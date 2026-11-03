@@ -124,15 +124,18 @@ F = W + "Farming_training"
 m("FARMING", 1, 15, "Quests and allotment runs", None,
   "Quests cover much of it; allotments fill the rest until oak trees open at 15.",
   F)
-m("FARMING", 15, 99, "Tree runs", None,
-  "A few minutes of clicking for a big lump of xp, then a wait. Oak 15, willow 30, maple 45, yew 60, magic 75.",
-  F)
-m("FARMING", 35, 99, "Hardwood tree runs (Fossil Island)", None,
-  "Teak 35, mahogany 55, redwood 90. Fold these into the same tree run.",
-  F)
-m("FARMING", 32, 99, "Herb runs", None,
+# One tree run, not three: regular, fruit and hardwood trees all grow while
+# you are away and are planted on the same trip, so splitting them made the
+# plan read as if fruit trees were something else to do.
+m("FARMING", 15, 99, "Tree runs (regular, fruit and hardwood trees)", None,
+  "The best Farming xp there is, a few minutes of clicking per run. Regular trees: oak 15, "
+  "willow 30, maple 45, yew 60, magic 75. Fruit trees from 27: apple 27, banana 33, "
+  "orange 39, curry 42, pineapple 51, papaya 57, palm 68, dragonfruit 81. Hardwood trees "
+  "on Fossil Island from 35, calquat 72 and celastrus 85 along the way.",
+  W + "Farming_runs", activity="skilling_tree_runs")
+m("FARMING", 9, 99, "Herb runs", None,
   "Far less xp than a tree run, but among the best passive income in the game.",
-  F)
+  W + "Farming_runs", activity="skilling_herb_runs")
 
 # ---------------------------------------------------------------- MAGIC
 MG = W + "Magic_training"
@@ -474,7 +477,7 @@ OUT.sort(key=lambda x: (ORDER.index(x["skill"]), x["minLevel"], x["maxLevel"]))
 
 body = ",\n".join("  " + json.dumps(e, indent=2, ensure_ascii=False).replace("\n", "\n  ")
                   for e in OUT)
-io.open('src/main/resources/com/nowwhat/methods.json', 'w', encoding='utf-8').write(
+io.open('src/main/resources/com/nowwhat/methods.json', 'w', encoding='utf-8', newline='\n').write(
     "[\n" + body + "\n]\n")
 print("wrote %d methods | %d wilderness | %d tick-manip" % (
     len(OUT),

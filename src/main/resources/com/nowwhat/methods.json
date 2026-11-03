@@ -272,30 +272,23 @@
   },
   {
     "skill": "FARMING",
-    "minLevel": 15,
-    "maxLevel": 99,
-    "name": "Tree runs",
-    "xpPerHour": null,
-    "notes": "A few minutes of clicking for a big lump of xp, then a wait. Oak 15, willow 30, maple 45, yew 60, magic 75.",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Farming_training"
-  },
-  {
-    "skill": "FARMING",
-    "minLevel": 32,
+    "minLevel": 9,
     "maxLevel": 99,
     "name": "Herb runs",
     "xpPerHour": null,
     "notes": "Far less xp than a tree run, but among the best passive income in the game.",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Farming_training"
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Farming_runs",
+    "activity": "skilling_herb_runs"
   },
   {
     "skill": "FARMING",
-    "minLevel": 35,
+    "minLevel": 15,
     "maxLevel": 99,
-    "name": "Hardwood tree runs (Fossil Island)",
+    "name": "Tree runs (regular, fruit and hardwood trees)",
     "xpPerHour": null,
-    "notes": "Teak 35, mahogany 55, redwood 90. Fold these into the same tree run.",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Farming_training"
+    "notes": "The best Farming xp there is, a few minutes of clicking per run. Regular trees: oak 15, willow 30, maple 45, yew 60, magic 75. Fruit trees from 27: apple 27, banana 33, orange 39, curry 42, pineapple 51, papaya 57, palm 68, dragonfruit 81. Hardwood trees on Fossil Island from 35, calquat 72 and celastrus 85 along the way.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Farming_runs",
+    "activity": "skilling_tree_runs"
   },
   {
     "skill": "MAGIC",

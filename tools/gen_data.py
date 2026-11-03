@@ -8,6 +8,14 @@ import collections
 import io, json, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from diary_data import DIARY_RAW, REGION_LABELS, DIARY_WIKI_PAGE, EXTRA_ACTIVITIES
+from boss_data import BOSSES, BOSS_PREP, BOSS_QUESTS, BOSS_WIKI_PAGE, BOSS_SOURCES
+from recommended_data import RECOMMENDED, WILDERNESS
+from activity_text import DESCRIPTIONS
+from boss_uniques import UNIQUES, NOTES as UNIQUE_NOTES
+try:
+    from quest_wiki_data import QUEST_WIKI
+except ImportError:  # first run, before tools/audit_quests.py has written it
+    QUEST_WIKI = {}
 
 WIKI_SKILLS = """
 The Dig Site | AGILITY:10, HERBLORE:10, THIEVING:25
@@ -33,7 +41,7 @@ Cabin Fever | AGILITY:42, RANGED:40, SMITHING:50
 A Taste of Hope | AGILITY:45, ATTACK:40, HERBLORE:40, SLAYER:38, CRAFTING:48
 The Path of Glouphrie | AGILITY:45, RANGED:47, SLAYER:56, STRENGTH:60
 The Heart of Darkness | AGILITY:46, MINING:55, SLAYER:48, THIEVING:48
-Recipe for Disaster - Freeing King Awowogei | AGILITY:48, COOKING:70, CRAFTING:48
+Recipe for Disaster - King Awowogei | AGILITY:48, COOKING:70, CRAFTING:48
 Legends' Quest | AGILITY:50, CRAFTING:50, HERBLORE:45, MAGIC:56, MINING:52, PRAYER:42, SMITHING:50, STRENGTH:50, THIEVING:50, WOODCUTTING:50, QUEST:107
 Sins of the Father | AGILITY:52, ATTACK:50, CRAFTING:56, FLETCHING:60, MAGIC:49, MINING:40, PRAYER:50, WOODCUTTING:62, SLAYER:50
 A Kingdom Divided | AGILITY:54, CRAFTING:38, HERBLORE:50, MAGIC:35, MINING:42, THIEVING:52, WOODCUTTING:52
@@ -58,10 +66,10 @@ The Great Brain Robbery | CONSTRUCTION:30, CRAFTING:16, PRAYER:50
 Scrambled! | CONSTRUCTION:38, SMITHING:35
 Desert Treasure II - The Fallen Empire | CONSTRUCTION:60, FIREMAKING:75, HERBLORE:62, MAGIC:75, RUNECRAFT:60, THIEVING:70
 Recipe for Disaster - Another Cook's Quest | COOKING:10
-Recipe for Disaster - Freeing Evil Dave | COOKING:25
+Recipe for Disaster - Evil Dave | COOKING:25
 Big Chompy Bird Hunting | COOKING:30, FLETCHING:5, RANGED:30
-Recipe for Disaster - Freeing the Lumbridge Guide | COOKING:40
-Recipe for Disaster - Freeing Skrach Uglogwee | COOKING:41, FIREMAKING:20
+Recipe for Disaster - Lumbridge Guide | COOKING:40
+Recipe for Disaster - Skrach Uglogwee | COOKING:41, FIREMAKING:20
 Heroes' Quest | COOKING:53, FISHING:53, HERBLORE:25, MINING:50, QUEST:55
 Swan Song | COOKING:62, CRAFTING:40, FISHING:62, FIREMAKING:42, MAGIC:66, SMITHING:45, QUEST:100
 The Giant Dwarf | CRAFTING:12, FIREMAKING:16, MAGIC:33, THIEVING:14
@@ -113,8 +121,8 @@ Black Knights' Fortress | QUEST:12
 Below Ice Mountain | QUEST:16
 Wanted! | QUEST:32
 Dragon Slayer I | QUEST:32
-Recipe for Disaster - Freeing Sir Amik Varze | QUEST:107
-Recipe for Disaster - Defeating the Culinaromancer | QUEST:175
+Recipe for Disaster - Sir Amik Varze | QUEST:107
+Recipe for Disaster - Culinaromancer | QUEST:175
 Underground Pass | RANGED:25
 Temple of Ikov | RANGED:40, THIEVING:42
 Mourning's End Part I | RANGED:60, THIEVING:50
@@ -201,10 +209,10 @@ QUEST_PREREQS = {
     "Cabin Fever": ["Pirate's Treasure", "Rum Deal"],
     "Rum Deal": ["Zogre Flesh Eaters", "Priest in Peril"],
     "Zogre Flesh Eaters": ["Big Chompy Bird Hunting", "Jungle Potion"],
-    "Recipe for Disaster - Freeing King Awowogei": ["Monkey Madness I", "Recipe for Disaster"],
-    "Recipe for Disaster - Freeing Sir Amik Varze": ["Recipe for Disaster", "Heroes' Quest"],
-    "Recipe for Disaster - Defeating the Culinaromancer": ["Recipe for Disaster - Freeing King Awowogei",
-                                                            "Recipe for Disaster - Freeing Sir Amik Varze"],
+    "Recipe for Disaster - King Awowogei": ["Monkey Madness I", "Recipe for Disaster"],
+    "Recipe for Disaster - Sir Amik Varze": ["Recipe for Disaster", "Heroes' Quest"],
+    "Recipe for Disaster - Culinaromancer": ["Recipe for Disaster - King Awowogei",
+                                                            "Recipe for Disaster - Sir Amik Varze"],
     "While Guthix Sleeps": ["Defender of Varrock", "King's Ransom", "Dream Mentor",
                              "Temple of Ikov", "Tears of Guthix"],
     "Defender of Varrock": ["Family Crest", "Demon Slayer"],
@@ -216,7 +224,9 @@ QUEST_PREREQS = {
     "Another Slice of H.A.M.": ["Death to the Dorgeshuun", "The Dig Site"],
     "Death to the Dorgeshuun": ["The Lost Tribe"],
     "The Lost Tribe": ["Goblin Diplomacy", "Rune Mysteries"],
-    "The Heart of Darkness": ["Sins of the Father", "A Kingdom Divided"],
+    # Both checked against their wiki infoboxes, November 2026.
+    "The Heart of Darkness": ["Twilight's Promise"],
+    "Perilous Moons": ["Twilight's Promise"],
     "Tears of Guthix": ["Temple of Ikov", "Waterfall Quest"],
     "Troll Romance": ["Troll Stronghold"],
     "Haunted Mine": ["Priest in Peril"],
@@ -255,7 +265,8 @@ def wiki_url(name):
 
 # ---- merge wiki skill data per quest ----
 quests = {}
-for line in WIKI_SKILLS.strip().split('\n'):
+BOSS_QUEST_LINES = "\n".join(name + " | " + skills for name, (skills, _) in BOSS_QUESTS.items())
+for line in (WIKI_SKILLS.strip() + "\n" + BOSS_QUEST_LINES).split('\n'):
     if '|' not in line:
         continue
     name, reqs = [p.strip() for p in line.split('|', 1)]
@@ -281,6 +292,9 @@ for line in WIKI_SKILLS.strip().split('\n'):
 
 for q in NO_REQ_QUESTS:
     quests.setdefault(q, {'skills': {}, 'qp': 0, 'combat': 0})
+for name, (_, prereqs) in BOSS_QUESTS.items():
+    if prereqs:
+        QUEST_PREREQS.setdefault(name, prereqs)
 # any quest named as a prerequisite must exist as an activity, or the resolver
 # reports it as an unresolved reference
 for target, prereqs in QUEST_PREREQS.items():
@@ -337,6 +351,21 @@ for region in DIARY:
 for extra in EXTRA_ACTIVITIES:
     quests.setdefault(extra, {"skills": {}, "qp": 0, "combat": 0})
 
+# The wiki's own infobox has the last word on a quest's skills, quest points
+# and direct prerequisites (see tools/audit_quests.py for why). The hand-made
+# tables above still supply anything the wiki page does not state, such as a
+# combat level, and every quest the infobox has nothing for.
+for name, wiki in QUEST_WIKI.items():
+    entry = quests.setdefault(name, {"skills": {}, "qp": 0, "combat": 0})
+    if wiki["skills"]:
+        entry["skills"] = dict(wiki["skills"])
+    if wiki["qp"]:
+        entry["qp"] = wiki["qp"]
+    if wiki["prereqs"]:
+        QUEST_PREREQS[name] = list(wiki["prereqs"])
+        for pr in wiki["prereqs"]:
+            quests.setdefault(pr, {"skills": {}, "qp": 0, "combat": 0})
+
 activities = []
 for name in sorted(quests):
     data = quests[name]
@@ -363,12 +392,18 @@ for name in sorted(quests):
 # ---- PVM ----
 # Slayer levels and quest unlocks are hard gates and accurate. Gear/stat advice
 # that is a recommendation rather than a gate lives in the description.
+# Getting into the God Wars Dungeon at all: past Dad in Troll Stronghold (the
+# whole quest stands in for the part), then 60 Strength to move the boulder or
+# 60 Agility for the crack in the wall.
+GWD_ENTRANCE = ("ANY_OF", [("SKILL_LEVEL", "STRENGTH", 60), ("SKILL_LEVEL", "AGILITY", 60)], 0)
+
 PVM = [
     ("pvm_zulrah", "Zulrah", [("QUEST_COMPLETE", "Regicide", 0)],
      "Solo boss. Recommended 75+ Ranged/Magic with a blowpipe or trident and good switches."),
     ("pvm_vorkath", "Vorkath", [("QUEST_COMPLETE", "Dragon Slayer II", 0)],
      "Solo dragon boss. Recommended 80+ Ranged, dragonfire protection and an antifire."),
-    ("pvm_abyssal_sire", "Abyssal Sire", [("SKILL_LEVEL", "SLAYER", 85)],
+    ("pvm_abyssal_sire", "Abyssal Sire", [("SKILL_LEVEL", "SLAYER", 85),
+                                           ("QUEST_COMPLETE", "Enter the Abyss", 0)],
      "Slayer boss. Requires 85 Slayer to damage."),
     ("pvm_kraken", "Kraken", [("SKILL_LEVEL", "SLAYER", 87)],
      "Slayer boss, Magic only. Trident recommended."),
@@ -376,10 +411,10 @@ PVM = [
      "Slayer boss. Requires 91 Slayer; prayer switching heavy."),
     ("pvm_thermonuclear_smoke_devil", "Thermonuclear smoke devil", [("SKILL_LEVEL", "SLAYER", 93)],
      "Slayer boss. Requires 93 Slayer."),
-    ("pvm_alchemical_hydra", "Alchemical Hydra", [("SKILL_LEVEL", "SLAYER", 95),
-                                                   ("QUEST_COMPLETE", "A Kingdom Divided", 0)],
+    ("pvm_alchemical_hydra", "Alchemical Hydra", [("SKILL_LEVEL", "SLAYER", 95)],
      "Slayer boss. Requires 95 Slayer."),
-    ("pvm_grotesque_guardians", "Grotesque Guardians", [("SKILL_LEVEL", "SLAYER", 75)],
+    ("pvm_grotesque_guardians", "Grotesque Guardians", [("SKILL_LEVEL", "SLAYER", 75),
+                                                         ("QUEST_COMPLETE", "Priest in Peril", 0)],
      "Slayer boss on a gargoyle task. Requires 75 Slayer and a brittle key."),
     ("pvm_barrows", "Barrows", [("QUEST_COMPLETE", "Priest in Peril", 0)],
      "Low-requirement money maker and a good first 'real' PVM routine."),
@@ -387,13 +422,13 @@ PVM = [
     # different entry requirements, different killcount, and completely
     # different gear, so a single "God Wars Dungeon bosses" row could not say
     # anything specific enough to act on.
-    ("pvm_general_graardor", "General Graardor", [("SKILL_LEVEL", "STRENGTH", 70)],
+    ("pvm_general_graardor", "General Graardor", [("SKILL_LEVEL", "STRENGTH", 70), ("QUEST_COMPLETE", "Troll Stronghold", 0), GWD_ENTRANCE],
      "Bandos boss. 70 Strength and a hammer to enter the room, 40 Bandos killcount."),
-    ("pvm_kreearra", "Kree'arra", [("SKILL_LEVEL", "RANGED", 70)],
+    ("pvm_kreearra", "Kree'arra", [("SKILL_LEVEL", "RANGED", 70), ("QUEST_COMPLETE", "Troll Stronghold", 0), GWD_ENTRANCE],
      "Armadyl boss. 70 Ranged and a mithril grapple to enter, 40 Armadyl killcount. Ranged only."),
-    ("pvm_commander_zilyana", "Commander Zilyana", [("SKILL_LEVEL", "AGILITY", 70)],
+    ("pvm_commander_zilyana", "Commander Zilyana", [("SKILL_LEVEL", "AGILITY", 70), ("QUEST_COMPLETE", "Troll Stronghold", 0), GWD_ENTRANCE],
      "Saradomin boss. 70 Agility (not boostable) to enter, 40 Saradomin killcount."),
-    ("pvm_kril_tsutsaroth", "K'ril Tsutsaroth", [("SKILL_LEVEL", "HITPOINTS", 70)],
+    ("pvm_kril_tsutsaroth", "K'ril Tsutsaroth", [("SKILL_LEVEL", "HITPOINTS", 70), ("QUEST_COMPLETE", "Troll Stronghold", 0), GWD_ENTRANCE],
      "Zamorak boss. 70 Hitpoints to cross the river, 40 Zamorak killcount."),
     ("pvm_zalcano", "Zalcano", [("QUEST_COMPLETE", "Song of the Elves", 0),
                                  ("SKILL_LEVEL", "MINING", 70),
@@ -401,11 +436,9 @@ PVM = [
      "Group skilling boss in Prifddinas."),
     ("pvm_hespori", "Hespori", [("SKILL_LEVEL", "FARMING", 65)],
      "Farming boss, one kill per seed planted."),
-    ("pvm_chambers_of_xeric", "Chambers of Xeric", [("SKILL_LEVEL", "RANGED", 75),
-                                                     ("SKILL_LEVEL", "HERBLORE", 78)],
+    ("pvm_chambers_of_xeric", "Chambers of Xeric", [],
      "Raid. No hard gate, but 75+ combat stats and 78 Herblore for overloads is the practical floor."),
-    ("pvm_theatre_of_blood", "Theatre of Blood", [("SKILL_LEVEL", "RANGED", 80),
-                                                   ("SKILL_LEVEL", "MAGIC", 80)],
+    ("pvm_theatre_of_blood", "Theatre of Blood", [],
      "Raid. No hard gate; high combat stats and strong gear expected."),
     ("pvm_tombs_of_amascut", "Tombs of Amascut", [("QUEST_COMPLETE", "Beneath Cursed Sands", 0)],
      "Raid with scalable difficulty, so it is approachable earlier than the other two."),
@@ -794,23 +827,44 @@ PVM_PREP = {
     },
 }
 
+def strategy_url(pid, name):
+    """The page the gear came from. The original bosses all have a /Strategies
+    page; the newer entries say which page they used, and a monster with no
+    strategy page of its own points at its money making guide instead."""
+    sources = BOSS_SOURCES.get(pid)
+    if sources is None:
+        return wiki_url(name) + "/Strategies"
+    for marker in ("/Strategies", "Money_making_guide"):
+        for url in sources:
+            if marker in url and "api.php" not in url:
+                return url
+    return wiki_url(BOSS_WIKI_PAGE.get(pid, name))
+
+
+PVM += BOSSES
+PVM_PREP.update(BOSS_PREP)
+
+def requirement(t, v, thr):
+    if t == "ANY_OF":
+        return {"type": "ANY_OF", "anyOf": [requirement(*option) for option in v]}
+    r = {"type": t, "value": v}
+    if thr:
+        r["threshold"] = thr
+    return r
+
+
 for pid, name, reqs, desc in PVM:
-    out = []
-    for t, v, thr in reqs:
-        r = {"type": t, "value": v}
-        if thr:
-            r["threshold"] = thr
-        out.append(r)
+    out = [requirement(t, v, thr) for t, v, thr in reqs]
     entry = {
         "id": pid, "name": name, "category": "PVM", "description": desc,
         "reasonTemplate": "Your stats support this now",
-        "wikiUrl": wiki_url(name.split(' bosses')[0]), "priority": 6, "requirements": out,
+        "wikiUrl": wiki_url(BOSS_WIKI_PAGE.get(pid, name)), "priority": 6, "requirements": out,
     }
     prep = PVM_PREP.get(pid)
     if prep:
         entry["setups"] = [{"name": n, "items": items} for n, items in prep["setups"]]
         entry["supplies"] = prep["supplies"]
-        entry["strategyUrl"] = wiki_url(name.split(' bosses')[0]) + "/Strategies"
+        entry["strategyUrl"] = strategy_url(pid, name)
         if prep.get("helper"):
             entry["helperPlugin"] = prep["helper"]
             if prep.get("helper_id"):
@@ -819,7 +873,7 @@ for pid, name, reqs, desc in PVM:
 
 # ---- Minigames / unlocks ----
 MISC = [
-    ("minigame_barbarian_assault", "Barbarian Assault", "MINIGAME", [("COMBAT_LEVEL", "COMBAT_LEVEL", 40)],
+    ("minigame_barbarian_assault", "Barbarian Assault", "MINIGAME", [],
      "Team minigame; the source of Void knight equipment."),
     ("minigame_pest_control", "Pest Control", "MINIGAME", [("COMBAT_LEVEL", "COMBAT_LEVEL", 40)],
      "Void knight equipment and cheap combat experience."),
@@ -827,6 +881,12 @@ MISC = [
      "Safe Firemaking training with useful supply drops."),
     ("minigame_tempoross", "Tempoross", "MINIGAME", [("SKILL_LEVEL", "FISHING", 35)],
      "Safe Fishing training, source of the fish barrel and tackle box."),
+    ("minigame_last_man_standing", "Last Man Standing", "MINIGAME", [],
+     "Safe PvP in the Ferox Enclave: nothing is lost on death, and you bring nothing in, "
+     "since the game hands out the gear. Points come from competitive games only, up to 9 "
+     "a game by placement and kills, and placement points need at least one kill. "
+     "Competitive needs 750 total level and 30 Quest points, or 1,500 total level. "
+     "75 points buys a rune pouch note."),
     # The description carries the wiki's own units rather than a points-per-hour
     # figure it does not publish: 1 point per 3 fruits, 35 for a full sack, and
     # 19 minutes per 100 fruits. From those a player can work out what 250
@@ -834,19 +894,112 @@ MISC = [
     ("minigame_tithe_farm", "Tithe Farm", "MINIGAME", [("SKILL_LEVEL", "FARMING", 34)],
      "Farming minigame paid in points: 1 point per 3 fruits deposited, and 35 for "
      "a full 100-fruit sack. Roughly 19 minutes per 100 fruits. No favour needed."),
-    ("minigame_guardians_of_the_rift", "Guardians of the Rift", "MINIGAME", [("SKILL_LEVEL", "RUNECRAFT", 27)],
+    ("minigame_guardians_of_the_rift", "Guardians of the Rift", "MINIGAME",
+     [("SKILL_LEVEL", "RUNECRAFT", 27), ("QUEST_COMPLETE", "Temple of the Eye", 0)],
      "Runecraft training and the main source of Runecraft pets and outfits."),
-    ("minigame_fight_caves", "Fight Caves", "MINIGAME", [("SKILL_LEVEL", "RANGED", 70)],
+    ("minigame_fight_caves", "Fight Caves", "MINIGAME", [],
      "Solo wave minigame for the fire cape; 70+ Ranged and a good prayer book expected."),
     ("unlock_warriors_guild", "Warriors' Guild entry", "SKILLING",
      [("ANY_OF", None, 0)], "Dragon defender unlock."),
-    ("skilling_herb_runs", "Start Farming herb runs", "SKILLING", [("SKILL_LEVEL", "FARMING", 32)],
-     "Low-effort passive income and fast Farming experience."),
-    ("skilling_birdhouse_runs", "Start birdhouse runs", "SKILLING", [("SKILL_LEVEL", "HUNTER", 5)],
-     "Roughly five minutes every 50 minutes for passive Hunter experience."),
-    ("skilling_graceful_set", "Buy a Graceful outfit", "SKILLING", [("SKILL_LEVEL", "AGILITY", 30)],
+    # Both from the wiki's Farming runs and Bird house trapping pages, November 2026.
+    ("skilling_herb_runs", "Start Farming herb runs", "SKILLING", [("SKILL_LEVEL", "FARMING", 9)],
+     (
+        "Plant a herb seed in every herb patch you have, then come back about 80 minutes "
+        "later to harvest and plant again. A run takes five to ten minutes.\n"
+        "At each patch:\n"
+        "* Rake the weeds\n"
+        "* Add compost\n"
+        "* Plant the seed with a seed dibber\n"
+        "* Note the herbs at the Tool Leprechaun\n"
+        "Patches:\n"
+        "* Falador\n"
+        "* Port Phasmatys (Priest in Peril)\n"
+        "* Ardougne\n"
+        "* Catherby\n"
+        "* Hosidius\n"
+        "* Farming Guild (65 Farming)\n"
+        "* Varlamore (Children of the Sun)\n"
+        "* Troll Stronghold (My Arm's Big Adventure)\n"
+        "* Weiss (Making Friends with My Arm)\n"
+        "* Harmony Island (elite Morytania Diary)\n"
+        "Log out at a patch and the next run starts with you standing at it.")),
+    ("skilling_tree_runs", "Start tree runs", "SKILLING", [("SKILL_LEVEL", "FARMING", 15)],
+     (
+        "One trip for every tree patch you have: regular trees, fruit trees and, once you can "
+        "reach Fossil Island, hardwood trees.\n"
+        "At each patch:\n"
+        "* Check the grown tree's health for the xp\n"
+        "* Pay the gardener to clear it\n"
+        "* Plant the next sapling\n"
+        "* Pay the gardener to protect it\n"
+        "Regular trees, about 1,400 coins in clearing fees:\n"
+        "* Lumbridge, Varrock, Falador and Taverley\n"
+        "* Gnome Stronghold\n"
+        "* Farming Guild (65 Farming)\n"
+        "* Auburn Valley (Children of the Sun)\n"
+        "Fruit trees, about a day to grow, so once a day:\n"
+        "* Gnome Stronghold and Tree Gnome Village\n"
+        "* Catherby and Brimhaven\n"
+        "* Lletya (Mourning's End Part I)\n"
+        "* Farming Guild (85 Farming)\n"
+        "* Kastori\n"
+        "Hardwood trees on Fossil Island need Bone Voyage and 35 Farming.\n"
+        "Levels:\n"
+        "* Trees: oak 15, willow 30, maple 45, yew 60, magic 75\n"
+        "* Fruit trees: apple 27, banana 33, orange 39, curry 42, pineapple 51, papaya 57, "
+        "palm 68, dragonfruit 81\n"
+        "* Hardwood: teak 35, mahogany 55, redwood 90\n"
+        "* Calquat 72, celastrus 85")),
+    ("skilling_birdhouse_runs", "Start birdhouse runs", "SKILLING",
+     [("QUEST_COMPLETE", "Bone Voyage", 0), ("SKILL_LEVEL", "HUNTER", 5),
+      ("SKILL_LEVEL", "CRAFTING", 5)],
+     (
+        "Four bird house spots on Fossil Island fill with birds about 50 minutes after you "
+        "set them.\n"
+        "Setting one:\n"
+        "* Build a bird house from logs and a clockwork, with a hammer and chisel\n"
+        "* Place it on the spot\n"
+        "* Fill it with 10 seeds. Any hop, herb, flower, bush or allotment seed gives the "
+        "same loot\n"
+        "Emptying a full house gives the clockwork back, so four clockworks last forever.\n"
+        "Route:\n"
+        "* Digsite pendant to Fossil Island\n"
+        "* Magic mushtree to Verdant Valley, the north house then the south one\n"
+        "* Mushtree to Mushroom Meadow for the third\n"
+        "* Run south to the Tar Swamp for the fourth\n"
+        "Which bird house (Hunter, then Crafting):\n"
+        "* Regular 5 and 5\n"
+        "* Oak 14 and 15\n"
+        "* Willow 24 and 25\n"
+        "* Teak 34 and 35\n"
+        "* Maple 44 and 45\n"
+        "* Mahogany 49 and 50\n"
+        "* Yew 59 and 60\n"
+        "* Magic 74 and 75\n"
+        "* Redwood 89 and 90")),
+    ("skilling_graceful_set", "Buy a Graceful outfit", "SKILLING", [],
      "Marks of grace from rooftop courses; weight reduction that pays off everywhere."),
+    ("skilling_rooftop_agility", "Rooftop courses, for marks of grace", "SKILLING", [],
+     "Marks of grace appear on rooftop courses, at most one every 3 minutes. From level 40, "
+     "Canifis gives the most, about 12 to 18 an hour, until Ardougne at 90. A course 20 or "
+     "more levels below you drops 80% fewer marks, Canifis excepted. Marks vanish after 10 "
+     "minutes on the ground. A full Graceful outfit is 260 marks."),
+    ("skilling_slayer", "Slayer tasks, for Slayer points", "SKILLING", [],
+     "Points start on your fifth task, and never come from Turael, Aya or Spria. Per task: "
+     "Vannaka 8, Chaeldar 10, Nieve 12, Duradel 15, Konar 18. Every 10th task pays 5x and "
+     "every 50th 15x. Vannaka needs combat 40, Chaeldar 70, Konar 75, Nieve 85, Duradel 100 "
+     "and Slayer 50."),
 ]
+
+# Activities whose wiki page is not named after the activity.
+MISC_WIKI = {
+    "skilling_graceful_set": "Graceful_outfit",
+    "skilling_rooftop_agility": "Mark_of_grace",
+    "skilling_slayer": "Slayer_reward_point",
+    "skilling_herb_runs": "Farming_runs",
+    "skilling_birdhouse_runs": "Bird_house_trapping",
+    "skilling_tree_runs": "Farming_runs",
+}
 
 # Which activity mints the currency a shop item is bought with.
 #
@@ -860,12 +1013,58 @@ ITEM_CURRENCY = {
     'BOTTOMLESS_COMPOST_BUCKET': 'minigame_tithe_farm',
     'FISH_BARREL': 'minigame_tempoross',
     'TACKLE_BOX': 'minigame_tempoross',
+    'GRACEFUL_HOOD': 'skilling_rooftop_agility',
+    'HERB_SACK': 'minigame_tithe_farm',
+    'RUNE_POUCH': 'minigame_last_man_standing',
 }
 
 # What to wear and bring to a minigame, and where its strategy page is.
 # Same shape and same purpose as PVM_PREP above; these were living only in the
 # generated file for a while, which meant regenerating deleted them.
-MISC_PREP = {'minigame_barbarian_assault': {'setups': [['Any role',
+MISC_PREP = {'minigame_last_man_standing': {'supplies': [
+                  'Nothing - items cannot be brought in',
+                  'Ring of dueling or the Minigame teleport, to reach Ferox Enclave without the Wilderness']},
+ 'skilling_slayer': {'supplies': ['Enchanted gem, from any Slayer master, to check your task anywhere']},
+ 'skilling_herb_runs': {'setups': [['Equipment',
+                                    ["Farmer's strawhat, jacket, boro trousers and boots, or graceful",
+                                     'magic secateurs']]],
+                        'supplies': ['One herb seed per patch',
+                                     'rake, spade and seed dibber',
+                                     'compost, supercompost or ultracompost (or a bottomless compost bucket)',
+                                     "Explorer's ring for Falador",
+                                     'ectophial for Port Phasmatys',
+                                     'Ardougne cloak for Ardougne',
+                                     'Catherby teleport tablet',
+                                     "Xeric's talisman for Hosidius",
+                                     'skills necklace for the Farming Guild',
+                                     'quetzal whistle for Varlamore',
+                                     'stony basalt and icy basalt for Troll Stronghold and Weiss',
+                                     'Harmony island teleport tablet'],
+                        'strategyUrl': 'https://oldschool.runescape.wiki/w/Farming_runs#Herb_run'},
+ 'skilling_tree_runs': {'setups': [['Equipment',
+                                    ["Farmer's strawhat, jacket, boro trousers and boots, or graceful"]]],
+                        'supplies': ['One sapling per patch: tree, fruit tree and hardwood saplings',
+                                     'The gardener payment for each sapling (the wiki lists each one)',
+                                     'Coins for clearing the patches',
+                                     'rake and spade',
+                                     'ring of wealth for Falador Park',
+                                     'slayer ring for the Gnome Stronghold',
+                                     'skills necklace for the Farming Guild',
+                                     'teleport crystal for Lletya',
+                                     'Pendant of Ates for Auburn Valley and Kastori',
+                                     'Digsite pendant for Fossil Island',
+                                     'Lumbridge, Varrock and Camelot teleports'],
+                        'strategyUrl': 'https://oldschool.runescape.wiki/w/Farming_runs#Tree,_fruit_tree,_calquat_tree,_and_celastrus_tree_run'},
+ 'skilling_birdhouse_runs': {'setups': [['Equipment',
+                                         ['strung rabbit foot, for more ring and egg nests']]],
+                             'supplies': ['40 seeds, 10 per bird house',
+                                          'clockwork (bring one extra to build the next house on the way)',
+                                          'hammer and chisel',
+                                          '4 logs of your best tier',
+                                          'Digsite pendant',
+                                          'Hunter potion, to reach the next tier early'],
+                             'strategyUrl': 'https://oldschool.runescape.wiki/w/Bird_house_trapping#Recommended_setup'},
+ 'minigame_barbarian_assault': {'setups': [['Any role',
                                             ['Weapon: any, the roles barely use one',
                                              'Penance gloves, once you have earned them']]],
                                 'supplies': ['A few sharks',
@@ -959,13 +1158,16 @@ for mid, name, cat, reqs, desc in MISC:
     entry = {
         "id": mid, "name": name, "category": cat, "description": desc,
         "reasonTemplate": "Available to you now",
-        "wikiUrl": wiki_url(name), "priority": 4, "requirements": out,
+        "wikiUrl": WIKI + MISC_WIKI[mid] if mid in MISC_WIKI else wiki_url(name),
+        "priority": 4, "requirements": out,
     }
     prep = MISC_PREP.get(mid)
     if prep:
-        entry["setups"] = [{"name": n, "items": its} for n, its in prep["setups"]]
+        if prep.get("setups"):
+            entry["setups"] = [{"name": n, "items": its} for n, its in prep["setups"]]
         entry["supplies"] = prep["supplies"]
-        entry["strategyUrl"] = prep["strategyUrl"]
+        if prep.get("strategyUrl"):
+            entry["strategyUrl"] = prep["strategyUrl"]
     activities.append(entry)
 
 # ---- Achievement Diaries ----
@@ -1000,17 +1202,21 @@ CA_TIERS = [
     ("MASTER", 110, "Endgame content with tight mechanical requirements."),
     ("GRANDMASTER", 120, "The hardest tasks in the game."),
 ]
-for tier, combat, desc in CA_TIERS:
+for n, (tier, combat, desc) in enumerate(CA_TIERS):
+    reqs = [{"type": "COMBAT_LEVEL", "value": "COMBAT_LEVEL", "threshold": combat}]
+    if n:
+        # A tier's rewards unlock only once the one before it is claimed.
+        reqs.append({"type": "COMBAT_ACHIEVEMENT_TIER", "value": "CA_" + CA_TIERS[n - 1][0]})
     activities.append({
         # id matches what CombatAchievementTracker writes into PlayerState
         "id": "CA_" + tier,
         "name": "Combat Achievements: " + tier.capitalize() + " tier",
         "category": "COMBAT_ACHIEVEMENT",
         "description": desc,
-        "reasonTemplate": "Your combat level supports this tier",
-        "wikiUrl": WIKI + "Combat_Achievements",
+        "reasonTemplate": "Your combat level suits this tier, and the one before it is done",
+        "wikiUrl": WIKI + "Combat_Achievements/" + tier.capitalize(),
         "priority": 5,
-        "requirements": [{"type": "COMBAT_LEVEL", "value": "COMBAT_LEVEL", "threshold": combat}],
+        "requirements": reqs,
     })
 
 # ---- Collection log goals ----
@@ -1021,8 +1227,6 @@ COLLECTION = [
      [("QUEST_COMPLETE", "Dragon Slayer II", 0)]),
     ("collectionlog_zulrah_pet", "Pet snakeling (Zulrah)", "Zulrah",
      [("QUEST_COMPLETE", "Regicide", 0)]),
-    ("collectionlog_barrows_set", "A full Barrows set", "Barrows",
-     [("QUEST_COMPLETE", "Priest in Peril", 0)]),
     ("collectionlog_abyssal_whip", "Abyssal whip", "Abyssal demons",
      [("SKILL_LEVEL", "SLAYER", 85)]),
     ("collectionlog_fire_cape", "Fire cape", "the Fight Caves",
@@ -1034,7 +1238,6 @@ COLLECTION = [
 # is one copy of the answer. Resolved by Activity.preparationFrom at load.
 COLLECTION_PREP = {'collectionlog_vorkath_head': 'pvm_vorkath',
  'collectionlog_zulrah_pet': 'pvm_zulrah',
- 'collectionlog_barrows_set': 'pvm_barrows',
  'collectionlog_fire_cape': 'minigame_fight_caves',
  'collectionlog_dragon_defender': 'unlock_warriors_guild'}
 
@@ -1057,6 +1260,27 @@ for cid, name, source, reqs in COLLECTION:
     entry["priority"] = 3
     entry["requirements"] = out
     activities.append(entry)
+
+# What the wiki recommends before going, and where other players can attack
+# you. Both only decide what gets suggested; see Activity.getRecommended.
+def soft(req):
+    if req[0] == "ANY_OF":
+        return {"type": "ANY_OF", "anyOf": [soft(option) for option in req[1]]}
+    return {"type": req[0], "value": req[1], "threshold": req[2]}
+
+
+known_ids = {a["id"] for a in activities}
+known_fights = {a["id"] for a in activities if a["category"] == "PVM"}
+assert set(RECOMMENDED) <= known_ids, sorted(set(RECOMMENDED) - known_ids)
+assert set(WILDERNESS) <= known_ids, sorted(set(WILDERNESS) - known_ids)
+assert set(DESCRIPTIONS) <= known_ids, sorted(set(DESCRIPTIONS) - known_ids)
+for a in activities:
+    if a["id"] in DESCRIPTIONS:
+        a["description"] = DESCRIPTIONS[a["id"]]
+    if RECOMMENDED.get(a["id"]):
+        a["recommended"] = [soft(r) for r in RECOMMENDED[a["id"]]]
+    if a["id"] in WILDERNESS:
+        a["wilderness"] = True
 
 io.open('src/main/resources/com/nowwhat/activities.json', 'w', encoding='utf-8', newline='\n').write(
     json.dumps(activities, indent=2, ensure_ascii=False) + "\n")
@@ -1108,8 +1332,8 @@ ITEMS = [
     ("BERSERKER_RING", "Berserker ring", 6737, "MONSTER_DROP", "Dagannoth Rex", 128, None),
     ("SEERS_RING", "Seers ring", 6731, "MONSTER_DROP", "Dagannoth Prime", 128, None),
     ("ARCHERS_RING", "Archers ring", 6733, "MONSTER_DROP", "Dagannoth Supreme", 128, None),
-    ("GRACEFUL_HOOD", "Graceful hood", 11850, "SHOP", "Marks of grace, Rogues' Den", None,
-     {"type": "SKILL_LEVEL", "value": "AGILITY", "threshold": 30}),
+    ("GRACEFUL_HOOD", "Graceful hood", 11850, "SHOP",
+     "Grace's shop in the Rogues' Den, Burthorpe, 35 marks of grace", None, None),
     ("RUNE_PLATEBODY", "Rune platebody", 1127, "GE_BUY", "Budget melee body", None, None),
     ("CADAVA_BERRIES", "Cadava berries", 753, "GE_BUY", None, None, None),
     ("JANGERBERRIES", "Jangerberries", 247, "GE_BUY", None, None, None),
@@ -1171,12 +1395,17 @@ ITEMS = [
     ("IMBUED_HEART", "Imbued heart", 20724, "MONSTER_DROP", "Any superior slayer monster", None, {'type': 'SKILL_LEVEL', 'value': 'SLAYER', 'threshold': 1}),
     ("DRAGON_AXE", "Dragon axe", 6739, "MONSTER_DROP", "Dagannoth Kings, or a Wintertodt supply crate", 128, {'type': 'SKILL_LEVEL', 'value': 'WOODCUTTING', 'threshold': 61}),
     ("DRAGON_HARPOON", "Dragon harpoon", 21028, "MONSTER_DROP", "Wyrms", None, {'type': 'SKILL_LEVEL', 'value': 'FISHING', 'threshold': 61}),
-    ("HERB_SACK", "Herb sack", 13226, "SHOP", "Slayer reward shop, 750 points", None, None),
+    ("HERB_SACK", "Herb sack", 13226, "SHOP",
+     "Tithe Farm reward shop, 250 points (or 750 Slayer points from any Slayer master)", None,
+     {"type": "SKILL_LEVEL", "value": "HERBLORE", "threshold": 58}),
     ("SEED_BOX", "Seed box", 13639, "SHOP", "Tithe Farm reward shop, 250 points", None, {'type': 'SKILL_LEVEL', 'value': 'FARMING', 'threshold': 34}),
     ("BOTTOMLESS_COMPOST_BUCKET", "Bottomless compost bucket", 22994, "SHOP", "Tithe Farm reward shop, 250 points", None, {'type': 'SKILL_LEVEL', 'value': 'FARMING', 'threshold': 34}),
     ("FISH_BARREL", "Fish barrel", 25582, "SHOP", "Tempoross reward pool", None, {'type': 'SKILL_LEVEL', 'value': 'FISHING', 'threshold': 35}),
     ("TACKLE_BOX", "Tackle box", 25580, "SHOP", "Tempoross reward pool", None, {'type': 'SKILL_LEVEL', 'value': 'FISHING', 'threshold': 35}),
-    ("RUNE_POUCH", "Rune pouch", 12791, "SHOP", "Last Man Standing shop, or Wilderness slayer", None, None),
+    ("RUNE_POUCH", "Rune pouch", 12791, "SHOP",
+     "Last Man Standing reward shop, 75 points for a rune pouch note, swapped for the pouch at "
+     "any bank. The note also trades on the Grand Exchange. Slayer masters sell one for 750 "
+     "points, and Mage Training Arena for far more effort.", None, None),
     ("AVAS_ASSEMBLER", "Ava's assembler", 22109, "QUEST_REWARD", "Dragon Slayer II", None, {'type': 'QUEST_COMPLETE', 'value': 'Dragon Slayer II'}),
     ("ARDOUGNE_CLOAK_4", "Ardougne cloak 4", 13124, "QUEST_REWARD", "Ardougne Elite Diary", None, None),
     ("INFERNAL_CAPE", "Infernal cape", 21295, "MONSTER_DROP", "the Inferno", 1, {'type': 'SKILL_LEVEL', 'value': 'RANGED', 'threshold': 85}),
@@ -1316,6 +1545,41 @@ for iid, display, game_id, detail, req, ingredients in CRAFTED:
         entry["ingredients"] = [{"itemId": i, "quantity": q}
                                 for i, q in ingredients]
     entry["wikiUrl"] = wiki_url(display)
+    items.append(entry)
+
+# The six Barrows armour sets. 728 chests is the wiki's average for one full
+# set of a given brother when all six are killed every trip.
+BARROWS_SETS = [("AHRIMS", "Ahrim's", 12881), ("DHAROKS", "Dharok's", 12877),
+                ("GUTHANS", "Guthan's", 12873), ("KARILS", "Karil's", 12883),
+                ("TORAGS", "Torag's", 12879), ("VERACS", "Verac's", 12875)]
+for key, brother, game_id in BARROWS_SETS:
+    display = brother + " armour set"
+    items.append(collections.OrderedDict([
+        ("id", key + "_ARMOUR_SET"), ("preparationFrom", "pvm_barrows"),
+        ("displayName", display), ("gameItemId", game_id), ("type", "MONSTER_DROP"),
+        ("detail", "the Barrows chest, killing all six brothers every trip"),
+        ("estimatedKc", 728), ("attemptUnit", "chests"),
+        ("skillRequirement", {"type": "QUEST_COMPLETE", "value": "Priest in Peril"}),
+        ("wikiUrl", wiki_url(display)),
+    ]))
+
+# The newer fights' uniques, so any of them can be picked as an item goal and
+# planned back to the fight that drops it.
+for iid, display, game_id, stype, detail, kc, req, prep, unit in UNIQUES:
+    assert prep in known_fights, iid + " points at unknown fight " + prep
+    entry = collections.OrderedDict()
+    entry["id"] = iid
+    entry["preparationFrom"] = prep
+    entry["displayName"] = display
+    entry["gameItemId"] = game_id
+    entry["type"] = stype
+    entry["detail"] = detail
+    entry["estimatedKc"] = kc
+    if unit and unit != "kills":
+        entry["attemptUnit"] = unit
+    if req:
+        entry["skillRequirement"] = req
+    entry["wikiUrl"] = wiki_url(display.replace(" (damaged)", ""))
     items.append(entry)
 
 io.open('src/main/resources/com/nowwhat/item-sources.json', 'w', encoding='utf-8', newline='\n').write(

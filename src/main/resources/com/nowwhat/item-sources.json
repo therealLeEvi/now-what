@@ -1412,5 +1412,1721 @@
       "value": "Priest in Peril"
     },
     "wikiUrl": "https://oldschool.runescape.wiki/w/Verac's_armour_set"
+  },
+  {
+    "id": "MAGUS_VESTIGE",
+    "preparationFrom": "pvm_duke_sucellus",
+    "displayName": "Magus vestige",
+    "gameItemId": 28281,
+    "type": "MONSTER_DROP",
+    "detail": "Duke Sucellus",
+    "estimatedKc": 720,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Desert Treasure II - The Fallen Empire"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Magus_vestige"
+  },
+  {
+    "id": "EYE_OF_THE_DUKE",
+    "preparationFrom": "pvm_duke_sucellus",
+    "displayName": "Eye of the Duke",
+    "gameItemId": 28321,
+    "type": "MONSTER_DROP",
+    "detail": "Duke Sucellus",
+    "estimatedKc": 720,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Desert Treasure II - The Fallen Empire"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Eye_of_the_Duke"
+  },
+  {
+    "id": "VENATOR_VESTIGE",
+    "preparationFrom": "pvm_the_leviathan",
+    "displayName": "Venator vestige",
+    "gameItemId": 28283,
+    "type": "MONSTER_DROP",
+    "detail": "the Leviathan",
+    "estimatedKc": 768,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Desert Treasure II - The Fallen Empire"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Venator_vestige"
+  },
+  {
+    "id": "LEVIATHANS_LURE",
+    "preparationFrom": "pvm_the_leviathan",
+    "displayName": "Leviathan's lure",
+    "gameItemId": 28325,
+    "type": "MONSTER_DROP",
+    "detail": "the Leviathan",
+    "estimatedKc": 768,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Desert Treasure II - The Fallen Empire"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Leviathan's_lure"
+  },
+  {
+    "id": "BELLATOR_VESTIGE",
+    "preparationFrom": "pvm_the_whisperer",
+    "displayName": "Bellator vestige",
+    "gameItemId": 28279,
+    "type": "MONSTER_DROP",
+    "detail": "the Whisperer",
+    "estimatedKc": 512,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Desert Treasure II - The Fallen Empire"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Bellator_vestige"
+  },
+  {
+    "id": "SIRENS_STAFF",
+    "preparationFrom": "pvm_the_whisperer",
+    "displayName": "Siren's staff",
+    "gameItemId": 28323,
+    "type": "MONSTER_DROP",
+    "detail": "the Whisperer",
+    "estimatedKc": 512,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Desert Treasure II - The Fallen Empire"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Siren's_staff"
+  },
+  {
+    "id": "VIRTUS_MASK",
+    "preparationFrom": "pvm_the_whisperer",
+    "displayName": "Virtus mask",
+    "gameItemId": 26241,
+    "type": "MONSTER_DROP",
+    "detail": "the Whisperer, or any Desert Treasure II boss",
+    "estimatedKc": 1536,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Desert Treasure II - The Fallen Empire"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Virtus_mask"
+  },
+  {
+    "id": "VIRTUS_ROBE_TOP",
+    "preparationFrom": "pvm_the_whisperer",
+    "displayName": "Virtus robe top",
+    "gameItemId": 26243,
+    "type": "MONSTER_DROP",
+    "detail": "the Whisperer, or any Desert Treasure II boss",
+    "estimatedKc": 1536,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Desert Treasure II - The Fallen Empire"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Virtus_robe_top"
+  },
+  {
+    "id": "VIRTUS_ROBE_BOTTOM",
+    "preparationFrom": "pvm_the_whisperer",
+    "displayName": "Virtus robe bottom",
+    "gameItemId": 26245,
+    "type": "MONSTER_DROP",
+    "detail": "the Whisperer, or any Desert Treasure II boss",
+    "estimatedKc": 1536,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Desert Treasure II - The Fallen Empire"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Virtus_robe_bottom"
+  },
+  {
+    "id": "ULTOR_VESTIGE",
+    "preparationFrom": "pvm_vardorvis",
+    "displayName": "Ultor vestige",
+    "gameItemId": 28285,
+    "type": "MONSTER_DROP",
+    "detail": "Vardorvis",
+    "estimatedKc": 1088,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Desert Treasure II - The Fallen Empire"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ultor_vestige"
+  },
+  {
+    "id": "EXECUTIONERS_AXE_HEAD",
+    "preparationFrom": "pvm_vardorvis",
+    "displayName": "Executioner's axe head",
+    "gameItemId": 28319,
+    "type": "MONSTER_DROP",
+    "detail": "Vardorvis",
+    "estimatedKc": 1088,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Desert Treasure II - The Fallen Empire"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Executioner's_axe_head"
+  },
+  {
+    "id": "SOULFLAME_HORN",
+    "preparationFrom": "pvm_yama",
+    "displayName": "Soulflame horn",
+    "gameItemId": 30759,
+    "type": "MONSTER_DROP",
+    "detail": "Yama",
+    "estimatedKc": 300,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "A Kingdom Divided"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Soulflame_horn"
+  },
+  {
+    "id": "OATHPLATE_HELM",
+    "preparationFrom": "pvm_yama",
+    "displayName": "Oathplate helm",
+    "gameItemId": 30750,
+    "type": "MONSTER_DROP",
+    "detail": "Yama",
+    "estimatedKc": 600,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "A Kingdom Divided"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Oathplate_helm"
+  },
+  {
+    "id": "OATHPLATE_CHEST",
+    "preparationFrom": "pvm_yama",
+    "displayName": "Oathplate chest",
+    "gameItemId": 30753,
+    "type": "MONSTER_DROP",
+    "detail": "Yama",
+    "estimatedKc": 600,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "A Kingdom Divided"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Oathplate_chest"
+  },
+  {
+    "id": "OATHPLATE_LEGS",
+    "preparationFrom": "pvm_yama",
+    "displayName": "Oathplate legs",
+    "gameItemId": 30756,
+    "type": "MONSTER_DROP",
+    "detail": "Yama",
+    "estimatedKc": 600,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "A Kingdom Divided"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Oathplate_legs"
+  },
+  {
+    "id": "ANCIENT_HILT",
+    "preparationFrom": "pvm_nex",
+    "displayName": "Ancient hilt",
+    "gameItemId": 26370,
+    "type": "MONSTER_DROP",
+    "detail": "Nex",
+    "estimatedKc": 516,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "The Frozen Door"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ancient_hilt"
+  },
+  {
+    "id": "NIHIL_HORN",
+    "preparationFrom": "pvm_nex",
+    "displayName": "Nihil horn",
+    "gameItemId": 26372,
+    "type": "MONSTER_DROP",
+    "detail": "Nex",
+    "estimatedKc": 258,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "The Frozen Door"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Nihil_horn"
+  },
+  {
+    "id": "TORVA_FULL_HELM_DAMAGED",
+    "preparationFrom": "pvm_nex",
+    "displayName": "Torva full helm (damaged)",
+    "gameItemId": 26376,
+    "type": "MONSTER_DROP",
+    "detail": "Nex",
+    "estimatedKc": 258,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "The Frozen Door"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Torva_full_helm"
+  },
+  {
+    "id": "TORVA_PLATEBODY_DAMAGED",
+    "preparationFrom": "pvm_nex",
+    "displayName": "Torva platebody (damaged)",
+    "gameItemId": 26378,
+    "type": "MONSTER_DROP",
+    "detail": "Nex",
+    "estimatedKc": 258,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "The Frozen Door"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Torva_platebody"
+  },
+  {
+    "id": "TORVA_PLATELEGS_DAMAGED",
+    "preparationFrom": "pvm_nex",
+    "displayName": "Torva platelegs (damaged)",
+    "gameItemId": 26380,
+    "type": "MONSTER_DROP",
+    "detail": "Nex",
+    "estimatedKc": 258,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "The Frozen Door"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Torva_platelegs"
+  },
+  {
+    "id": "ZARYTE_VAMBRACES",
+    "preparationFrom": "pvm_nex",
+    "displayName": "Zaryte vambraces",
+    "gameItemId": 26235,
+    "type": "MONSTER_DROP",
+    "detail": "Nex",
+    "estimatedKc": 172,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "The Frozen Door"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Zaryte_vambraces"
+  },
+  {
+    "id": "VENATOR_SHARD",
+    "preparationFrom": "pvm_phantom_muspah",
+    "displayName": "Venator shard",
+    "gameItemId": 27614,
+    "type": "MONSTER_DROP",
+    "detail": "the Phantom Muspah",
+    "estimatedKc": 100,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Secrets of the North"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Venator_shard"
+  },
+  {
+    "id": "ANCIENT_ICON",
+    "preparationFrom": "pvm_phantom_muspah",
+    "displayName": "Ancient icon",
+    "gameItemId": 27627,
+    "type": "MONSTER_DROP",
+    "detail": "the Phantom Muspah",
+    "estimatedKc": 50,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Secrets of the North"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ancient_icon"
+  },
+  {
+    "id": "AVERNIC_TREADS",
+    "preparationFrom": "pvm_doom_of_mokhaiotl",
+    "displayName": "Avernic treads",
+    "gameItemId": 31088,
+    "type": "MONSTER_DROP",
+    "detail": "the Doom of Mokhaiotl, delve 4 or deeper",
+    "estimatedKc": 160,
+    "attemptUnit": "runs",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "The Final Dawn"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Avernic_treads"
+  },
+  {
+    "id": "EYE_OF_AYAK",
+    "preparationFrom": "pvm_doom_of_mokhaiotl",
+    "displayName": "Eye of Ayak",
+    "gameItemId": 31115,
+    "type": "MONSTER_DROP",
+    "detail": "the Doom of Mokhaiotl, delve 3 or deeper",
+    "estimatedKc": 148,
+    "attemptUnit": "runs",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "The Final Dawn"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Eye_of_Ayak"
+  },
+  {
+    "id": "MOKHAIOTL_CLOTH",
+    "preparationFrom": "pvm_doom_of_mokhaiotl",
+    "displayName": "Mokhaiotl cloth",
+    "gameItemId": 31109,
+    "type": "MONSTER_DROP",
+    "detail": "the Doom of Mokhaiotl, delve 2 or deeper",
+    "estimatedKc": 140,
+    "attemptUnit": "runs",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "The Final Dawn"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Mokhaiotl_cloth"
+  },
+  {
+    "id": "ELDER_VENATOR_FANG",
+    "preparationFrom": "pvm_maggot_king",
+    "displayName": "Elder venator fang",
+    "gameItemId": 33634,
+    "type": "MONSTER_DROP",
+    "detail": "the Maggot King",
+    "estimatedKc": 340,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "The Blood Moon Rises"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Elder_venator_fang"
+  },
+  {
+    "id": "CRIMSON_KISTEN",
+    "preparationFrom": "pvm_maggot_king",
+    "displayName": "Crimson kisten",
+    "gameItemId": 33631,
+    "type": "MONSTER_DROP",
+    "detail": "the Maggot King",
+    "estimatedKc": 520,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "The Blood Moon Rises"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Crimson_kisten"
+  },
+  {
+    "id": "GLACIAL_TEMOTLI",
+    "preparationFrom": "pvm_amoxliatl",
+    "displayName": "Glacial temotli",
+    "gameItemId": 29889,
+    "type": "MONSTER_DROP",
+    "detail": "Amoxliatl",
+    "estimatedKc": 100,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "The Heart of Darkness"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Glacial_temotli"
+  },
+  {
+    "id": "PENDANT_OF_ATES",
+    "preparationFrom": "pvm_amoxliatl",
+    "displayName": "Pendant of Ates",
+    "gameItemId": 29892,
+    "type": "MONSTER_DROP",
+    "detail": "Amoxliatl",
+    "estimatedKc": 25,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "The Heart of Darkness"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pendant_of_Ates"
+  },
+  {
+    "id": "DRAGON_HUNTER_WAND",
+    "preparationFrom": "pvm_the_hueycoatl",
+    "displayName": "Dragon hunter wand",
+    "gameItemId": 30070,
+    "type": "MONSTER_DROP",
+    "detail": "the Hueycoatl",
+    "estimatedKc": 105,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Children of the Sun"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_hunter_wand"
+  },
+  {
+    "id": "TOME_OF_EARTH",
+    "preparationFrom": "pvm_the_hueycoatl",
+    "displayName": "Tome of earth",
+    "gameItemId": 30066,
+    "type": "MONSTER_DROP",
+    "detail": "the Hueycoatl",
+    "estimatedKc": 90,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Children of the Sun"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Tome_of_earth"
+  },
+  {
+    "id": "HUEYCOATL_HIDE",
+    "preparationFrom": "pvm_the_hueycoatl",
+    "displayName": "Hueycoatl hide",
+    "gameItemId": 30085,
+    "type": "MONSTER_DROP",
+    "detail": "the Hueycoatl",
+    "estimatedKc": 29,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Children of the Sun"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hueycoatl_hide"
+  },
+  {
+    "id": "ECLIPSE_ATLATL",
+    "preparationFrom": "pvm_moons_of_peril",
+    "displayName": "Eclipse atlatl",
+    "gameItemId": 29000,
+    "type": "MONSTER_DROP",
+    "detail": "the Lunar Chest after the Moons of Peril",
+    "estimatedKc": 224,
+    "attemptUnit": "chests",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Perilous Moons"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Eclipse_atlatl"
+  },
+  {
+    "id": "DUAL_MACUAHUITL",
+    "preparationFrom": "pvm_moons_of_peril",
+    "displayName": "Dual macuahuitl",
+    "gameItemId": 28997,
+    "type": "MONSTER_DROP",
+    "detail": "the Lunar Chest after the Moons of Peril",
+    "estimatedKc": 224,
+    "attemptUnit": "chests",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Perilous Moons"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dual_macuahuitl"
+  },
+  {
+    "id": "BLUE_MOON_SPEAR",
+    "preparationFrom": "pvm_moons_of_peril",
+    "displayName": "Blue moon spear",
+    "gameItemId": 28988,
+    "type": "MONSTER_DROP",
+    "detail": "the Lunar Chest after the Moons of Peril",
+    "estimatedKc": 224,
+    "attemptUnit": "chests",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Perilous Moons"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Blue_moon_spear"
+  },
+  {
+    "id": "BLOOD_MOON_CHESTPLATE",
+    "preparationFrom": "pvm_moons_of_peril",
+    "displayName": "Blood moon chestplate",
+    "gameItemId": 29022,
+    "type": "MONSTER_DROP",
+    "detail": "the Lunar Chest after the Moons of Peril",
+    "estimatedKc": 224,
+    "attemptUnit": "chests",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Perilous Moons"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Blood_moon_chestplate"
+  },
+  {
+    "id": "BLUE_MOON_CHESTPLATE",
+    "preparationFrom": "pvm_moons_of_peril",
+    "displayName": "Blue moon chestplate",
+    "gameItemId": 29013,
+    "type": "MONSTER_DROP",
+    "detail": "the Lunar Chest after the Moons of Peril",
+    "estimatedKc": 224,
+    "attemptUnit": "chests",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Perilous Moons"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Blue_moon_chestplate"
+  },
+  {
+    "id": "ECLIPSE_MOON_CHESTPLATE",
+    "preparationFrom": "pvm_moons_of_peril",
+    "displayName": "Eclipse moon chestplate",
+    "gameItemId": 29004,
+    "type": "MONSTER_DROP",
+    "detail": "the Lunar Chest after the Moons of Peril",
+    "estimatedKc": 224,
+    "attemptUnit": "chests",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Perilous Moons"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Eclipse_moon_chestplate"
+  },
+  {
+    "id": "FIRE_ELEMENT_STAFF_CROWN",
+    "preparationFrom": "pvm_royal_titans",
+    "displayName": "Fire element staff crown",
+    "gameItemId": 30631,
+    "type": "MONSTER_DROP",
+    "detail": "the Royal Titans, looting Branda",
+    "estimatedKc": 75,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fire_element_staff_crown"
+  },
+  {
+    "id": "MYSTIC_VIGOUR_PRAYER_SCROLL",
+    "preparationFrom": "pvm_royal_titans",
+    "displayName": "Mystic vigour prayer scroll",
+    "gameItemId": 30627,
+    "type": "MONSTER_DROP",
+    "detail": "the Royal Titans, looting Branda",
+    "estimatedKc": 75,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Mystic_vigour_prayer_scroll"
+  },
+  {
+    "id": "ICE_ELEMENT_STAFF_CROWN",
+    "preparationFrom": "pvm_royal_titans",
+    "displayName": "Ice element staff crown",
+    "gameItemId": 30628,
+    "type": "MONSTER_DROP",
+    "detail": "the Royal Titans, looting Eldric",
+    "estimatedKc": 75,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ice_element_staff_crown"
+  },
+  {
+    "id": "DEADEYE_PRAYER_SCROLL",
+    "preparationFrom": "pvm_royal_titans",
+    "displayName": "Deadeye prayer scroll",
+    "gameItemId": 30626,
+    "type": "MONSTER_DROP",
+    "detail": "the Royal Titans, looting Eldric",
+    "estimatedKc": 75,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Deadeye_prayer_scroll"
+  },
+  {
+    "id": "GIANTSOUL_AMULET",
+    "preparationFrom": "pvm_royal_titans",
+    "displayName": "Giantsoul amulet",
+    "gameItemId": 30637,
+    "type": "MONSTER_DROP",
+    "detail": "the Royal Titans",
+    "estimatedKc": 16,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Giantsoul_amulet"
+  },
+  {
+    "id": "DIZANAS_QUIVER",
+    "preparationFrom": "pvm_fortis_colosseum",
+    "displayName": "Dizana's quiver",
+    "gameItemId": 28947,
+    "type": "MONSTER_DROP",
+    "detail": "the Fortis Colosseum, for beating Sol Heredit",
+    "estimatedKc": 1,
+    "attemptUnit": "completions",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Children of the Sun"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dizana's_quiver"
+  },
+  {
+    "id": "SUNFIRE_FANATIC_HELM",
+    "preparationFrom": "pvm_fortis_colosseum",
+    "displayName": "Sunfire fanatic helm",
+    "gameItemId": 28933,
+    "type": "MONSTER_DROP",
+    "detail": "the Fortis Colosseum",
+    "estimatedKc": 24,
+    "attemptUnit": "completions",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Children of the Sun"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Sunfire_fanatic_helm"
+  },
+  {
+    "id": "SUNFIRE_FANATIC_CUIRASS",
+    "preparationFrom": "pvm_fortis_colosseum",
+    "displayName": "Sunfire fanatic cuirass",
+    "gameItemId": 28936,
+    "type": "MONSTER_DROP",
+    "detail": "the Fortis Colosseum",
+    "estimatedKc": 24,
+    "attemptUnit": "completions",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Children of the Sun"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Sunfire_fanatic_cuirass"
+  },
+  {
+    "id": "SUNFIRE_FANATIC_CHAUSSES",
+    "preparationFrom": "pvm_fortis_colosseum",
+    "displayName": "Sunfire fanatic chausses",
+    "gameItemId": 28939,
+    "type": "MONSTER_DROP",
+    "detail": "the Fortis Colosseum",
+    "estimatedKc": 24,
+    "attemptUnit": "completions",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Children of the Sun"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Sunfire_fanatic_chausses"
+  },
+  {
+    "id": "TONALZTICS_OF_RALOS",
+    "preparationFrom": "pvm_fortis_colosseum",
+    "displayName": "Tonalztics of Ralos",
+    "gameItemId": 28919,
+    "type": "MONSTER_DROP",
+    "detail": "the Fortis Colosseum, wave 7 onwards",
+    "estimatedKc": 83,
+    "attemptUnit": "completions",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Children of the Sun"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Tonalztics_of_Ralos"
+  },
+  {
+    "id": "ECHO_CRYSTAL",
+    "preparationFrom": "pvm_fortis_colosseum",
+    "displayName": "Echo crystal",
+    "gameItemId": 28942,
+    "type": "MONSTER_DROP",
+    "detail": "the Fortis Colosseum",
+    "estimatedKc": 12,
+    "attemptUnit": "completions",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Children of the Sun"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Echo_crystal"
+  },
+  {
+    "id": "NOXIOUS_POINT",
+    "preparationFrom": "pvm_araxxor",
+    "displayName": "Noxious point",
+    "gameItemId": 29790,
+    "type": "MONSTER_DROP",
+    "detail": "Araxxor",
+    "estimatedKc": 200,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 92
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Noxious_point"
+  },
+  {
+    "id": "NOXIOUS_BLADE",
+    "preparationFrom": "pvm_araxxor",
+    "displayName": "Noxious blade",
+    "gameItemId": 29792,
+    "type": "MONSTER_DROP",
+    "detail": "Araxxor",
+    "estimatedKc": 200,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 92
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Noxious_blade"
+  },
+  {
+    "id": "NOXIOUS_POMMEL",
+    "preparationFrom": "pvm_araxxor",
+    "displayName": "Noxious pommel",
+    "gameItemId": 29794,
+    "type": "MONSTER_DROP",
+    "detail": "Araxxor",
+    "estimatedKc": 200,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 92
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Noxious_pommel"
+  },
+  {
+    "id": "ARAXYTE_FANG",
+    "preparationFrom": "pvm_araxxor",
+    "displayName": "Araxyte fang",
+    "gameItemId": 29799,
+    "type": "MONSTER_DROP",
+    "detail": "Araxxor",
+    "estimatedKc": 600,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 92
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Araxyte_fang"
+  },
+  {
+    "id": "NIGHTMARE_STAFF",
+    "preparationFrom": "pvm_the_nightmare",
+    "displayName": "Nightmare staff",
+    "gameItemId": 24422,
+    "type": "MONSTER_DROP",
+    "detail": "the Nightmare",
+    "estimatedKc": 300,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Priest in Peril"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Nightmare_staff"
+  },
+  {
+    "id": "INQUISITORS_GREAT_HELM",
+    "preparationFrom": "pvm_the_nightmare",
+    "displayName": "Inquisitor's great helm",
+    "gameItemId": 24419,
+    "type": "MONSTER_DROP",
+    "detail": "the Nightmare",
+    "estimatedKc": 420,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Priest in Peril"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Inquisitor's_great_helm"
+  },
+  {
+    "id": "INQUISITORS_HAUBERK",
+    "preparationFrom": "pvm_the_nightmare",
+    "displayName": "Inquisitor's hauberk",
+    "gameItemId": 24420,
+    "type": "MONSTER_DROP",
+    "detail": "the Nightmare",
+    "estimatedKc": 420,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Priest in Peril"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Inquisitor's_hauberk"
+  },
+  {
+    "id": "INQUISITORS_PLATESKIRT",
+    "preparationFrom": "pvm_the_nightmare",
+    "displayName": "Inquisitor's plateskirt",
+    "gameItemId": 24421,
+    "type": "MONSTER_DROP",
+    "detail": "the Nightmare",
+    "estimatedKc": 420,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Priest in Peril"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Inquisitor's_plateskirt"
+  },
+  {
+    "id": "INQUISITORS_MACE",
+    "preparationFrom": "pvm_the_nightmare",
+    "displayName": "Inquisitor's mace",
+    "gameItemId": 24417,
+    "type": "MONSTER_DROP",
+    "detail": "the Nightmare",
+    "estimatedKc": 750,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Priest in Peril"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Inquisitor's_mace"
+  },
+  {
+    "id": "ELDRITCH_ORB",
+    "preparationFrom": "pvm_the_nightmare",
+    "displayName": "Eldritch orb",
+    "gameItemId": 24517,
+    "type": "MONSTER_DROP",
+    "detail": "the Nightmare",
+    "estimatedKc": 960,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Priest in Peril"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Eldritch_orb"
+  },
+  {
+    "id": "HARMONISED_ORB",
+    "preparationFrom": "pvm_the_nightmare",
+    "displayName": "Harmonised orb",
+    "gameItemId": 24511,
+    "type": "MONSTER_DROP",
+    "detail": "the Nightmare",
+    "estimatedKc": 960,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Priest in Peril"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Harmonised_orb"
+  },
+  {
+    "id": "VOLATILE_ORB",
+    "preparationFrom": "pvm_the_nightmare",
+    "displayName": "Volatile orb",
+    "gameItemId": 24514,
+    "type": "MONSTER_DROP",
+    "detail": "the Nightmare",
+    "estimatedKc": 960,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Priest in Peril"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Volatile_orb"
+  },
+  {
+    "id": "BELLES_FOLLY",
+    "preparationFrom": "pvm_shellbane_gryphon",
+    "displayName": "Belle's folly",
+    "gameItemId": 31245,
+    "type": "MONSTER_DROP",
+    "detail": "Shellbane gryphons",
+    "estimatedKc": 75,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 51
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Belle's_folly"
+  },
+  {
+    "id": "HOLY_ELIXIR",
+    "preparationFrom": "pvm_corporeal_beast",
+    "displayName": "Holy elixir",
+    "gameItemId": 12833,
+    "type": "MONSTER_DROP",
+    "detail": "the Corporeal Beast",
+    "estimatedKc": 171,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Holy_elixir"
+  },
+  {
+    "id": "SPECTRAL_SIGIL",
+    "preparationFrom": "pvm_corporeal_beast",
+    "displayName": "Spectral sigil",
+    "gameItemId": 12823,
+    "type": "MONSTER_DROP",
+    "detail": "the Corporeal Beast",
+    "estimatedKc": 1365,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Spectral_sigil"
+  },
+  {
+    "id": "ARCANE_SIGIL",
+    "preparationFrom": "pvm_corporeal_beast",
+    "displayName": "Arcane sigil",
+    "gameItemId": 12827,
+    "type": "MONSTER_DROP",
+    "detail": "the Corporeal Beast",
+    "estimatedKc": 1365,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Arcane_sigil"
+  },
+  {
+    "id": "ELYSIAN_SIGIL",
+    "preparationFrom": "pvm_corporeal_beast",
+    "displayName": "Elysian sigil",
+    "gameItemId": 12819,
+    "type": "MONSTER_DROP",
+    "detail": "the Corporeal Beast",
+    "estimatedKc": 4095,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Elysian_sigil"
+  },
+  {
+    "id": "DRAGON_CHAINBODY",
+    "preparationFrom": "pvm_kalphite_queen",
+    "displayName": "Dragon chainbody",
+    "gameItemId": 2513,
+    "type": "MONSTER_DROP",
+    "detail": "the Kalphite Queen",
+    "estimatedKc": 128,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_chainbody"
+  },
+  {
+    "id": "KQ_HEAD",
+    "preparationFrom": "pvm_kalphite_queen",
+    "displayName": "Kq head",
+    "gameItemId": 7981,
+    "type": "MONSTER_DROP",
+    "detail": "the Kalphite Queen",
+    "estimatedKc": 128,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Kq_head"
+  },
+  {
+    "id": "SARACHNIS_CUDGEL",
+    "preparationFrom": "pvm_sarachnis",
+    "displayName": "Sarachnis cudgel",
+    "gameItemId": 23528,
+    "type": "MONSTER_DROP",
+    "detail": "Sarachnis",
+    "estimatedKc": 384,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Sarachnis_cudgel"
+  },
+  {
+    "id": "ODIUM_SHARD_1",
+    "preparationFrom": "pvm_chaos_fanatic",
+    "displayName": "Odium shard 1",
+    "gameItemId": 11928,
+    "type": "MONSTER_DROP",
+    "detail": "the Chaos Fanatic",
+    "estimatedKc": 256,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Odium_shard_1"
+  },
+  {
+    "id": "MALEDICTION_SHARD_1",
+    "preparationFrom": "pvm_chaos_fanatic",
+    "displayName": "Malediction shard 1",
+    "gameItemId": 11931,
+    "type": "MONSTER_DROP",
+    "detail": "the Chaos Fanatic",
+    "estimatedKc": 256,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Malediction_shard_1"
+  },
+  {
+    "id": "ODIUM_SHARD_2",
+    "preparationFrom": "pvm_crazy_archaeologist",
+    "displayName": "Odium shard 2",
+    "gameItemId": 11929,
+    "type": "MONSTER_DROP",
+    "detail": "the Crazy archaeologist",
+    "estimatedKc": 256,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Odium_shard_2"
+  },
+  {
+    "id": "MALEDICTION_SHARD_2",
+    "preparationFrom": "pvm_crazy_archaeologist",
+    "displayName": "Malediction shard 2",
+    "gameItemId": 11932,
+    "type": "MONSTER_DROP",
+    "detail": "the Crazy archaeologist",
+    "estimatedKc": 256,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Malediction_shard_2"
+  },
+  {
+    "id": "ODIUM_SHARD_3",
+    "preparationFrom": "pvm_scorpia",
+    "displayName": "Odium shard 3",
+    "gameItemId": 11930,
+    "type": "MONSTER_DROP",
+    "detail": "Scorpia",
+    "estimatedKc": 256,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Odium_shard_3"
+  },
+  {
+    "id": "MALEDICTION_SHARD_3",
+    "preparationFrom": "pvm_scorpia",
+    "displayName": "Malediction shard 3",
+    "gameItemId": 11933,
+    "type": "MONSTER_DROP",
+    "detail": "Scorpia",
+    "estimatedKc": 256,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Malediction_shard_3"
+  },
+  {
+    "id": "SKULL_OF_VETION",
+    "preparationFrom": "pvm_vetion",
+    "displayName": "Skull of Vet'ion",
+    "gameItemId": 27673,
+    "type": "MONSTER_DROP",
+    "detail": "Vet'ion",
+    "estimatedKc": 196,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Skull_of_Vet'ion"
+  },
+  {
+    "id": "VOIDWAKER_BLADE",
+    "preparationFrom": "pvm_vetion",
+    "displayName": "Voidwaker blade",
+    "gameItemId": 27684,
+    "type": "MONSTER_DROP",
+    "detail": "Vet'ion",
+    "estimatedKc": 360,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Voidwaker_blade"
+  },
+  {
+    "id": "RING_OF_THE_GODS",
+    "preparationFrom": "pvm_vetion",
+    "displayName": "Ring of the gods",
+    "gameItemId": 12601,
+    "type": "MONSTER_DROP",
+    "detail": "Vet'ion",
+    "estimatedKc": 512,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ring_of_the_gods"
+  },
+  {
+    "id": "FANGS_OF_VENENATIS",
+    "preparationFrom": "pvm_venenatis",
+    "displayName": "Fangs of Venenatis",
+    "gameItemId": 27670,
+    "type": "MONSTER_DROP",
+    "detail": "Venenatis",
+    "estimatedKc": 196,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fangs_of_Venenatis"
+  },
+  {
+    "id": "VOIDWAKER_GEM",
+    "preparationFrom": "pvm_venenatis",
+    "displayName": "Voidwaker gem",
+    "gameItemId": 27687,
+    "type": "MONSTER_DROP",
+    "detail": "Venenatis",
+    "estimatedKc": 360,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Voidwaker_gem"
+  },
+  {
+    "id": "TREASONOUS_RING",
+    "preparationFrom": "pvm_venenatis",
+    "displayName": "Treasonous ring",
+    "gameItemId": 12605,
+    "type": "MONSTER_DROP",
+    "detail": "Venenatis",
+    "estimatedKc": 512,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Treasonous_ring"
+  },
+  {
+    "id": "CLAWS_OF_CALLISTO",
+    "preparationFrom": "pvm_callisto",
+    "displayName": "Claws of Callisto",
+    "gameItemId": 27667,
+    "type": "MONSTER_DROP",
+    "detail": "Callisto",
+    "estimatedKc": 196,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Claws_of_Callisto"
+  },
+  {
+    "id": "VOIDWAKER_HILT",
+    "preparationFrom": "pvm_callisto",
+    "displayName": "Voidwaker hilt",
+    "gameItemId": 27681,
+    "type": "MONSTER_DROP",
+    "detail": "Callisto",
+    "estimatedKc": 360,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Voidwaker_hilt"
+  },
+  {
+    "id": "TYRANNICAL_RING",
+    "preparationFrom": "pvm_callisto",
+    "displayName": "Tyrannical ring",
+    "gameItemId": 12603,
+    "type": "MONSTER_DROP",
+    "detail": "Callisto",
+    "estimatedKc": 512,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Tyrannical_ring"
+  },
+  {
+    "id": "ENHANCED_CRYSTAL_WEAPON_SEED",
+    "preparationFrom": "pvm_the_gauntlet",
+    "displayName": "Enhanced crystal weapon seed",
+    "gameItemId": 25859,
+    "type": "MONSTER_DROP",
+    "detail": "the Corrupted Gauntlet",
+    "estimatedKc": 400,
+    "attemptUnit": "completions",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Song of the Elves"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Enhanced_crystal_weapon_seed"
+  },
+  {
+    "id": "CRYSTAL_ARMOUR_SEED",
+    "preparationFrom": "pvm_the_gauntlet",
+    "displayName": "Crystal armour seed",
+    "gameItemId": 23956,
+    "type": "MONSTER_DROP",
+    "detail": "the Corrupted Gauntlet",
+    "estimatedKc": 50,
+    "attemptUnit": "completions",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Song of the Elves"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Crystal_armour_seed"
+  },
+  {
+    "id": "CRYSTAL_WEAPON_SEED",
+    "preparationFrom": "pvm_the_gauntlet",
+    "displayName": "Crystal weapon seed",
+    "gameItemId": 4207,
+    "type": "MONSTER_DROP",
+    "detail": "the Corrupted Gauntlet",
+    "estimatedKc": 50,
+    "attemptUnit": "completions",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Song of the Elves"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Crystal_weapon_seed"
+  },
+  {
+    "id": "HILL_GIANT_CLUB",
+    "preparationFrom": "pvm_obor",
+    "displayName": "Hill giant club",
+    "gameItemId": 20756,
+    "type": "MONSTER_DROP",
+    "detail": "the chest in Obor's lair",
+    "estimatedKc": 118,
+    "attemptUnit": "chests",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hill_giant_club"
+  },
+  {
+    "id": "BRYOPHYTAS_ESSENCE",
+    "preparationFrom": "pvm_bryophyta",
+    "displayName": "Bryophyta's essence",
+    "gameItemId": 22372,
+    "type": "MONSTER_DROP",
+    "detail": "the chest in Bryophyta's lair",
+    "estimatedKc": 118,
+    "attemptUnit": "chests",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Bryophyta's_essence"
+  },
+  {
+    "id": "MOOLETA",
+    "preparationFrom": "pvm_brutus",
+    "displayName": "Mooleta",
+    "gameItemId": 33101,
+    "type": "MONSTER_DROP",
+    "detail": "Brutus",
+    "estimatedKc": 30,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "The Ides of Milk"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Mooleta"
+  },
+  {
+    "id": "COW_SLIPPERS",
+    "preparationFrom": "pvm_brutus",
+    "displayName": "Cow slippers",
+    "gameItemId": 33093,
+    "type": "MONSTER_DROP",
+    "detail": "Brutus",
+    "estimatedKc": 150,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "The Ides of Milk"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Cow_slippers"
+  },
+  {
+    "id": "HALLOWFELL",
+    "preparationFrom": "pvm_mad_angel",
+    "displayName": "Hallowfell",
+    "gameItemId": 34027,
+    "type": "MONSTER_DROP",
+    "detail": "the Mad Angel",
+    "estimatedKc": 127,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Fallen From Grace"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hallowfell"
+  },
+  {
+    "id": "DARK_CLAW",
+    "preparationFrom": "pvm_skotizo",
+    "displayName": "Dark claw",
+    "gameItemId": 21275,
+    "type": "MONSTER_DROP",
+    "detail": "Skotizo",
+    "estimatedKc": 25,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dark_claw"
+  },
+  {
+    "id": "RONDACHE",
+    "preparationFrom": "pvm_the_fractured_archive",
+    "displayName": "Rondache",
+    "gameItemId": 34719,
+    "type": "MONSTER_DROP",
+    "detail": "the Fractured Archive",
+    "estimatedKc": 42,
+    "attemptUnit": "raids",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "While Guthix Sleeps"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Rondache"
+  },
+  {
+    "id": "ZORYAS_TOME",
+    "preparationFrom": "pvm_the_fractured_archive",
+    "displayName": "Zorya's tome",
+    "gameItemId": 34727,
+    "type": "MONSTER_DROP",
+    "detail": "the Fractured Archive",
+    "estimatedKc": 53,
+    "attemptUnit": "raids",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "While Guthix Sleeps"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Zorya's_tome"
+  },
+  {
+    "id": "HORN_OF_BRAN",
+    "preparationFrom": "pvm_the_fractured_archive",
+    "displayName": "Horn of Bran",
+    "gameItemId": 34679,
+    "type": "MONSTER_DROP",
+    "detail": "the Fractured Archive",
+    "estimatedKc": 70,
+    "attemptUnit": "raids",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "While Guthix Sleeps"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Horn_of_Bran"
+  },
+  {
+    "id": "ASCENSION_CROSSBOWS",
+    "preparationFrom": "pvm_the_fractured_archive",
+    "displayName": "Ascension crossbows",
+    "gameItemId": 34681,
+    "type": "MONSTER_DROP",
+    "detail": "the Fractured Archive",
+    "estimatedKc": 105,
+    "attemptUnit": "raids",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "While Guthix Sleeps"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ascension_crossbows"
+  },
+  {
+    "id": "OBLIGATOR",
+    "preparationFrom": "pvm_the_fractured_archive",
+    "displayName": "Obligator",
+    "gameItemId": 34717,
+    "type": "MONSTER_DROP",
+    "detail": "the Fractured Archive",
+    "estimatedKc": 210,
+    "attemptUnit": "raids",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "While Guthix Sleeps"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Obligator"
+  },
+  {
+    "id": "TORMENTED_SYNAPSE",
+    "preparationFrom": "pvm_tormented_demons",
+    "displayName": "Tormented synapse",
+    "gameItemId": 29580,
+    "type": "MONSTER_DROP",
+    "detail": "Tormented Demons",
+    "estimatedKc": 500,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "While Guthix Sleeps"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Tormented_synapse"
+  },
+  {
+    "id": "BURNING_CLAW",
+    "preparationFrom": "pvm_tormented_demons",
+    "displayName": "Burning claw",
+    "gameItemId": 29574,
+    "type": "MONSTER_DROP",
+    "detail": "Tormented Demons",
+    "estimatedKc": 501,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "While Guthix Sleeps"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Burning_claw"
+  },
+  {
+    "id": "ZENYTE_SHARD",
+    "preparationFrom": "pvm_demonic_gorillas",
+    "displayName": "Zenyte shard",
+    "gameItemId": 19529,
+    "type": "MONSTER_DROP",
+    "detail": "Demonic gorillas",
+    "estimatedKc": 300,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Monkey Madness II"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Zenyte_shard"
+  },
+  {
+    "id": "BALLISTA_LIMBS",
+    "preparationFrom": "pvm_demonic_gorillas",
+    "displayName": "Ballista limbs",
+    "gameItemId": 19592,
+    "type": "MONSTER_DROP",
+    "detail": "Demonic gorillas",
+    "estimatedKc": 500,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Monkey Madness II"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ballista_limbs"
+  },
+  {
+    "id": "BALLISTA_SPRING",
+    "preparationFrom": "pvm_demonic_gorillas",
+    "displayName": "Ballista spring",
+    "gameItemId": 19601,
+    "type": "MONSTER_DROP",
+    "detail": "Demonic gorillas",
+    "estimatedKc": 500,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Monkey Madness II"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ballista_spring"
+  },
+  {
+    "id": "LIGHT_FRAME",
+    "preparationFrom": "pvm_demonic_gorillas",
+    "displayName": "Light frame",
+    "gameItemId": 19586,
+    "type": "MONSTER_DROP",
+    "detail": "Demonic gorillas",
+    "estimatedKc": 750,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Monkey Madness II"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Light_frame"
+  },
+  {
+    "id": "HEAVY_FRAME",
+    "preparationFrom": "pvm_demonic_gorillas",
+    "displayName": "Heavy frame",
+    "gameItemId": 19589,
+    "type": "MONSTER_DROP",
+    "detail": "Demonic gorillas",
+    "estimatedKc": 1500,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Monkey Madness II"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Heavy_frame"
+  },
+  {
+    "id": "CRAWS_BOW",
+    "preparationFrom": "pvm_revenants",
+    "displayName": "Craw's bow",
+    "gameItemId": 22547,
+    "type": "MONSTER_DROP",
+    "detail": "Revenants in the Revenant Caves",
+    "estimatedKc": 14667,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Craw's_bow"
+  },
+  {
+    "id": "THAMMARONS_SCEPTRE",
+    "preparationFrom": "pvm_revenants",
+    "displayName": "Thammaron's sceptre",
+    "gameItemId": 22552,
+    "type": "MONSTER_DROP",
+    "detail": "Revenants in the Revenant Caves",
+    "estimatedKc": 14667,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Thammaron's_sceptre"
+  },
+  {
+    "id": "VIGGORAS_CHAINMACE",
+    "preparationFrom": "pvm_revenants",
+    "displayName": "Viggora's chainmace",
+    "gameItemId": 22542,
+    "type": "MONSTER_DROP",
+    "detail": "Revenants in the Revenant Caves",
+    "estimatedKc": 14667,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Viggora's_chainmace"
+  },
+  {
+    "id": "AMULET_OF_AVARICE",
+    "preparationFrom": "pvm_revenants",
+    "displayName": "Amulet of avarice",
+    "gameItemId": 22557,
+    "type": "MONSTER_DROP",
+    "detail": "Revenants in the Revenant Caves",
+    "estimatedKc": 7334,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Amulet_of_avarice"
+  },
+  {
+    "id": "DRAGON_METAL_SHEET",
+    "preparationFrom": "pvm_frost_dragons",
+    "displayName": "Dragon metal sheet",
+    "gameItemId": 31996,
+    "type": "MONSTER_DROP",
+    "detail": "Frost dragons",
+    "estimatedKc": 100,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SAILING",
+      "threshold": 87
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_metal_sheet"
+  },
+  {
+    "id": "DRAGON_LIMBS",
+    "preparationFrom": "pvm_rune_dragons",
+    "displayName": "Dragon limbs",
+    "gameItemId": 21918,
+    "type": "MONSTER_DROP",
+    "detail": "Rune dragons",
+    "estimatedKc": 800,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Dragon Slayer II"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_limbs"
+  },
+  {
+    "id": "DRAGON_METAL_LUMP",
+    "preparationFrom": "pvm_rune_dragons",
+    "displayName": "Dragon metal lump",
+    "gameItemId": 22103,
+    "type": "MONSTER_DROP",
+    "detail": "Rune dragons",
+    "estimatedKc": 5000,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Dragon Slayer II"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_metal_lump"
+  },
+  {
+    "id": "DRAGON_METAL_SLICE",
+    "preparationFrom": "pvm_adamant_dragons",
+    "displayName": "Dragon metal slice",
+    "gameItemId": 22100,
+    "type": "MONSTER_DROP",
+    "detail": "Adamant dragons",
+    "estimatedKc": 5000,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Dragon Slayer II"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_metal_slice"
+  },
+  {
+    "id": "ARANEA_BOOTS",
+    "preparationFrom": "pvm_araxxor",
+    "displayName": "Aranea boots",
+    "gameItemId": 29806,
+    "type": "MONSTER_DROP",
+    "detail": "Araxytes",
+    "estimatedKc": 2000,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 92
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Aranea_boots"
+  },
+  {
+    "id": "ARAXYTE_HEAD",
+    "preparationFrom": "pvm_araxxor",
+    "displayName": "Araxyte head",
+    "gameItemId": 29788,
+    "type": "MONSTER_DROP",
+    "detail": "Araxytes",
+    "estimatedKc": 2000,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 92
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Araxyte_head"
+  },
+  {
+    "id": "GRANITE_LEGS",
+    "preparationFrom": "pvm_skeletal_wyverns",
+    "displayName": "Granite legs",
+    "gameItemId": 6809,
+    "type": "MONSTER_DROP",
+    "detail": "Skeletal wyverns",
+    "estimatedKc": 512,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 72
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Granite_legs"
+  },
+  {
+    "id": "GRANITE_LONGSWORD",
+    "preparationFrom": "pvm_spitting_wyverns",
+    "displayName": "Granite longsword",
+    "gameItemId": 21646,
+    "type": "MONSTER_DROP",
+    "detail": "Spitting wyverns",
+    "estimatedKc": 512,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 66
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Granite_longsword"
+  },
+  {
+    "id": "GRANITE_BOOTS",
+    "preparationFrom": "pvm_spitting_wyverns",
+    "displayName": "Granite boots",
+    "gameItemId": 21643,
+    "type": "MONSTER_DROP",
+    "detail": "Spitting wyverns",
+    "estimatedKc": 2560,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 66
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Granite_boots"
+  },
+  {
+    "id": "WYVERN_VISAGE",
+    "preparationFrom": "pvm_spitting_wyverns",
+    "displayName": "Wyvern visage",
+    "gameItemId": 21637,
+    "type": "MONSTER_DROP",
+    "detail": "Spitting wyverns",
+    "estimatedKc": 12000,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 66
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Wyvern_visage"
+  },
+  {
+    "id": "LEAF_BLADED_BATTLEAXE",
+    "preparationFrom": "pvm_kurasks",
+    "displayName": "Leaf-bladed battleaxe",
+    "gameItemId": 20727,
+    "type": "MONSTER_DROP",
+    "detail": "Kurasks",
+    "estimatedKc": 1026,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 70
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Leaf-bladed_battleaxe"
+  },
+  {
+    "id": "HYDRAS_EYE",
+    "preparationFrom": "pvm_hydras",
+    "displayName": "Hydra's eye",
+    "gameItemId": 22973,
+    "type": "MONSTER_DROP",
+    "detail": "Hydras",
+    "estimatedKc": 1801,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 95
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hydra's_eye"
+  },
+  {
+    "id": "HYDRAS_FANG",
+    "preparationFrom": "pvm_hydras",
+    "displayName": "Hydra's fang",
+    "gameItemId": 22971,
+    "type": "MONSTER_DROP",
+    "detail": "Hydras",
+    "estimatedKc": 1801,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 95
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hydra's_fang"
+  },
+  {
+    "id": "HYDRAS_HEART",
+    "preparationFrom": "pvm_hydras",
+    "displayName": "Hydra's heart",
+    "gameItemId": 22969,
+    "type": "MONSTER_DROP",
+    "detail": "Hydras",
+    "estimatedKc": 1801,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 95
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hydra's_heart"
+  },
+  {
+    "id": "BASILISK_JAW",
+    "preparationFrom": "pvm_basilisk_knights",
+    "displayName": "Basilisk jaw",
+    "gameItemId": 24268,
+    "type": "MONSTER_DROP",
+    "detail": "Basilisk Knights",
+    "estimatedKc": 5000,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 60
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Basilisk_jaw"
+  },
+  {
+    "id": "BLOOD_SHARD",
+    "preparationFrom": "pvm_venators",
+    "displayName": "Blood shard",
+    "gameItemId": 24777,
+    "type": "MONSTER_DROP",
+    "detail": "Venators",
+    "estimatedKc": 860,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 74
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Blood_shard"
+  },
+  {
+    "id": "DRAGON_SHORTSWORD",
+    "preparationFrom": "pvm_wyrms",
+    "displayName": "Dragon shortsword",
+    "gameItemId": 21009,
+    "type": "MONSTER_DROP",
+    "detail": "Wyrms",
+    "estimatedKc": 10000,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 62
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_shortsword"
+  },
+  {
+    "id": "DRAKES_TOOTH",
+    "preparationFrom": "pvm_drakes",
+    "displayName": "Drake's tooth",
+    "gameItemId": 22960,
+    "type": "MONSTER_DROP",
+    "detail": "Drakes",
+    "estimatedKc": 2560,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 84
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Drake's_tooth"
+  },
+  {
+    "id": "DRAKES_CLAW",
+    "preparationFrom": "pvm_drakes",
+    "displayName": "Drake's claw",
+    "gameItemId": 22957,
+    "type": "MONSTER_DROP",
+    "detail": "Drakes",
+    "estimatedKc": 2560,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 84
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Drake's_claw"
   }
 ]

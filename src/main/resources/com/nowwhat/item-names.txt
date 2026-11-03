@@ -1,127 +1,296 @@
+113	strength potion(4)
 311	harpoon
+333	trout
+379	lobster
 385	shark
 391	manta ray
 536	dragon bones
+542	monks robe
+544	monks robe top
+554	fire rune
+555	water rune
+556	air rune
+560	death rune
+561	nature rune
 562	chaos rune
 563	law rune
+564	cosmic rune
+565	blood rune
+566	soul rune
 590	tinderbox
+617	coins
+770	ardougne cloak
+772	dramen staff
+805	rune thrownaxe
+806	bronze dart
+810	adamant dart
 837	crossbow
+853	maple shortbow
+890	adamant arrow
+892	rune arrow
 946	knife
 952	spade
 954	rope
+1007	red cape
+1033	zamorak monk bottom
+1035	zamorak monk top
 1050	santa hat
+1059	leather gloves
+1065	green dhide vambraces
 1079	rune platelegs
+1093	rune plateskirt
+1099	green dhide chaps
+1113	rune chainbody
 1127	rune platebody
+1135	green dhide body
+1163	rune full helm
+1169	coif
 1201	rune kiteshield
 1215	dragon dagger
+1249	dragon spear
+1333	rune scimitar
 1379	staff
 1381	staff of air
+1387	staff of fire
+1397	air battlestaff
+1409	ibans staff
+1434	dragon mace
 1506	gas mask
 1515	yew logs
+1523	lockpick
 1603	ruby
 1704	amulet of glory
+1718	holy symbol
 1725	amulet of strength
+1731	amulet of power
 1755	chisel
 2347	hammer
 2434	prayer potion(4)
+2436	super attack(4)
+2440	super strength(4)
+2442	super defence(4)
 2444	ranging potion(4)
 2446	antipoison(4)
+2448	superantipoison(4)
+2452	antifire potion(4)
+2491	black dhide vambraces
 2497	black dhide chaps
 2503	black dhide body
 2550	ring of recoil
 2552	ring of dueling(8)
+2572	ring of wealth
+2577	ranger boots
 2579	wizard boots
+2890	elemental shield
+3008	energy potion(4)
+3016	super energy(4)
 3024	super restore(4)
 3040	magic potion(4)
 3105	climbing boots
 3144	cooked karambwan
+3690	enchanted lyre
+3695	pet rock
+3749	archer helm
+3751	berserker helm
+3755	farseer helm
+3842	unholy book
 3853	games necklace(8)
+4087	dragon platelegs
 4089	mystic hat
 4091	mystic robe top
 4093	mystic robe bottom
+4097	mystic boots
+4131	rune boots
 4151	abyssal whip
 4155	enchanted gem
+4156	mirror shield
 4162	rock hammer
 4164	facemask
+4168	nose peg
+4251	ectophial
+4417	guthix rest(4)
+4548	bullseye lantern
 4587	dragon scimitar
+4695	mist rune
+4696	dust rune
+4699	lava rune
+4700	sapphire lantern
+4708	ahrims hood
+4710	ahrims staff
 4712	ahrims robetop
 4714	ahrims robeskirt
+4716	dharoks helm
+4718	dharoks greataxe
+4720	dharoks platebody
+4722	dharoks platelegs
+4724	guthans helm
+4728	guthans platebody
+4730	guthans chainskirt
+4732	karils coif
+4736	karils leathertop
+4738	karils leatherskirt
 4749	torags platebody
 4751	torags platelegs
+4753	veracs helm
+4755	veracs flail
+4757	veracs brassard
+4759	veracs plateskirt
+5095	explorers ring
+5171	seeds
+5329	secateurs
 5331	watering can
 5341	rake
 5343	seed dibber
 5516	elemental talisman
+6032	compost
+6034	supercompost
+6326	snakeskin bandana
 6328	snakeskin boots
+6450	kandarin headgear
+6469	white tree fruit
 6570	fire cape
 6585	amulet of fury
 6660	fishing explosive
 6685	saradomin brew(4)
+6714	holy wrench
+6746	darklight
+6809	granite legs
 6862	woolly hat
 6889	mages book
+6914	master wand
 6920	infinity boots
+7158	dragon 2h sword
+7159	insulated boots
+7208	wild pie
+7218	summer pie
+7409	magic secateurs
+7460	rune gloves
 7462	barrows gloves
 7946	monkfish
+8009	falador teleport
+8010	camelot teleport
+8289	lumbridge
 8839	void knight top
 8840	void knight robe
 8842	void knight gloves
+8850	rune defender
+8921	black mask
+8923	witchwood icon
+9084	lunar staff
 9185	rune crossbow
+9240	sapphire bolts (e)
 9242	ruby bolts (e)
 9243	diamond bolts (e)
+9433	bolt pouch
+9674	proselyte hauberk
+9676	proselyte cuisse
+9731	mind shield
+9780	crafting cape
+9998	hunter potion(4)
+10132	strung rabbit foot
+10148	black salamander
+10456	zamorak mitre
 10499	avas accumulator
 10551	fighter torso
 10553	penance gloves
+10588	salve amulet (e)
 10828	helm of neitiznot
 10925	sanfew serum(4)
+11061	ancient mace
+11090	phoenix necklace
+11113	skills necklace
 11126	combat bracelet
+11128	berserker necklace
 11133	regen bracelet
+11190	digsite pendant 1
+11200	dwarven helmet
+11212	dragon arrow
+11230	dragon dart
+11283	dragonfire shield
 11663	void mage helm
 11664	void ranger helm
+11665	void melee helm
 11770	seers ring (i)
+11771	archers ring (i)
 11773	berserker ring (i)
 11784	black mask (i)
+11785	armadyl crossbow
 11804	bandos godsword
+11806	saradomin godsword
+11824	zamorakian spear
 11826	armadyl helmet
+11828	armadyl chestplate
+11830	armadyl chainskirt
 11832	bandos chestplate
 11834	bandos tassets
+11836	bandos boots
 11838	saradomin sword
 11840	dragon boots
 11860	graceful boots
 11864	slayer helmet
 11865	slayer helmet (i)
 11866	slayer ring 8
+11875	broad bolts
+11889	zamorakian hasta
 11907	trident of the seas
+11924	malediction ward
 11926	odium ward
 11936	dark crab
+11941	looting bag
+11951	extended antifire(4)
 12002	occult necklace
 12006	abyssal tentacle
 12013	prospector helmet
 12253	armadyl robe top
 12265	bandos robe top
+12405	lunar isle teleport
+12490	ancient bracers
 12502	bandos chaps
 12508	armadyl dhide body
 12510	armadyl chaps
 12512	armadyl coif
+12598	holy sandals
 12610	book of law
 12612	book of darkness
 12625	stamina potion(4)
+12658	ibans staff (u)
 12695	super combat potion(4)
+12778	ghorrock teleport
+12779	kharyrll teleport
+12785	ring of wealth (i)
 12788	magic shortbow (i)
 12791	rune pouch
+12817	elysian spirit shield
 12821	spectral spirit shield
 12825	arcane spirit shield
 12899	trident of the swamp
 12926	toxic blowpipe
 12931	serpentine helm
 12954	dragon defender
+13066	super potion set
 13072	elite void top
 13073	elite void robe
+13114	morytania legs 3
+13119	falador shield 3
+13120	falador shield 4
+13122	ardougne cloak 2
+13127	explorers ring 3
+13128	explorers ring 4
+13132	fremennik sea boots 4
+13136	desert amulet 4
+13202	ring of the gods (i)
+13226	herb sack
 13235	eternal boots
 13237	pegasian boots
 13239	primordial boots
+13263	abyssal bludgeon
+13265	abyssal dagger
 13280	max cape
 13353	gricollers can
+13393	xerics talisman
 13441	anglerfish
+13576	dragon warhammer
+13639	seed box
 13640	farmers boro trousers
 13642	farmers jacket
 13644	farmers boots
@@ -130,30 +299,60 @@
 19544	tormented bracelet
 19547	necklace of anguish
 19553	amulet of torture
+19564	royal seed pod
+19617	mind altar teleport
+19634	soul bearer
 19669	redwood logs
+19675	arclight
+19685	dark totem
 19689	clue hunter garb
 19710	ring of suffering (i)
+19997	holy wraps
 20657	ring of suffering (ri)
 20712	warm gloves
 20714	tome of fire
 20720	bruma torch
+20724	imbued heart
+20754	giant key
 20997	twisted bow
 21000	twisted buckler
 21003	elder maul
 21006	kodai wand
 21012	dragon hunter crossbow
+21015	dinhs bulwark
 21018	ancestral hat
 21021	ancestral robe top
 21024	ancestral robe bottom
 21028	dragon harpoon
+21140	efaritays aid
+21146	necklace of passage(5)
+21166	burning amulet(5)
+21177	expeditious bracelet
 21183	bracelet of slaughter
+21255	slayers staff (e)
 21295	infernal cape
+21298	obsidian helmet
+21301	obsidian platebody
+21304	obsidian platelegs
 21326	amethyst arrow
+21633	ancient wyvern shield
+21643	granite boots
+21733	guardian boots
 21742	granite hammer
+21791	imbued saradomin cape
+21802	revenant cave teleport
+21816	bracelet of ethereum
+21820	revenant ether
+21880	wrath rune
+21902	dragon crossbow
+21913	mythical cape
+21940	sapphire dragon bolts (e)
 21944	ruby dragon bolts (e)
 21946	diamond dragon bolts (e)
+21948	dragonstone dragon bolts (e)
 21994	super antifire mix(2)
 22002	dragonfire ward
+22081	locator orb
 22109	avas assembler
 22111	dragonbone necklace
 22124	superior dragon bones
@@ -162,34 +361,107 @@
 22323	sanguinesti staff
 22324	ghrazi rapier
 22325	scythe of vitur
+22326	justiciar faceguard
+22327	justiciar chestguard
+22328	justiciar legguards
+22374	mossy key
+22398	ivandis flail
+22400	drakans medallion
+22461	bastion potion(4)
+22545	viggoras chainmace
+22550	craws bow
+22555	thammarons sceptre
+22557	amulet of avarice
+22599	icy basalt
+22601	stony basalt
 22875	hespori seed
 22935	celastrus bark
+22945	radas blessing 3
+22947	radas blessing 4
+22951	boots of brimstone
+22954	devout boots
+22975	brimstone ring
 22978	dragon hunter lance
 22981	ferocious gloves
 22986	bonecrusher necklace
+23037	boots of stone
+23246	fremennik kilt
+23261	gilded dhide vambraces
+23528	sarachnis cudgel
 23685	divine super combat potion(4)
 23733	divine ranging potion(4)
+23836	linum tirinum
+23838	phren bark
+23840	corrupted helm basic
+23843	corrupted body basic
+23846	corrupted legs basic
+23851	corrupted halberd perfected
+23854	corrupted staff perfected
+23857	corrupted bow perfected
+23874	paddlefish
+23877	crystal ore
+23882	egniol potion 1
+23886	crystal helm basic
+23887	crystal helm attuned
+23889	crystal body basic
+23890	crystal body attuned
+23892	crystal legs basic
+23893	crystal legs attuned
+23897	crystal halberd perfected
+23900	crystal staff perfected
+23903	crystal bow perfected
 23904	teleport crystal
 23971	crystal helm
 23975	crystal body
 23979	crystal legs
+23983	crystal bow
 23987	crystal halberd
+23991	crystal shield
 23995	blade of saeldor
+24251	wilderness crabs teleport
+24265	vs shield
 24271	neitiznot faceguard
+24417	inquisitors mace
 24419	inquisitors great helm
 24420	inquisitors hauberk
 24421	inquisitors plateskirt
 24422	nightmare staff
+24423	harmonised nightmare staff
+24424	volatile nightmare staff
+24425	eldritch nightmare staff
+24589	blighted manta ray
+24592	blighted anglerfish
+24595	blighted karambwan
+24598	blighted super restore(4)
+24607	blighted ancient ice sack
+24613	blighted entangle sack
+24635	divine bastion potion(4)
+24699	blisterwood flail
 24780	amulet of blood fury
+24953	waterbirth teleport
+25340	ectoplasmator
+25404	bloodbark body
+25410	bloodbark boots
+25413	bloodbark helm
+25416	bloodbark legs
+25422	bleached bones
+25434	zealots robe top
+25436	zealots robe bottom
+25467	gold coffin
 25484	soulreaper axe
 25485	ultor ring
 25486	magus ring
 25487	venator ring
 25488	bellator ring
+25641	barronite mace
 25644	imcando hammer
+25781	ash sanctifier
+25818	book of the dead
+25849	amethyst dart
 25865	bow of faerdhinen
 25975	lightbearer
 25979	keris partisan
+25981	keris partisan of breaching
 26219	osmumtens fang
 26235	zaryte vambraces
 26241	virtus mask
@@ -201,6 +473,8 @@
 26384	torva platebody
 26386	torva platelegs
 26798	catalytic talisman
+26914	amulet of the eye
+27202	menaphite remedy(4)
 27226	masori mask
 27229	masori body
 27232	masori chaps
@@ -209,25 +483,104 @@
 27241	masori chaps (f)
 27251	elidinis ward (f)
 27275	tumekens shadow
+27281	divine rune pouch
 27323	silk dressing 2
 27335	blessed crystal scarab 2
 27343	smelling salts 2
+27610	venator bow
+27624	ancient sceptre
+27629	forgotten brew(4)
 27641	saturated heart
+27655	webweaver bow
+27660	ursine chainmace
+27665	accursed sceptre
+27690	voidwaker
+28140	log basket
+28327	ring of shadows
+28356	blackstone fragment
+28585	warped sceptre
+28792	bone mace
+28794	bone shortbow
+28796	bone staff
+28810	zombie axe
+28824	civitas illa fortis teleport
+28869	hunters sunlight crossbow
+28878	moonlight antler bolts
+28945	echo boots
 28951	dizanas quiver
+28955	blessed dizanas quiver
+28991	atlatl dart
+28997	dual macuahuitl
+29000	eclipse atlatl
+29004	eclipse moon chestplate
+29007	eclipse moon tassets
+29010	eclipse moon helm
+29013	blue moon chestplate
+29016	blue moon tassets
+29019	blue moon helm
+29022	blood moon chestplate
+29025	blood moon tassets
 29028	blood moon helm
+29077	cooked moss lizard
+29090	calcified moth
 29143	cooked moonlight antelope
+29195	moonlight moth mix 2
+29271	basic quetzal whistle
+29280	mixed hide top
+29283	mixed hide legs
+29286	mixed hide boots
+29289	mixed hide cape
 29381	blessed bone shards
+29574	burning claw
 29589	emberlight
 29591	scorching bow
+29594	purging staff
+29684	guthixian temple teleport
+29782	spider cave teleport
+29784	araxyte venom sac
+29796	noxious halberd
 29801	amulet of rancour
 29806	aranea boots
+29889	glacial temotli
+29893	pendant of ates
 30064	tome of earth
 30070	dragon hunter wand
+30125	prayer regeneration potion(4)
+30634	twinflame staff
+30638	giantsoul amulet
 30750	oathplate helm
+30753	oathplate chest
 30756	oathplate legs
+30775	chasm teleport scroll
+30843	aether rune
+30875	surge potion(4)
+31091	avernic treads (pr)
+31099	mokhaiotl waystone
 31106	confliction gauntlets
 31113	eye of ayak
+31142	eclipse moon armour set
+31248	belles folly
+31398	tortugan shield
+31583	rosewood blowpipe
+31590	haemostatic dressing 4
+31650	armadyl brew(4)
+32312	giant krill
+32344	bluefin
+32399	sailors amulet
 32612	crate of angler outfit pieces
+33101	mooleta
+33103	cowbell amulet
 33595	seeking dragon arrow
+33631	crimson kisten
 33639	necklace of rupture
+33716	blisterwood stake
+33718	hallowed flail
+33722	sunspear
+34027	hallowfell
+34033	ardeaglais teleport
 34407	amulet of air
+34428	elemental amulet
+34681	ascension crossbows
+34696	diamond ascension bolts (e)
+34715	obligator
+34719	rondache
