@@ -1857,22 +1857,23 @@ be worth having.
 
 ## Where this stands
 
-Everything below is on disk and building. There is **no version control in
-this directory** — `git init` would be the first thing worth doing before the
-next round of changes, since several passes here rewrote generated data files
-wholesale and there is currently no way to diff or roll back.
+Everything below is in git and building. Last brought up to date on
+2026-11-03.
 
 ### Working
 
 - Reads from the client: skill levels, completed quests, **quest points**,
-  **all 48 diary tiers**, **Combat Achievement tiers**, combat level, and
-  bank / inventory / worn equipment.
-- 253 activities and 35 item sources, with zero dangling references.
+  **all 48 diary tiers**, **Combat Achievement tiers and points total**, combat
+  level, and bank / inventory / worn equipment.
+- 259 activities and 116 item sources, with zero dangling references. Every
+  points shop names the activity its currency is earned in.
 - Planning: prerequisite chains, skill segments with xp and time estimates,
   recursive item sourcing, and item goals that subtract what you already own.
 - Panel renders correctly at real sidebar width, with no horizontal scroll.
-- 42 tests, including content-integrity checks that fail the build on a bad
+- 138 tests, including content-integrity checks that fail the build on a bad
   quest reference, skill name, ingredient or missing item id.
+- Exercised in a real dev client against a logged-in account; the Combat
+  Achievement points total matched the in-game interface.
 
 ### Known gaps, in rough priority order
 
@@ -1889,17 +1890,19 @@ wholesale and there is currently no way to diff or roll back.
    doesn't change a plan yet beyond item goals.
 5. **"(started)" quest requirements are over-required** on diaries — needs a
    `QUEST_STARTED` requirement type.
-6. **The plugin has never been exercised against a logged-in account.** Every
-   verification here was either a unit test or an offline render via
-   `./gradlew panelshot`. Clicking through it in a real client with a real
-   account is still the highest-value unknown.
+6. **There is no total-level requirement type**, so Last Man Standing's entry
+   requirement (750 total and 30 Quest points, or 1,500 total) is only in its
+   description and is not enforced by the planner.
+7. **Combat Achievement thresholds are written down**, in
+   `CombatAchievementTier`, from the wiki as of 2026-11-03. They move when Jagex
+   adds tasks.
 
 ### Useful commands
 
 | Command | What it does |
 | --- | --- |
-| `./gradlew test` | 42 tests, including content integrity |
-| `./gradlew run` | Launches a dev-mode RuneLite client with the plugin side-loaded |
+| `./gradlew test` | 138 tests, including content integrity |
+| `./gradlew run` | Launches a dev-mode RuneLite client with the plugin side-loaded, from its own jar so a rebuild cannot reach it |
 | `./gradlew panelshot --args="241 out.png activity:<id>"` | Renders the panel offline; also accepts `skill:ATTACK:99` and `item:<ID>` |
 | `./gradlew plandiag` | Dumps what the planner returns for every activity |
 | `python tools/gen_data.py` | Regenerates the content database |
