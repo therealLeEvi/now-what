@@ -1855,6 +1855,76 @@ Not implemented yet. It is a real feature rather than a one-line fix, and it
 needs the "never looked" state carried through the model and into the UI to
 be worth having.
 
+## Every boss, and saying what to do (2026-11-03)
+
+The rule this round was written down from the user: the plugin is for players
+who do not know what to do, *including* things they qualified for long ago.
+"You already meet every requirement" with nothing after it is a bug, not a
+finished plan.
+
+### What to do, not only whether you can
+
+- A plan whose requirements are met now shows the activity's description
+  before the kit. Birdhouse, herb and tree runs said nothing at all until
+  this; they now carry the route, the patches or spots and what unlocks each,
+  the level tiers, and an inventory. Tree runs are one run (regular, fruit and
+  hardwood trees), as players actually do them.
+- The 26 oldest bosses and minigames had one-line descriptions that only
+  repeated a requirement. They were rewritten from each wiki page as where it
+  is, how to get there, what you do and what it is for. Researching them
+  turned up wrong facts in the old text (Barbarian Assault is not where Void
+  comes from, Kree'arra is not Ranged only) and wrong gates in the data
+  (Alchemical Hydra does not need A Kingdom Divided; the God Wars bosses do
+  need Troll Stronghold and 60 Strength or Agility; Guardians of the Rift needs
+  Temple of the Eye). `tools/activity_text.py` holds the new text.
+
+### 67 new fights
+
+`tools/boss_data.py`: every boss on the wiki's boss list that was missing, and
+the combat money makers on the Money making guide that are not bosses
+(Tormented Demons, demonic gorillas, wyverns and so on), each with hard
+requirements, budget and best-in-slot kits and supplies. Researched in seven
+parallel groups, one agent each, then a review pass over the ~2,000 new gear
+lines for wrong pictures. `tools/boss_uniques.py` adds 129 of their unique drops
+as item goals, with wiki drop rates, so "Venator shard" plans back to Phantom
+Muspah.
+
+### Suggested is not the same as allowed
+
+25 of the new fights have no requirement at all, and suggestions were
+"requirements met, sorted by priority", so a level 3 account was being told to
+do the Inferno. Activities now carry `recommended` stats from the wiki
+(`tools/recommended_data.py`). They gate suggestions only, never planning, and
+being a few levels short puts a fight under "Almost there" with "Recommended 90
+Ranged, you have 87". Wilderness fights are flagged, and a new setting hides
+them.
+
+### Quest data now comes from the wiki
+
+`tools/audit_quests.py` reads every quest's infobox and writes
+`tools/quest_wiki_data.py`, which `gen_data.py` applies over the hand-made
+tables. The first run found about 45 quests with wrong prerequisites and 25
+with missing or wrong skill levels. It also found that the Recipe for Disaster
+subquests were named differently from RuneLite's `Quest` enum ("Freeing King
+Awowogei" against "King Awowogei"), so the plugin could never see them as done
+and every Monkey Madness II plan asked for Awowogei again.
+
+### Icons
+
+RuneLite's item search only knows tradeable items, and for an untradeable one
+it offered a tradeable relative: the avernic defender's hilt, the dragon
+defender's ornament kit, the uncharged scythe. The bundled table now decides and
+the live search is the fallback. The parser also prefers an item named with the
+very words written over one matched through a slot's other nouns, which fixed
+"dragonfire shield" showing the ward and every "robe bottom" showing the top.
+
+### Generator caught up
+
+Several of this day's earlier changes (Last Man Standing, rooftop courses, the
+Combat Achievement tier chain, the Barrows sets and the shop items) had been
+made in the JSON directly, so regenerating would have deleted them. They are in
+`gen_data.py` now, and regenerating reproduces the shipped files.
+
 ## Where this stands
 
 Everything below is in git and building. Last brought up to date on
@@ -1870,12 +1940,15 @@ this section is history and still uses the old names.
 - Reads from the client: skill levels, completed quests, **quest points**,
   **all 48 diary tiers**, **Combat Achievement tiers and points total**, combat
   level, and bank / inventory / worn equipment.
-- 259 activities and 116 item sources, with zero dangling references. Every
-  points shop names the activity its currency is earned in.
+- 344 activities and 245 item sources, with zero dangling references. Every
+  points shop names the activity its currency is earned in. Every boss on the
+  wiki's boss list, plus the non-boss combat money makers.
+- Suggestions respect the wiki's recommended stats, and Wilderness content can
+  be hidden.
 - Planning: prerequisite chains, skill segments with xp and time estimates,
   recursive item sourcing, and item goals that subtract what you already own.
 - Panel renders correctly at real sidebar width, with no horizontal scroll.
-- 138 tests, including content-integrity checks that fail the build on a bad
+- 142 tests, including content-integrity checks that fail the build on a bad
   quest reference, skill name, ingredient or missing item id.
 - Exercised in a real dev client against a logged-in account; the Combat
   Achievement points total matched the in-game interface.
@@ -1888,8 +1961,10 @@ this section is history and still uses the old names.
    carried into the UI so an unopened tab isn't reported as "not obtained".
 2. **Boss kill counts are not read**, so `BOSS_KC` requirements can never be
    satisfied — the same class of bug quest points had before it was fixed.
-3. **Quest prerequisite links are hand-entered** (`tools/gen_data.py`,
-   `QUEST_PREREQS`) and are the most likely source of a wrong chain.
+3. **Quest links come from the wiki now, but only the direct ones the
+   infobox lists.** Miniquests RuneLite cannot track (Barbarian Training's
+   parts, Knight Waves Training Grounds) are dropped or never complete.
+   Re-run `tools/audit_quests.py` after a quest release.
 4. **No content gates on gear.** `ITEM_OWNED` exists and works but is used by
    nothing, and `PlayerState.isEquipped` has no callers. Gear is read; it just
    doesn't change a plan yet beyond item goals.
@@ -1906,8 +1981,10 @@ this section is history and still uses the old names.
 
 | Command | What it does |
 | --- | --- |
-| `./gradlew test` | 138 tests, including content integrity |
+| `./gradlew test` | 142 tests, including content integrity |
 | `./gradlew run` | Launches a dev-mode RuneLite client with the plugin side-loaded, from its own jar so a rebuild cannot reach it |
 | `./gradlew panelshot --args="241 out.png activity:<id>"` | Renders the panel offline; also accepts `skill:ATTACK:99` and `item:<ID>` |
 | `./gradlew plandiag` | Dumps what the planner returns for every activity |
 | `python tools/gen_data.py` | Regenerates the content database |
+| `./gradlew -q questnames > names.txt` then `python tools/audit_quests.py <cache> names.txt` | Re-reads every quest's requirements from the wiki |
+| `./gradlew suggestdiag --args="1 40 70 85"` | Which fights an account with every skill at that level is suggested |

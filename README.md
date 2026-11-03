@@ -12,8 +12,15 @@ have to do first, including what to wear and what to bring when you get there.
 **Something to do.** The panel opens on what you can start right now, ranked,
 plus an "Almost there" list of things you are a short step from: one requirement
 away, and within a few levels. Each one says what is missing ("Needs 91 Slayer,
-you have 87"). If you would rather not choose, it will roll one for you, optionally
-within a category.
+you have 87"). A fight is only suggested once you have the stats the wiki
+recommends for it, so a new account is not pointed at the Inferno; a few levels
+short, it shows as "Recommended 90 Ranged, you have 87". If you would rather not
+choose, it will roll one for you, optionally within a category.
+
+**What to do there.** Picking something you can already do does not stop at
+"you meet the requirements": it says where it is, how to get there and what you
+actually do, then what to bring. A birdhouse or tree run comes with its route
+and which patches you have unlocked.
 
 **Plan a path to anything.** Pick a goal three ways:
 
@@ -58,6 +65,7 @@ installed and switched on.
 | Show PvM suggestions | on | Include bosses and PvM |
 | Show collection log suggestions | on | Include collection log slots |
 | Prefer tick-manipulation methods | off | Plan with tick-manipulation training methods where they exist, falling back to normal ones. Exclusive, not additive, and overridable per lookup in the panel. |
+| Show Wilderness suggestions | on | Include bosses and monsters in the Wilderness, where other players can attack you |
 
 Methods also carry what an xp/hr figure cannot say: `Wilderness - PvP risk`,
 `Tick manipulation`, and, where it has been assessed, `Constant input` or
@@ -81,8 +89,8 @@ To build and run it from source you need JDK 11 or later:
 ## The data
 
 The plugin ships its own content database rather than calling anything at
-runtime: **259 activities**, **183 training methods across 23 skills** and
-**116 item sources**. Everything ships inside the plugin, nothing is downloaded,
+runtime: **344 activities**, including every boss on the wiki's boss list,
+**182 training methods across 23 skills** and **245 item sources**. Everything ships inside the plugin, nothing is downloaded,
 and it makes no network requests of its own.
 
 That data is taken from the [Old School RuneScape Wiki](https://oldschool.runescape.wiki/),
