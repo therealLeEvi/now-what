@@ -1,7 +1,6 @@
 package com.nextstep;
 
 import com.nextstep.data.ItemNameIndex;
-import com.nextstep.data.NavButtonLookup;
 import com.nextstep.data.PluginLookup;
 import com.nextstep.data.ItemTextParser;
 import com.nextstep.engine.XpTable;
@@ -54,9 +53,7 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.game.ItemManager;
 import net.runelite.http.api.item.ItemPrice;
 import net.runelite.client.plugins.PluginManager;
-import net.runelite.client.ui.ClientToolbar;
 import net.runelite.client.ui.ColorScheme;
-import net.runelite.client.ui.NavigationButton;
 import net.runelite.client.ui.PluginPanel;
 import net.runelite.client.util.LinkBrowser;
 
@@ -225,12 +222,6 @@ public class NextStepPanel extends PluginPanel
 	private JPanel content;
 	/** The measured gap that holds the attribution at the foot of the panel. */
 	private final JPanel footerSpacer = new JPanel();
-	/**
-	 * RuneLite's sidebar, for opening another plugin's panel. Handed over after
-	 * construction so every existing caller - and every test - still builds a
-	 * panel without one.
-	 */
-	private ClientToolbar clientToolbar;
 	private final Map<String, ItemSource> itemSourcesById = new HashMap<>();
 
 	private final JPanel availableNowContainer = new JPanel();
@@ -311,12 +302,6 @@ public class NextStepPanel extends PluginPanel
 	 * index, and a boss page re-renders on every click in the plan.
 	 */
 	private final Map<String, EntryIcons> iconCache = new HashMap<>();
-	/**
-	 * Helper plugins this panel tried and failed to start. Asking the player to
-	 * click the same dead link again is worse than telling them to do it
-	 * themselves.
-	 */
-	private final Set<String> failedToStart = new HashSet<>();
 
 	/**
 	 * Option titles the player has picked, so a step with a choice can collapse
@@ -1536,66 +1521,6 @@ public class NextStepPanel extends PluginPanel
 		});
 	}
 
-	public void setClientToolbar(ClientToolbar clientToolbar)
-	{
-		this.clientToolbar = clientToolbar;
-	}
-
-	/**
-	 * Another plugin's sidebar button, if RuneLite is showing one for it.
-	 * <p>
-	 * There is no registry of other plugins' buttons: {@code ClientToolbar} can
-	 * open a {@code NavigationButton}, but only the plugin that built one holds
-	 * a reference to it. The set of them does exist though - the client keeps
-	 * the sidebar's entries - so this reads that set and matches on the tooltip.
-	 * <p>
-	 * It is reflection into the client's own fields, which is why every part of
-	 * it is wrapped: a RuneLite release that renames a field costs this feature
-	 * and nothing else, and the pointer falls back to the sentence it used to
-	 * be. {@link NavButtonLookup} holds the matching, which is the part worth
-	 * testing.
-	 */
-	private NavigationButton sidebarButton(String pluginName)
-	{
-		if (clientToolbar == null)
-		{
-			return null;
-		}
-		try
-		{
-			java.lang.reflect.Field uiField = ClientToolbar.class.getDeclaredField("clientUI");
-			uiField.setAccessible(true);
-			Object clientUi = uiField.get(clientToolbar);
-			java.lang.reflect.Field entriesField = clientUi.getClass()
-				.getDeclaredField("sidebarEntries");
-			entriesField.setAccessible(true);
-			Object entries = entriesField.get(clientUi);
-			if (!(entries instanceof java.util.Collection))
-			{
-				return null;
-			}
-
-			List<NavigationButton> buttons = new ArrayList<>();
-			List<String> tooltips = new ArrayList<>();
-			for (Object entry : (java.util.Collection<?>) entries)
-			{
-				if (entry instanceof NavigationButton)
-				{
-					NavigationButton button = (NavigationButton) entry;
-					buttons.add(button);
-					tooltips.add(button.getTooltip());
-				}
-			}
-			int at = NavButtonLookup.match(pluginName, tooltips);
-			return at < 0 ? null : buttons.get(at);
-		}
-		catch (ReflectiveOperationException | RuntimeException | LinkageError notThisVersion)
-		{
-			log.debug("Could not read the sidebar's buttons", notThisVersion);
-			return null;
-		}
-	}
-
 	/** The activity a path is aimed at, or null for skill and item goals. */
 	private Activity targetActivity(Path path)
 	{
@@ -1976,42 +1901,22 @@ public class NextStepPanel extends PluginPanel
 		Plugin helper = findPlugin(pluginName);
 		if (helper != null && pluginManager.isPluginEnabled(helper))
 		{
-			// Installed and running. If it has a sidebar panel, the sentence
-			// opens it: naming a plugin and leaving the player to go and find
-			// its icon is the same half-handoff as naming a wiki page and not
-			// linking it.
-			NavigationButton button = sidebarButton(pluginName);
-			if (button == null)
-			{
-				JLabel line = resultLine(pluginName + " " + does, SUBTLE, indent);
-				line.setFont(SMALL_FONT);
-				return line;
-			}
-
-			JLabel line = resultLine(pluginName + " " + does + " Open it.", QUIET_LINK, indent);
+			// Installed and running: name it and what it does. Opening its panel
+			// for the player would mean reaching into RuneLite's sidebar, which
+			// has no public way in.
+			JLabel line = resultLine(pluginName + " " + does, SUBTLE, indent);
 			line.setFont(SMALL_FONT);
-			line.setToolTipText("Opens the " + pluginName + " panel");
-			makeClickable(line, () -> clientToolbar.openPanel(button));
 			return line;
 		}
 
 		if (helper != null)
 		{
-			// Installed but switched off used to be a dead end: a sentence
-			// telling the player to go and do something the panel could do
-			// itself. One click, and the next redraw says it is ready.
-			if (failedToStart.contains(pluginName))
-			{
-				JLabel failed = resultLine(pluginName + " would not start \u2014 switch it on in "
-					+ "RuneLite's plugin list.", WARN, indent);
-				failed.setFont(SMALL_FONT);
-				return failed;
-			}
-			JLabel line = resultLine(pluginName + " is installed but switched off \u2014 turn it "
-				+ "on for " + offer + ".", QUIET_LINK, indent);
+			// Installed but switched off. Said rather than done: switching on
+			// someone else's plugin is the player's call, made in RuneLite's own
+			// plugin list.
+			JLabel line = resultLine(pluginName + " is installed but switched off. Turn it "
+				+ "on in RuneLite's plugin list for " + offer + ".", SUBTLE, indent);
 			line.setFont(SMALL_FONT);
-			line.setToolTipText("Enables " + pluginName + " in RuneLite");
-			makeClickable(line, () -> enableHelper(helper, pluginName));
 			return line;
 		}
 
@@ -2022,48 +1927,6 @@ public class NextStepPanel extends PluginPanel
 		line.setToolTipText(url);
 		makeClickable(line, () -> openUrl(url));
 		return line;
-	}
-
-	/**
-	 * Switches another plugin on, on the player's say-so.
-	 * <p>
-	 * This is the one thing the panel does to someone else's plugin, and it only
-	 * happens on a click of a line that says so. Off the EDT, because starting a
-	 * plugin runs its own startUp() and that is not this thread's work to block
-	 * on; the redraw afterwards goes back to Swing.
-	 */
-	private void enableHelper(Plugin helper, String pluginName)
-	{
-		Thread worker = new Thread(() ->
-		{
-			try
-			{
-				pluginManager.setPluginEnabled(helper, true);
-				pluginManager.startPlugin(helper);
-			}
-			catch (Exception couldNotStart)
-			{
-				failedToStart.add(pluginName);
-			}
-			SwingUtilities.invokeLater(this::redrawAfterHelperChange);
-		}, "nextstep-enable-plugin");
-		worker.setDaemon(true);
-		worker.start();
-	}
-
-	/** Puts whatever is on screen back up, now that a helper's state has changed. */
-	private void redrawAfterHelperChange()
-	{
-		if (lastPath != null)
-		{
-			renderPath(lastPath);
-		}
-		else if (mode == Mode.RANDOM)
-		{
-			renderRoll();
-		}
-		revalidate();
-		repaint();
 	}
 
 	/**

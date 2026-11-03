@@ -135,7 +135,6 @@ public class NextStepPlugin extends Plugin
 			itemSourceDatabase.getAllSources(), this::resolvePath, pluginManager, itemManager);
 		// Lets the panel open another plugin's sidebar panel when it points at
 		// one - the toolbar is the only thing that can.
-		panel.setClientToolbar(clientToolbar);
 
 		final BufferedImage icon = ImageUtil.loadImageResource(getClass(), "/com/nextstep/icon.png");
 
