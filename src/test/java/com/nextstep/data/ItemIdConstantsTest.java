@@ -11,27 +11,27 @@ import org.junit.Test;
  * everything untradeable - so what matters is that the names it rebuilds from
  * constants are close enough to match against.
  */
-public class ItemNameIndexTest
+public class ItemIdConstantsTest
 {
 	@Test
 	public void variantMarkersComeBackAsBrackets()
 	{
-		assertEquals("masori body (f)", ItemNameIndex.displayName("MASORI_BODY_F"));
-		assertEquals("slayer helmet (i)", ItemNameIndex.displayName("SLAYER_HELMET_I"));
+		assertEquals("masori body (f)", ItemIdConstants.displayName("MASORI_BODY_F"));
+		assertEquals("slayer helmet (i)", ItemIdConstants.displayName("SLAYER_HELMET_I"));
 	}
 
 	@Test
 	public void aDoseGluedToTheWordIsSeparated()
 	{
-		assertEquals("prayer potion(4)", ItemNameIndex.displayName("PRAYER_POTION4"));
-		assertEquals("super restore(1)", ItemNameIndex.displayName("SUPER_RESTORE1"));
+		assertEquals("prayer potion(4)", ItemIdConstants.displayName("PRAYER_POTION4"));
+		assertEquals("super restore(1)", ItemIdConstants.displayName("SUPER_RESTORE1"));
 	}
 
 	@Test
 	public void plainNamesAreLeftAlone()
 	{
-		assertEquals("scythe of vitur", ItemNameIndex.displayName("SCYTHE_OF_VITUR"));
-		assertEquals("twisted bow", ItemNameIndex.displayName("TWISTED_BOW"));
+		assertEquals("scythe of vitur", ItemIdConstants.displayName("SCYTHE_OF_VITUR"));
+		assertEquals("twisted bow", ItemIdConstants.displayName("TWISTED_BOW"));
 	}
 
 	@Test
@@ -50,12 +50,12 @@ public class ItemNameIndexTest
 	public void aNameNoItemHasFindsNothing()
 	{
 		assertFalse(holdsSomethingNamed("sword of definitely not a real item"));
-		assertTrue(ItemNameIndex.search("").isEmpty());
+		assertTrue(ItemIdConstants.search("").isEmpty());
 	}
 
 	private boolean holdsSomethingNamed(String name)
 	{
-		List<ItemTextParser.Candidate> hits = ItemNameIndex.search(name);
+		List<ItemTextParser.Candidate> hits = ItemIdConstants.search(name);
 		for (ItemTextParser.Candidate hit : hits)
 		{
 			if (hit.getName().contains(name))

@@ -2,7 +2,7 @@ package com.nextstep.diag;
 
 import com.google.gson.Gson;
 import com.nextstep.data.ActivityDatabase;
-import com.nextstep.data.ItemNameIndex;
+import com.nextstep.data.ItemIdConstants;
 import com.nextstep.data.ItemTextParser;
 import com.nextstep.model.Activity;
 import java.lang.reflect.Field;
@@ -33,7 +33,7 @@ public class IconCoverage
 	public static void main(String[] args) throws Exception
 	{
 		List<ItemTextParser.Candidate> index = java.util.Collections.emptyList();
-		System.out.println("fallback item index: " + ItemNameIndex.search("scythe").size()
+		System.out.println("fallback item index: " + ItemIdConstants.search("scythe").size()
 			+ " names matching \"scythe\"");
 
 		Gson gson = new Gson();
@@ -154,6 +154,6 @@ public class IconCoverage
 	private static List<ItemTextParser.Candidate> search(List<ItemTextParser.Candidate> unused,
 		String term)
 	{
-		return ItemNameIndex.search(term);
+		return ItemIdConstants.search(term);
 	}
 }

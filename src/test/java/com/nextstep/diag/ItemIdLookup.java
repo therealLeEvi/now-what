@@ -1,6 +1,6 @@
 package com.nextstep.diag;
 
-import com.nextstep.data.ItemNameIndex;
+import com.nextstep.data.ItemIdConstants;
 import com.nextstep.data.ItemTextParser;
 import java.util.List;
 
@@ -45,7 +45,7 @@ public final class ItemIdLookup
 			}
 			System.out.println();
 			System.out.println("== " + needle);
-			List<ItemTextParser.Candidate> hits = ItemNameIndex.search(needle);
+			List<ItemTextParser.Candidate> hits = ItemIdConstants.search(needle);
 			if (hits.isEmpty())
 			{
 				System.out.println("   (nothing)");

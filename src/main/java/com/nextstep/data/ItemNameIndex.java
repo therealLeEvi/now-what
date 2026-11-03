@@ -1,15 +1,19 @@
 package com.nextstep.data;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import lombok.extern.slf4j.Slf4j;
 
 /**
- * A name-to-id index for every item in the game, built from RuneLite's
- * {@code ItemID} constants.
+ * Names and ids for the items the bundled gear and supply lines mention, for
+ * the ones RuneLite's own search cannot find.
  * <p>
  * This exists because {@code ItemManager.search} only covers <b>tradeable</b>
  * items: it walks the Grand Exchange price map, so nothing untradeable is in
@@ -20,18 +24,21 @@ import java.util.Locale;
  * a best-in-slot setup with no scythe in it reasonably concludes the pictures
  * are broken.
  * <p>
- * The constants are read by reflection, once, with no client and no network, so
- * this also works in tests and in the offline diagnostics. The cost is that a
- * constant name is not a display name: it has lost apostrophes, hyphens and
- * brackets ({@code MASORI_BODY_F}, {@code PRAYER_POTION4}). Those are put back
- * where the pattern is unambiguous, and {@link ItemTextParser} matches
- * leniently enough to absorb the rest. Because of that, this is the
- * <em>fallback</em>: a real display name from the item index is always
- * preferred when there is one.
+ * The table is a resource, {@code item-names.txt}, generated from RuneLite's
+ * {@code ItemID} constants by {@code ./gradlew itemnames}. It used to be read
+ * from those constants at runtime by reflection, which Plugin Hub plugins may
+ * not use; it holds only the items the bundled text resolves to, and
+ * {@code ItemNamesTableTest} fails when the text and the table drift apart.
+ * Constant names are not display names - they have lost apostrophes, hyphens
+ * and brackets - so this stays the <em>fallback</em>: a real display name from
+ * RuneLite's index is always preferred when there is one.
  */
+@Slf4j
 public final class ItemNameIndex
 {
-	private static final String ITEM_ID_CLASS = "net.runelite.api.ItemID";
+	static final String RESOURCE = "/com/nextstep/item-names.txt";
+	/** A typographic apostrophe, written as a number so the source stays ASCII. */
+	private static final String CURLY_APOSTROPHE = String.valueOf((char) 0x2019);
 
 	private static List<ItemTextParser.Candidate> index;
 
@@ -40,28 +47,18 @@ public final class ItemNameIndex
 	}
 
 	/**
-	 * Every item constant, name and id. Used to check that the ids written into
-	 * item-sources.json point at the items they say they do.
-	 */
-	public static List<ItemTextParser.Candidate> all()
-	{
-		return Collections.unmodifiableList(index());
-	}
-
-	/**
-	 * Every item whose name contains {@code term}, compared without the
-	 * punctuation these names cannot carry.
+	 * Every item in the table whose name contains {@code term}, compared without
+	 * the punctuation these names cannot carry.
 	 */
 	public static List<ItemTextParser.Candidate> search(String term)
 	{
-		List<ItemTextParser.Candidate> all = index();
 		List<ItemTextParser.Candidate> hits = new ArrayList<>();
-		if (term == null || term.isEmpty())
+		if (term == null || term.trim().isEmpty())
 		{
 			return hits;
 		}
 		String needle = flatten(term);
-		for (ItemTextParser.Candidate candidate : all)
+		for (ItemTextParser.Candidate candidate : index())
 		{
 			if (flatten(candidate.getName()).contains(needle))
 			{
@@ -71,87 +68,60 @@ public final class ItemNameIndex
 		return hits;
 	}
 
+	/** The whole table, for the test that keeps it in step with the bundled text. */
+	static List<ItemTextParser.Candidate> all()
+	{
+		return Collections.unmodifiableList(index());
+	}
+
 	/** Apostrophes and hyphens are absent from constant names; ignore them on both sides. */
-	private static String flatten(String text)
+	static String flatten(String text)
 	{
 		return text.toLowerCase(Locale.ROOT)
 			.replace("'", "")
-			.replace("\u2019", "")
+			.replace(CURLY_APOSTROPHE, "")
 			.replace("-", "")
 			.replace("+", "");
 	}
 
 	private static synchronized List<ItemTextParser.Candidate> index()
 	{
-		if (index != null)
+		if (index == null)
 		{
-			return index;
+			index = load();
 		}
-
-		List<ItemTextParser.Candidate> built = new ArrayList<>();
-		try
-		{
-			Class<?> itemId = Class.forName(ITEM_ID_CLASS);
-			for (Field field : itemId.getFields())
-			{
-				if (field.getType() != int.class || !Modifier.isStatic(field.getModifiers()))
-				{
-					continue;
-				}
-				built.add(new ItemTextParser.Candidate(displayName(field.getName()),
-					field.getInt(null)));
-			}
-		}
-		catch (ReflectiveOperationException | LinkageError noItemIdOnTheClasspath)
-		{
-			// Leaves the index empty: every lookup then simply falls through to
-			// whatever the real item index offered, which is where it started.
-			built = Collections.emptyList();
-		}
-		index = built;
 		return index;
 	}
 
-	/**
-	 * A constant name read back as something like the item's name.
-	 * <p>
-	 * {@code MASORI_BODY_F} is "masori body (f)" and {@code PRAYER_POTION4} is
-	 * "prayer potion(4)": a trailing one or two letter segment is a variant
-	 * marker in every real item name that has one, and a digit run glued to the
-	 * last word is a dose.
-	 */
-	static String displayName(String constant)
+	/** One item per line, "id TAB name". A missing or broken table leaves the fallback empty. */
+	private static List<ItemTextParser.Candidate> load()
 	{
-		String[] parts = constant.toLowerCase(Locale.ROOT).split("_");
-		StringBuilder name = new StringBuilder();
-		for (int i = 0; i < parts.length; i++)
+		List<ItemTextParser.Candidate> loaded = new ArrayList<>();
+		try (InputStream in = ItemNameIndex.class.getResourceAsStream(RESOURCE))
 		{
-			if (name.length() > 0)
+			if (in == null)
 			{
-				name.append(' ');
+				log.warn("Item name table {} is missing", RESOURCE);
+				return loaded;
 			}
-			if (i > 0 && i == parts.length - 1 && parts[i].length() <= 2
-				&& !parts[i].isEmpty() && !Character.isDigit(parts[i].charAt(0)))
+			BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
+			String line;
+			while ((line = reader.readLine()) != null)
 			{
-				name.append('(').append(parts[i]).append(')');
-			}
-			else
-			{
-				name.append(parts[i]);
+				int tab = line.indexOf('\t');
+				if (tab <= 0)
+				{
+					continue;
+				}
+				loaded.add(new ItemTextParser.Candidate(line.substring(tab + 1),
+					Integer.parseInt(line.substring(0, tab))));
 			}
 		}
-
-		// "potion4" -> "potion(4)"
-		String built = name.toString();
-		int at = built.length();
-		while (at > 0 && Character.isDigit(built.charAt(at - 1)))
+		catch (IOException | NumberFormatException broken)
 		{
-			at--;
+			log.warn("Could not read the item name table", broken);
+			loaded.clear();
 		}
-		if (at > 0 && at < built.length() && Character.isLetter(built.charAt(at - 1)))
-		{
-			built = built.substring(0, at) + "(" + built.substring(at) + ")";
-		}
-		return built;
+		return loaded;
 	}
 }

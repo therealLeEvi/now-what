@@ -2,7 +2,7 @@ package com.nextstep.data;
 
 import com.google.gson.Gson;
 import com.nextstep.model.Activity;
-import com.nextstep.data.ItemNameIndex;
+import com.nextstep.data.ItemIdConstants;
 import com.nextstep.model.ItemSource;
 import com.nextstep.model.Requirement;
 import com.nextstep.model.TrainingMethod;
@@ -206,7 +206,7 @@ public class ContentDatabaseTest
 	public void everyGameItemIdNamesTheItemItClaimsTo()
 	{
 		Map<Integer, List<String>> byId = new HashMap<>();
-		for (ItemTextParser.Candidate candidate : ItemNameIndex.all())
+		for (ItemTextParser.Candidate candidate : ItemIdConstants.all())
 		{
 			byId.computeIfAbsent(candidate.getId(), k -> new ArrayList<>())
 				.add(candidate.getName());

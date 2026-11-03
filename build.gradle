@@ -138,6 +138,14 @@ tasks.register('iconcoverage', JavaExec) {
 
 // Reads an item id out of RuneLite's ItemID constants, which is where every
 // gameItemId in item-sources.json is supposed to come from rather than memory.
+// Regenerates src/main/resources/com/nextstep/item-names.txt, the item table the
+// plugin ships in place of reading ItemID by reflection. Run it after changing
+// gear or supply text; ItemNamesTableTest fails until you do.
+tasks.register('itemnames', JavaExec) {
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.nextstep.data.ItemNamesTable'
+}
+
 tasks.register('itemid', JavaExec) {
 	classpath = sourceSets.test.runtimeClasspath
 	mainClass = 'com.nextstep.diag.ItemIdLookup'
