@@ -15,6 +15,9 @@ import com.nextstep.model.Path;
 import com.nextstep.model.PlayerState;
 import java.awt.image.BufferedImage;
 import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import javax.inject.Inject;
 import javax.swing.SwingUtilities;
@@ -209,9 +212,16 @@ public class NextStepPlugin extends Plugin
 				// Before the suggestions, because this can rebuild a rendered
 				// plan and the update below repaints around it.
 				panel.setProgress(state.getSkillLevels());
+				List<Activity> almost =
+					suggestionEngine.getAlmostAvailable(activityDatabase.getAllActivities(), state, hidden);
+				Map<String, String> missing = new HashMap<>();
+				for (Activity activity : almost)
+				{
+					missing.put(activity.getId(), suggestionEngine.whatIsMissing(activity, state));
+				}
 				panel.update(
 					suggestionEngine.getAvailableNow(activityDatabase.getAllActivities(), state, hidden),
-					suggestionEngine.getAlmostAvailable(activityDatabase.getAllActivities(), state, hidden)
+					almost, missing
 				);
 			});
 		});

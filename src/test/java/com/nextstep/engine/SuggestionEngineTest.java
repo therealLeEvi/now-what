@@ -77,7 +77,7 @@ public class SuggestionEngineTest
 	@Test
 	public void almostAvailableRequiresExactlyOneUnmetRequirement()
 	{
-		state.setSkillLevel("AGILITY", 40);
+		state.setSkillLevel("AGILITY", 43); // 4 short: within CLOSE_LEVELS
 		state.setSkillLevel("THIEVING", 32); // met
 		Activity twoReqsOneUnmet = new Activity("a", "Two reqs", Activity.Category.DIARY, Arrays.asList(
 			new Requirement(Requirement.Type.SKILL_LEVEL, "AGILITY", 47),
@@ -143,7 +143,7 @@ public class SuggestionEngineTest
 	@Test
 	public void almostAvailableDropsCategoriesThePlayerSwitchedOff()
 	{
-		state.setSkillLevel("AGILITY", 40);
+		state.setSkillLevel("AGILITY", 43); // close enough to list
 		Activity quest = questRequiringAgility(47);
 
 		assertTrue(engine.getAlmostAvailable(Arrays.asList(quest), state,
@@ -162,5 +162,45 @@ public class SuggestionEngineTest
 
 		assertEquals(engine.getAvailableNow(all, state).size(),
 			engine.getAvailableNow(all, state, EnumSet.noneOf(Activity.Category.class)).size());
+	}
+
+	/**
+	 * 70 Slayer used to put Cerberus (91) on the list, because one requirement
+	 * away was the only test. Far-off levels are not "almost".
+	 */
+	@Test
+	public void almostAvailableLeavesOutRequirementsThatAreFarOff()
+	{
+		state.setSkillLevel("SLAYER", 87);
+		Activity kraken = new Activity("kraken", "Kraken", Activity.Category.PVM, Arrays.asList(
+			new Requirement(Requirement.Type.SKILL_LEVEL, "SLAYER", 87 + 1)));
+		Activity cerberus = new Activity("cerb", "Cerberus", Activity.Category.PVM, Arrays.asList(
+			new Requirement(Requirement.Type.SKILL_LEVEL, "SLAYER", 87 + SuggestionEngine.CLOSE_LEVELS + 1)));
+
+		List<Activity> result = engine.getAlmostAvailable(Arrays.asList(kraken, cerberus), state);
+
+		assertEquals(1, result.size());
+		assertEquals("kraken", result.get(0).getId());
+	}
+
+	/** A quest is one thing to do, so it stays close however far the levels inside it are. */
+	@Test
+	public void aMissingQuestStillCountsAsAlmost()
+	{
+		Activity zulrah = new Activity("zulrah", "Zulrah", Activity.Category.PVM, Arrays.asList(
+			new Requirement(Requirement.Type.QUEST_COMPLETE, "Regicide", 0)));
+
+		assertEquals(1, engine.getAlmostAvailable(Arrays.asList(zulrah), state).size());
+		assertEquals("Needs Regicide done first", engine.whatIsMissing(zulrah, state));
+	}
+
+	@Test
+	public void whatIsMissingNamesTheLevelAndWhereYouAre()
+	{
+		state.setSkillLevel("SLAYER", 87);
+		Activity cerberus = new Activity("cerb", "Cerberus", Activity.Category.PVM, Arrays.asList(
+			new Requirement(Requirement.Type.SKILL_LEVEL, "SLAYER", 91)));
+
+		assertEquals("Needs 91 Slayer, you have 87", engine.whatIsMissing(cerberus, state));
 	}
 }

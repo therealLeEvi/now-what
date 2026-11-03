@@ -10,8 +10,10 @@ to do first - including what to wear and what to bring when you get there.
 ## What it does
 
 **Something to do.** The panel opens on what you can start right now, ranked,
-plus an "Almost there" list of what one more requirement would unlock. If you
-would rather not choose, it will roll one for you, optionally within a category.
+plus an "Almost there" list of what you are a short step from - one requirement
+away, within a few levels - each saying what is missing ("Needs 91 Slayer, you
+have 87"). If you would rather not choose, it will roll one for you, optionally
+within a category.
 
 **Plan a path to anything.** Pick a goal three ways:
 

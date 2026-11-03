@@ -3033,6 +3033,18 @@ public class NextStepPanel extends PluginPanel
 	 */
 	public void update(List<Activity> availableNowList, List<Activity> almostAvailable)
 	{
+		update(availableNowList, almostAvailable, java.util.Collections.emptyMap());
+	}
+
+	/**
+	 * @param missingById per activity id, the line saying what is still in the
+	 *                    way ("Needs 91 Slayer, you have 87"). A suggestion
+	 *                    that only named a category and a boss left the player
+	 *                    to work out for themselves why it was "almost".
+	 */
+	public void update(List<Activity> availableNowList, List<Activity> almostAvailable,
+		Map<String, String> missingById)
+	{
 		this.availableNow = availableNowList;
 		if (mode == Mode.RANDOM && rolled == null)
 		{
@@ -3051,7 +3063,8 @@ public class NextStepPanel extends PluginPanel
 		{
 			for (Activity activity : almostAvailable)
 			{
-				stack(almostThereContainer, new ActivityCard(activity, wrapWidth(14), this::planFor));
+				stack(almostThereContainer, new ActivityCard(activity, missingById.get(activity.getId()),
+					wrapWidth(14), this::planFor));
 			}
 		}
 
@@ -3134,7 +3147,7 @@ public class NextStepPanel extends PluginPanel
 	 */
 	private static class ActivityCard extends JPanel
 	{
-		ActivityCard(Activity activity, int wrapWidth, Consumer<Activity> onSelect)
+		ActivityCard(Activity activity, String missing, int wrapWidth, Consumer<Activity> onSelect)
 		{
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 			setBackground(ColorScheme.DARK_GRAY_COLOR);
@@ -3162,6 +3175,17 @@ public class NextStepPanel extends PluginPanel
 			title.setFont(OPTION_FONT);
 			title.setAlignmentX(Component.LEFT_ALIGNMENT);
 			add(title);
+
+			if (missing != null)
+			{
+				JLabel why = new JLabel(wrapped(
+					missing.replace("&", "&amp;").replace("<", "&lt;"), wrapWidth));
+				why.setForeground(DETAIL);
+				why.setFont(SMALL_FONT);
+				why.setBorder(new EmptyBorder(2, 0, 0, 0));
+				why.setAlignmentX(Component.LEFT_ALIGNMENT);
+				add(why);
+			}
 
 			setMaximumSize(new Dimension(Integer.MAX_VALUE, getPreferredSize().height));
 
