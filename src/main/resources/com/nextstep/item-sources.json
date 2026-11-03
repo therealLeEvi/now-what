@@ -1,0 +1,405 @@
+[
+  {
+    "id": "TWISTED_BOW",
+    "preparationFrom": "pvm_chambers_of_xeric",
+    "displayName": "Twisted bow",
+    "gameItemId": 20997,
+    "type": "MONSTER_DROP",
+    "detail": "Chambers of Xeric",
+    "estimatedKc": 500,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "RANGED",
+      "threshold": 75,
+      "hint": "Raid-entry benchmark; CoX also wants 70s-80s melee stats and 78 Herblore for overloads."
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Twisted_bow"
+  },
+  {
+    "id": "SCYTHE_OF_VITUR",
+    "preparationFrom": "pvm_theatre_of_blood",
+    "displayName": "Scythe of vitur",
+    "gameItemId": 22325,
+    "type": "MONSTER_DROP",
+    "detail": "Theatre of Blood",
+    "estimatedKc": 300,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "ATTACK",
+      "threshold": 80,
+      "hint": "ToB expects high combat stats and strong gear."
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Scythe_of_vitur"
+  },
+  {
+    "id": "DRAGON_CLAWS",
+    "preparationFrom": "pvm_chambers_of_xeric",
+    "displayName": "Dragon claws",
+    "gameItemId": 13652,
+    "type": "MONSTER_DROP",
+    "detail": "Chambers of Xeric",
+    "estimatedKc": 150,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_claws"
+  },
+  {
+    "id": "KODAI_WAND",
+    "preparationFrom": "pvm_chambers_of_xeric",
+    "displayName": "Kodai wand",
+    "gameItemId": 21006,
+    "type": "MONSTER_DROP",
+    "detail": "Chambers of Xeric",
+    "estimatedKc": 300,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Kodai_wand"
+  },
+  {
+    "id": "ELDER_MAUL",
+    "preparationFrom": "pvm_chambers_of_xeric",
+    "displayName": "Elder maul",
+    "gameItemId": 21003,
+    "type": "MONSTER_DROP",
+    "detail": "Chambers of Xeric",
+    "estimatedKc": 300,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Elder_maul"
+  },
+  {
+    "id": "ANCESTRAL_ROBE_TOP",
+    "preparationFrom": "pvm_chambers_of_xeric",
+    "displayName": "Ancestral robe top",
+    "gameItemId": 21021,
+    "type": "MONSTER_DROP",
+    "detail": "Chambers of Xeric",
+    "estimatedKc": 350,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ancestral_robe_top"
+  },
+  {
+    "id": "AVERNIC_DEFENDER",
+    "preparationFrom": "pvm_theatre_of_blood",
+    "displayName": "Avernic defender hilt",
+    "gameItemId": 22322,
+    "type": "MONSTER_DROP",
+    "detail": "Theatre of Blood",
+    "estimatedKc": 60,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Avernic_defender_hilt"
+  },
+  {
+    "id": "TOXIC_BLOWPIPE",
+    "preparationFrom": "pvm_zulrah",
+    "displayName": "Toxic blowpipe",
+    "gameItemId": 12926,
+    "type": "MONSTER_DROP",
+    "detail": "Zulrah",
+    "estimatedKc": 90,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Regicide"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Toxic_blowpipe"
+  },
+  {
+    "id": "DRAGON_WARHAMMER",
+    "displayName": "Dragon warhammer",
+    "gameItemId": 13576,
+    "type": "MONSTER_DROP",
+    "detail": "Lizardman shamans",
+    "estimatedKc": 400,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_warhammer"
+  },
+  {
+    "id": "ARMADYL_CROSSBOW",
+    "preparationFrom": "pvm_commander_zilyana",
+    "displayName": "Armadyl crossbow",
+    "gameItemId": 11785,
+    "type": "MONSTER_DROP",
+    "detail": "Commander Zilyana",
+    "estimatedKc": 500,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Armadyl_crossbow"
+  },
+  {
+    "id": "BANDOS_CHESTPLATE",
+    "preparationFrom": "pvm_general_graardor",
+    "displayName": "Bandos chestplate",
+    "gameItemId": 11832,
+    "type": "MONSTER_DROP",
+    "detail": "General Graardor",
+    "estimatedKc": 380,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Bandos_chestplate"
+  },
+  {
+    "id": "BANDOS_TASSETS",
+    "preparationFrom": "pvm_general_graardor",
+    "displayName": "Bandos tassets",
+    "gameItemId": 11834,
+    "type": "MONSTER_DROP",
+    "detail": "General Graardor",
+    "estimatedKc": 380,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Bandos_tassets"
+  },
+  {
+    "id": "ARMADYL_GODSWORD",
+    "preparationFrom": "pvm_kreearra",
+    "displayName": "Armadyl godsword hilt",
+    "gameItemId": 11802,
+    "type": "MONSTER_DROP",
+    "detail": "Kree'arra",
+    "estimatedKc": 500,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Armadyl_godsword_hilt"
+  },
+  {
+    "id": "SARADOMIN_GODSWORD",
+    "preparationFrom": "pvm_commander_zilyana",
+    "displayName": "Saradomin godsword hilt",
+    "gameItemId": 11806,
+    "type": "MONSTER_DROP",
+    "detail": "Commander Zilyana",
+    "estimatedKc": 500,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Saradomin_godsword_hilt"
+  },
+  {
+    "id": "PRIMORDIAL_BOOTS",
+    "preparationFrom": "pvm_cerberus",
+    "displayName": "Primordial boots",
+    "gameItemId": 13239,
+    "type": "MONSTER_DROP",
+    "detail": "Cerberus",
+    "estimatedKc": 256,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 91
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Primordial_boots"
+  },
+  {
+    "id": "DRAGON_HUNTER_LANCE",
+    "preparationFrom": "pvm_alchemical_hydra",
+    "displayName": "Dragon hunter lance",
+    "gameItemId": 22978,
+    "type": "MONSTER_DROP",
+    "detail": "Alchemical Hydra",
+    "estimatedKc": 1000,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 95
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_hunter_lance"
+  },
+  {
+    "id": "OCCULT_NECKLACE",
+    "preparationFrom": "pvm_thermonuclear_smoke_devil",
+    "displayName": "Occult necklace",
+    "gameItemId": 12002,
+    "type": "MONSTER_DROP",
+    "detail": "Smoke devils",
+    "estimatedKc": 350,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 93
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Occult_necklace"
+  },
+  {
+    "id": "TRIDENT_OF_THE_SEAS",
+    "preparationFrom": "pvm_kraken",
+    "displayName": "Trident of the seas",
+    "gameItemId": 11907,
+    "type": "MONSTER_DROP",
+    "detail": "Cave kraken",
+    "estimatedKc": 512,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 87
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Trident_of_the_seas"
+  },
+  {
+    "id": "AMULET_OF_TORTURE",
+    "displayName": "Amulet of torture",
+    "gameItemId": 19553,
+    "type": "CRAFT",
+    "detail": "String a zenyte and enchant it",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "CRAFTING",
+      "threshold": 98
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Amulet_of_torture"
+  },
+  {
+    "id": "ABYSSAL_WHIP",
+    "displayName": "Abyssal whip",
+    "gameItemId": 4151,
+    "type": "MONSTER_DROP",
+    "detail": "Abyssal demons",
+    "estimatedKc": 512,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 85
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Abyssal_whip"
+  },
+  {
+    "id": "DRAGON_BOOTS",
+    "displayName": "Dragon boots",
+    "gameItemId": 11840,
+    "type": "MONSTER_DROP",
+    "detail": "Spiritual mages",
+    "estimatedKc": 120,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 1
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_boots"
+  },
+  {
+    "id": "FIRE_CAPE",
+    "preparationFrom": "minigame_fight_caves",
+    "displayName": "Fire cape",
+    "gameItemId": 6570,
+    "type": "MONSTER_DROP",
+    "detail": "the Fight Caves",
+    "estimatedKc": 1,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "RANGED",
+      "threshold": 70
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fire_cape"
+  },
+  {
+    "id": "DRAGON_DEFENDER",
+    "preparationFrom": "unlock_warriors_guild",
+    "displayName": "Dragon defender",
+    "gameItemId": 12954,
+    "type": "MONSTER_DROP",
+    "detail": "Cyclopes in the Warriors' Guild",
+    "estimatedKc": 1,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_defender"
+  },
+  {
+    "id": "BARROWS_GLOVES",
+    "displayName": "Barrows gloves",
+    "gameItemId": 7462,
+    "type": "QUEST_REWARD",
+    "detail": "Recipe for Disaster",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Barrows_gloves"
+  },
+  {
+    "id": "DRAGON_SCIMITAR",
+    "displayName": "Dragon scimitar",
+    "gameItemId": 4587,
+    "type": "GE_BUY",
+    "detail": "Cheap early melee upgrade",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Monkey Madness I"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_scimitar"
+  },
+  {
+    "id": "AMULET_OF_FURY",
+    "displayName": "Amulet of fury",
+    "gameItemId": 6585,
+    "type": "GE_BUY",
+    "detail": "Standard all-round amulet",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Amulet_of_fury"
+  },
+  {
+    "id": "DRAGON_PICKAXE",
+    "displayName": "Dragon pickaxe",
+    "gameItemId": 11920,
+    "type": "MONSTER_DROP",
+    "detail": "Venenatis, Callisto or Vet'ion",
+    "estimatedKc": 400,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_pickaxe"
+  },
+  {
+    "id": "BERSERKER_RING",
+    "displayName": "Berserker ring",
+    "gameItemId": 6737,
+    "type": "MONSTER_DROP",
+    "detail": "Dagannoth Rex",
+    "estimatedKc": 128,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Berserker_ring"
+  },
+  {
+    "id": "SEERS_RING",
+    "displayName": "Seers ring",
+    "gameItemId": 6731,
+    "type": "MONSTER_DROP",
+    "detail": "Dagannoth Prime",
+    "estimatedKc": 128,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Seers_ring"
+  },
+  {
+    "id": "ARCHERS_RING",
+    "displayName": "Archers ring",
+    "gameItemId": 6733,
+    "type": "MONSTER_DROP",
+    "detail": "Dagannoth Supreme",
+    "estimatedKc": 128,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Archers_ring"
+  },
+  {
+    "id": "GRACEFUL_HOOD",
+    "displayName": "Graceful hood",
+    "gameItemId": 11850,
+    "type": "SHOP",
+    "detail": "Marks of grace, Rogues' Den",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "AGILITY",
+      "threshold": 30
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Graceful_hood"
+  },
+  {
+    "id": "RUNE_PLATEBODY",
+    "displayName": "Rune platebody",
+    "gameItemId": 1127,
+    "type": "GE_BUY",
+    "detail": "Budget melee body",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Rune_platebody"
+  },
+  {
+    "id": "CADAVA_BERRIES",
+    "displayName": "Cadava berries",
+    "gameItemId": 753,
+    "type": "GE_BUY",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Cadava_berries"
+  },
+  {
+    "id": "JANGERBERRIES",
+    "displayName": "Jangerberries",
+    "gameItemId": 247,
+    "type": "GE_BUY",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Jangerberries"
+  },
+  {
+    "id": "ZAMORAK_BREW",
+    "displayName": "Zamorak brew (4)",
+    "gameItemId": 2450,
+    "type": "CRAFT",
+    "detail": "Mix at a Herblore workbench",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "HERBLORE",
+      "threshold": 78
+    },
+    "ingredients": [
+      {
+        "itemId": "CADAVA_BERRIES",
+        "quantity": 1
+      },
+      {
+        "itemId": "JANGERBERRIES",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Zamorak_brew"
+  }
+]

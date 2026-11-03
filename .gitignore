@@ -1,0 +1,26 @@
+# Gradle
+/build/
+/.gradle/
+
+# The wrapper jar is deliberately committed: without it ./gradlew cannot
+# bootstrap itself on a fresh clone.
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDEs
+/.idea/
+*.iml
+*.ipr
+*.iws
+/out/
+/.vscode/
+/.settings/
+/.classpath
+/.project
+
+# tools/ holds Python generators for the bundled JSON
+__pycache__/
+*.py[cod]
+
+# Where the diagnostic harnesses (panelshot, paneltext) are pointed by default.
+# They take an output path as an argument, so nothing here is ever an input.
+/diag/

@@ -1,0 +1,16 @@
+# Normalise line endings in the repository to LF. Without this, committing from
+# Windows can store gradlew with CRLF, and a CRLF gradlew fails to execute on
+# Linux and macOS with a confusing "bad interpreter" error.
+* text=auto eol=lf
+
+# Windows-only scripts have to keep CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Never touch binaries.
+*.jar binary
+*.png binary
+*.ico binary
+
+# Java sources are deliberately pure ASCII (see the asciiCheck task in
+# build.gradle), so no charset attribute is needed to keep them intact.

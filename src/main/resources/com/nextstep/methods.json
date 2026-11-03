@@ -1,0 +1,2057 @@
+[
+  {
+    "skill": "AGILITY",
+    "minLevel": 1,
+    "maxLevel": 20,
+    "name": "Gnome Stronghold / Draynor rooftop",
+    "xpPerHour": 9000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Agility_training"
+  },
+  {
+    "skill": "AGILITY",
+    "minLevel": 20,
+    "maxLevel": 47,
+    "name": "Brimhaven Agility Arena",
+    "xpPerHour": 30000,
+    "notes": "Tickets buy Agility xp in bulk; the rate climbs toward 50k by level 40",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Agility_training"
+  },
+  {
+    "skill": "AGILITY",
+    "minLevel": 30,
+    "maxLevel": 99,
+    "name": "Agility Pyramid",
+    "xpPerHour": 25000,
+    "notes": "Slower, but the only course that pays you while you run it",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Agility_training"
+  },
+  {
+    "skill": "AGILITY",
+    "minLevel": 47,
+    "maxLevel": 62,
+    "name": "Wilderness Agility Course",
+    "xpPerHour": 50000,
+    "notes": "Fastest in this bracket, but player killers camp the obstacles. Bring nothing you mind losing.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Agility_training",
+    "risk": "PVP"
+  },
+  {
+    "skill": "AGILITY",
+    "minLevel": 52,
+    "maxLevel": 62,
+    "name": "Hallowed Sepulchre (floor 1)",
+    "xpPerHour": 45000,
+    "notes": "Requires Sins of the Father; the safe answer to the same bracket as the Wilderness course",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hallowed_Sepulchre"
+  },
+  {
+    "skill": "AGILITY",
+    "minLevel": 60,
+    "maxLevel": 70,
+    "name": "Seers' Village rooftop",
+    "xpPerHour": 50000,
+    "notes": "Marks of Grace toward the graceful outfit",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Agility_training"
+  },
+  {
+    "skill": "AGILITY",
+    "minLevel": 62,
+    "maxLevel": 72,
+    "name": "Hallowed Sepulchre (floor 2)",
+    "xpPerHour": 56000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hallowed_Sepulchre"
+  },
+  {
+    "skill": "AGILITY",
+    "minLevel": 70,
+    "maxLevel": 80,
+    "name": "Pollnivneach rooftop",
+    "xpPerHour": 47000,
+    "notes": "Marks of Grace toward the graceful outfit",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Agility_training"
+  },
+  {
+    "skill": "AGILITY",
+    "minLevel": 72,
+    "maxLevel": 87,
+    "name": "Hallowed Sepulchre (floors 3-4)",
+    "xpPerHour": 69000,
+    "notes": "Reaches roughly 80k once floor 4 opens at 77",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hallowed_Sepulchre"
+  },
+  {
+    "skill": "AGILITY",
+    "minLevel": 75,
+    "maxLevel": 99,
+    "name": "Prifddinas rooftop",
+    "xpPerHour": 60000,
+    "notes": "Requires Song of the Elves",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Agility_training"
+  },
+  {
+    "skill": "AGILITY",
+    "minLevel": 80,
+    "maxLevel": 90,
+    "name": "Rellekka rooftop",
+    "xpPerHour": 50000,
+    "notes": "Marks of Grace toward the graceful outfit",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Agility_training"
+  },
+  {
+    "skill": "AGILITY",
+    "minLevel": 87,
+    "maxLevel": 99,
+    "name": "Hallowed Sepulchre (floor 5)",
+    "xpPerHour": 98000,
+    "notes": "Fastest Agility in the game and entirely safe",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hallowed_Sepulchre"
+  },
+  {
+    "skill": "AGILITY",
+    "minLevel": 90,
+    "maxLevel": 99,
+    "name": "Ardougne rooftop",
+    "xpPerHour": 66000,
+    "notes": "Best rooftop rate; the Ardougne hard diary speeds it up further",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Agility_training"
+  },
+  {
+    "skill": "THIEVING",
+    "minLevel": 1,
+    "maxLevel": 36,
+    "name": "Pickpocketing men, farmers and master farmers",
+    "xpPerHour": 20000,
+    "notes": "Quests skip most of this bracket outright",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Thieving_training"
+  },
+  {
+    "skill": "THIEVING",
+    "minLevel": 36,
+    "maxLevel": 45,
+    "name": "Stealing from Aldarin villa chests",
+    "xpPerHour": 60000,
+    "notes": "Bring lockpicks and stamina potions",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Thieving_training"
+  },
+  {
+    "skill": "THIEVING",
+    "minLevel": 45,
+    "maxLevel": 65,
+    "name": "Blackjacking bandits (Pollnivneach)",
+    "xpPerHour": 99000,
+    "notes": "Very click-intensive; the rate more than doubles by level 65",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Blackjack"
+  },
+  {
+    "skill": "THIEVING",
+    "minLevel": 49,
+    "maxLevel": 65,
+    "name": "Stealing artefacts (Port Piscarilius)",
+    "xpPerHour": 150000,
+    "notes": "Needs Piscarilius favour; far calmer than blackjacking",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Thieving_training"
+  },
+  {
+    "skill": "THIEVING",
+    "minLevel": 55,
+    "maxLevel": 60,
+    "name": "Pickpocketing Knights of Ardougne",
+    "xpPerHour": 86000,
+    "notes": "Safe and low-setup. Over 55-99: ~200 dodgy necklaces, ~16k hitpoints healed, ~7.6M coins.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Thieving_training"
+  },
+  {
+    "skill": "THIEVING",
+    "minLevel": 60,
+    "maxLevel": 65,
+    "name": "Pickpocketing Knights of Ardougne",
+    "xpPerHour": 98000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Thieving_training"
+  },
+  {
+    "skill": "THIEVING",
+    "minLevel": 65,
+    "maxLevel": 70,
+    "name": "Pickpocketing Knights of Ardougne",
+    "xpPerHour": 109000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Thieving_training"
+  },
+  {
+    "skill": "THIEVING",
+    "minLevel": 65,
+    "maxLevel": 99,
+    "name": "Blackjacking menaphite thugs",
+    "xpPerHour": 230000,
+    "notes": "Fastest safe method outside the Wilderness, at high click intensity",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Blackjack"
+  },
+  {
+    "skill": "THIEVING",
+    "minLevel": 70,
+    "maxLevel": 75,
+    "name": "Pickpocketing Knights of Ardougne",
+    "xpPerHour": 124000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Thieving_training"
+  },
+  {
+    "skill": "THIEVING",
+    "minLevel": 75,
+    "maxLevel": 80,
+    "name": "Pickpocketing Knights of Ardougne",
+    "xpPerHour": 141000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Thieving_training"
+  },
+  {
+    "skill": "THIEVING",
+    "minLevel": 80,
+    "maxLevel": 85,
+    "name": "Pickpocketing Knights of Ardougne",
+    "xpPerHour": 159000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Thieving_training"
+  },
+  {
+    "skill": "THIEVING",
+    "minLevel": 82,
+    "maxLevel": 99,
+    "name": "Pickpocketing vyres (Darkmeyer)",
+    "xpPerHour": 120000,
+    "notes": "Requires Sins of the Father; good profit alongside the xp",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Thieving_training"
+  },
+  {
+    "skill": "THIEVING",
+    "minLevel": 84,
+    "maxLevel": 99,
+    "name": "Rogues' Castle chests",
+    "xpPerHour": 300000,
+    "notes": "The fastest Thieving there is. Player killers camp the castle, and you lose what you carry.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Thieving_training",
+    "risk": "PVP"
+  },
+  {
+    "skill": "THIEVING",
+    "minLevel": 85,
+    "maxLevel": 90,
+    "name": "Pickpocketing Knights of Ardougne",
+    "xpPerHour": 182000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Thieving_training"
+  },
+  {
+    "skill": "THIEVING",
+    "minLevel": 90,
+    "maxLevel": 95,
+    "name": "Pickpocketing Knights of Ardougne",
+    "xpPerHour": 209000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Thieving_training"
+  },
+  {
+    "skill": "THIEVING",
+    "minLevel": 91,
+    "maxLevel": 99,
+    "name": "Pyramid Plunder",
+    "xpPerHour": 270000,
+    "notes": "Nearly as fast as Rogues' Castle with no PvP exposure at all",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pyramid_Plunder"
+  },
+  {
+    "skill": "THIEVING",
+    "minLevel": 95,
+    "maxLevel": 99,
+    "name": "Pickpocketing Knights of Ardougne",
+    "xpPerHour": 240000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Thieving_training"
+  },
+  {
+    "skill": "FARMING",
+    "minLevel": 1,
+    "maxLevel": 15,
+    "name": "Quests and allotment runs",
+    "xpPerHour": null,
+    "notes": "Quests cover much of it; allotments fill the rest until oak trees open at 15.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Farming_training"
+  },
+  {
+    "skill": "FARMING",
+    "minLevel": 15,
+    "maxLevel": 99,
+    "name": "Tree runs",
+    "xpPerHour": null,
+    "notes": "A few minutes of clicking for a big lump of xp, then a wait. Oak 15, willow 30, maple 45, yew 60, magic 75.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Farming_training"
+  },
+  {
+    "skill": "FARMING",
+    "minLevel": 32,
+    "maxLevel": 99,
+    "name": "Herb runs",
+    "xpPerHour": null,
+    "notes": "Far less xp than a tree run, but among the best passive income in the game.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Farming_training"
+  },
+  {
+    "skill": "FARMING",
+    "minLevel": 35,
+    "maxLevel": 99,
+    "name": "Hardwood tree runs (Fossil Island)",
+    "xpPerHour": null,
+    "notes": "Teak 35, mahogany 55, redwood 90. Fold these into the same tree run.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Farming_training"
+  },
+  {
+    "skill": "MAGIC",
+    "minLevel": 1,
+    "maxLevel": 21,
+    "name": "Enchanting jewellery / spells on crabs",
+    "xpPerHour": 32000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training",
+    "gear": [
+      "Staff of air",
+      "Wizard robes"
+    ],
+    "supplies": [
+      "Cosmic rune",
+      "Sapphire ring or sapphire amulet"
+    ]
+  },
+  {
+    "skill": "MAGIC",
+    "minLevel": 21,
+    "maxLevel": 55,
+    "name": "Low Level Alchemy",
+    "xpPerHour": 60000,
+    "notes": "Stationary and cheap; the standard way through the 20s and 30s",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training",
+    "gear": [
+      "Staff of fire"
+    ],
+    "supplies": [
+      "Nature rune",
+      "Alchables: iron platebodies or similar"
+    ]
+  },
+  {
+    "skill": "MAGIC",
+    "minLevel": 43,
+    "maxLevel": 55,
+    "name": "Superheat Item",
+    "xpPerHour": 97000,
+    "notes": "Gives Smithing xp at the same time, but you pay for the ore",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training",
+    "gear": [
+      "Staff of fire"
+    ],
+    "supplies": [
+      "Nature rune",
+      "Iron ore",
+      "Coal"
+    ]
+  },
+  {
+    "skill": "MAGIC",
+    "minLevel": 55,
+    "maxLevel": 80,
+    "name": "Tele-alching at Camelot",
+    "xpPerHour": 144000,
+    "notes": "Alch between teleports; profitable and needs no combat",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training",
+    "gear": [
+      "Staff of fire"
+    ],
+    "supplies": [
+      "Nature rune",
+      "Law rune",
+      "Air rune",
+      "Alchables, one per teleport"
+    ]
+  },
+  {
+    "skill": "MAGIC",
+    "minLevel": 55,
+    "maxLevel": 99,
+    "name": "High Level Alchemy (passive)",
+    "xpPerHour": 78000,
+    "notes": "Done alongside another activity rather than as a session of its own",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training",
+    "gear": [
+      "Staff of fire"
+    ],
+    "supplies": [
+      "Nature rune",
+      "Alchables worth more than the nature rune"
+    ]
+  },
+  {
+    "skill": "MAGIC",
+    "minLevel": 70,
+    "maxLevel": 99,
+    "name": "Ice Bursting maniacal monkeys",
+    "xpPerHour": 310000,
+    "notes": "Requires Monkey Madness II; roughly 400k once Ice Barrage unlocks at 94",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training",
+    "gear": [
+      "Ancestral hat, robe top and robe bottom, or mystic robes",
+      "Kodai wand or master wand",
+      "Occult necklace",
+      "Imbued god cape",
+      "Tome of water",
+      "Barrows gloves"
+    ],
+    "supplies": [
+      "Death rune",
+      "Blood rune",
+      "Water rune",
+      "Prayer potions",
+      "Saradomin brew or sharks",
+      "Ninja monkey greegree",
+      "Royal seed pod"
+    ]
+  },
+  {
+    "skill": "MAGIC",
+    "minLevel": 70,
+    "maxLevel": 99,
+    "name": "Ice Bursting zombie pirates",
+    "xpPerHour": 330000,
+    "notes": "As fast as maniacal monkeys, and it pays for itself. You are a target the whole time.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training",
+    "risk": "PVP",
+    "gear": [
+      "Mystic robe top and mystic robe bottom",
+      "Occult necklace",
+      "Master wand or mystic smoke staff",
+      "Imbued god cape"
+    ],
+    "supplies": [
+      "Death rune",
+      "Blood rune",
+      "Water rune",
+      "Burning amulet",
+      "Nothing you are not willing to lose"
+    ]
+  },
+  {
+    "skill": "MAGIC",
+    "minLevel": 80,
+    "maxLevel": 99,
+    "name": "Stun-alching",
+    "xpPerHour": 256000,
+    "notes": "Fastest non-combat Magic, at a punishing click rate",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training",
+    "gear": [
+      "Staff of fire"
+    ],
+    "supplies": [
+      "Soul rune",
+      "Earth rune",
+      "Water rune",
+      "Nature rune",
+      "Alchables, one per cast pair"
+    ]
+  },
+  {
+    "skill": "MAGIC",
+    "minLevel": 86,
+    "maxLevel": 99,
+    "name": "Plank Make",
+    "xpPerHour": 90000,
+    "notes": "Near-AFK and profitable; requires Lunar Diplomacy",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training",
+    "gear": [
+      "Staff of earth"
+    ],
+    "supplies": [
+      "Astral rune",
+      "Nature rune",
+      "Earth rune",
+      "Oak logs or teak logs",
+      "Coins"
+    ]
+  },
+  {
+    "skill": "SMITHING",
+    "minLevel": 1,
+    "maxLevel": 40,
+    "name": "Smithing bronze through steel at an anvil",
+    "xpPerHour": 14000,
+    "notes": "Rate climbs steeply as better bars unlock",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Smithing_training"
+  },
+  {
+    "skill": "SMITHING",
+    "minLevel": 15,
+    "maxLevel": 99,
+    "name": "Giants' Foundry",
+    "xpPerHour": 98000,
+    "notes": "Requires Sleeping Giants; low cost and low attention",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Giants%27_Foundry"
+  },
+  {
+    "skill": "SMITHING",
+    "minLevel": 15,
+    "maxLevel": 99,
+    "name": "Blast Furnace (iron through rune bars)",
+    "xpPerHour": 75000,
+    "notes": "Slower than gold but turns a profit instead of costing",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Blast_Furnace"
+  },
+  {
+    "skill": "SMITHING",
+    "minLevel": 20,
+    "maxLevel": 99,
+    "name": "Dart tips and nails",
+    "xpPerHour": 13000,
+    "notes": "Near-zero attention; usually breaks even",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Smithing_training"
+  },
+  {
+    "skill": "SMITHING",
+    "minLevel": 35,
+    "maxLevel": 99,
+    "name": "Steel cannonballs",
+    "xpPerHour": 14000,
+    "notes": "The AFK option — slow, but you can run it while doing something else",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Smithing_training"
+  },
+  {
+    "skill": "SMITHING",
+    "minLevel": 40,
+    "maxLevel": 99,
+    "name": "Blast Furnace (gold bars, goldsmith gauntlets)",
+    "xpPerHour": 380000,
+    "notes": "By far the fastest Smithing; needs goldsmith gauntlets, ice gloves and Family Crest",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Blast_Furnace"
+  },
+  {
+    "skill": "RANGED",
+    "minLevel": 1,
+    "maxLevel": 45,
+    "name": "Dwarf multicannon on ogres or similar",
+    "xpPerHour": 40000,
+    "notes": "Fastest option before chinning unlocks",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ranged_training",
+    "gear": [
+      "Weapon: the best bow you can wield",
+      "Black d'hide body and black d'hide chaps"
+    ],
+    "supplies": [
+      "Cannon barrels, cannon base, cannon furnace and cannon stand",
+      "Cannonball",
+      "Adamant arrows"
+    ]
+  },
+  {
+    "skill": "RANGED",
+    "minLevel": 1,
+    "maxLevel": 99,
+    "name": "Gemstone crab",
+    "xpPerHour": 30000,
+    "notes": "Fully idle; far slower than chinning but costs nothing and needs no attention",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ranged_training",
+    "gear": [
+      "Weapon: the best bow or crossbow you can wield",
+      "Black d'hide body and black d'hide chaps"
+    ],
+    "supplies": [
+      "Adamant arrow or runite bolts"
+    ]
+  },
+  {
+    "skill": "RANGED",
+    "minLevel": 45,
+    "maxLevel": 55,
+    "name": "Chinning maniacal monkeys (grey chinchompas)",
+    "xpPerHour": 290000,
+    "notes": "Requires Monkey Madness II chapter II; chins are consumed, so this is expensive",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ranged_training",
+    "gear": [
+      "Void ranger helm, void knight top and void knight robe",
+      "Ava's assembler or Ava's accumulator",
+      "Necklace of anguish or amulet of fury",
+      "Barrows gloves",
+      "Pegasian boots or Aranea boots"
+    ],
+    "supplies": [
+      "Grey chinchompa",
+      "Prayer potions",
+      "Ranging potion",
+      "Saradomin brew or sharks",
+      "Ninja monkey greegree",
+      "Royal seed pod"
+    ]
+  },
+  {
+    "skill": "RANGED",
+    "minLevel": 55,
+    "maxLevel": 65,
+    "name": "Chinning maniacal monkeys (red chinchompas)",
+    "xpPerHour": 430000,
+    "notes": "Expensive — budget for the chins before you start",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ranged_training",
+    "gear": [
+      "Void ranger helm, void knight top and void knight robe",
+      "Ava's assembler or Ava's accumulator",
+      "Necklace of anguish or amulet of fury",
+      "Barrows gloves",
+      "Pegasian boots or Aranea boots"
+    ],
+    "supplies": [
+      "Red chinchompa",
+      "Prayer potions",
+      "Ranging potion",
+      "Saradomin brew or sharks",
+      "Ninja monkey greegree",
+      "Royal seed pod"
+    ]
+  },
+  {
+    "skill": "RANGED",
+    "minLevel": 65,
+    "maxLevel": 99,
+    "name": "Chinning maniacal monkeys (black chinchompas)",
+    "xpPerHour": 690000,
+    "notes": "The fastest xp/hr in the game, priced accordingly. Near 1M/hr at 99 with Rigour and void.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ranged_training",
+    "gear": [
+      "Void ranger helm, void knight top and void knight robe",
+      "Ava's assembler or Ava's accumulator",
+      "Necklace of anguish or amulet of fury",
+      "Barrows gloves",
+      "Pegasian boots or Aranea boots"
+    ],
+    "supplies": [
+      "Black chinchompa",
+      "Prayer potions",
+      "Ranging potion",
+      "Saradomin brew or sharks",
+      "Ninja monkey greegree",
+      "Royal seed pod"
+    ]
+  },
+  {
+    "skill": "RANGED",
+    "minLevel": 70,
+    "maxLevel": 99,
+    "name": "Nightmare Zone (venator bow)",
+    "xpPerHour": 140000,
+    "notes": "Largely AFK, and a fraction of the cost of chinning",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Nightmare_Zone",
+    "gear": [
+      "Venator bow",
+      "Void ranger helm, void knight top and void knight robe"
+    ],
+    "supplies": [
+      "Absorption (4)",
+      "Overload (4)",
+      "Dwarven rock cake"
+    ]
+  },
+  {
+    "skill": "RANGED",
+    "minLevel": 80,
+    "maxLevel": 99,
+    "name": "Venator bow at maniacal monkeys",
+    "xpPerHour": 140000,
+    "notes": "Cheaper alternative to chins at the same spot",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ranged_training",
+    "gear": [
+      "Venator bow",
+      "Void ranger helm, void knight top and void knight robe",
+      "Ava's assembler or Ava's accumulator",
+      "Necklace of anguish or amulet of fury",
+      "Barrows gloves",
+      "Pegasian boots or Aranea boots"
+    ],
+    "supplies": [
+      "Prayer potions",
+      "Ranging potion",
+      "Saradomin brew or sharks",
+      "Ninja monkey greegree",
+      "Royal seed pod"
+    ]
+  },
+  {
+    "skill": "MINING",
+    "minLevel": 1,
+    "maxLevel": 15,
+    "name": "Copper and tin ore",
+    "xpPerHour": 15000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Mining_training"
+  },
+  {
+    "skill": "MINING",
+    "minLevel": 15,
+    "maxLevel": 45,
+    "name": "Iron ore (power mining)",
+    "xpPerHour": 45000,
+    "notes": "Drop the ore rather than banking it; Varrock armour helps",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Mining_training"
+  },
+  {
+    "skill": "MINING",
+    "minLevel": 30,
+    "maxLevel": 99,
+    "name": "Motherlode Mine",
+    "xpPerHour": 35000,
+    "notes": "Low attention, and pays in nuggets and Prospector pieces. Reaches ~62k with upgrades.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Motherlode_Mine"
+  },
+  {
+    "skill": "MINING",
+    "minLevel": 40,
+    "maxLevel": 99,
+    "name": "Gem rocks (Shilo Village)",
+    "xpPerHour": 46000,
+    "notes": "Requires the medium Karamja diary; the gems are worth real money",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Mining_training"
+  },
+  {
+    "skill": "MINING",
+    "minLevel": 45,
+    "maxLevel": 99,
+    "name": "3-tick granite power-mining",
+    "xpPerHour": 120000,
+    "notes": "Requires precise drop-and-reclick timing every game tick; very click intensive",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Mining_training",
+    "intensity": "TICK_MANIPULATION"
+  },
+  {
+    "skill": "MINING",
+    "minLevel": 45,
+    "maxLevel": 99,
+    "name": "Calcified rocks (Lovakengj)",
+    "xpPerHour": 40000,
+    "notes": "Requires Lovakengj favour; the ore feeds the Blast Mine minigame itself",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Mining_training"
+  },
+  {
+    "skill": "MINING",
+    "minLevel": 60,
+    "maxLevel": 99,
+    "name": "Crashed stars",
+    "xpPerHour": 26000,
+    "notes": "Very low effort; stardust charges the celestial ring",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Mining_training"
+  },
+  {
+    "skill": "MINING",
+    "minLevel": 70,
+    "maxLevel": 99,
+    "name": "Volcanic Mine",
+    "xpPerHour": 84000,
+    "notes": "Group minigame requiring Bone Voyage; fastest normal-pace Mining",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Volcanic_Mine"
+  },
+  {
+    "skill": "MINING",
+    "minLevel": 75,
+    "maxLevel": 99,
+    "name": "Blast Mine",
+    "xpPerHour": 65000,
+    "notes": "Profitable solo minigame; needs dynamite, a chisel and a tinderbox",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Blast_Mine"
+  },
+  {
+    "skill": "MINING",
+    "minLevel": 92,
+    "maxLevel": 99,
+    "name": "Amethyst",
+    "xpPerHour": 22000,
+    "notes": "Slow but profitable and nearly AFK",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Mining_training"
+  },
+  {
+    "skill": "CRAFTING",
+    "minLevel": 1,
+    "maxLevel": 20,
+    "name": "Leather crafting (gloves through chaps)",
+    "xpPerHour": 60000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Crafting_training"
+  },
+  {
+    "skill": "CRAFTING",
+    "minLevel": 20,
+    "maxLevel": 54,
+    "name": "Cutting gems (sapphire through diamond)",
+    "xpPerHour": 139000,
+    "notes": "Rate roughly doubles as better gems unlock; a jeweller's chisel adds another ~10%",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Crafting_training"
+  },
+  {
+    "skill": "CRAFTING",
+    "minLevel": 54,
+    "maxLevel": 63,
+    "name": "Crafting battlestaves",
+    "xpPerHour": 245000,
+    "notes": "Fast and close to break-even if you alch the staves",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Crafting_training"
+  },
+  {
+    "skill": "CRAFTING",
+    "minLevel": 61,
+    "maxLevel": 99,
+    "name": "Superglass Make",
+    "xpPerHour": 108000,
+    "notes": "Requires Lunar Diplomacy; profitable and calmer than d'hide",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Crafting_training"
+  },
+  {
+    "skill": "CRAFTING",
+    "minLevel": 63,
+    "maxLevel": 99,
+    "name": "Dragonhide bodies",
+    "xpPerHour": 313000,
+    "notes": "Fastest normal-pace Crafting; a costume needle removes the thread juggling",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Crafting_training"
+  },
+  {
+    "skill": "WOODCUTTING",
+    "minLevel": 1,
+    "maxLevel": 15,
+    "name": "Regular trees",
+    "xpPerHour": 13000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training"
+  },
+  {
+    "skill": "WOODCUTTING",
+    "minLevel": 15,
+    "maxLevel": 35,
+    "name": "Oak trees",
+    "xpPerHour": 40000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training"
+  },
+  {
+    "skill": "WOODCUTTING",
+    "minLevel": 35,
+    "maxLevel": 41,
+    "name": "1.5-tick teaks (Fossil Island)",
+    "xpPerHour": 93000,
+    "notes": "Tick-perfect chopping, and the fastest Woodcutting there is. Reaches ~235k by 99.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training",
+    "intensity": "TICK_MANIPULATION"
+  },
+  {
+    "skill": "WOODCUTTING",
+    "minLevel": 35,
+    "maxLevel": 65,
+    "name": "Teak trees (regular pace)",
+    "xpPerHour": 55000,
+    "notes": "Solid through the mid game; falls off past 65 without tick manipulation",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training"
+  },
+  {
+    "skill": "WOODCUTTING",
+    "minLevel": 41,
+    "maxLevel": 50,
+    "name": "1.5-tick teaks (Fossil Island)",
+    "xpPerHour": 115000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training",
+    "intensity": "TICK_MANIPULATION"
+  },
+  {
+    "skill": "WOODCUTTING",
+    "minLevel": 45,
+    "maxLevel": 65,
+    "name": "Maple trees",
+    "xpPerHour": 48000,
+    "notes": "The Kandarin medium diary improves this",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training"
+  },
+  {
+    "skill": "WOODCUTTING",
+    "minLevel": 50,
+    "maxLevel": 61,
+    "name": "1.5-tick teaks (Fossil Island)",
+    "xpPerHour": 126000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training",
+    "intensity": "TICK_MANIPULATION"
+  },
+  {
+    "skill": "WOODCUTTING",
+    "minLevel": 61,
+    "maxLevel": 71,
+    "name": "1.5-tick teaks (Fossil Island)",
+    "xpPerHour": 173000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training",
+    "intensity": "TICK_MANIPULATION"
+  },
+  {
+    "skill": "WOODCUTTING",
+    "minLevel": 62,
+    "maxLevel": 90,
+    "name": "Blisterwood tree",
+    "xpPerHour": 69000,
+    "notes": "No banking at all — the logs are consumed as you chop",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training"
+  },
+  {
+    "skill": "WOODCUTTING",
+    "minLevel": 65,
+    "maxLevel": 99,
+    "name": "Sulliuscep (Fossil Island)",
+    "xpPerHour": 80000,
+    "notes": "Reaches ~102k at 99 with a crystal axe",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training"
+  },
+  {
+    "skill": "WOODCUTTING",
+    "minLevel": 71,
+    "maxLevel": 80,
+    "name": "1.5-tick teaks (Fossil Island)",
+    "xpPerHour": 194000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training",
+    "intensity": "TICK_MANIPULATION"
+  },
+  {
+    "skill": "WOODCUTTING",
+    "minLevel": 77,
+    "maxLevel": 99,
+    "name": "Bloodwood trees",
+    "xpPerHour": 130000,
+    "notes": "Fastest normal-pace Woodcutting, and the logs sell well",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training"
+  },
+  {
+    "skill": "WOODCUTTING",
+    "minLevel": 80,
+    "maxLevel": 90,
+    "name": "1.5-tick teaks (Fossil Island)",
+    "xpPerHour": 208000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training",
+    "intensity": "TICK_MANIPULATION"
+  },
+  {
+    "skill": "WOODCUTTING",
+    "minLevel": 88,
+    "maxLevel": 99,
+    "name": "Redwood trees",
+    "xpPerHour": 55000,
+    "notes": "Slower than bloodwood but completely AFK-friendly",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training"
+  },
+  {
+    "skill": "WOODCUTTING",
+    "minLevel": 90,
+    "maxLevel": 99,
+    "name": "1.5-tick teaks (Fossil Island)",
+    "xpPerHour": 222000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training",
+    "intensity": "TICK_MANIPULATION"
+  },
+  {
+    "skill": "FISHING",
+    "minLevel": 1,
+    "maxLevel": 20,
+    "name": "Net fishing (shrimp and anchovies)",
+    "xpPerHour": 10000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fishing_training"
+  },
+  {
+    "skill": "FISHING",
+    "minLevel": 20,
+    "maxLevel": 47,
+    "name": "Fly fishing (trout and salmon)",
+    "xpPerHour": 25000,
+    "notes": "Rate climbs toward 50k by the top of the bracket",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fishing_training"
+  },
+  {
+    "skill": "FISHING",
+    "minLevel": 47,
+    "maxLevel": 99,
+    "name": "Drift net fishing (Fossil Island)",
+    "xpPerHour": 53000,
+    "notes": "Trains Hunter at the same time; requires Bone Voyage",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Drift_net_fishing"
+  },
+  {
+    "skill": "FISHING",
+    "minLevel": 58,
+    "maxLevel": 99,
+    "name": "Barbarian Fishing",
+    "xpPerHour": 37000,
+    "notes": "Passive Agility and Strength xp alongside the Fishing",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Barbarian_Fishing"
+  },
+  {
+    "skill": "FISHING",
+    "minLevel": 58,
+    "maxLevel": 99,
+    "name": "Barbarian Fishing (3-tick)",
+    "xpPerHour": 68000,
+    "notes": "Tick-perfect swapping between fishing and a second action",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Barbarian_Fishing",
+    "intensity": "TICK_MANIPULATION"
+  },
+  {
+    "skill": "FISHING",
+    "minLevel": 71,
+    "maxLevel": 99,
+    "name": "2-tick harpooning (swordfish and tuna)",
+    "xpPerHour": 78000,
+    "notes": "Fastest Fishing in the game with a crystal harpoon",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fishing_training",
+    "intensity": "TICK_MANIPULATION"
+  },
+  {
+    "skill": "FISHING",
+    "minLevel": 78,
+    "maxLevel": 99,
+    "name": "Leechfin fishing",
+    "xpPerHour": 109000,
+    "notes": "Requires The Blood Moon Rises; fastest normal-pace Fishing but very click heavy",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fishing_training"
+  },
+  {
+    "skill": "FISHING",
+    "minLevel": 82,
+    "maxLevel": 99,
+    "name": "Minnows",
+    "xpPerHour": 40000,
+    "notes": "Profitable, and needs the full angler's outfit",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fishing_training"
+  },
+  {
+    "skill": "FISHING",
+    "minLevel": 85,
+    "maxLevel": 99,
+    "name": "Dark crabs",
+    "xpPerHour": 40000,
+    "notes": "Taken for the profit, not the xp. You can be killed for the catch.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fishing_training",
+    "risk": "PVP"
+  },
+  {
+    "skill": "ATTACK",
+    "minLevel": 1,
+    "maxLevel": 30,
+    "name": "Low-level monsters (chickens, cows, Al Kharid warriors)",
+    "xpPerHour": 12000,
+    "notes": "Quests skip most of this bracket",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
+    "gear": [
+      "Weapon: the best scimitar you can wield",
+      "Amulet of strength",
+      "Iron platebody or steel platebody",
+      "Iron platelegs or steel platelegs"
+    ],
+    "supplies": [
+      "Trout or shrimps",
+      "Varrock teleport"
+    ]
+  },
+  {
+    "skill": "ATTACK",
+    "minLevel": 20,
+    "maxLevel": 99,
+    "name": "Sand or ammonite crabs",
+    "xpPerHour": 30000,
+    "notes": "Fully AFK — the default when you want to do something else at the same time",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
+    "gear": [
+      "Weapon: abyssal whip or the best scimitar you can wield",
+      "Amulet of fury or amulet of strength",
+      "Fighter torso or rune platebody",
+      "Dragon defender",
+      "Barrows gloves"
+    ],
+    "supplies": [
+      "Super combat potion",
+      "Sharks - for a bad streak",
+      "Digsite pendant"
+    ]
+  },
+  {
+    "skill": "ATTACK",
+    "minLevel": 30,
+    "maxLevel": 55,
+    "name": "Gemstone crab (Tlati Rainforest)",
+    "xpPerHour": 50000,
+    "notes": "Infinite health and low accuracy, so no food is needed",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
+    "gear": [
+      "Weapon: the best scimitar or whip you can wield",
+      "Amulet of strength",
+      "Fighter torso or rune platebody"
+    ],
+    "supplies": [
+      "No food needed: the crab barely hits"
+    ]
+  },
+  {
+    "skill": "ATTACK",
+    "minLevel": 40,
+    "maxLevel": 99,
+    "name": "Slayer tasks",
+    "xpPerHour": 35000,
+    "notes": "Slower per hour, but it trains Slayer at the same time and pays for itself in drops",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Slayer",
+    "gear": [
+      "Slayer helmet (i)",
+      "Weapon: whatever the task wants",
+      "Amulet of fury",
+      "Dragon defender",
+      "Barrows gloves",
+      "Dragon boots"
+    ],
+    "supplies": [
+      "Enchanted gem",
+      "Sharks or monkfish",
+      "Prayer potions",
+      "Super combat potion",
+      "Ring of dueling"
+    ]
+  },
+  {
+    "skill": "ATTACK",
+    "minLevel": 55,
+    "maxLevel": 75,
+    "name": "Sulphur naguas (Neypotzli)",
+    "xpPerHour": 75000,
+    "notes": "Requires 48 Slayer; restores prayer and the drops are worth keeping",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
+    "gear": [
+      "Slayer helmet (i)",
+      "Weapon: your best melee weapon",
+      "Amulet of torture or fury",
+      "Dragon defender",
+      "Barrows gloves"
+    ],
+    "supplies": [
+      "Prayer potions - the drops top you back up",
+      "Sharks",
+      "Stamina potion"
+    ]
+  },
+  {
+    "skill": "ATTACK",
+    "minLevel": 60,
+    "maxLevel": 99,
+    "name": "Nightmare Zone",
+    "xpPerHour": 60000,
+    "notes": "The most AFK method in the game — minutes between clicks",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Nightmare_Zone",
+    "gear": [
+      "Dharok's helm, platebody, platelegs and greataxe",
+      "Amulet of strength"
+    ],
+    "supplies": [
+      "Absorption (4)",
+      "Overload (4)",
+      "Dwarven rock cake"
+    ]
+  },
+  {
+    "skill": "ATTACK",
+    "minLevel": 75,
+    "maxLevel": 99,
+    "name": "Maniacal monkeys (Ape Atoll)",
+    "xpPerHour": 200000,
+    "notes": "Requires Monkey Madness II; prayer potion drops sustain Piety",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
+    "gear": [
+      "Weapon: scythe of vitur, soulreaper axe or abyssal whip",
+      "Head: Neitiznot faceguard or helm of neitiznot",
+      "Body: bandos chestplate or fighter torso",
+      "Legs: bandos tassets",
+      "Amulet of torture or amulet of fury",
+      "Barrows gloves",
+      "Primordial boots or dragon boots"
+    ],
+    "supplies": [
+      "Prayer potions - the monkeys drop more",
+      "Saradomin brew or sharks",
+      "Super combat potion",
+      "Ninja monkey greegree",
+      "Royal seed pod"
+    ]
+  },
+  {
+    "skill": "STRENGTH",
+    "minLevel": 1,
+    "maxLevel": 30,
+    "name": "Low-level monsters (chickens, cows, Al Kharid warriors)",
+    "xpPerHour": 12000,
+    "notes": "Quests skip most of this bracket",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
+    "gear": [
+      "Weapon: the best scimitar you can wield",
+      "Amulet of strength",
+      "Iron platebody or steel platebody",
+      "Iron platelegs or steel platelegs"
+    ],
+    "supplies": [
+      "Trout or shrimps",
+      "Varrock teleport"
+    ]
+  },
+  {
+    "skill": "STRENGTH",
+    "minLevel": 20,
+    "maxLevel": 99,
+    "name": "Sand or ammonite crabs",
+    "xpPerHour": 30000,
+    "notes": "Fully AFK — the default when you want to do something else at the same time",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
+    "gear": [
+      "Weapon: abyssal whip or the best scimitar you can wield",
+      "Amulet of fury or amulet of strength",
+      "Fighter torso or rune platebody",
+      "Dragon defender",
+      "Barrows gloves"
+    ],
+    "supplies": [
+      "Super combat potion",
+      "Sharks - for a bad streak",
+      "Digsite pendant"
+    ]
+  },
+  {
+    "skill": "STRENGTH",
+    "minLevel": 30,
+    "maxLevel": 55,
+    "name": "Gemstone crab (Tlati Rainforest)",
+    "xpPerHour": 50000,
+    "notes": "Infinite health and low accuracy, so no food is needed",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
+    "gear": [
+      "Weapon: the best scimitar or whip you can wield",
+      "Amulet of strength",
+      "Fighter torso or rune platebody"
+    ],
+    "supplies": [
+      "No food needed: the crab barely hits"
+    ]
+  },
+  {
+    "skill": "STRENGTH",
+    "minLevel": 40,
+    "maxLevel": 99,
+    "name": "Slayer tasks",
+    "xpPerHour": 35000,
+    "notes": "Slower per hour, but it trains Slayer at the same time and pays for itself in drops",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Slayer",
+    "gear": [
+      "Slayer helmet (i)",
+      "Weapon: whatever the task wants",
+      "Amulet of fury",
+      "Dragon defender",
+      "Barrows gloves",
+      "Dragon boots"
+    ],
+    "supplies": [
+      "Enchanted gem",
+      "Sharks or monkfish",
+      "Prayer potions",
+      "Super combat potion",
+      "Ring of dueling"
+    ]
+  },
+  {
+    "skill": "STRENGTH",
+    "minLevel": 55,
+    "maxLevel": 75,
+    "name": "Sulphur naguas (Neypotzli)",
+    "xpPerHour": 75000,
+    "notes": "Requires 48 Slayer; restores prayer and the drops are worth keeping",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
+    "gear": [
+      "Slayer helmet (i)",
+      "Weapon: your best melee weapon",
+      "Amulet of torture or fury",
+      "Dragon defender",
+      "Barrows gloves"
+    ],
+    "supplies": [
+      "Prayer potions - the drops top you back up",
+      "Sharks",
+      "Stamina potion"
+    ]
+  },
+  {
+    "skill": "STRENGTH",
+    "minLevel": 60,
+    "maxLevel": 99,
+    "name": "Nightmare Zone",
+    "xpPerHour": 60000,
+    "notes": "The most AFK method in the game — minutes between clicks",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Nightmare_Zone",
+    "gear": [
+      "Dharok's helm, platebody, platelegs and greataxe",
+      "Amulet of strength"
+    ],
+    "supplies": [
+      "Absorption (4)",
+      "Overload (4)",
+      "Dwarven rock cake"
+    ]
+  },
+  {
+    "skill": "STRENGTH",
+    "minLevel": 75,
+    "maxLevel": 99,
+    "name": "Maniacal monkeys (Ape Atoll)",
+    "xpPerHour": 200000,
+    "notes": "Requires Monkey Madness II; prayer potion drops sustain Piety",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
+    "gear": [
+      "Weapon: scythe of vitur, soulreaper axe or abyssal whip",
+      "Head: Neitiznot faceguard or helm of neitiznot",
+      "Body: bandos chestplate or fighter torso",
+      "Legs: bandos tassets",
+      "Amulet of torture or amulet of fury",
+      "Barrows gloves",
+      "Primordial boots or dragon boots"
+    ],
+    "supplies": [
+      "Prayer potions - the monkeys drop more",
+      "Saradomin brew or sharks",
+      "Super combat potion",
+      "Ninja monkey greegree",
+      "Royal seed pod"
+    ]
+  },
+  {
+    "skill": "DEFENCE",
+    "minLevel": 1,
+    "maxLevel": 30,
+    "name": "Low-level monsters (chickens, cows, Al Kharid warriors)",
+    "xpPerHour": 12000,
+    "notes": "Quests skip most of this bracket",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
+    "gear": [
+      "Weapon: the best scimitar you can wield",
+      "Amulet of strength",
+      "Iron platebody or steel platebody",
+      "Iron platelegs or steel platelegs"
+    ],
+    "supplies": [
+      "Trout or shrimps",
+      "Varrock teleport"
+    ]
+  },
+  {
+    "skill": "DEFENCE",
+    "minLevel": 20,
+    "maxLevel": 99,
+    "name": "Sand or ammonite crabs",
+    "xpPerHour": 30000,
+    "notes": "Fully AFK — the default when you want to do something else at the same time",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
+    "gear": [
+      "Weapon: abyssal whip or the best scimitar you can wield",
+      "Amulet of fury or amulet of strength",
+      "Fighter torso or rune platebody",
+      "Dragon defender",
+      "Barrows gloves"
+    ],
+    "supplies": [
+      "Super combat potion",
+      "Sharks - for a bad streak",
+      "Digsite pendant"
+    ]
+  },
+  {
+    "skill": "DEFENCE",
+    "minLevel": 30,
+    "maxLevel": 55,
+    "name": "Gemstone crab (Tlati Rainforest)",
+    "xpPerHour": 50000,
+    "notes": "Infinite health and low accuracy, so no food is needed",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
+    "gear": [
+      "Weapon: the best scimitar or whip you can wield",
+      "Amulet of strength",
+      "Fighter torso or rune platebody"
+    ],
+    "supplies": [
+      "No food needed: the crab barely hits"
+    ]
+  },
+  {
+    "skill": "DEFENCE",
+    "minLevel": 40,
+    "maxLevel": 99,
+    "name": "Slayer tasks",
+    "xpPerHour": 35000,
+    "notes": "Slower per hour, but it trains Slayer at the same time and pays for itself in drops",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Slayer",
+    "gear": [
+      "Slayer helmet (i)",
+      "Weapon: whatever the task wants",
+      "Amulet of fury",
+      "Dragon defender",
+      "Barrows gloves",
+      "Dragon boots"
+    ],
+    "supplies": [
+      "Enchanted gem",
+      "Sharks or monkfish",
+      "Prayer potions",
+      "Super combat potion",
+      "Ring of dueling"
+    ]
+  },
+  {
+    "skill": "DEFENCE",
+    "minLevel": 55,
+    "maxLevel": 75,
+    "name": "Sulphur naguas (Neypotzli)",
+    "xpPerHour": 75000,
+    "notes": "Requires 48 Slayer; restores prayer and the drops are worth keeping",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
+    "gear": [
+      "Slayer helmet (i)",
+      "Weapon: your best melee weapon",
+      "Amulet of torture or fury",
+      "Dragon defender",
+      "Barrows gloves"
+    ],
+    "supplies": [
+      "Prayer potions - the drops top you back up",
+      "Sharks",
+      "Stamina potion"
+    ]
+  },
+  {
+    "skill": "DEFENCE",
+    "minLevel": 60,
+    "maxLevel": 99,
+    "name": "Nightmare Zone",
+    "xpPerHour": 60000,
+    "notes": "The most AFK method in the game — minutes between clicks",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Nightmare_Zone",
+    "gear": [
+      "Dharok's helm, platebody, platelegs and greataxe",
+      "Amulet of strength"
+    ],
+    "supplies": [
+      "Absorption (4)",
+      "Overload (4)",
+      "Dwarven rock cake"
+    ]
+  },
+  {
+    "skill": "DEFENCE",
+    "minLevel": 75,
+    "maxLevel": 99,
+    "name": "Maniacal monkeys (Ape Atoll)",
+    "xpPerHour": 200000,
+    "notes": "Requires Monkey Madness II; prayer potion drops sustain Piety",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
+    "gear": [
+      "Weapon: scythe of vitur, soulreaper axe or abyssal whip",
+      "Head: Neitiznot faceguard or helm of neitiznot",
+      "Body: bandos chestplate or fighter torso",
+      "Legs: bandos tassets",
+      "Amulet of torture or amulet of fury",
+      "Barrows gloves",
+      "Primordial boots or dragon boots"
+    ],
+    "supplies": [
+      "Prayer potions - the monkeys drop more",
+      "Saradomin brew or sharks",
+      "Super combat potion",
+      "Ninja monkey greegree",
+      "Royal seed pod"
+    ]
+  },
+  {
+    "skill": "HITPOINTS",
+    "minLevel": 1,
+    "maxLevel": 99,
+    "name": "Comes naturally from any combat training",
+    "xpPerHour": null,
+    "notes": "Not trained directly — gained automatically from Attack/Strength/Defence/Ranged/Magic combat xp",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hitpoints"
+  },
+  {
+    "skill": "PRAYER",
+    "minLevel": 1,
+    "maxLevel": 30,
+    "name": "Burying bones / Ectofuntus",
+    "xpPerHour": 25000,
+    "notes": "Quests cover most of this bracket faster than burying does",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Prayer_training",
+    "supplies": [
+      "Big bones or dragon bones",
+      "Bucket of slime",
+      "Pot of bonemeal"
+    ]
+  },
+  {
+    "skill": "PRAYER",
+    "minLevel": 30,
+    "maxLevel": 99,
+    "name": "Gilded altar with dragon bones",
+    "xpPerHour": 643000,
+    "notes": "Needs 75 Construction and your own or a friend's altar; the standard safe method",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Gilded_altar",
+    "supplies": [
+      "Dragon bones",
+      "Marrentill",
+      "Ring of dueling"
+    ]
+  },
+  {
+    "skill": "PRAYER",
+    "minLevel": 30,
+    "maxLevel": 99,
+    "name": "Libation bowl with blessed bone shards",
+    "xpPerHour": 670000,
+    "notes": "Slightly cheaper than a gilded altar, at the cost of preparing the shards first",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Prayer_training",
+    "supplies": [
+      "Blessed bone shards",
+      "Ring of dueling"
+    ]
+  },
+  {
+    "skill": "PRAYER",
+    "minLevel": 30,
+    "maxLevel": 99,
+    "name": "Chaos Temple altar",
+    "xpPerHour": 500000,
+    "notes": "Half the bone cost, from a 50% save chance. Bring one inventory at a time and expect to die.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Chaos_Temple",
+    "risk": "PVP",
+    "supplies": [
+      "Dragon bones",
+      "Burning amulet",
+      "Nothing you are not willing to lose"
+    ]
+  },
+  {
+    "skill": "PRAYER",
+    "minLevel": 70,
+    "maxLevel": 99,
+    "name": "Gilded altar with superior dragon bones",
+    "xpPerHour": 1340000,
+    "notes": "The fastest Prayer in the game and the most expensive by a wide margin",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Gilded_altar",
+    "supplies": [
+      "Superior dragon bones",
+      "Marrentill",
+      "Ring of dueling"
+    ]
+  },
+  {
+    "skill": "COOKING",
+    "minLevel": 1,
+    "maxLevel": 40,
+    "name": "Cooking shrimp, trout and salmon",
+    "xpPerHour": 30000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Cooking_training"
+  },
+  {
+    "skill": "COOKING",
+    "minLevel": 30,
+    "maxLevel": 99,
+    "name": "Karambwan at the Hosidius kitchen",
+    "xpPerHour": 141000,
+    "notes": "Requires Tai Bwo Wannai Trio; the kitchen's burn reduction does the work",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Cooking_training"
+  },
+  {
+    "skill": "COOKING",
+    "minLevel": 30,
+    "maxLevel": 99,
+    "name": "1-tick karambwan",
+    "xpPerHour": 464000,
+    "notes": "Tick-perfect cooking; the fastest Cooking in the game, near 1M/hr by level 99",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Cooking_training",
+    "intensity": "TICK_MANIPULATION"
+  },
+  {
+    "skill": "COOKING",
+    "minLevel": 40,
+    "maxLevel": 68,
+    "name": "Cooking lobsters",
+    "xpPerHour": 120000,
+    "notes": "Cheap, and profitable at most prices",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Cooking_training"
+  },
+  {
+    "skill": "COOKING",
+    "minLevel": 68,
+    "maxLevel": 99,
+    "name": "Jugs of wine",
+    "xpPerHour": 490000,
+    "notes": "Fastest normal-pace Cooking, and wine never burns",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Cooking_training"
+  },
+  {
+    "skill": "COOKING",
+    "minLevel": 84,
+    "maxLevel": 99,
+    "name": "Cooking anglerfish",
+    "xpPerHour": 305000,
+    "notes": "Fast and turns a profit rather than costing one",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Cooking_training"
+  },
+  {
+    "skill": "FLETCHING",
+    "minLevel": 1,
+    "maxLevel": 20,
+    "name": "Arrow shafts and shortbows",
+    "xpPerHour": 10000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fletching_training"
+  },
+  {
+    "skill": "FLETCHING",
+    "minLevel": 1,
+    "maxLevel": 99,
+    "name": "Darts",
+    "xpPerHour": 21000,
+    "notes": "Zero-time training — fletch while doing something else entirely",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fletching_training"
+  },
+  {
+    "skill": "FLETCHING",
+    "minLevel": 20,
+    "maxLevel": 40,
+    "name": "Oak and willow longbows",
+    "xpPerHour": 18000,
+    "notes": "Roughly break-even",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fletching_training"
+  },
+  {
+    "skill": "FLETCHING",
+    "minLevel": 40,
+    "maxLevel": 99,
+    "name": "Battlestaves (celastrus bark)",
+    "xpPerHour": 110000,
+    "notes": "Fastest Fletching for most of the game; the bark comes from your own farming patch",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fletching_training"
+  },
+  {
+    "skill": "FLETCHING",
+    "minLevel": 50,
+    "maxLevel": 85,
+    "name": "Yew longbows (u)",
+    "xpPerHour": 75000,
+    "notes": "Cheaper than battlestaves and can turn a profit strung",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fletching_training"
+  },
+  {
+    "skill": "FLETCHING",
+    "minLevel": 90,
+    "maxLevel": 99,
+    "name": "Redwood shields",
+    "xpPerHour": 168000,
+    "notes": "Fastest late-game option",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fletching_training"
+  },
+  {
+    "skill": "FIREMAKING",
+    "minLevel": 1,
+    "maxLevel": 30,
+    "name": "Burning regular and oak logs",
+    "xpPerHour": 45000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Firemaking_training"
+  },
+  {
+    "skill": "FIREMAKING",
+    "minLevel": 30,
+    "maxLevel": 50,
+    "name": "Burning willow and maple logs",
+    "xpPerHour": 107000,
+    "notes": "Burn in a line next to a bank",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Firemaking_training"
+  },
+  {
+    "skill": "FIREMAKING",
+    "minLevel": 50,
+    "maxLevel": 99,
+    "name": "Wintertodt",
+    "xpPerHour": 161000,
+    "notes": "Pays in supply crates and pyromancer pieces and gives passive Woodcutting xp; ~320k by level 99",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Wintertodt"
+  },
+  {
+    "skill": "FIREMAKING",
+    "minLevel": 75,
+    "maxLevel": 99,
+    "name": "Burning magic logs",
+    "xpPerHour": 451000,
+    "notes": "Much faster than Wintertodt, but you are buying every log",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Firemaking_training"
+  },
+  {
+    "skill": "FIREMAKING",
+    "minLevel": 90,
+    "maxLevel": 99,
+    "name": "Burning redwood logs",
+    "xpPerHour": 519000,
+    "notes": "Fastest Firemaking in the game, and the most expensive",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Firemaking_training"
+  },
+  {
+    "skill": "HERBLORE",
+    "minLevel": 1,
+    "maxLevel": 30,
+    "name": "Attack and antipoison potions",
+    "xpPerHour": 62000,
+    "notes": "Druidic Ritual unlocks the skill at level 3 and quests cover much of the rest of this bracket",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Herblore_training"
+  },
+  {
+    "skill": "HERBLORE",
+    "minLevel": 30,
+    "maxLevel": 38,
+    "name": "Defence potions",
+    "xpPerHour": 187000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Herblore_training"
+  },
+  {
+    "skill": "HERBLORE",
+    "minLevel": 38,
+    "maxLevel": 63,
+    "name": "Prayer potions",
+    "xpPerHour": 218000,
+    "notes": "Profitable as well as fast",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Herblore_training"
+  },
+  {
+    "skill": "HERBLORE",
+    "minLevel": 60,
+    "maxLevel": 99,
+    "name": "Mastering Mixology",
+    "xpPerHour": 105000,
+    "notes": "Requires Children of the Sun; slower, but it pays in reward points rather than costing gp",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Mastering_Mixology"
+  },
+  {
+    "skill": "HERBLORE",
+    "minLevel": 63,
+    "maxLevel": 69,
+    "name": "Super restores",
+    "xpPerHour": 356000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Herblore_training"
+  },
+  {
+    "skill": "HERBLORE",
+    "minLevel": 69,
+    "maxLevel": 92,
+    "name": "Antifire potions",
+    "xpPerHour": 393000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Herblore_training"
+  },
+  {
+    "skill": "HERBLORE",
+    "minLevel": 77,
+    "maxLevel": 99,
+    "name": "Stamina / extended antifire with tick manipulation",
+    "xpPerHour": 535000,
+    "notes": "Tick-perfect mixing; the fastest Herblore short of the very top potions",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Herblore_training",
+    "intensity": "TICK_MANIPULATION"
+  },
+  {
+    "skill": "HERBLORE",
+    "minLevel": 92,
+    "maxLevel": 99,
+    "name": "Super antifire potions",
+    "xpPerHour": 450000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Herblore_training"
+  },
+  {
+    "skill": "SLAYER",
+    "minLevel": 1,
+    "maxLevel": 99,
+    "name": "Tasks from your assigned Slayer master",
+    "xpPerHour": null,
+    "notes": "Not an hourly grind. Better masters (Nieve, Duradel) unlock better tasks and more points.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Slayer",
+    "gear": [
+      "Slayer helmet (i)",
+      "Weapon: whatever the task wants",
+      "Amulet of fury",
+      "Dragon defender",
+      "Barrows gloves",
+      "Dragon boots"
+    ],
+    "supplies": [
+      "Enchanted gem",
+      "Sharks or monkfish",
+      "Prayer potions",
+      "Super combat potion",
+      "Ring of dueling"
+    ]
+  },
+  {
+    "skill": "RUNECRAFT",
+    "minLevel": 1,
+    "maxLevel": 23,
+    "name": "Talisman tiaras",
+    "xpPerHour": 36000,
+    "notes": "The grind, if you would rather not quest — expensive and click-intensive",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Runecraft_training"
+  },
+  {
+    "skill": "RUNECRAFT",
+    "minLevel": 1,
+    "maxLevel": 32,
+    "name": "Quests",
+    "xpPerHour": null,
+    "notes": "These cover 1-32 between them. What Lies Below adds 8,000 more at 35.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Runecraft_training",
+    "quests": [
+      "Client of Kourend",
+      "The Ascent of Arceuus",
+      "Enter the Abyss",
+      "Temple of the Eye",
+      "The Eyes of Glouphrie",
+      "The Slug Menace"
+    ]
+  },
+  {
+    "skill": "RUNECRAFT",
+    "minLevel": 23,
+    "maxLevel": 25,
+    "name": "Lava runes",
+    "xpPerHour": 43200,
+    "notes": "No pouches yet — a binding necklace guarantees the combination",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Runecraft_training"
+  },
+  {
+    "skill": "RUNECRAFT",
+    "minLevel": 25,
+    "maxLevel": 50,
+    "name": "Lava runes",
+    "xpPerHour": 51400,
+    "notes": "With small and medium pouches",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Runecraft_training"
+  },
+  {
+    "skill": "RUNECRAFT",
+    "minLevel": 27,
+    "maxLevel": 99,
+    "name": "Guardians of the Rift",
+    "xpPerHour": 30000,
+    "notes": "Passive Mining and Crafting xp, plus the Raiments of the Eye and the colossal pouch",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Guardians_of_the_Rift"
+  },
+  {
+    "skill": "RUNECRAFT",
+    "minLevel": 44,
+    "maxLevel": 99,
+    "name": "Ourania (ZMI) altar",
+    "xpPerHour": 35000,
+    "notes": "No quest requirements, profitable, and no combat risk; climbs steeply once you have pouches",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ourania_Altar"
+  },
+  {
+    "skill": "RUNECRAFT",
+    "minLevel": 50,
+    "maxLevel": 75,
+    "name": "Lava runes",
+    "xpPerHour": 62900,
+    "notes": "With small, medium and large pouches",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Runecraft_training"
+  },
+  {
+    "skill": "RUNECRAFT",
+    "minLevel": 75,
+    "maxLevel": 85,
+    "name": "Lava runes",
+    "xpPerHour": 77600,
+    "notes": "With the giant pouch; a colossal pouch is worth about 2k/hr more here",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Runecraft_training"
+  },
+  {
+    "skill": "RUNECRAFT",
+    "minLevel": 77,
+    "maxLevel": 99,
+    "name": "Blood runes (Arceuus)",
+    "xpPerHour": 36000,
+    "notes": "Best gp/hr in the skill, with passive Mining and Crafting xp",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Runecraft_training"
+  },
+  {
+    "skill": "RUNECRAFT",
+    "minLevel": 82,
+    "maxLevel": 99,
+    "name": "Double astral runes",
+    "xpPerHour": 42000,
+    "notes": "Requires Lunar Diplomacy; strong profit alongside the xp",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Runecraft_training"
+  },
+  {
+    "skill": "RUNECRAFT",
+    "minLevel": 85,
+    "maxLevel": 99,
+    "name": "Lava runes",
+    "xpPerHour": 100800,
+    "notes": "With a colossal pouch from Guardians of the Rift — the pouch matters more than the level",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Runecraft_training"
+  },
+  {
+    "skill": "HUNTER",
+    "minLevel": 1,
+    "maxLevel": 15,
+    "name": "Bird snaring (crimson swifts / Feldip weasels)",
+    "xpPerHour": 13000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hunter_training"
+  },
+  {
+    "skill": "HUNTER",
+    "minLevel": 9,
+    "maxLevel": 44,
+    "name": "Bird house runs (Fossil Island)",
+    "xpPerHour": 25000,
+    "notes": "Passive: a few minutes every 50. Run it alongside other training; scales with birdhouse tier.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Bird_house_trapping"
+  },
+  {
+    "skill": "HUNTER",
+    "minLevel": 15,
+    "maxLevel": 21,
+    "name": "Butterfly netting (ruby harvests)",
+    "xpPerHour": 20000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hunter_training"
+  },
+  {
+    "skill": "HUNTER",
+    "minLevel": 21,
+    "maxLevel": 39,
+    "name": "Box trapping (red crabs)",
+    "xpPerHour": 31000,
+    "notes": "Two traps until level 40",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hunter_training"
+  },
+  {
+    "skill": "HUNTER",
+    "minLevel": 39,
+    "maxLevel": 43,
+    "name": "Box trapping (embertailed jerboas)",
+    "xpPerHour": 50000,
+    "notes": "Three traps from level 40",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hunter_training"
+  },
+  {
+    "skill": "HUNTER",
+    "minLevel": 43,
+    "maxLevel": 49,
+    "name": "Falconry (spotted kebbits)",
+    "xpPerHour": 60000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hunter_training"
+  },
+  {
+    "skill": "HUNTER",
+    "minLevel": 49,
+    "maxLevel": 73,
+    "name": "Deadfall trapping (razor-backed kebbits)",
+    "xpPerHour": 130000,
+    "notes": "Fastest safe method for most of the mid game and far faster than box trapping",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hunter_training"
+  },
+  {
+    "skill": "HUNTER",
+    "minLevel": 63,
+    "maxLevel": 99,
+    "name": "Carnivorous (red) chinchompas",
+    "xpPerHour": 120000,
+    "notes": "The safe alternative to black chins. Needs Eagles' Peak; faster once five traps unlock at 80.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Chinchompa_hunting"
+  },
+  {
+    "skill": "HUNTER",
+    "minLevel": 72,
+    "maxLevel": 91,
+    "name": "Hunter rumours — Expert tier (Hunters' Guild)",
+    "xpPerHour": 160000,
+    "notes": "Safe, varied, and pays in hunter loot sacks. Novice and Adept open at 46 and 57 but are slower.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Rumour"
+  },
+  {
+    "skill": "HUNTER",
+    "minLevel": 73,
+    "maxLevel": 99,
+    "name": "Black chinchompas",
+    "xpPerHour": 145000,
+    "notes": "You lose everything you carry on death. Rates climb past 200k once five traps unlock at 80.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Chinchompa_hunting",
+    "risk": "PVP"
+  },
+  {
+    "skill": "HUNTER",
+    "minLevel": 77,
+    "maxLevel": 99,
+    "name": "Box trapping (rainbow crabs)",
+    "xpPerHour": 155000,
+    "notes": "Five traps from level 80",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hunter_training"
+  },
+  {
+    "skill": "HUNTER",
+    "minLevel": 80,
+    "maxLevel": 99,
+    "name": "Herbiboar (Fossil Island)",
+    "xpPerHour": 137000,
+    "notes": "Also yields herbs; no traps or supplies needed",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Herbiboar"
+  },
+  {
+    "skill": "HUNTER",
+    "minLevel": 80,
+    "maxLevel": 99,
+    "name": "Carnivorous chinchompas with tick manipulation",
+    "xpPerHour": 200000,
+    "notes": "Tick-perfect trap resetting; roughly the same rate as black chinchompas without the Wilderness",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Chinchompa_hunting",
+    "intensity": "TICK_MANIPULATION"
+  },
+  {
+    "skill": "HUNTER",
+    "minLevel": 91,
+    "maxLevel": 99,
+    "name": "Hunter rumours — Master tier (Hunters' Guild)",
+    "xpPerHour": 195000,
+    "notes": "Requires At First Light; the fastest safe method in the skill",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Rumour"
+  },
+  {
+    "skill": "CONSTRUCTION",
+    "minLevel": 1,
+    "maxLevel": 33,
+    "name": "Planks, crude chairs and oak repair benches",
+    "xpPerHour": 120000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Construction_training"
+  },
+  {
+    "skill": "CONSTRUCTION",
+    "minLevel": 33,
+    "maxLevel": 52,
+    "name": "Oak larders",
+    "xpPerHour": 480000,
+    "notes": "A butler from level 40 does the banking for you",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Construction_training"
+  },
+  {
+    "skill": "CONSTRUCTION",
+    "minLevel": 52,
+    "maxLevel": 77,
+    "name": "Mahogany tables",
+    "xpPerHour": 900000,
+    "notes": "Needs a demon butler; among the most expensive training in the game",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Construction_training"
+  },
+  {
+    "skill": "CONSTRUCTION",
+    "minLevel": 74,
+    "maxLevel": 99,
+    "name": "Oak dungeon doors",
+    "xpPerHour": 550000,
+    "notes": "The budget option — meaningfully cheaper than mahogany for a modest rate loss",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Construction_training"
+  },
+  {
+    "skill": "CONSTRUCTION",
+    "minLevel": 77,
+    "maxLevel": 99,
+    "name": "Gnome benches (superior garden)",
+    "xpPerHour": 1100000,
+    "notes": "Fastest xp/hr of any skill in the game; needs a demon butler",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Construction_training"
+  }
+]

@@ -1,0 +1,113 @@
+plugins {
+	id 'java'
+}
+
+group = 'com.nextstep'
+version = '1.0'
+
+def runeLiteVersion = 'latest.release'
+def pluginMainClass = 'com.nextstep.NextStepPluginTest'
+
+repositories {
+	mavenLocal()
+	maven {
+		url = 'https://repo.runelite.net'
+	}
+	mavenCentral()
+}
+
+dependencies {
+	compileOnly group: 'net.runelite', name: 'client', version: runeLiteVersion
+	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
+	annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
+
+	testImplementation group: 'net.runelite', name: 'client', version: runeLiteVersion
+	testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+}
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_11
+	targetCompatibility = JavaVersion.VERSION_11
+}
+
+// Belt and braces. The sources are pure ASCII (see asciiCheck), so this only
+// matters for a source file that has not been checked in yet.
+tasks.withType(JavaCompile).configureEach {
+	options.encoding = 'UTF-8'
+}
+
+test {
+	useJUnit()
+}
+
+// The plugin hub builds submissions in 'standard' mode, which replaces this
+// file - and with it the encoding setting above - with its own. Whether that
+// javac runs with a UTF-8 default charset is not something this repository can
+// see, and a raw em dash compiled under the wrong charset reaches the panel as
+// mojibake. A \\uXXXX escape is decoded by javac before the parser runs, so it
+// means the same character under every encoding. The sources are therefore kept
+// ASCII-only, and this is what keeps them that way.
+tasks.register('asciiCheck') {
+	group = 'verification'
+	description = 'Fails if a Java source contains a non-ASCII character.'
+
+	def sources = fileTree('src') {
+		include '**/*.java'
+	}
+	inputs.files sources
+
+	doLast {
+		def offenders = []
+		sources.each { file ->
+			file.eachLine('UTF-8') { line, number ->
+				if (line.toCharArray().any { (int) it > 127 }) {
+					offenders << "${file.path}:${number}"
+				}
+			}
+		}
+		if (!offenders.isEmpty()) {
+			throw new GradleException(
+				'Non-ASCII characters in Java sources. The plugin hub\'s standard build may\n' +
+				'compile these under a non-UTF-8 charset and turn them into mojibake. Use a\n' +
+				'\\uXXXX escape in a string literal, and plain ASCII punctuation in a comment:\n  ' +
+				offenders.join('\n  '))
+		}
+	}
+}
+
+tasks.named('check') {
+	dependsOn 'asciiCheck'
+}
+
+// RuneLite dev mode: launches a real client with this plugin side-loaded.
+tasks.register('run', JavaExec) {
+	group = 'application'
+	description = 'Runs a RuneLite client with the Next Step plugin side-loaded.'
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = pluginMainClass
+	// RuneLite refuses to side-load a builtin plugin without assertions on.
+	jvmArgs '-ea'
+	// Developer mode: enables the Developer Tools plugin (widget/varb inspectors),
+	// which is the whole point of launching a client from source.
+	args '--developer-mode'
+}
+
+tasks.register('plandiag', JavaExec) {
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.nextstep.diag.PlanDiag'
+}
+
+tasks.register('panelshot', JavaExec) {
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.nextstep.diag.PanelShot'
+}
+
+tasks.register('paneltext', JavaExec) {
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.nextstep.diag.PanelText'
+}
+
+tasks.register('iconcoverage', JavaExec) {
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.nextstep.diag.IconCoverage'
+}
