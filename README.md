@@ -3,8 +3,8 @@
 A RuneLite sidebar plugin that answers the two questions a bank screen tends to
 produce: **"what should I do tonight?"** and **"how do I actually get that?"**
 
-It reads your live skills, quests, achievement diaries, combat level and
-collection log progress, and plans backwards from a goal to the things you have
+It reads your live skills, quests, achievement diaries, Combat Achievements,
+combat level and what you own, and plans backwards from a goal to the things you have
 to do first - including what to wear and what to bring when you get there.
 
 ## What it does

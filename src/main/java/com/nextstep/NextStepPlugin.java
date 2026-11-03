@@ -43,8 +43,8 @@ import com.nextstep.model.Activity;
 @Slf4j
 @PluginDescriptor(
 	name = "Next Step",
-	description = "Suggests what to do next based on your skills, quests, diaries, and collection log",
-	tags = {"todo", "goals", "quests", "diaries", "collection log", "pvm", "advisor"}
+	description = "Suggests what to do next based on your skills, quests, diaries and Combat Achievements",
+	tags = {"todo", "goals", "quests", "diaries", "combat achievements", "pvm", "advisor", "planner"}
 )
 public class NextStepPlugin extends Plugin
 {
