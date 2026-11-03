@@ -707,7 +707,19 @@ public class NextStepPanel extends PluginPanel
 	private JPanel goalBlock(String caption, SearchPicker<?> picker, Component extra,
 		String buttonText, java.awt.event.ActionListener action)
 	{
-		JPanel block = new JPanel();
+		// Its height is asked for every layout, never fixed. stack() caps a
+		// block at the height it has when the panel is built, and this one is
+		// built with the matches closed - so typing opened a list inside a block
+		// that could not grow, and the list came out 6px tall: the field took
+		// the text, and nothing showed underneath to say what it had found.
+		JPanel block = new JPanel()
+		{
+			@Override
+			public Dimension getMaximumSize()
+			{
+				return new Dimension(Integer.MAX_VALUE, getPreferredSize().height);
+			}
+		};
 		block.setLayout(new BoxLayout(block, BoxLayout.Y_AXIS));
 		block.setBackground(ColorScheme.DARK_GRAY_COLOR);
 		block.setBorder(new EmptyBorder(6, 0, 2, 0));
