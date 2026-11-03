@@ -79,11 +79,35 @@ tasks.named('check') {
 	dependsOn 'asciiCheck'
 }
 
+// The client's own copy of the compiled plugin, one jar per launch.
+//
+// A client run straight from build/classes loads each class the first time it
+// is needed, so recompiling while one is open hands it new classes beside old
+// ones it already holds. That surfaced as NoSuchFieldError on PathStep.Type in
+// the middle of drawing a plan: the plan logic was fine, the client was running
+// two builds at once. A jar named for this launch is never written again, and a
+// jar still held open by a running client cannot be deleted on Windows, so the
+// clean-up below only removes the ones no client is using.
+def runJarName = "next-step-run-${System.currentTimeMillis()}.jar"
+tasks.register('runJar', Jar) {
+	from sourceSets.main.output
+	from sourceSets.test.output
+	destinationDirectory = layout.buildDirectory.dir('run')
+	archiveFileName = runJarName
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+	doFirst {
+		fileTree(destinationDirectory).each { old -> old.delete() }
+	}
+}
+
 // RuneLite dev mode: launches a real client with this plugin side-loaded.
 tasks.register('run', JavaExec) {
 	group = 'application'
 	description = 'Runs a RuneLite client with the Next Step plugin side-loaded.'
-	classpath = sourceSets.test.runtimeClasspath
+	dependsOn 'runJar'
+	def compiled = sourceSets.main.output.files + sourceSets.test.output.files
+	classpath = files(tasks.named('runJar').flatMap { it.archiveFile }) +
+		sourceSets.test.runtimeClasspath.filter { !compiled.contains(it) }
 	mainClass = pluginMainClass
 	// RuneLite refuses to side-load a builtin plugin without assertions on.
 	jvmArgs '-ea'
