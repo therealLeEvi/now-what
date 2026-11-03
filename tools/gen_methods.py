@@ -10,7 +10,8 @@ W = "https://oldschool.runescape.wiki/w/"
 OUT = []
 
 
-def m(skill, lo, hi, name, xp, notes=None, url=None, tick=False, pvp=False, quests=None):
+def m(skill, lo, hi, name, xp, notes=None, url=None, tick=False, pvp=False, quests=None,
+      attention=None, activity=None, xp_each=None, consumes=None):
     d = collections.OrderedDict()
     d["skill"] = skill
     d["minLevel"] = lo
@@ -22,10 +23,30 @@ def m(skill, lo, hi, name, xp, notes=None, url=None, tick=False, pvp=False, ques
     d["wikiUrl"] = url or (W + skill.capitalize() + "_training")
     if quests:
         d["quests"] = quests
+    if activity:
+        # An activities.json id. The method takes that activity's gear and
+        # supplies at load time rather than repeating them here.
+        d["activity"] = activity
+    if xp_each or consumes:
+        # The xp of ONE action and what that action uses up, so the panel can
+        # turn a level range into a shopping list. Both or neither: a count
+        # needs the divisor, and a divisor with nothing to count is dead weight.
+        assert xp_each and consumes, (name, xp_each, consumes)
+        d["xpPerAction"] = xp_each
+        d["consumes"] = [collections.OrderedDict(
+            [("item", item)] + ([("each", each)] if each != 1 else []))
+            for item, each in consumes]
     if tick:
         d["intensity"] = "TICK_MANIPULATION"
     if pvp:
         d["risk"] = "PVP"
+    if attention:
+        # AFK / ORDINARY / DEMANDING. Omitted means "not judged yet", which the
+        # panel renders as no label at all - see TrainingMethod.Attention. Tick
+        # manipulation methods are left out on purpose: they already say so.
+        assert attention in ("AFK", "ORDINARY", "DEMANDING"), attention
+        assert not tick, "a tick-manipulation method already carries its own label"
+        d["attention"] = attention
     OUT.append(d)
 
 
@@ -203,10 +224,14 @@ m("CRAFTING", 63, 99, "Dragonhide bodies", 313000,
 
 # ---------------------------------------------------------------- WOODCUTTING
 WC = W + "Woodcutting_training"
-m("WOODCUTTING", 1, 15, "Regular trees", 13000, None, WC)
-m("WOODCUTTING", 15, 35, "Oak trees", 40000, None, WC)
+CAM = W + "Camphor_tree"
+IRON = W + "Ironwood_tree"
+ROSE = W + "Rosewood_tree"
+m("WOODCUTTING", 1, 15, "Regular trees", 13000, None, WC, attention="ORDINARY")
+m("WOODCUTTING", 15, 35, "Oak trees", 40000, None, WC, attention="ORDINARY")
 m("WOODCUTTING", 35, 65, "Teak trees (regular pace)", 55000,
-  "Solid through the mid game; falls off past 65 without tick manipulation", WC)
+  "Solid through the mid game; falls off past 65 without tick manipulation", WC,
+  attention="ORDINARY")
 m("WOODCUTTING", 35, 41, "1.5-tick teaks (Fossil Island)", 93000,
   "Tick-perfect chopping, and the fastest Woodcutting there is. Reaches ~235k by 99.", WC, tick=True)
 m("WOODCUTTING", 41, 50, "1.5-tick teaks (Fossil Island)", 115000,
@@ -221,15 +246,30 @@ m("WOODCUTTING", 80, 90, "1.5-tick teaks (Fossil Island)", 208000,
   None, WC, tick=True)
 m("WOODCUTTING", 90, 99, "1.5-tick teaks (Fossil Island)", 222000,
   None, WC, tick=True)
-m("WOODCUTTING", 45, 65, "Maple trees", 48000, "The Kandarin medium diary improves this", WC)
+m("WOODCUTTING", 45, 65, "Maple trees", 48000, "The Kandarin medium diary improves this", WC,
+  attention="ORDINARY")
 m("WOODCUTTING", 62, 90, "Blisterwood tree", 69000,
-  "No banking at all — the logs are consumed as you chop", WC)
+  "No banking at all — the logs are consumed as you chop", WC, attention="AFK")
 m("WOODCUTTING", 65, 99, "Sulliuscep (Fossil Island)", 80000,
-  "Reaches ~102k at 99 with a crystal axe", WC)
+  "Needs Bone Voyage, and you walk a six-spot cycle across the Tar Swamp", WC,
+  attention="ORDINARY")
+m("WOODCUTTING", 66, 90, "Camphor trees (The Great Conch)", 70000,
+  "Needs 45 Sailing and Troubled Tortugans started; a plain tree, no cycle to walk", CAM,
+  attention="ORDINARY")
+m("WOODCUTTING", 90, 99, "Camphor trees (The Great Conch)", 82000, None, CAM)
 m("WOODCUTTING", 77, 99, "Bloodwood trees", 130000,
-  "Fastest normal-pace Woodcutting, and the logs sell well", WC)
+  "Fastest without tick manipulation, but a two-tick cycle across three trees to reach it; needs The Blood Moon Rises",
+  WC, attention="DEMANDING")
+m("WOODCUTTING", 77, 99, "Engorged bloodwood tree", 70000,
+  "The calm way to tap bloodwood: one tree, far less input, roughly half the rate", WC,
+  attention="AFK")
+m("WOODCUTTING", 80, 99, "Ironwood trees (Sunbleak Island)", 66000,
+  "Needs 72 Sailing; a steady rate for very little input - each tree lasts four minutes", IRON,
+  attention="AFK")
 m("WOODCUTTING", 88, 99, "Redwood trees", 55000,
-  "Slower than bloodwood but completely AFK-friendly", WC)
+  "Slower than bloodwood but completely AFK-friendly", WC, attention="AFK")
+m("WOODCUTTING", 92, 99, "Rosewood trees (Drumstick Isle)", 85000,
+  "Needs 79 Sailing; drop the logs, there is no bank on the isle", ROSE, attention="ORDINARY")
 
 # ---------------------------------------------------------------- FISHING
 FI = W + "Fishing_training"
@@ -281,14 +321,17 @@ GA = W + "Gilded_altar"
 m("PRAYER", 1, 30, "Burying bones / Ectofuntus", 25000,
   "Quests cover most of this bracket faster than burying does", P)
 m("PRAYER", 30, 99, "Gilded altar with dragon bones", 643000,
-  "Needs 75 Construction and your own or a friend's altar; the standard safe method", GA)
+  "Needs 75 Construction and your own or a friend's altar; the standard safe method", GA,
+  xp_each=252, consumes=[("Dragon bones", 1)])
 m("PRAYER", 30, 99, "Libation bowl with blessed bone shards", 670000,
-  "Slightly cheaper than a gilded altar, at the cost of preparing the shards first", P)
+  "Slightly cheaper than a gilded altar, at the cost of preparing the shards first", P,
+  xp_each=5, consumes=[("Blessed bone shards", 1)])
 m("PRAYER", 30, 99, "Chaos Temple altar", 500000,
   "Half the bone cost, from a 50% save chance. Bring one inventory at a time and expect to die.",
   W + "Chaos_Temple", pvp=True)
 m("PRAYER", 70, 99, "Gilded altar with superior dragon bones", 1340000,
-  "The fastest Prayer in the game and the most expensive by a wide margin", GA)
+  "The fastest Prayer in the game and the most expensive by a wide margin", GA,
+  xp_each=525, consumes=[("Superior dragon bones", 1)])
 
 # ---------------------------------------------------------------- COOKING
 CO = W + "Cooking_training"
@@ -310,10 +353,13 @@ m("FLETCHING", 1, 99, "Darts", 21000,
   "Zero-time training — fletch while doing something else entirely", FL)
 m("FLETCHING", 20, 40, "Oak and willow longbows", 18000, "Roughly break-even", FL)
 m("FLETCHING", 40, 99, "Battlestaves (celastrus bark)", 110000,
-  "Fastest Fletching for most of the game; the bark comes from your own farming patch", FL)
-m("FLETCHING", 50, 85, "Yew longbows (u)", 75000,
-  "Cheaper than battlestaves and can turn a profit strung", FL)
-m("FLETCHING", 90, 99, "Redwood shields", 168000, "Fastest late-game option", FL)
+  "Fastest Fletching for most of the game; the bark comes from your own farming patch", FL,
+  xp_each=80, consumes=[("Celastrus bark", 1)])
+m("FLETCHING", 70, 85, "Yew longbows (u)", 75000,
+  "Cheaper than battlestaves and can turn a profit strung", FL,
+  xp_each=75, consumes=[("Yew logs", 1)])
+m("FLETCHING", 92, 99, "Redwood shields", 168000, "Fastest late-game option", FL,
+  xp_each=216, consumes=[("Redwood logs", 2)])
 
 # ---------------------------------------------------------------- FIREMAKING
 FM = W + "Firemaking_training"
@@ -322,7 +368,7 @@ m("FIREMAKING", 30, 50, "Burning willow and maple logs", 107000,
   "Burn in a line next to a bank", FM)
 m("FIREMAKING", 50, 99, "Wintertodt", 161000,
   "Pays in supply crates and pyromancer pieces and gives passive Woodcutting xp; ~320k by level 99",
-  W + "Wintertodt")
+  W + "Wintertodt", activity="minigame_wintertodt")
 m("FIREMAKING", 75, 99, "Burning magic logs", 451000,
   "Much faster than Wintertodt, but you are buying every log", FM)
 m("FIREMAKING", 90, 99, "Burning redwood logs", 519000,
@@ -368,7 +414,7 @@ m("RUNECRAFT", 85, 99, "Lava runes", 100800,
   "With a colossal pouch from Guardians of the Rift — the pouch matters more than the level", RC)
 m("RUNECRAFT", 27, 99, "Guardians of the Rift", 30000,
   "Passive Mining and Crafting xp, plus the Raiments of the Eye and the colossal pouch",
-  W + "Guardians_of_the_Rift")
+  W + "Guardians_of_the_Rift", activity="minigame_guardians_of_the_rift")
 m("RUNECRAFT", 44, 99, "Ourania (ZMI) altar", 35000,
   "No quest requirements, profitable, and no combat risk; climbs steeply once you have pouches",
   W + "Ourania_Altar")

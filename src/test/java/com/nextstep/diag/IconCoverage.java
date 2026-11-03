@@ -40,7 +40,7 @@ public class IconCoverage
 		ActivityDatabase ad = new ActivityDatabase(gson);
 		ad.load();
 		com.nextstep.data.TrainingMethodDatabase tm = new com.nextstep.data.TrainingMethodDatabase(gson);
-		tm.load();
+		tm.load(ad.getAllActivities());
 
 		int lines = 0;
 		int resolved = 0;
@@ -68,6 +68,13 @@ public class IconCoverage
 			List<String> entries = new ArrayList<>();
 			entries.addAll(method.getGear());
 			entries.addAll(method.getSupplies());
+			// The shopping list goes through the same parser and the same icon
+			// row, so a consumable that resolves to nothing would quietly print
+			// as words where the count was meant to sit under a picture.
+			for (com.nextstep.model.TrainingMethod.Consumed consumed : method.getConsumes())
+			{
+				entries.add(consumed.getItem());
+			}
 			if (!entries.isEmpty())
 			{
 				sources.put(method.getSkill() + " - " + method.getName(), entries);

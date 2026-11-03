@@ -185,7 +185,8 @@ public class SkillPathPlanner
 					method.getXpPerHour(),
 					method.getGear(),
 					method.getSupplies()
-				));
+				).withAttention(method.getAttention())
+					.withNeeded(shoppingList(method, segmentXp)));
 			}
 
 			// No "(choose one)" here: whether a choice is still open depends on
@@ -236,6 +237,41 @@ public class SkillPathPlanner
 		}
 		return "~" + XpTable.formatHours(segmentXp / (double) xpPerHour)
 			+ " \u00b7 " + XpTable.formatXp(xpPerHour) + " xp/hr";
+	}
+
+	/**
+	 * What this method's materials come to over this many xp.
+	 * <p>
+	 * Rounded up, per item, because a shopping list that is one bone short is
+	 * not a shopping list. The count is deliberately exact arithmetic on the xp
+	 * rather than an estimate: a player buying 44,048 dragon bones wants the
+	 * number the xp implies, and if the figure behind it is approximate - as a
+	 * 50% bone-save chance is - that belongs in the method's note, where the
+	 * reason can be given.
+	 *
+	 * @return empty when the method records no countable actions
+	 */
+	private List<PathStep.Option.Needed> shoppingList(TrainingMethod method, long segmentXp)
+	{
+		if (!method.hasShoppingList() || segmentXp <= 0)
+		{
+			return java.util.Collections.emptyList();
+		}
+		// Rounded up to whole actions BEFORE the per-action quantity is applied.
+		// A redwood shield takes two logs, and 8.3 actions' worth of xp needs 9
+		// shields and therefore 18 logs - not the 17 that comes out of rounding
+		// 16.6 at the end. Half a shield is not a shield.
+		long actions = (long) Math.ceil(segmentXp / method.getXpPerAction());
+		List<PathStep.Option.Needed> needed = new ArrayList<>();
+		for (TrainingMethod.Consumed consumed : method.getConsumes())
+		{
+			long quantity = (long) Math.ceil(actions * consumed.getEach());
+			if (quantity > 0)
+			{
+				needed.add(new PathStep.Option.Needed(consumed.getItem(), quantity));
+			}
+		}
+		return needed;
 	}
 
 	private int rate(TrainingMethod method)

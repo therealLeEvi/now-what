@@ -1,6 +1,7 @@
 package com.nextstep.engine;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import com.nextstep.model.PathStep;
@@ -221,5 +222,96 @@ public class SkillPathPlannerTest
 		// visible, not the headline for the whole bracket.
 		assertTrue(steps.get(0).getAlternatives().get(0).getTitle().contains("Copper ore"));
 		assertEquals("Quests", steps.get(0).getAlternatives().get(1).getTitle());
+	}
+
+	/**
+	 * The judgement has to survive the trip from methods.json to the card, or
+	 * the data is recorded and never seen.
+	 */
+	@Test
+	public void attentionTravelsFromTheMethodToTheOption()
+	{
+		TrainingMethod hard = normal(1, 99, "Two-tick sap cycle", 130000)
+			.withAttention(TrainingMethod.Attention.DEMANDING);
+		TrainingMethod easy = normal(1, 99, "One tree every four minutes", 66000)
+			.withAttention(TrainingMethod.Attention.AFK);
+
+		List<PathStep> steps = new SkillPathPlanner().plan("MINING", 1, 99,
+			java.util.Arrays.asList(hard, easy), false, new ArrayList<>());
+
+		assertEquals(1, steps.size());
+		java.util.Map<String, TrainingMethod.Attention> byName = new java.util.HashMap<>();
+		for (PathStep.Option option : steps.get(0).getAlternatives())
+		{
+			byName.put(option.getTitle(), option.getAttention());
+		}
+		assertEquals(TrainingMethod.Attention.DEMANDING, byName.get("Two-tick sap cycle"));
+		assertEquals(TrainingMethod.Attention.AFK, byName.get("One tree every four minutes"));
+	}
+
+	/**
+	 * An unjudged method must come through as null, not ORDINARY. The panel
+	 * prints nothing either way, but conflating the two would turn "nobody has
+	 * assessed this" into a claim that it is unremarkable.
+	 */
+	@Test
+	public void anUnjudgedMethodReachesTheOptionWithNoJudgement()
+	{
+		List<PathStep> steps = new SkillPathPlanner().plan("MINING", 1, 99,
+			java.util.Collections.singletonList(normal(1, 99, "Motherlode Mine", 40000)),
+			false, new ArrayList<>());
+
+		assertEquals(1, steps.size());
+		assertNull(steps.get(0).getAlternatives().get(0).getAttention());
+	}
+
+	/**
+	 * The shopping list is the range's xp divided by one action's xp. This is
+	 * the arithmetic a player was leaving the client to do in a wiki tab, so it
+	 * had better be right.
+	 */
+	@Test
+	public void aShoppingListIsTheRangeXpOverTheActionXp()
+	{
+		// 1 -> 2 Mining is 83 xp; at 10 xp an action that is 9 actions, rounded up.
+		TrainingMethod method = normal(1, 99, "Offering bones", 50000)
+			.withConsumption(10, new TrainingMethod.Consumed("Dragon bones", 1));
+
+		List<PathStep> steps = new SkillPathPlanner().plan("MINING", 1, 2,
+			java.util.Collections.singletonList(method), false, new ArrayList<>());
+
+		List<PathStep.Option.Needed> needed = steps.get(0).getAlternatives().get(0).getNeeded();
+		assertEquals(1, needed.size());
+		assertEquals("Dragon bones", needed.get(0).getItem());
+		assertEquals(9, needed.get(0).getQuantity());
+	}
+
+	/** Two logs a shield means twice the logs, not twice the actions. */
+	@Test
+	public void aConsumedQuantityPerActionMultiplies()
+	{
+		TrainingMethod method = normal(1, 99, "Redwood shields", 50000)
+			.withConsumption(10, new TrainingMethod.Consumed("Redwood logs", 2));
+
+		List<PathStep> steps = new SkillPathPlanner().plan("MINING", 1, 2,
+			java.util.Collections.singletonList(method), false, new ArrayList<>());
+
+		List<PathStep.Option.Needed> needed = steps.get(0).getAlternatives().get(0).getNeeded();
+		assertEquals(18, needed.get(0).getQuantity());
+	}
+
+	/**
+	 * Most methods do not consume anything countable - a minigame, a stretch of
+	 * combat - and must come through with no list rather than an empty-looking
+	 * one the panel would still head "Buy".
+	 */
+	@Test
+	public void aMethodWithNoCountableActionHasNoShoppingList()
+	{
+		List<PathStep> steps = new SkillPathPlanner().plan("MINING", 1, 99,
+			java.util.Collections.singletonList(normal(1, 99, "Motherlode Mine", 40000)),
+			false, new ArrayList<>());
+
+		assertTrue(steps.get(0).getAlternatives().get(0).getNeeded().isEmpty());
 	}
 }

@@ -33,6 +33,74 @@ public class TrainingMethod
 		TICK_MANIPULATION
 	}
 
+	/**
+	 * How much of the player's attention a method actually costs, which is a
+	 * separate question from how fast it is and from whether it is tick
+	 * manipulation.
+	 * <p>
+	 * Bloodwood is why this field exists. The wiki classes it as the fastest
+	 * Woodcutting method that is not tick manipulation, so it is correctly
+	 * {@link Intensity#NORMAL} - but its 130k/hr assumes an efficient two-tick
+	 * cycle filling sap buckets across three trees at once, and the panel was
+	 * presenting that beside an ironwood tree you click once every four minutes
+	 * as though the only difference between them were the xp. That is the same
+	 * kind of hidden cost as {@link Risk#PVP}: real, decision-changing, and
+	 * invisible in an xp/hr figure, so it is recorded as data and labelled
+	 * rather than left for the player to already know.
+	 * <p>
+	 * Unset is not {@link #ORDINARY}. A method with no value here has not been
+	 * judged yet and gets no label, because printing "ordinary" over a method
+	 * nobody has assessed would be inventing a fact. Tick-manipulation methods
+	 * are deliberately left unset too - they already carry their own label and
+	 * do not need a second one saying the same thing.
+	 */
+	public enum Attention
+	{
+		/** Little input: one tree every few minutes, or no banking to do. */
+		AFK,
+		/** Ordinary clicking - assessed and unremarkable. Carries no label. */
+		ORDINARY,
+		/** Near-continuous input to reach the stated rate, without being tick manipulation. */
+		DEMANDING
+	}
+
+	/**
+	 * One counted thing an action of this method uses up, and how many of it per
+	 * action.
+	 * <p>
+	 * Recorded so the panel can answer the question a player actually goes to a
+	 * bank screen with. "Gilded altar with dragon bones, 643k xp/hr, ~17 hours"
+	 * tells you the time but not the shopping list, and the arithmetic to get
+	 * from one to the other - 11.1M xp divided by 252 xp a bone - is exactly the
+	 * sort of thing people leave the client to do in a calculator.
+	 */
+	public static class Consumed
+	{
+		private String item;
+		private double each = 1;
+
+		public Consumed()
+		{
+		}
+
+		public Consumed(String item, double each)
+		{
+			this.item = item;
+			this.each = each;
+		}
+
+		public String getItem()
+		{
+			return item;
+		}
+
+		/** How many per action; fractional for something used across several actions. */
+		public double getEach()
+		{
+			return each <= 0 ? 1 : each;
+		}
+	}
+
 	public enum Risk
 	{
 		/** No PvP exposure - the default assumption if a method omits this field. */
@@ -58,6 +126,16 @@ public class TrainingMethod
 	private Intensity intensity;
 	/** Defaults to SAFE when absent from methods.json (see getRisk()). */
 	private Risk risk;
+	/** Null when absent from methods.json, meaning "not judged" - see {@link Attention}. */
+	private Attention attention;
+	/**
+	 * The xp one action of this method gives - one bone offered, one bow strung,
+	 * one gem cut. Null for a method whose xp does not come in countable units,
+	 * such as a minigame or a stretch of combat.
+	 */
+	private Double xpPerAction;
+	/** What one action uses up. Empty for a method that consumes nothing. */
+	private java.util.List<Consumed> consumes;
 	/**
 	 * Quests that cover this level range outright, for a method that is "do
 	 * these quests" rather than an hourly grind. Named here rather than buried
@@ -73,6 +151,20 @@ public class TrainingMethod
 	 */
 	private java.util.List<String> gear;
 	private java.util.List<String> supplies;
+	/**
+	 * An activity id to take the kit from, for a method that <i>is</i> an
+	 * activity the database already describes.
+	 * <p>
+	 * Wintertodt is the case this exists for. It is a Firemaking method and a
+	 * minigame with four warm-clothing slots and a hammer, and the minigame
+	 * entry already says so - so planning 99 Firemaking used to name Wintertodt
+	 * and then say nothing at all about what to wear, while clicking the same
+	 * minigame in the suggestion list pictured the whole kit. Two copies of one
+	 * answer was the wrong fix; this borrows it, exactly as
+	 * {@code Activity.preparationFrom} does for a collection log slot that is
+	 * really a boss.
+	 */
+	private String activity;
 
 	/** No-arg constructor used by Gson when loading methods.json. */
 	public TrainingMethod()
@@ -191,6 +283,34 @@ public class TrainingMethod
 		}
 	}
 
+	/**
+	 * Null unless this method's xp arrives in countable actions. Paired with
+	 * {@link #getConsumes()}: together they are what turns a level range into a
+	 * shopping list.
+	 */
+	public Double getXpPerAction()
+	{
+		return xpPerAction;
+	}
+
+	/** Never null - a method that consumes nothing returns an empty list. */
+	public java.util.List<Consumed> getConsumes()
+	{
+		return consumes == null ? java.util.Collections.emptyList() : consumes;
+	}
+
+	/** True when this method can say how much of what a level range will cost. */
+	public boolean hasShoppingList()
+	{
+		return xpPerAction != null && xpPerAction > 0 && !getConsumes().isEmpty();
+	}
+
+	/** Null for an ordinary method; an activity id for one that borrows its kit. */
+	public String getActivity()
+	{
+		return activity;
+	}
+
 	public java.util.List<String> getQuests()
 	{
 		return quests == null ? java.util.Collections.emptyList() : quests;
@@ -199,6 +319,46 @@ public class TrainingMethod
 	public Risk getRisk()
 	{
 		return risk == null ? Risk.SAFE : risk;
+	}
+
+	/**
+	 * Null when the method carries no attention judgement at all, which is
+	 * deliberately distinct from {@link Attention#ORDINARY}.
+	 */
+	public Attention getAttention()
+	{
+		return attention;
+	}
+
+	/**
+	 * Sets the attention judgement, for programmatic construction - tests and
+	 * the diagnostic harnesses, which build methods rather than loading JSON.
+	 */
+	public TrainingMethod withAttention(Attention attention)
+	{
+		this.attention = attention;
+		return this;
+	}
+
+	/**
+	 * Sets the countable-action fields, for programmatic construction - tests
+	 * and the diagnostic harnesses, which build methods rather than loading
+	 * JSON.
+	 */
+	public TrainingMethod withConsumption(double xpPerAction, Consumed... consumes)
+	{
+		this.xpPerAction = xpPerAction;
+		this.consumes = java.util.Arrays.asList(consumes);
+		return this;
+	}
+
+	/** Takes the attention judgement recorded on the lowest bracket of the same method. */
+	public void inheritAttention(Attention inherited)
+	{
+		if (attention == null)
+		{
+			attention = inherited;
+		}
 	}
 
 	public boolean isPvpRisk()

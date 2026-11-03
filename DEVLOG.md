@@ -672,6 +672,120 @@ prefix, in that order, because a loose match that beats an exact one opens the
 wrong panel — is a pure function in `NavButtonLookup` with its own tests,
 which is the same split `PluginLookup` got after its bug.
 
+## The data stopped at the Sailing update
+
+A player asked why the Woodcutting path never mentions ironwood. It did not,
+and the reason turned out to be bigger than one tree: the content database was
+written before Sailing existed, and three Woodcutting methods are gated behind
+it. Ironwood (80 Woodcutting, 72 Sailing, Sunbleak Island), rosewood (92 / 79
+Sailing, Drumstick Isle) and camphor (66, 45 Sailing and Troubled Tortugans
+started) were all simply absent, along with the engorged bloodwood tree. All
+four are in now.
+
+`Skill.SAILING` is in runelite-api and `NextStepPlugin` already walks
+`Skill.values()`, so the player's live Sailing level is read today - but there
+are **no Sailing training methods and no activity anywhere references Sailing**,
+so the plugin cannot plan the 72 Sailing that ironwood needs. Requirements like
+that live in a method's note for now, which is how sulliuscep's Bone Voyage and
+bloodwood's The Blood Moon Rises are handled - neither of which the data
+mentioned either until this pass.
+
+Two corrections fell out of checking the rest: sulliuscep's "~102k at 99 with a
+crystal axe" is the *dragon* axe figure, and bloodwood yields sap into buckets
+rather than logs, so "the logs sell well" was wrong twice over.
+
+## Attention is not intensity, and not risk
+
+The same player then said the thing that mattered: bloodwood is the best and
+also exhausting, while ironwood gives a steady rate for far less effort. The
+panel had no way to say so. `Intensity` is a two-value enum - NORMAL or
+TICK_MANIPULATION - and the wiki classes bloodwood as the fastest Woodcutting
+that is *not* tick manipulation, so bloodwood was correctly NORMAL and sat
+beside an ironwood tree you click once every four minutes as though the only
+difference were the xp.
+
+So there is a third axis, `TrainingMethod.Attention`, labelled in the card as
+`Constant input` or `Nearly AFK`. It is modelled on `Risk.PVP` rather than on
+`Intensity`, deliberately: a real cost, decision-changing, invisible in an
+xp/hr figure, recorded as data and labelled rather than left for the player to
+already know. It does **not** re-rank anything - the planner still sorts by
+xp/hr and never prunes - because hiding the fastest method is not an
+improvement on failing to describe it.
+
+Three details worth keeping:
+
+- **Unset is not ORDINARY.** A method with no judgement has not been assessed,
+  and printing "ordinary" over it would be inventing a fact. The getter returns
+  null and the panel prints nothing.
+- **Tick-manipulation methods must leave it unset.** They already carry a label;
+  two tags saying the same thing is noise. The generator asserts it and
+  `ContentDatabaseTest` checks the shipped file.
+- **It is populated skill by skill.** Woodcutting is judged end to end and a
+  test keeps it that way, because a *partially* judged skill is the dangerous
+  state: an unlabelled method next to labelled ones reads as "ordinary".
+
+## Wintertodt named the minigame and said nothing about warm clothing
+
+`TrainingMethod.gear`, `TrainingMethod.supplies`, `inheritPreparation` and
+`PathStep.Option.withPreparation` were all implemented. Nothing called
+`withPreparation`, and **not one of the 183 methods carried gear or supplies** -
+the whole mechanism was dead code. The README said "planning 99 Attack gives
+you the inventory for maniacal monkeys", which was never true as shipped.
+
+Wintertodt is the clear case: it is a Firemaking method *and* a minigame whose
+entry already lists four warm-clothing slots and a hammer. Copying that into
+methods.json would have meant two copies of one answer, so a method can now
+name an `activity` to borrow its kit from, exactly as `Activity.preparationFrom`
+lets a collection log slot borrow a boss's. Guardians of the Rift was the other
+match.
+
+The borrow happens inside `load()`, which now takes the activity list, rather
+than in a second call a caller has to remember - six places build this database
+and forgetting the second call is invisible: the plan still renders, the gear is
+simply gone. That is the bug that was already there.
+
+## One link was answering two questions
+
+Thieving from 55 printed five near-identical blackjacking cards in a row, with
+Rogues' Castle and Pyramid Plunder somewhere underneath them. The planner was
+right - the brackets genuinely differ, because Knights of Ardougne's rate climbs
+through eight rows - but "Show 5 level brackets, 4 other methods" made one link
+answer two unrelated questions, and the bracket half buried the other.
+
+They are separate links now. "Show 4 other ways to train this" merges each
+alternative across the whole run the same way the headline already was, so
+Pyramid Plunder appears **once**, captioned `Covers 91 to 99`, with its rate
+range and its note - no bracket repetition to read past. The arithmetic that
+only the headline used is now a shared `mergeAcross`, which also taught it to
+sum shopping lists over a run instead of taking the first bracket's.
+
+## How many do I actually have to buy
+
+A plan that says "9.2 hours at 1.3M xp/hr" tells you the time and not the cost,
+and the division from one to the other is exactly what people were leaving the
+client to do in a wiki tab. A method can now record the xp of **one action** and
+what that action consumes, and the panel pictures the result with the count
+under the icon: 99 Prayer from 70 is 23,423 superior dragon bones.
+
+Two things this got right only after a test said otherwise:
+
+- **Round up to whole actions before applying the per-action quantity.** A
+  redwood shield takes two logs; 8.3 shields' worth of xp needs 9 shields and
+  therefore 18 logs, not the 17 that falls out of rounding 16.6 at the end.
+  Half a shield is not a shield.
+- **Never abbreviate a count.** Everywhere else the panel rounds xp to "12.3M",
+  because nobody needs the digits. "23k superior dragon bones" is not a number
+  you can take to the Grand Exchange.
+
+Only methods naming one concrete item carry a list. `"Dragonhide bodies"` and
+`"Cutting gems (sapphire through diamond)"` name a *class*, so there is nothing
+to count - and checking them turned up a separate accuracy bug: both quote the
+rate of the best material in the class from the bottom of the range, so the
+panel claims 313k/hr Crafting from level 63 when black hides need 84. Splitting
+them per material fixes the count and the rate together. Also corrected while
+checking: a yew longbow (u) needs 70 Fletching, not the 50 we had, and a redwood
+shield 92, not 90.
+
 ## Still to do before the hub PR
 
 Everything mechanical is done and committed. What is left needs a person:

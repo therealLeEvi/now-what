@@ -118,7 +118,10 @@ public class NextStepPlugin extends Plugin
 	protected void startUp()
 	{
 		activityDatabase.load();
-		trainingMethodDatabase.load();
+		// The activities go in too: a method that is really an activity takes that
+		// activity's kit, so the skill path pictures the same gear the
+		// suggestion list does.
+		trainingMethodDatabase.load(activityDatabase.getAllActivities());
 		itemSourceDatabase.load();
 		itemTracker.load();
 		prerequisiteResolver = new PrerequisiteResolver(activityDatabase.getAllActivities());

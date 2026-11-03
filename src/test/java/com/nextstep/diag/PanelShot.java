@@ -36,7 +36,7 @@ public class PanelShot
 		ActivityDatabase ad = new ActivityDatabase(gson);
 		ad.load();
 		TrainingMethodDatabase tm = new TrainingMethodDatabase(gson);
-		tm.load();
+		tm.load(ad.getAllActivities());
 		ItemSourceDatabase is = new ItemSourceDatabase(gson);
 		is.load();
 		PathPlanner planner = new PathPlanner(ad.getAllActivities(),

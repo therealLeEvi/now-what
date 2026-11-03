@@ -49,7 +49,18 @@ public class TrainingMethodDatabase
 		return db;
 	}
 
-	public void load()
+	/**
+	 * Loads the bundled methods and resolves every method that borrows its kit
+	 * from an activity.
+	 * <p>
+	 * The activities are a parameter rather than a second call the caller has to
+	 * remember, because forgetting it is invisible: the plan still renders, the
+	 * gear is simply absent, and that was exactly the bug - Wintertodt on the
+	 * Firemaking path named the minigame and said nothing about warm clothing.
+	 * Six places build this database (the plugin and five diagnostic harnesses)
+	 * and one signature keeps all six honest.
+	 */
+	public void load(List<com.nextstep.model.Activity> activities)
 	{
 		try (InputStream is = TrainingMethodDatabase.class.getResourceAsStream(RESOURCE_PATH))
 		{
@@ -76,6 +87,7 @@ public class TrainingMethodDatabase
 					methods.sort(Comparator.comparingInt(TrainingMethod::getMinLevel));
 					shareNotesAcrossBrackets(methods);
 				}
+				linkActivityKit(activities);
 				log.info("Loaded {} training methods across {} skills", all.size(), methodsBySkill.size());
 			}
 		}
@@ -108,6 +120,15 @@ public class TrainingMethodDatabase
 				firstNote.putIfAbsent(key, method.getNotes());
 			}
 		}
+		Map<String, TrainingMethod.Attention> firstAttention = new HashMap<>();
+		for (TrainingMethod method : methods)
+		{
+			if (method.getAttention() != null)
+			{
+				firstAttention.putIfAbsent(method.getName().toLowerCase(java.util.Locale.ROOT),
+					method.getAttention());
+			}
+		}
 		Map<String, List<String>> firstGear = new HashMap<>();
 		Map<String, List<String>> firstSupplies = new HashMap<>();
 		for (TrainingMethod method : methods)
@@ -127,6 +148,56 @@ public class TrainingMethodDatabase
 			String key = method.getName().toLowerCase(java.util.Locale.ROOT);
 			method.inheritNotes(firstNote.get(key));
 			method.inheritPreparation(firstGear.get(key), firstSupplies.get(key));
+			method.inheritAttention(firstAttention.get(key));
+		}
+	}
+
+	/**
+	 * Fills in the kit of every method that names an activity to borrow it from,
+	 * then re-shares it down that method's level brackets.
+	 * <p>
+	 * The activities are a different file with its own database, and this is the
+	 * one point where the two meet. A method that already carries its own gear
+	 * keeps it: the borrow is a default, not an override.
+	 * <p>
+	 * A setup's name is dropped on the way in. The activity view has room to
+	 * head three kits "Ranged (budget)", "Magic (best in slot)"; a training
+	 * option inside a plan is a 240px card that has already spent two lines on
+	 * the rate and the note, so it gets one row of pictures. Where an activity
+	 * offers several kits they are concatenated in written order, the first
+	 * being the one the data recommends.
+	 */
+	private void linkActivityKit(List<com.nextstep.model.Activity> activities)
+	{
+		Map<String, com.nextstep.model.Activity> byId = new HashMap<>();
+		for (com.nextstep.model.Activity activity : activities)
+		{
+			byId.put(activity.getId(), activity);
+		}
+
+		for (List<TrainingMethod> perSkill : methodsBySkill.values())
+		{
+			for (TrainingMethod method : perSkill)
+			{
+				if (method.getActivity() == null)
+				{
+					continue;
+				}
+				com.nextstep.model.Activity source = byId.get(method.getActivity());
+				if (source == null)
+				{
+					log.warn("Method '{}' borrows kit from unknown activity '{}'",
+						method.getName(), method.getActivity());
+					continue;
+				}
+				List<String> gear = new ArrayList<>();
+				for (com.nextstep.model.Activity.GearSetup setup : source.getSetups())
+				{
+					gear.addAll(setup.getItems());
+				}
+				method.inheritPreparation(gear, source.getSupplies());
+			}
+			shareNotesAcrossBrackets(perSkill);
 		}
 	}
 

@@ -10,6 +10,7 @@ import com.nextstep.model.Goal;
 import com.nextstep.model.ItemSource;
 import com.nextstep.model.Path;
 import com.nextstep.model.PathStep;
+import com.nextstep.model.TrainingMethod;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -2056,6 +2057,121 @@ public class NextStepPanel extends PluginPanel
 	 * xp by any one of those rates would be wrong for most of the range. The rate
 	 * is then shown as the span it actually covers.
 	 */
+
+	/**
+	 * One method's whole showing across a merged run of brackets: the levels it
+	 * actually covers, the xp it would carry over them, and its rate as the span
+	 * it really spans rather than any single bracket's figure.
+	 * <p>
+	 * Pulled out because the headline and the alternatives need exactly the same
+	 * arithmetic. It used to exist only for the headline, which is why the other
+	 * ways to train a skill were only visible by expanding the brackets - and a
+	 * method recorded in eight brackets then printed eight near-identical cards
+	 * for the player to read past. Pyramid Plunder opening at 91 is not a
+	 * footnote to Thieving; it is the answer for a third of the range.
+	 */
+	private static final class Across
+	{
+		private PathStep.Option option;
+		private int from = Integer.MAX_VALUE;
+		private int to = 0;
+		private long xp;
+		private int rateLow = Integer.MAX_VALUE;
+
+		private boolean found()
+		{
+			return option != null;
+		}
+	}
+
+	private Across mergeAcross(List<PathStep> run, String title)
+	{
+		Across across = new Across();
+		PathStep.Option template = null;
+		String detail = null;
+		double hours = 0;
+		boolean timed = true;
+		int rateHigh = 0;
+
+		for (PathStep bracket : run)
+		{
+			PathStep.Option here = matching(bracket, title);
+			if (here == null)
+			{
+				continue;
+			}
+			if (template == null)
+			{
+				template = here;
+			}
+			across.from = Math.min(across.from, bracket.getLevelFrom());
+			across.to = Math.max(across.to, bracket.getLevelTo());
+			across.xp += bracket.getXpCost();
+			if (detail == null && here.getDetail() != null && !here.getDetail().isEmpty())
+			{
+				// A bracketed method carries its note on its first bracket only,
+				// so a run starting part-way up it would otherwise show no note
+				// at all - the one place the note is most wanted.
+				detail = here.getDetail();
+			}
+			Integer rate = here.getXpPerHour();
+			if (rate == null || rate <= 0)
+			{
+				// A rate-less bracket (a quest route) would make any total a lie
+				// about part of the range, so no estimate is shown at all.
+				timed = false;
+				continue;
+			}
+			across.rateLow = Math.min(across.rateLow, rate);
+			rateHigh = Math.max(rateHigh, rate);
+			hours += bracket.getXpCost() / (double) rate;
+		}
+
+		// Shopping lists add up over the run. Taking the first bracket's would
+		// understate a merged range by however many brackets followed it, which
+		// is the one way a count like this can be worse than no count at all.
+		Map<String, Long> totals = new LinkedHashMap<>();
+		for (PathStep bracket : run)
+		{
+			PathStep.Option here = matching(bracket, title);
+			if (here == null)
+			{
+				continue;
+			}
+			for (PathStep.Option.Needed line : here.getNeeded())
+			{
+				totals.merge(line.getItem(), line.getQuantity(), Long::sum);
+			}
+		}
+		List<PathStep.Option.Needed> needed = new ArrayList<>();
+		for (Map.Entry<String, Long> entry : totals.entrySet())
+		{
+			needed.add(new PathStep.Option.Needed(entry.getKey(), entry.getValue()));
+		}
+
+		if (template == null)
+		{
+			return across;
+		}
+
+		String meta = null;
+		if (timed && hours > 0)
+		{
+			meta = "~" + XpTable.formatHours(hours) + " \u00b7 "
+				+ (across.rateLow == rateHigh
+					? XpTable.formatXp(across.rateLow) + " xp/hr"
+					: XpTable.formatXp(across.rateLow) + "\u2013" + XpTable.formatXp(rateHigh)
+						+ " xp/hr");
+		}
+		across.option = new PathStep.Option(template.getTitle(), detail, meta,
+			template.getWikiUrl(), template.getQuests(), template.isPvpRisk(),
+			template.isTickManipulation(), template.getXpPerHour(), template.getGear(),
+			template.getSupplies())
+			.withAttention(template.getAttention())
+			.withNeeded(needed);
+		return across;
+	}
+
 	private void renderMergedRun(int number, List<PathStep> run, String runKey)
 	{
 		PathStep first = run.get(0);
@@ -2064,11 +2180,6 @@ public class NextStepPanel extends PluginPanel
 		boolean picked = chosenFrom(first) != null;
 
 		long totalXp = 0;
-		double hours = 0;
-		boolean timed = true;
-		int rateLow = Integer.MAX_VALUE;
-		int rateHigh = 0;
-		String detail = shown.getDetail();
 		Set<String> allTitles = new LinkedHashSet<>();
 		for (PathStep bracket : run)
 		{
@@ -2077,43 +2188,11 @@ public class NextStepPanel extends PluginPanel
 			{
 				allTitles.add(option.getTitle());
 			}
-
-			PathStep.Option here = matching(bracket, shown.getTitle());
-			if (detail == null && here != null && here.getDetail() != null
-				&& !here.getDetail().isEmpty())
-			{
-				// A bracketed method carries its note on its first bracket only,
-				// so a run starting part-way up it would otherwise show no note
-				// at all - the one place the note is most wanted.
-				detail = here.getDetail();
-			}
-			Integer rate = here == null ? null : here.getXpPerHour();
-			if (rate == null || rate <= 0)
-			{
-				// A rate-less bracket (a quest route) would make any total a lie
-				// about part of the range, so no estimate is shown at all.
-				timed = false;
-				continue;
-			}
-			rateLow = Math.min(rateLow, rate);
-			rateHigh = Math.max(rateHigh, rate);
-			hours += bracket.getXpCost() / (double) rate;
-		}
-
-		String meta = null;
-		if (timed && hours > 0)
-		{
-			meta = "~" + XpTable.formatHours(hours) + " \u00b7 "
-				+ (rateLow == rateHigh
-					? XpTable.formatXp(rateLow) + " xp/hr"
-					: XpTable.formatXp(rateLow) + "\u2013" + XpTable.formatXp(rateHigh) + " xp/hr");
 		}
 
 		String title = capitalize(first.getSkill()) + " " + first.getLevelFrom()
 			+ " \u2192 " + last.getLevelTo();
-		PathStep.Option merged = new PathStep.Option(shown.getTitle(), detail, meta,
-			shown.getWikiUrl(), shown.getQuests(), shown.isPvpRisk(), shown.isTickManipulation(),
-			shown.getXpPerHour(), shown.getGear(), shown.getSupplies());
+		PathStep.Option merged = mergeAcross(run, shown.getTitle()).option;
 		// Single-option by construction, so renderOption leaves the name
 		// unclickable: choosing happens in the brackets, which are one link away.
 		PathStep mergedStep = new PathStep(PathStep.Type.TRAIN_SKILL, title,
@@ -2132,10 +2211,10 @@ public class NextStepPanel extends PluginPanel
 		// Folding it away behind a link would be the same mistake as sorting it to
 		// the top, in the other direction: the player is told to train, with the
 		// shortcut off screen.
-		int shownCount = 1;
+		Set<String> questsAlreadyShown = new HashSet<>();
 		if (!picked)
 		{
-			Set<String> questsShown = new HashSet<>();
+			Set<String> questsShown = questsAlreadyShown;
 			for (PathStep bracket : run)
 			{
 				for (PathStep.Option option : bracket.getAlternatives())
@@ -2163,17 +2242,82 @@ public class NextStepPanel extends PluginPanel
 							+ from + " \u2192 " + to, SUBTLE, 6, 12));
 					}
 					renderOption(bracket, option, false);
-					shownCount++;
 				}
 			}
 		}
 
-		int others = allTitles.size() - shownCount;
-		String label = picked
+		// The other ways to train this range, each once, merged the same way the
+		// headline is - and deliberately NOT behind the bracket expansion. Those
+		// are two different questions ("what else could I do?" and "where does
+		// the rate change?"), and one link answering both meant the second
+		// buried the first: Thieving 65-84 printed five near-identical
+		// blackjacking cards, with Rogues' Castle and Pyramid Plunder somewhere
+		// underneath them.
+		List<Across> alternatives = new ArrayList<>();
+		if (!picked)
+		{
+			for (String other : allTitles)
+			{
+				if (other.equals(shown.getTitle()) || questsAlreadyShown.contains(other))
+				{
+					continue;
+				}
+				Across across = mergeAcross(run, other);
+				if (across.found())
+				{
+					alternatives.add(across);
+				}
+			}
+			// Fastest first, by the rate at the bottom of each one's range: the
+			// same figure, and the same order, the planner ranks a single
+			// bracket's options by.
+			alternatives.sort((a, b) -> b.rateLow != a.rateLow
+				? Integer.compare(b.rateLow, a.rateLow)
+				: a.option.getTitle().compareTo(b.option.getTitle()));
+		}
+
+		String altKey = runKey + "|alts";
+		if (!alternatives.isEmpty())
+		{
+			if (expandedSteps.contains(altKey))
+			{
+				// A multi-option step, so each title stays clickable: picking one
+				// of these is the same act as picking it inside a bracket.
+				List<PathStep.Option> options = new ArrayList<>();
+				for (Across across : alternatives)
+				{
+					options.add(across.option);
+				}
+				PathStep altStep = new PathStep(PathStep.Type.TRAIN_SKILL, title, options)
+					.withLevels(first.getSkill(), first.getLevelFrom(), last.getLevelTo());
+				JLabel hint = resultLine("Click one to keep just that method:", SUBTLE, 10);
+				hint.setFont(SMALL_FONT);
+				stack(pathResultContainer, hint);
+				for (Across across : alternatives)
+				{
+					// Only where it does not cover the whole run. "Covers 91 to
+					// 99" is the fact worth a line; repeating the step's own
+					// levels under every option would not be.
+					if (across.from > first.getLevelFrom() || across.to < last.getLevelTo())
+					{
+						stack(pathResultContainer, microLabel("Covers " + across.from
+							+ " \u2192 " + across.to, SUBTLE, 6, 12));
+					}
+					renderOption(altStep, across.option, false);
+				}
+				stack(pathResultContainer, runLink(altKey, "Hide other methods"));
+			}
+			else
+			{
+				int others = alternatives.size();
+				stack(pathResultContainer, runLink(altKey, "Show " + others + " other way"
+					+ (others == 1 ? "" : "s") + " to train this"));
+			}
+		}
+
+		stack(pathResultContainer, runLink(runKey, picked
 			? "Change method (" + run.size() + " level brackets)"
-			: "Show " + run.size() + " level brackets"
-				+ (others > 0 ? ", " + others + " other method" + (others == 1 ? "" : "s") : "");
-		stack(pathResultContainer, runLink(runKey, label));
+			: "Show " + run.size() + " level brackets"));
 	}
 
 	/** Opens or closes a merged run of level brackets. */
@@ -2288,6 +2432,17 @@ public class NextStepPanel extends PluginPanel
 		{
 			stack(card, microLabel("Tick manipulation", SUBTLE, 3, 0));
 		}
+		// The attention cost, where it has been judged. Deliberately not amber:
+		// amber is reserved for "you can lose what you brought". A method being
+		// hard work is a trade-off to weigh, not a warning.
+		if (option.getAttention() == TrainingMethod.Attention.DEMANDING)
+		{
+			stack(card, microLabel("Constant input", SUBTLE, 3, 0));
+		}
+		else if (option.getAttention() == TrainingMethod.Attention.AFK)
+		{
+			stack(card, microLabel("Nearly AFK", SUBTLE, 3, 0));
+		}
 		if (option.getMeta() != null && !option.getMeta().isEmpty())
 		{
 			stack(card, microLabel(option.getMeta(), SUBTLE, 3, 0));
@@ -2321,6 +2476,7 @@ public class NextStepPanel extends PluginPanel
 		// question they were going to the wiki for.
 		renderKit(card, "Wear", option.getGear());
 		renderKit(card, "Bring", option.getSupplies());
+		renderNeeded(card, option.getNeeded());
 
 		// Name the quests, then let Quest Helper take the player through each
 		// one and its own requirements; they come back here afterwards to pick
@@ -2340,6 +2496,67 @@ public class NextStepPanel extends PluginPanel
 			stack(card, linkRow(java.util.Collections.singletonList(
 				actionLink("Wiki \u2197", () -> openUrl(option.getWikiUrl()))), 0));
 		}
+	}
+
+	/**
+	 * What this range will use up, as pictures with the counts under them.
+	 * <p>
+	 * The same row the gear gets, because it is the same question one step
+	 * later: the plan says 16 hours at a gilded altar, and the player's next
+	 * move is to work out how many dragon bones that is and go and buy them.
+	 * Doing that division in the panel is the difference between a plan you can
+	 * read and a plan you can act on - and it was being done on the wiki, in
+	 * another tab, with the numbers copied across by hand.
+	 */
+	private void renderNeeded(JPanel card, List<PathStep.Option.Needed> needed)
+	{
+		if (needed.isEmpty())
+		{
+			return;
+		}
+
+		stack(card, microLabel("Buy", SUBTLE, 6, 12));
+		Pictured pictured = new Pictured();
+		for (PathStep.Option.Needed line : needed)
+		{
+			EntryIcons icons = itemManager == null ? null : iconsForEntry(line.getItem());
+			Integer id = null;
+			if (icons != null && !icons.names.isEmpty())
+			{
+				id = icons.names.keySet().iterator().next();
+			}
+			if (id == null || pictured.names.size() >= MAX_ICONS)
+			{
+				// No sprite for it: the count is the point, so it goes back to
+				// words rather than being dropped.
+				pictured.inWords.add(exact(line.getQuantity()) + " "
+					+ line.getItem().toLowerCase(java.util.Locale.ROOT));
+				continue;
+			}
+			pictured.names.putIfAbsent(id, line.getItem());
+			pictured.counts.put(id, exact(line.getQuantity()));
+		}
+		stackIcons(card, pictured);
+		for (String words : pictured.getInWords())
+		{
+			JLabel line = resultLine(words, DETAIL, 0);
+			line.setFont(SMALL_FONT);
+			stack(card, line);
+		}
+	}
+
+	/**
+	 * A count in full, with thousands separators - never abbreviated.
+	 * <p>
+	 * Everywhere else in the panel an xp figure is rounded to "12.3M", because
+	 * nobody needs the digits of an xp total. A shopping list is the opposite:
+	 * "23k superior dragon bones" is not a number you can take to the Grand
+	 * Exchange, and rounding it is how the player ends up two bones short at
+	 * level 98.
+	 */
+	private static String exact(long quantity)
+	{
+		return String.format(java.util.Locale.ROOT, "%,d", quantity);
 	}
 
 	/** One labelled row of gear or supplies inside an option box. */

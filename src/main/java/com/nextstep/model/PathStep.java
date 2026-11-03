@@ -55,6 +55,10 @@ public class PathStep
 		 */
 		private final boolean pvpRisk;
 		private final boolean tickManipulation;
+		/** Null means no judgement was recorded; see {@link TrainingMethod.Attention}. */
+		private final TrainingMethod.Attention attention;
+		/** How much of what this option's range will use up; empty when unknown. */
+		private final List<Needed> needed;
 		/**
 		 * The scannable fact - "~3 hrs - 160k xp/hr". Kept apart from the note
 		 * because welding it on the end made every note a five-line paragraph
@@ -114,6 +118,17 @@ public class PathStep
 			List<String> quests, boolean pvpRisk, boolean tickManipulation, Integer xpPerHour,
 			List<String> gear, List<String> supplies)
 		{
+			this(title, detail, meta, wikiUrl, quests, pvpRisk, tickManipulation, xpPerHour,
+				gear, supplies, null, Collections.emptyList());
+		}
+
+		private Option(String title, String detail, String meta, String wikiUrl,
+			List<String> quests, boolean pvpRisk, boolean tickManipulation, Integer xpPerHour,
+			List<String> gear, List<String> supplies, TrainingMethod.Attention attention,
+			List<Needed> needed)
+		{
+			this.needed = needed == null ? Collections.emptyList() : needed;
+			this.attention = attention;
 			this.gear = gear == null ? Collections.emptyList() : gear;
 			this.supplies = supplies == null ? Collections.emptyList() : supplies;
 			this.xpPerHour = xpPerHour;
@@ -142,11 +157,73 @@ public class PathStep
 			return !gear.isEmpty() || !supplies.isEmpty();
 		}
 
+		/** One line of a shopping list: an item and how many of it. */
+		public static final class Needed
+		{
+			private final String item;
+			private final long quantity;
+
+			public Needed(String item, long quantity)
+			{
+				this.item = item;
+				this.quantity = quantity;
+			}
+
+			public String getItem()
+			{
+				return item;
+			}
+
+			public long getQuantity()
+			{
+				return quantity;
+			}
+		}
+
 		/** This option with gear and supplies attached - everything else unchanged. */
 		public Option withPreparation(List<String> gear, List<String> supplies)
 		{
 			return new Option(title, detail, meta, wikiUrl, quests, pvpRisk, tickManipulation,
-				xpPerHour, gear, supplies);
+				xpPerHour, gear, supplies, attention, needed);
+		}
+
+		/**
+		 * This option with its shopping list attached. Computed per level range
+		 * rather than stored on the method, because the answer <em>is</em> the
+		 * range: the same method costs 44,000 bones over one stretch and 3,000
+		 * over another.
+		 */
+		public Option withNeeded(List<Needed> needed)
+		{
+			return new Option(title, detail, meta, wikiUrl, quests, pvpRisk, tickManipulation,
+				xpPerHour, gear, supplies, attention, needed);
+		}
+
+		/** Empty when the method does not consume anything countable. */
+		public List<Needed> getNeeded()
+		{
+			return needed;
+		}
+
+		/**
+		 * This option with an attention judgement attached - everything else
+		 * unchanged. A wither rather than another constructor parameter: the
+		 * constructor chain is already five deep, and every existing caller
+		 * means "no judgement recorded" anyway.
+		 */
+		public Option withAttention(TrainingMethod.Attention attention)
+		{
+			return new Option(title, detail, meta, wikiUrl, quests, pvpRisk, tickManipulation,
+				xpPerHour, gear, supplies, attention, needed);
+		}
+
+		/**
+		 * Null when the method behind this option carries no attention
+		 * judgement, which is not the same as judging it ordinary.
+		 */
+		public TrainingMethod.Attention getAttention()
+		{
+			return attention;
 		}
 
 		/** Null when the method has no hourly rate, e.g. a quest route. */

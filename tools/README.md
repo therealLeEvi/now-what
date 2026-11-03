@@ -65,6 +65,31 @@ wiki's framing:
   carries a tag that does.
 - `risk: PVP` for anything in the Wilderness, and only methods that are
   actually recommended somewhere get an entry at all.
+- `attention=` is how much of the player's attention a method costs, which is a
+  different question from its rate and from tick manipulation. `AFK`,
+  `ORDINARY` or `DEMANDING`; **omitting it means "not judged yet"**, not
+  "ordinary", and the panel prints no label at all for an unjudged method.
+  Tick-manipulation methods must leave it unset - they already carry their own
+  label. Woodcutting is judged end to end and a test keeps it that way; the
+  other skills are not yet, so judge a method when you add one.
+- `activity=` names an activities.json id to borrow the gear and supplies from,
+  for a method that *is* an activity the database already describes. Wintertodt
+  is the case: four warm-clothing slots and a hammer, written once in the
+  minigame entry. `ContentDatabaseTest` checks both that the id resolves and
+  that the kit actually arrives.
+- `xp_each=` and `consumes=` are the shopping list: the xp of one action, and
+  what one action uses up as `[("Dragon bones", 1)]` or `[("Redwood logs", 2)]`.
+  The planner divides the level range's xp by `xp_each`, rounds **up to whole
+  actions**, then applies the per-action quantity - 8.3 shields' worth of xp is
+  9 shields and 18 logs, not 17. Both fields or neither.
+
+  Only methods that name one concrete item carry this. `"Dragonhide bodies"` and
+  `"Cutting gems (sapphire through diamond)"` name a *class* of material, so
+  there is nothing to count - and both are also wrong about their rate at the
+  bottom of their range, since they quote the figure for the best material in
+  the class (313k/hr needs black hides, which need 84 Crafting, from a bracket
+  starting at 63). Splitting them per material fixes the count and the rate
+  together, and needs per-material xp/hr read off the wiki rather than derived.
 
 ### diary_data.py
 

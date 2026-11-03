@@ -303,15 +303,7 @@
     "maxLevel": 21,
     "name": "Enchanting jewellery / spells on crabs",
     "xpPerHour": 32000,
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training",
-    "gear": [
-      "Staff of air",
-      "Wizard robes"
-    ],
-    "supplies": [
-      "Cosmic rune",
-      "Sapphire ring or sapphire amulet"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training"
   },
   {
     "skill": "MAGIC",
@@ -320,14 +312,7 @@
     "name": "Low Level Alchemy",
     "xpPerHour": 60000,
     "notes": "Stationary and cheap; the standard way through the 20s and 30s",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training",
-    "gear": [
-      "Staff of fire"
-    ],
-    "supplies": [
-      "Nature rune",
-      "Alchables: iron platebodies or similar"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training"
   },
   {
     "skill": "MAGIC",
@@ -336,15 +321,7 @@
     "name": "Superheat Item",
     "xpPerHour": 97000,
     "notes": "Gives Smithing xp at the same time, but you pay for the ore",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training",
-    "gear": [
-      "Staff of fire"
-    ],
-    "supplies": [
-      "Nature rune",
-      "Iron ore",
-      "Coal"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training"
   },
   {
     "skill": "MAGIC",
@@ -353,16 +330,7 @@
     "name": "Tele-alching at Camelot",
     "xpPerHour": 144000,
     "notes": "Alch between teleports; profitable and needs no combat",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training",
-    "gear": [
-      "Staff of fire"
-    ],
-    "supplies": [
-      "Nature rune",
-      "Law rune",
-      "Air rune",
-      "Alchables, one per teleport"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training"
   },
   {
     "skill": "MAGIC",
@@ -371,14 +339,7 @@
     "name": "High Level Alchemy (passive)",
     "xpPerHour": 78000,
     "notes": "Done alongside another activity rather than as a session of its own",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training",
-    "gear": [
-      "Staff of fire"
-    ],
-    "supplies": [
-      "Nature rune",
-      "Alchables worth more than the nature rune"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training"
   },
   {
     "skill": "MAGIC",
@@ -387,24 +348,7 @@
     "name": "Ice Bursting maniacal monkeys",
     "xpPerHour": 310000,
     "notes": "Requires Monkey Madness II; roughly 400k once Ice Barrage unlocks at 94",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training",
-    "gear": [
-      "Ancestral hat, robe top and robe bottom, or mystic robes",
-      "Kodai wand or master wand",
-      "Occult necklace",
-      "Imbued god cape",
-      "Tome of water",
-      "Barrows gloves"
-    ],
-    "supplies": [
-      "Death rune",
-      "Blood rune",
-      "Water rune",
-      "Prayer potions",
-      "Saradomin brew or sharks",
-      "Ninja monkey greegree",
-      "Royal seed pod"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training"
   },
   {
     "skill": "MAGIC",
@@ -414,20 +358,7 @@
     "xpPerHour": 330000,
     "notes": "As fast as maniacal monkeys, and it pays for itself. You are a target the whole time.",
     "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training",
-    "risk": "PVP",
-    "gear": [
-      "Mystic robe top and mystic robe bottom",
-      "Occult necklace",
-      "Master wand or mystic smoke staff",
-      "Imbued god cape"
-    ],
-    "supplies": [
-      "Death rune",
-      "Blood rune",
-      "Water rune",
-      "Burning amulet",
-      "Nothing you are not willing to lose"
-    ]
+    "risk": "PVP"
   },
   {
     "skill": "MAGIC",
@@ -436,17 +367,7 @@
     "name": "Stun-alching",
     "xpPerHour": 256000,
     "notes": "Fastest non-combat Magic, at a punishing click rate",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training",
-    "gear": [
-      "Staff of fire"
-    ],
-    "supplies": [
-      "Soul rune",
-      "Earth rune",
-      "Water rune",
-      "Nature rune",
-      "Alchables, one per cast pair"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training"
   },
   {
     "skill": "MAGIC",
@@ -455,17 +376,7 @@
     "name": "Plank Make",
     "xpPerHour": 90000,
     "notes": "Near-AFK and profitable; requires Lunar Diplomacy",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training",
-    "gear": [
-      "Staff of earth"
-    ],
-    "supplies": [
-      "Astral rune",
-      "Nature rune",
-      "Earth rune",
-      "Oak logs or teak logs",
-      "Coins"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_training"
   },
   {
     "skill": "SMITHING",
@@ -528,16 +439,7 @@
     "name": "Dwarf multicannon on ogres or similar",
     "xpPerHour": 40000,
     "notes": "Fastest option before chinning unlocks",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Ranged_training",
-    "gear": [
-      "Weapon: the best bow you can wield",
-      "Black d'hide body and black d'hide chaps"
-    ],
-    "supplies": [
-      "Cannon barrels, cannon base, cannon furnace and cannon stand",
-      "Cannonball",
-      "Adamant arrows"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ranged_training"
   },
   {
     "skill": "RANGED",
@@ -546,14 +448,7 @@
     "name": "Gemstone crab",
     "xpPerHour": 30000,
     "notes": "Fully idle; far slower than chinning but costs nothing and needs no attention",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Ranged_training",
-    "gear": [
-      "Weapon: the best bow or crossbow you can wield",
-      "Black d'hide body and black d'hide chaps"
-    ],
-    "supplies": [
-      "Adamant arrow or runite bolts"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ranged_training"
   },
   {
     "skill": "RANGED",
@@ -562,22 +457,7 @@
     "name": "Chinning maniacal monkeys (grey chinchompas)",
     "xpPerHour": 290000,
     "notes": "Requires Monkey Madness II chapter II; chins are consumed, so this is expensive",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Ranged_training",
-    "gear": [
-      "Void ranger helm, void knight top and void knight robe",
-      "Ava's assembler or Ava's accumulator",
-      "Necklace of anguish or amulet of fury",
-      "Barrows gloves",
-      "Pegasian boots or Aranea boots"
-    ],
-    "supplies": [
-      "Grey chinchompa",
-      "Prayer potions",
-      "Ranging potion",
-      "Saradomin brew or sharks",
-      "Ninja monkey greegree",
-      "Royal seed pod"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ranged_training"
   },
   {
     "skill": "RANGED",
@@ -586,22 +466,7 @@
     "name": "Chinning maniacal monkeys (red chinchompas)",
     "xpPerHour": 430000,
     "notes": "Expensive — budget for the chins before you start",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Ranged_training",
-    "gear": [
-      "Void ranger helm, void knight top and void knight robe",
-      "Ava's assembler or Ava's accumulator",
-      "Necklace of anguish or amulet of fury",
-      "Barrows gloves",
-      "Pegasian boots or Aranea boots"
-    ],
-    "supplies": [
-      "Red chinchompa",
-      "Prayer potions",
-      "Ranging potion",
-      "Saradomin brew or sharks",
-      "Ninja monkey greegree",
-      "Royal seed pod"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ranged_training"
   },
   {
     "skill": "RANGED",
@@ -610,22 +475,7 @@
     "name": "Chinning maniacal monkeys (black chinchompas)",
     "xpPerHour": 690000,
     "notes": "The fastest xp/hr in the game, priced accordingly. Near 1M/hr at 99 with Rigour and void.",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Ranged_training",
-    "gear": [
-      "Void ranger helm, void knight top and void knight robe",
-      "Ava's assembler or Ava's accumulator",
-      "Necklace of anguish or amulet of fury",
-      "Barrows gloves",
-      "Pegasian boots or Aranea boots"
-    ],
-    "supplies": [
-      "Black chinchompa",
-      "Prayer potions",
-      "Ranging potion",
-      "Saradomin brew or sharks",
-      "Ninja monkey greegree",
-      "Royal seed pod"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ranged_training"
   },
   {
     "skill": "RANGED",
@@ -634,16 +484,7 @@
     "name": "Nightmare Zone (venator bow)",
     "xpPerHour": 140000,
     "notes": "Largely AFK, and a fraction of the cost of chinning",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Nightmare_Zone",
-    "gear": [
-      "Venator bow",
-      "Void ranger helm, void knight top and void knight robe"
-    ],
-    "supplies": [
-      "Absorption (4)",
-      "Overload (4)",
-      "Dwarven rock cake"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Nightmare_Zone"
   },
   {
     "skill": "RANGED",
@@ -652,22 +493,7 @@
     "name": "Venator bow at maniacal monkeys",
     "xpPerHour": 140000,
     "notes": "Cheaper alternative to chins at the same spot",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Ranged_training",
-    "gear": [
-      "Venator bow",
-      "Void ranger helm, void knight top and void knight robe",
-      "Ava's assembler or Ava's accumulator",
-      "Necklace of anguish or amulet of fury",
-      "Barrows gloves",
-      "Pegasian boots or Aranea boots"
-    ],
-    "supplies": [
-      "Prayer potions",
-      "Ranging potion",
-      "Saradomin brew or sharks",
-      "Ninja monkey greegree",
-      "Royal seed pod"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ranged_training"
   },
   {
     "skill": "MINING",
@@ -809,7 +635,8 @@
     "maxLevel": 15,
     "name": "Regular trees",
     "xpPerHour": 13000,
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training"
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training",
+    "attention": "ORDINARY"
   },
   {
     "skill": "WOODCUTTING",
@@ -817,7 +644,8 @@
     "maxLevel": 35,
     "name": "Oak trees",
     "xpPerHour": 40000,
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training"
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training",
+    "attention": "ORDINARY"
   },
   {
     "skill": "WOODCUTTING",
@@ -836,7 +664,8 @@
     "name": "Teak trees (regular pace)",
     "xpPerHour": 55000,
     "notes": "Solid through the mid game; falls off past 65 without tick manipulation",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training"
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training",
+    "attention": "ORDINARY"
   },
   {
     "skill": "WOODCUTTING",
@@ -854,7 +683,8 @@
     "name": "Maple trees",
     "xpPerHour": 48000,
     "notes": "The Kandarin medium diary improves this",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training"
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training",
+    "attention": "ORDINARY"
   },
   {
     "skill": "WOODCUTTING",
@@ -881,7 +711,8 @@
     "name": "Blisterwood tree",
     "xpPerHour": 69000,
     "notes": "No banking at all — the logs are consumed as you chop",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training"
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training",
+    "attention": "AFK"
   },
   {
     "skill": "WOODCUTTING",
@@ -889,8 +720,19 @@
     "maxLevel": 99,
     "name": "Sulliuscep (Fossil Island)",
     "xpPerHour": 80000,
-    "notes": "Reaches ~102k at 99 with a crystal axe",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training"
+    "notes": "Needs Bone Voyage, and you walk a six-spot cycle across the Tar Swamp",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training",
+    "attention": "ORDINARY"
+  },
+  {
+    "skill": "WOODCUTTING",
+    "minLevel": 66,
+    "maxLevel": 90,
+    "name": "Camphor trees (The Great Conch)",
+    "xpPerHour": 70000,
+    "notes": "Needs 45 Sailing and Troubled Tortugans started; a plain tree, no cycle to walk",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Camphor_tree",
+    "attention": "ORDINARY"
   },
   {
     "skill": "WOODCUTTING",
@@ -907,8 +749,19 @@
     "maxLevel": 99,
     "name": "Bloodwood trees",
     "xpPerHour": 130000,
-    "notes": "Fastest normal-pace Woodcutting, and the logs sell well",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training"
+    "notes": "Fastest without tick manipulation, but a two-tick cycle across three trees to reach it; needs The Blood Moon Rises",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training",
+    "attention": "DEMANDING"
+  },
+  {
+    "skill": "WOODCUTTING",
+    "minLevel": 77,
+    "maxLevel": 99,
+    "name": "Engorged bloodwood tree",
+    "xpPerHour": 70000,
+    "notes": "The calm way to tap bloodwood: one tree, far less input, roughly half the rate",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training",
+    "attention": "AFK"
   },
   {
     "skill": "WOODCUTTING",
@@ -921,12 +774,23 @@
   },
   {
     "skill": "WOODCUTTING",
+    "minLevel": 80,
+    "maxLevel": 99,
+    "name": "Ironwood trees (Sunbleak Island)",
+    "xpPerHour": 66000,
+    "notes": "Needs 72 Sailing; a steady rate for very little input - each tree lasts four minutes",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ironwood_tree",
+    "attention": "AFK"
+  },
+  {
+    "skill": "WOODCUTTING",
     "minLevel": 88,
     "maxLevel": 99,
     "name": "Redwood trees",
     "xpPerHour": 55000,
     "notes": "Slower than bloodwood but completely AFK-friendly",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training"
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training",
+    "attention": "AFK"
   },
   {
     "skill": "WOODCUTTING",
@@ -936,6 +800,24 @@
     "xpPerHour": 222000,
     "wikiUrl": "https://oldschool.runescape.wiki/w/Woodcutting_training",
     "intensity": "TICK_MANIPULATION"
+  },
+  {
+    "skill": "WOODCUTTING",
+    "minLevel": 90,
+    "maxLevel": 99,
+    "name": "Camphor trees (The Great Conch)",
+    "xpPerHour": 82000,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Camphor_tree"
+  },
+  {
+    "skill": "WOODCUTTING",
+    "minLevel": 92,
+    "maxLevel": 99,
+    "name": "Rosewood trees (Drumstick Isle)",
+    "xpPerHour": 85000,
+    "notes": "Needs 79 Sailing; drop the logs, there is no bank on the isle",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Rosewood_tree",
+    "attention": "ORDINARY"
   },
   {
     "skill": "FISHING",
@@ -1027,17 +909,7 @@
     "name": "Low-level monsters (chickens, cows, Al Kharid warriors)",
     "xpPerHour": 12000,
     "notes": "Quests skip most of this bracket",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
-    "gear": [
-      "Weapon: the best scimitar you can wield",
-      "Amulet of strength",
-      "Iron platebody or steel platebody",
-      "Iron platelegs or steel platelegs"
-    ],
-    "supplies": [
-      "Trout or shrimps",
-      "Varrock teleport"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training"
   },
   {
     "skill": "ATTACK",
@@ -1046,19 +918,7 @@
     "name": "Sand or ammonite crabs",
     "xpPerHour": 30000,
     "notes": "Fully AFK — the default when you want to do something else at the same time",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
-    "gear": [
-      "Weapon: abyssal whip or the best scimitar you can wield",
-      "Amulet of fury or amulet of strength",
-      "Fighter torso or rune platebody",
-      "Dragon defender",
-      "Barrows gloves"
-    ],
-    "supplies": [
-      "Super combat potion",
-      "Sharks - for a bad streak",
-      "Digsite pendant"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training"
   },
   {
     "skill": "ATTACK",
@@ -1067,15 +927,7 @@
     "name": "Gemstone crab (Tlati Rainforest)",
     "xpPerHour": 50000,
     "notes": "Infinite health and low accuracy, so no food is needed",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
-    "gear": [
-      "Weapon: the best scimitar or whip you can wield",
-      "Amulet of strength",
-      "Fighter torso or rune platebody"
-    ],
-    "supplies": [
-      "No food needed: the crab barely hits"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training"
   },
   {
     "skill": "ATTACK",
@@ -1084,22 +936,7 @@
     "name": "Slayer tasks",
     "xpPerHour": 35000,
     "notes": "Slower per hour, but it trains Slayer at the same time and pays for itself in drops",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Slayer",
-    "gear": [
-      "Slayer helmet (i)",
-      "Weapon: whatever the task wants",
-      "Amulet of fury",
-      "Dragon defender",
-      "Barrows gloves",
-      "Dragon boots"
-    ],
-    "supplies": [
-      "Enchanted gem",
-      "Sharks or monkfish",
-      "Prayer potions",
-      "Super combat potion",
-      "Ring of dueling"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Slayer"
   },
   {
     "skill": "ATTACK",
@@ -1108,19 +945,7 @@
     "name": "Sulphur naguas (Neypotzli)",
     "xpPerHour": 75000,
     "notes": "Requires 48 Slayer; restores prayer and the drops are worth keeping",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
-    "gear": [
-      "Slayer helmet (i)",
-      "Weapon: your best melee weapon",
-      "Amulet of torture or fury",
-      "Dragon defender",
-      "Barrows gloves"
-    ],
-    "supplies": [
-      "Prayer potions - the drops top you back up",
-      "Sharks",
-      "Stamina potion"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training"
   },
   {
     "skill": "ATTACK",
@@ -1129,16 +954,7 @@
     "name": "Nightmare Zone",
     "xpPerHour": 60000,
     "notes": "The most AFK method in the game — minutes between clicks",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Nightmare_Zone",
-    "gear": [
-      "Dharok's helm, platebody, platelegs and greataxe",
-      "Amulet of strength"
-    ],
-    "supplies": [
-      "Absorption (4)",
-      "Overload (4)",
-      "Dwarven rock cake"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Nightmare_Zone"
   },
   {
     "skill": "ATTACK",
@@ -1147,23 +963,7 @@
     "name": "Maniacal monkeys (Ape Atoll)",
     "xpPerHour": 200000,
     "notes": "Requires Monkey Madness II; prayer potion drops sustain Piety",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
-    "gear": [
-      "Weapon: scythe of vitur, soulreaper axe or abyssal whip",
-      "Head: Neitiznot faceguard or helm of neitiznot",
-      "Body: bandos chestplate or fighter torso",
-      "Legs: bandos tassets",
-      "Amulet of torture or amulet of fury",
-      "Barrows gloves",
-      "Primordial boots or dragon boots"
-    ],
-    "supplies": [
-      "Prayer potions - the monkeys drop more",
-      "Saradomin brew or sharks",
-      "Super combat potion",
-      "Ninja monkey greegree",
-      "Royal seed pod"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training"
   },
   {
     "skill": "STRENGTH",
@@ -1172,17 +972,7 @@
     "name": "Low-level monsters (chickens, cows, Al Kharid warriors)",
     "xpPerHour": 12000,
     "notes": "Quests skip most of this bracket",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
-    "gear": [
-      "Weapon: the best scimitar you can wield",
-      "Amulet of strength",
-      "Iron platebody or steel platebody",
-      "Iron platelegs or steel platelegs"
-    ],
-    "supplies": [
-      "Trout or shrimps",
-      "Varrock teleport"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training"
   },
   {
     "skill": "STRENGTH",
@@ -1191,19 +981,7 @@
     "name": "Sand or ammonite crabs",
     "xpPerHour": 30000,
     "notes": "Fully AFK — the default when you want to do something else at the same time",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
-    "gear": [
-      "Weapon: abyssal whip or the best scimitar you can wield",
-      "Amulet of fury or amulet of strength",
-      "Fighter torso or rune platebody",
-      "Dragon defender",
-      "Barrows gloves"
-    ],
-    "supplies": [
-      "Super combat potion",
-      "Sharks - for a bad streak",
-      "Digsite pendant"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training"
   },
   {
     "skill": "STRENGTH",
@@ -1212,15 +990,7 @@
     "name": "Gemstone crab (Tlati Rainforest)",
     "xpPerHour": 50000,
     "notes": "Infinite health and low accuracy, so no food is needed",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
-    "gear": [
-      "Weapon: the best scimitar or whip you can wield",
-      "Amulet of strength",
-      "Fighter torso or rune platebody"
-    ],
-    "supplies": [
-      "No food needed: the crab barely hits"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training"
   },
   {
     "skill": "STRENGTH",
@@ -1229,22 +999,7 @@
     "name": "Slayer tasks",
     "xpPerHour": 35000,
     "notes": "Slower per hour, but it trains Slayer at the same time and pays for itself in drops",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Slayer",
-    "gear": [
-      "Slayer helmet (i)",
-      "Weapon: whatever the task wants",
-      "Amulet of fury",
-      "Dragon defender",
-      "Barrows gloves",
-      "Dragon boots"
-    ],
-    "supplies": [
-      "Enchanted gem",
-      "Sharks or monkfish",
-      "Prayer potions",
-      "Super combat potion",
-      "Ring of dueling"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Slayer"
   },
   {
     "skill": "STRENGTH",
@@ -1253,19 +1008,7 @@
     "name": "Sulphur naguas (Neypotzli)",
     "xpPerHour": 75000,
     "notes": "Requires 48 Slayer; restores prayer and the drops are worth keeping",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
-    "gear": [
-      "Slayer helmet (i)",
-      "Weapon: your best melee weapon",
-      "Amulet of torture or fury",
-      "Dragon defender",
-      "Barrows gloves"
-    ],
-    "supplies": [
-      "Prayer potions - the drops top you back up",
-      "Sharks",
-      "Stamina potion"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training"
   },
   {
     "skill": "STRENGTH",
@@ -1274,16 +1017,7 @@
     "name": "Nightmare Zone",
     "xpPerHour": 60000,
     "notes": "The most AFK method in the game — minutes between clicks",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Nightmare_Zone",
-    "gear": [
-      "Dharok's helm, platebody, platelegs and greataxe",
-      "Amulet of strength"
-    ],
-    "supplies": [
-      "Absorption (4)",
-      "Overload (4)",
-      "Dwarven rock cake"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Nightmare_Zone"
   },
   {
     "skill": "STRENGTH",
@@ -1292,23 +1026,7 @@
     "name": "Maniacal monkeys (Ape Atoll)",
     "xpPerHour": 200000,
     "notes": "Requires Monkey Madness II; prayer potion drops sustain Piety",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
-    "gear": [
-      "Weapon: scythe of vitur, soulreaper axe or abyssal whip",
-      "Head: Neitiznot faceguard or helm of neitiznot",
-      "Body: bandos chestplate or fighter torso",
-      "Legs: bandos tassets",
-      "Amulet of torture or amulet of fury",
-      "Barrows gloves",
-      "Primordial boots or dragon boots"
-    ],
-    "supplies": [
-      "Prayer potions - the monkeys drop more",
-      "Saradomin brew or sharks",
-      "Super combat potion",
-      "Ninja monkey greegree",
-      "Royal seed pod"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training"
   },
   {
     "skill": "DEFENCE",
@@ -1317,17 +1035,7 @@
     "name": "Low-level monsters (chickens, cows, Al Kharid warriors)",
     "xpPerHour": 12000,
     "notes": "Quests skip most of this bracket",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
-    "gear": [
-      "Weapon: the best scimitar you can wield",
-      "Amulet of strength",
-      "Iron platebody or steel platebody",
-      "Iron platelegs or steel platelegs"
-    ],
-    "supplies": [
-      "Trout or shrimps",
-      "Varrock teleport"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training"
   },
   {
     "skill": "DEFENCE",
@@ -1336,19 +1044,7 @@
     "name": "Sand or ammonite crabs",
     "xpPerHour": 30000,
     "notes": "Fully AFK — the default when you want to do something else at the same time",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
-    "gear": [
-      "Weapon: abyssal whip or the best scimitar you can wield",
-      "Amulet of fury or amulet of strength",
-      "Fighter torso or rune platebody",
-      "Dragon defender",
-      "Barrows gloves"
-    ],
-    "supplies": [
-      "Super combat potion",
-      "Sharks - for a bad streak",
-      "Digsite pendant"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training"
   },
   {
     "skill": "DEFENCE",
@@ -1357,15 +1053,7 @@
     "name": "Gemstone crab (Tlati Rainforest)",
     "xpPerHour": 50000,
     "notes": "Infinite health and low accuracy, so no food is needed",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
-    "gear": [
-      "Weapon: the best scimitar or whip you can wield",
-      "Amulet of strength",
-      "Fighter torso or rune platebody"
-    ],
-    "supplies": [
-      "No food needed: the crab barely hits"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training"
   },
   {
     "skill": "DEFENCE",
@@ -1374,22 +1062,7 @@
     "name": "Slayer tasks",
     "xpPerHour": 35000,
     "notes": "Slower per hour, but it trains Slayer at the same time and pays for itself in drops",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Slayer",
-    "gear": [
-      "Slayer helmet (i)",
-      "Weapon: whatever the task wants",
-      "Amulet of fury",
-      "Dragon defender",
-      "Barrows gloves",
-      "Dragon boots"
-    ],
-    "supplies": [
-      "Enchanted gem",
-      "Sharks or monkfish",
-      "Prayer potions",
-      "Super combat potion",
-      "Ring of dueling"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Slayer"
   },
   {
     "skill": "DEFENCE",
@@ -1398,19 +1071,7 @@
     "name": "Sulphur naguas (Neypotzli)",
     "xpPerHour": 75000,
     "notes": "Requires 48 Slayer; restores prayer and the drops are worth keeping",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
-    "gear": [
-      "Slayer helmet (i)",
-      "Weapon: your best melee weapon",
-      "Amulet of torture or fury",
-      "Dragon defender",
-      "Barrows gloves"
-    ],
-    "supplies": [
-      "Prayer potions - the drops top you back up",
-      "Sharks",
-      "Stamina potion"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training"
   },
   {
     "skill": "DEFENCE",
@@ -1419,16 +1080,7 @@
     "name": "Nightmare Zone",
     "xpPerHour": 60000,
     "notes": "The most AFK method in the game — minutes between clicks",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Nightmare_Zone",
-    "gear": [
-      "Dharok's helm, platebody, platelegs and greataxe",
-      "Amulet of strength"
-    ],
-    "supplies": [
-      "Absorption (4)",
-      "Overload (4)",
-      "Dwarven rock cake"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Nightmare_Zone"
   },
   {
     "skill": "DEFENCE",
@@ -1437,23 +1089,7 @@
     "name": "Maniacal monkeys (Ape Atoll)",
     "xpPerHour": 200000,
     "notes": "Requires Monkey Madness II; prayer potion drops sustain Piety",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training",
-    "gear": [
-      "Weapon: scythe of vitur, soulreaper axe or abyssal whip",
-      "Head: Neitiznot faceguard or helm of neitiznot",
-      "Body: bandos chestplate or fighter torso",
-      "Legs: bandos tassets",
-      "Amulet of torture or amulet of fury",
-      "Barrows gloves",
-      "Primordial boots or dragon boots"
-    ],
-    "supplies": [
-      "Prayer potions - the monkeys drop more",
-      "Saradomin brew or sharks",
-      "Super combat potion",
-      "Ninja monkey greegree",
-      "Royal seed pod"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pay-to-play_melee_training"
   },
   {
     "skill": "HITPOINTS",
@@ -1471,12 +1107,7 @@
     "name": "Burying bones / Ectofuntus",
     "xpPerHour": 25000,
     "notes": "Quests cover most of this bracket faster than burying does",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Prayer_training",
-    "supplies": [
-      "Big bones or dragon bones",
-      "Bucket of slime",
-      "Pot of bonemeal"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Prayer_training"
   },
   {
     "skill": "PRAYER",
@@ -1486,10 +1117,11 @@
     "xpPerHour": 643000,
     "notes": "Needs 75 Construction and your own or a friend's altar; the standard safe method",
     "wikiUrl": "https://oldschool.runescape.wiki/w/Gilded_altar",
-    "supplies": [
-      "Dragon bones",
-      "Marrentill",
-      "Ring of dueling"
+    "xpPerAction": 252,
+    "consumes": [
+      {
+        "item": "Dragon bones"
+      }
     ]
   },
   {
@@ -1500,9 +1132,11 @@
     "xpPerHour": 670000,
     "notes": "Slightly cheaper than a gilded altar, at the cost of preparing the shards first",
     "wikiUrl": "https://oldschool.runescape.wiki/w/Prayer_training",
-    "supplies": [
-      "Blessed bone shards",
-      "Ring of dueling"
+    "xpPerAction": 5,
+    "consumes": [
+      {
+        "item": "Blessed bone shards"
+      }
     ]
   },
   {
@@ -1513,12 +1147,7 @@
     "xpPerHour": 500000,
     "notes": "Half the bone cost, from a 50% save chance. Bring one inventory at a time and expect to die.",
     "wikiUrl": "https://oldschool.runescape.wiki/w/Chaos_Temple",
-    "risk": "PVP",
-    "supplies": [
-      "Dragon bones",
-      "Burning amulet",
-      "Nothing you are not willing to lose"
-    ]
+    "risk": "PVP"
   },
   {
     "skill": "PRAYER",
@@ -1528,10 +1157,11 @@
     "xpPerHour": 1340000,
     "notes": "The fastest Prayer in the game and the most expensive by a wide margin",
     "wikiUrl": "https://oldschool.runescape.wiki/w/Gilded_altar",
-    "supplies": [
-      "Superior dragon bones",
-      "Marrentill",
-      "Ring of dueling"
+    "xpPerAction": 525,
+    "consumes": [
+      {
+        "item": "Superior dragon bones"
+      }
     ]
   },
   {
@@ -1621,25 +1251,44 @@
     "name": "Battlestaves (celastrus bark)",
     "xpPerHour": 110000,
     "notes": "Fastest Fletching for most of the game; the bark comes from your own farming patch",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Fletching_training"
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fletching_training",
+    "xpPerAction": 80,
+    "consumes": [
+      {
+        "item": "Celastrus bark"
+      }
+    ]
   },
   {
     "skill": "FLETCHING",
-    "minLevel": 50,
+    "minLevel": 70,
     "maxLevel": 85,
     "name": "Yew longbows (u)",
     "xpPerHour": 75000,
     "notes": "Cheaper than battlestaves and can turn a profit strung",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Fletching_training"
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fletching_training",
+    "xpPerAction": 75,
+    "consumes": [
+      {
+        "item": "Yew logs"
+      }
+    ]
   },
   {
     "skill": "FLETCHING",
-    "minLevel": 90,
+    "minLevel": 92,
     "maxLevel": 99,
     "name": "Redwood shields",
     "xpPerHour": 168000,
     "notes": "Fastest late-game option",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Fletching_training"
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fletching_training",
+    "xpPerAction": 216,
+    "consumes": [
+      {
+        "item": "Redwood logs",
+        "each": 2
+      }
+    ]
   },
   {
     "skill": "FIREMAKING",
@@ -1665,7 +1314,8 @@
     "name": "Wintertodt",
     "xpPerHour": 161000,
     "notes": "Pays in supply crates and pyromancer pieces and gives passive Woodcutting xp; ~320k by level 99",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Wintertodt"
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Wintertodt",
+    "activity": "minigame_wintertodt"
   },
   {
     "skill": "FIREMAKING",
@@ -1761,22 +1411,7 @@
     "name": "Tasks from your assigned Slayer master",
     "xpPerHour": null,
     "notes": "Not an hourly grind. Better masters (Nieve, Duradel) unlock better tasks and more points.",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Slayer",
-    "gear": [
-      "Slayer helmet (i)",
-      "Weapon: whatever the task wants",
-      "Amulet of fury",
-      "Dragon defender",
-      "Barrows gloves",
-      "Dragon boots"
-    ],
-    "supplies": [
-      "Enchanted gem",
-      "Sharks or monkfish",
-      "Prayer potions",
-      "Super combat potion",
-      "Ring of dueling"
-    ]
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Slayer"
   },
   {
     "skill": "RUNECRAFT",
@@ -1829,7 +1464,8 @@
     "name": "Guardians of the Rift",
     "xpPerHour": 30000,
     "notes": "Passive Mining and Crafting xp, plus the Raiments of the Eye and the colossal pouch",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Guardians_of_the_Rift"
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Guardians_of_the_Rift",
+    "activity": "minigame_guardians_of_the_rift"
   },
   {
     "skill": "RUNECRAFT",

@@ -28,8 +28,13 @@ and dangling requirements are reported rather than silently dropped.
 the gear and supplies for it, rendered as item icons rather than a list of
 names - and a goal that is only a *reason* to go somewhere inherits that
 somewhere's kit. Planning "Pet snakeling" gives you Zulrah's setup; planning an
-Ancestral robe top gives you the Chambers of Xeric's; planning 99 Attack gives
-you the inventory for maniacal monkeys.
+Ancestral robe top gives you the Chambers of Xeric's; planning 99 Firemaking
+gives you Wintertodt's warm clothing.
+
+**And how much of it to buy.** Where a method's xp comes in countable actions,
+the card does the division: 99 Prayer from 43 at a gilded altar is not just
+"9 hours", it is **23,423 superior dragon bones**. That is the arithmetic people
+leave the client to do in a wiki tab.
 
 **It defers to plugins that do a job better.** Where Quest Helper is the right
 tool for a quest step, the panel says so, and opens its panel for you.
@@ -43,6 +48,13 @@ tool for a quest step, the panel says so, and opens its panel for you.
 | Show PvM suggestions | on | Include bosses and PvM |
 | Show collection log suggestions | on | Include collection log slots |
 | Prefer tick-manipulation methods | off | Plan with tick-manipulation training methods where they exist, falling back to normal ones. Exclusive, not additive, and overridable per lookup in the panel. |
+
+Methods also carry what an xp/hr figure cannot say: `Wilderness - PvP risk`,
+`Tick manipulation`, and - where it has been assessed - `Constant input` or
+`Nearly AFK`. Bloodwood trees are the fastest Woodcutting that is not tick
+manipulation *and* a two-tick cycle across three trees; ironwood is one tree
+every four minutes at half the rate. The panel says which is which instead of
+ranking them by xp and leaving you to find out.
 
 ## Installing
 
