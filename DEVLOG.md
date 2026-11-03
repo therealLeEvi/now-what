@@ -672,6 +672,41 @@ prefix, in that order, because a loose match that beats an exact one opens the
 wrong panel — is a pure function in `NavButtonLookup` with its own tests,
 which is the same split `PluginLookup` got after its bug.
 
+## Still to do before the hub PR
+
+Everything mechanical is done and committed. What is left needs a person:
+
+1. **Run it in a real client.** Nothing in this repository has ever been loaded
+   by RuneLite. Every check so far is an offline render (`paneltext`,
+   `panelshot`), which catches wrong text and broken layout and cannot catch a
+   plugin that fails to load, a nav button that never appears, or a varbit that
+   reads differently in a live session. `./gradlew run` side-loads it. This is
+   the highest-value item on the list by a distance.
+2. **Take a screenshot** once it is running, for the README. An offline render
+   is the wrong thing to publish: the item icons come from the client's
+   `ItemManager`, so they are missing outside a client, and the picture would
+   undersell the panel while looking like a photograph of it.
+3. **Create the public GitHub repository and push.** The repository must be
+   public for the hub to build it.
+4. **Ask the OSRS Wiki Discord** (Bucket channel, contact named on
+   `RuneScape:Bucket`) to confirm the attribution approach and how they would
+   like it phrased. The licensing note further down this file set this as a
+   pre-submission step and it has not been done. Costs nothing, removes the
+   ambiguity.
+5. **Open the hub PR**: fork `runelite/plugin-hub`, add a file under `plugins/`
+   containing `repository=` (the HTTPS clone URL) and `commit=` (the full
+   40-character hash), push to the fork, open the PR against master, then watch
+   both CI checks. Each later push needs `commit=` updated.
+
+One thing a reviewer may stop on, and it is better to have an answer ready than
+to be surprised: the Quest Helper handoff reaches into the client's own fields
+by reflection to find another plugin's sidebar button. The hub's README does not
+forbid reflection, but it does say that if compliance is hard for them to verify
+they will not merge. Every part of it is wrapped, so a RuneLite release that
+renames a field costs that one feature and nothing else, and the line falls back
+to the plain sentence it used to be. If a reviewer objects, dropping back to the
+non-clickable sentence is a small, clean retreat.
+
 ## The sources are pure ASCII, because the hub replaces build.gradle
 
 The plugin hub builds a submission in one of two modes. `build=gradle` uses
