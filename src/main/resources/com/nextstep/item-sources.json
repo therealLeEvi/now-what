@@ -1322,5 +1322,95 @@
       }
     ],
     "wikiUrl": "https://oldschool.runescape.wiki/w/Trident_of_the_swamp"
+  },
+  {
+    "id": "AHRIMS_ARMOUR_SET",
+    "preparationFrom": "pvm_barrows",
+    "displayName": "Ahrim's armour set",
+    "gameItemId": 12881,
+    "type": "MONSTER_DROP",
+    "detail": "the Barrows chest, killing all six brothers every trip",
+    "estimatedKc": 728,
+    "attemptUnit": "chests",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Priest in Peril"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ahrim's_armour_set"
+  },
+  {
+    "id": "DHAROKS_ARMOUR_SET",
+    "preparationFrom": "pvm_barrows",
+    "displayName": "Dharok's armour set",
+    "gameItemId": 12877,
+    "type": "MONSTER_DROP",
+    "detail": "the Barrows chest, killing all six brothers every trip",
+    "estimatedKc": 728,
+    "attemptUnit": "chests",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Priest in Peril"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dharok's_armour_set"
+  },
+  {
+    "id": "GUTHANS_ARMOUR_SET",
+    "preparationFrom": "pvm_barrows",
+    "displayName": "Guthan's armour set",
+    "gameItemId": 12873,
+    "type": "MONSTER_DROP",
+    "detail": "the Barrows chest, killing all six brothers every trip",
+    "estimatedKc": 728,
+    "attemptUnit": "chests",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Priest in Peril"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Guthan's_armour_set"
+  },
+  {
+    "id": "KARILS_ARMOUR_SET",
+    "preparationFrom": "pvm_barrows",
+    "displayName": "Karil's armour set",
+    "gameItemId": 12883,
+    "type": "MONSTER_DROP",
+    "detail": "the Barrows chest, killing all six brothers every trip",
+    "estimatedKc": 728,
+    "attemptUnit": "chests",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Priest in Peril"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Karil's_armour_set"
+  },
+  {
+    "id": "TORAGS_ARMOUR_SET",
+    "preparationFrom": "pvm_barrows",
+    "displayName": "Torag's armour set",
+    "gameItemId": 12879,
+    "type": "MONSTER_DROP",
+    "detail": "the Barrows chest, killing all six brothers every trip",
+    "estimatedKc": 728,
+    "attemptUnit": "chests",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Priest in Peril"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Torag's_armour_set"
+  },
+  {
+    "id": "VERACS_ARMOUR_SET",
+    "preparationFrom": "pvm_barrows",
+    "displayName": "Verac's armour set",
+    "gameItemId": 12875,
+    "type": "MONSTER_DROP",
+    "detail": "the Barrows chest, killing all six brothers every trip",
+    "estimatedKc": 728,
+    "attemptUnit": "chests",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Priest in Peril"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Verac's_armour_set"
   }
 ]

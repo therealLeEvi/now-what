@@ -647,8 +647,9 @@ public class PathPlanner
 			case MONSTER_DROP:
 			{
 				String kcNote = source.getEstimatedKc() != null
-					? ("~" + String.format(java.util.Locale.ROOT, "%,d", source.getEstimatedKc() * quantity) + " attempts for " + quantity
-					+ " drop(s) \u2014 rough average, not a guaranteed rate")
+					? ("~" + String.format(java.util.Locale.ROOT, "%,d", source.getEstimatedKc() * quantity)
+					+ " " + source.getAttemptUnit() + " for " + quantity
+					+ (quantity == 1 ? " drop" : " drops") + " \u2014 rough average, not a guaranteed rate")
 					: "Drop rate unknown \u2014 check the wiki's droptable page";
 				steps.add(new PathStep(PathStep.Type.KILL_BOSS,
 					source.getDisplayName() + " from " + source.getDetail(),

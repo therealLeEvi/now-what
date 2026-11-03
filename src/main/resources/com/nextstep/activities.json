@@ -9385,22 +9385,6 @@
     ]
   },
   {
-    "id": "collectionlog_barrows_set",
-    "name": "A full Barrows set",
-    "category": "COLLECTION_LOG",
-    "description": "Collection log slot from Barrows",
-    "reasonTemplate": "You can access this drop source now",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/A_full_Barrows_set",
-    "preparationFrom": "pvm_barrows",
-    "priority": 3,
-    "requirements": [
-      {
-        "type": "QUEST_COMPLETE",
-        "value": "Priest in Peril"
-      }
-    ]
-  },
-  {
     "id": "collectionlog_abyssal_whip",
     "name": "Abyssal whip",
     "category": "COLLECTION_LOG",

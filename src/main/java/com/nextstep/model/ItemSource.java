@@ -55,6 +55,13 @@ public class ItemSource
 	/** MONSTER_DROP only: rough expected kills for one drop. Always an estimate. */
 	private Integer estimatedKc;
 	/**
+	 * MONSTER_DROP only: what one of those attempts is called, when "attempts"
+	 * is the wrong word. Barrows is counted in chests, not kills - one chest is
+	 * six brothers - so "~728 attempts" left the player guessing what an
+	 * attempt was. Null means "attempts".
+	 */
+	private String attemptUnit;
+	/**
 	 * The activity whose gear and supplies answer "so what do I take?" for this
 	 * item - the id of the fight it drops from.
 	 * <p>
@@ -147,6 +154,12 @@ public class ItemSource
 	public Integer getEstimatedKc()
 	{
 		return estimatedKc;
+	}
+
+	/** What one attempt is called in the plan: "attempts" unless the data says otherwise. */
+	public String getAttemptUnit()
+	{
+		return attemptUnit == null ? "attempts" : attemptUnit;
 	}
 
 	public Requirement getSkillRequirement()
