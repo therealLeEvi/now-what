@@ -52,5 +52,12 @@ public class CombatAchievementTracker
 				state.addCompletedCombatAchievementTier("CA_" + TIERS[i]);
 			}
 		}
+
+		// The running total every tier threshold is measured against. Read
+		// alongside the tier flags so "how far am I from Master" can be
+		// answered with a number rather than a wiki link. If the panel ever
+		// shows a total that disagrees with the in-game interface, check
+		// this varbit in the Var Inspector first.
+		state.setCombatAchievementPoints(client.getVarbitValue(VarbitID.CA_POINTS));
 	}
 }

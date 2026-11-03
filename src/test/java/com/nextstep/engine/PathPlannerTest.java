@@ -486,4 +486,58 @@ public class PathPlannerTest
 		assertTrue("expected a warning naming the missing activity, got " + path.getWarnings(),
 			said);
 	}
+
+	/**
+	 * Planning a Combat Achievement tier used to stop at "you meet every
+	 * requirement", because the only requirement was a combat level. A tier is
+	 * a points total, so the plan has to say how many points are left.
+	 */
+	@Test
+	public void combatAchievementTierPlansThePointsStillMissing()
+	{
+		Activity elite = new Activity("CA_ELITE", "Combat Achievements: Elite tier",
+			Activity.Category.COMBAT_ACHIEVEMENT, Collections.emptyList());
+		Activity master = new Activity("CA_MASTER", "Combat Achievements: Master tier",
+			Activity.Category.COMBAT_ACHIEVEMENT, Arrays.asList(
+				new Requirement(Requirement.Type.COMBAT_LEVEL, "COMBAT_LEVEL", 110),
+				new Requirement(Requirement.Type.COMBAT_ACHIEVEMENT_TIER, "CA_ELITE", 0)));
+		PathPlanner planner = new PathPlanner(Arrays.asList(elite, master),
+			new PrerequisiteResolver(Arrays.asList(elite, master)),
+			TrainingMethodDatabase.of(Collections.emptyList()),
+			ItemSourceDatabase.of(Collections.emptyList()));
+
+		PlayerState state = new PlayerState();
+		state.setCombatLevel(126);
+		state.addCompletedCombatAchievementTier("CA_ELITE");
+		state.setCombatAchievementPoints(1500);
+
+		Path path = planner.plan(Goal.activity("CA_MASTER", "Master", false), state);
+
+		assertTrue("a tier with points still to earn is not 'already met'",
+			!path.isRequirementsAlreadyMet());
+		PathStep points = path.getSteps().get(0);
+		assertEquals("Earn 465 more Combat Achievement points", points.getTitle());
+		assertTrue(points.getDetail(), points.getDetail().contains("93 Master tasks"));
+		assertEquals("https://oldschool.runescape.wiki/w/Combat_Achievements/Master", points.getWikiUrl());
+	}
+
+	/** Master needs Elite first, and the plan names Elite as a step rather than "CA_ELITE". */
+	@Test
+	public void combatAchievementTierPlansTheTierBeforeIt()
+	{
+		Activity elite = new Activity("CA_ELITE", "Combat Achievements: Elite tier",
+			Activity.Category.COMBAT_ACHIEVEMENT, Collections.emptyList());
+		Activity master = new Activity("CA_MASTER", "Combat Achievements: Master tier",
+			Activity.Category.COMBAT_ACHIEVEMENT, Arrays.asList(
+				new Requirement(Requirement.Type.COMBAT_ACHIEVEMENT_TIER, "CA_ELITE", 0)));
+		PathPlanner planner = new PathPlanner(Arrays.asList(elite, master),
+			new PrerequisiteResolver(Arrays.asList(elite, master)),
+			TrainingMethodDatabase.of(Collections.emptyList()),
+			ItemSourceDatabase.of(Collections.emptyList()));
+
+		Path path = planner.plan(Goal.activity("CA_MASTER", "Master", false), new PlayerState());
+
+		assertEquals("Combat Achievements: Elite tier", path.getSteps().get(0).getTitle());
+		assertTrue(path.getWarnings().toString(), path.getWarnings().isEmpty());
+	}
 }

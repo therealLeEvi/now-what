@@ -9204,8 +9204,8 @@
     "name": "Combat Achievements: Easy tier",
     "category": "COMBAT_ACHIEVEMENT",
     "description": "Entry-level tasks; mostly low-level bosses and basic mechanics.",
-    "reasonTemplate": "Your combat level supports this tier",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Combat_Achievements",
+    "reasonTemplate": "Your combat level suits this tier, and the one before it is done",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Combat_Achievements/Easy",
     "priority": 5,
     "requirements": [
       {
@@ -9220,14 +9220,18 @@
     "name": "Combat Achievements: Medium tier",
     "category": "COMBAT_ACHIEVEMENT",
     "description": "Requires comfortable mid-level bossing.",
-    "reasonTemplate": "Your combat level supports this tier",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Combat_Achievements",
+    "reasonTemplate": "Your combat level suits this tier, and the one before it is done",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Combat_Achievements/Medium",
     "priority": 5,
     "requirements": [
       {
         "type": "COMBAT_LEVEL",
         "value": "COMBAT_LEVEL",
         "threshold": 70
+      },
+      {
+        "type": "COMBAT_ACHIEVEMENT_TIER",
+        "value": "CA_EASY"
       }
     ]
   },
@@ -9236,14 +9240,18 @@
     "name": "Combat Achievements: Hard tier",
     "category": "COMBAT_ACHIEVEMENT",
     "description": "Expects solid gear and prayer switching.",
-    "reasonTemplate": "Your combat level supports this tier",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Combat_Achievements",
+    "reasonTemplate": "Your combat level suits this tier, and the one before it is done",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Combat_Achievements/Hard",
     "priority": 5,
     "requirements": [
       {
         "type": "COMBAT_LEVEL",
         "value": "COMBAT_LEVEL",
         "threshold": 90
+      },
+      {
+        "type": "COMBAT_ACHIEVEMENT_TIER",
+        "value": "CA_MEDIUM"
       }
     ]
   },
@@ -9252,14 +9260,18 @@
     "name": "Combat Achievements: Elite tier",
     "category": "COMBAT_ACHIEVEMENT",
     "description": "High-end bossing, including raids.",
-    "reasonTemplate": "Your combat level supports this tier",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Combat_Achievements",
+    "reasonTemplate": "Your combat level suits this tier, and the one before it is done",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Combat_Achievements/Elite",
     "priority": 5,
     "requirements": [
       {
         "type": "COMBAT_LEVEL",
         "value": "COMBAT_LEVEL",
         "threshold": 100
+      },
+      {
+        "type": "COMBAT_ACHIEVEMENT_TIER",
+        "value": "CA_HARD"
       }
     ]
   },
@@ -9268,14 +9280,18 @@
     "name": "Combat Achievements: Master tier",
     "category": "COMBAT_ACHIEVEMENT",
     "description": "Endgame content with tight mechanical requirements.",
-    "reasonTemplate": "Your combat level supports this tier",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Combat_Achievements",
+    "reasonTemplate": "Your combat level suits this tier, and the one before it is done",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Combat_Achievements/Master",
     "priority": 5,
     "requirements": [
       {
         "type": "COMBAT_LEVEL",
         "value": "COMBAT_LEVEL",
         "threshold": 110
+      },
+      {
+        "type": "COMBAT_ACHIEVEMENT_TIER",
+        "value": "CA_ELITE"
       }
     ]
   },
@@ -9284,14 +9300,18 @@
     "name": "Combat Achievements: Grandmaster tier",
     "category": "COMBAT_ACHIEVEMENT",
     "description": "The hardest tasks in the game.",
-    "reasonTemplate": "Your combat level supports this tier",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Combat_Achievements",
+    "reasonTemplate": "Your combat level suits this tier, and the one before it is done",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Combat_Achievements/Grandmaster",
     "priority": 5,
     "requirements": [
       {
         "type": "COMBAT_LEVEL",
         "value": "COMBAT_LEVEL",
         "threshold": 120
+      },
+      {
+        "type": "COMBAT_ACHIEVEMENT_TIER",
+        "value": "CA_MASTER"
       }
     ]
   },

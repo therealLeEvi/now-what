@@ -34,6 +34,7 @@ public class PrerequisiteResolver
 {
 	private final Map<String, Activity> questsByName = new HashMap<>();
 	private final Map<String, Activity> diaryTiersById = new HashMap<>();
+	private final Map<String, Activity> combatAchievementTiersById = new HashMap<>();
 
 	public PrerequisiteResolver(List<Activity> allActivities)
 	{
@@ -46,6 +47,10 @@ public class PrerequisiteResolver
 			else if (activity.getCategory() == Activity.Category.DIARY)
 			{
 				diaryTiersById.put(activity.getId().toUpperCase(), activity);
+			}
+			else if (activity.getCategory() == Activity.Category.COMBAT_ACHIEVEMENT)
+			{
+				combatAchievementTiersById.put(activity.getId().toUpperCase(), activity);
 			}
 		}
 	}
@@ -126,9 +131,25 @@ public class PrerequisiteResolver
 					}
 					break;
 				}
+				case COMBAT_ACHIEVEMENT_TIER:
+				{
+					// A tier is itself an activity, the same way a diary tier is,
+					// so "Master needs Elite" plans Elite as a step rather than
+					// printing the raw "CA_ELITE" key as a shortfall.
+					Activity tierPrereq = combatAchievementTiersById.get(req.getValue().toUpperCase());
+					if (tierPrereq != null)
+					{
+						walk(tierPrereq, state, orderedSteps, standalone, unresolved, visiting, visited, false);
+					}
+					else
+					{
+						unresolved.add("Combat Achievement tier: " + req.getValue() + " (not in activity database)");
+					}
+					break;
+				}
 				default:
 					// SKILL_LEVEL, BOSS_KC, QUEST_POINTS, COMBAT_LEVEL,
-					// COMBAT_ACHIEVEMENT_TIER, ANY_OF: nothing further to chain
+					// ANY_OF: nothing further to chain
 					// to here - PathPlanner expands each of these appropriately
 					// (training steps, or a presented choice for ANY_OF).
 					standalone.add(req);

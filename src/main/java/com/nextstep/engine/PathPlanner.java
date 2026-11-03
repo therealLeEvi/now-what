@@ -3,6 +3,7 @@ package com.nextstep.engine;
 import com.nextstep.data.ItemSourceDatabase;
 import com.nextstep.data.TrainingMethodDatabase;
 import com.nextstep.model.Activity;
+import com.nextstep.model.CombatAchievementTier;
 import com.nextstep.model.Goal;
 import com.nextstep.model.ItemSource;
 import com.nextstep.model.Path;
@@ -138,6 +139,16 @@ public class PathPlanner
 						expandStandaloneRequirement(req, state, steps, warnings, goal.isAllowTickManipulation());
 					}
 					warnings.addAll(chain.getUnresolvedReferences());
+					// A Combat Achievement tier is a points total, not a set of
+					// requirements, so "you meet every requirement" was true and
+					// useless: the combat level was the only thing it checked.
+					// What stands between the player and the tier is the points,
+					// so the points become the step.
+					CombatAchievementTier tier = CombatAchievementTier.fromKey(target.getId());
+					if (tier != null)
+					{
+						steps.add(combatAchievementPointsStep(tier, state.getCombatAchievementPoints()));
+					}
 					// Nothing was produced by the chain walk, so every requirement is
 					// already satisfied - the activity just isn't the kind of thing
 					// that gets marked "done" (a boss, a minigame, an unlock).
@@ -467,6 +478,62 @@ public class PathPlanner
 		}
 
 		steps.add(new PathStep(PathStep.Type.INFO, describeRequirement(req), req.getHint(), null));
+	}
+
+	/**
+	 * How many Combat Achievement points stand between the player and a tier,
+	 * and what that means in tasks.
+	 * <p>
+	 * The task count is a floor, not a forecast: it assumes every point comes
+	 * from the tier's own tasks. Lower-tier tasks still count toward the total,
+	 * and they are usually the quicker points, which the detail says.
+	 */
+	static PathStep combatAchievementPointsStep(CombatAchievementTier tier, int points)
+	{
+		String where = "Find them in the Character Summary tab, then Combat Achievements, "
+			+ "filtered to " + tier.getLabel() + " and Incomplete.";
+		if (points < 0)
+		{
+			return new PathStep(PathStep.Type.DO_ACTIVITY,
+				"Reach " + format(tier.getPointsToUnlock()) + " Combat Achievement points",
+				tier.getLabel() + " tasks are worth " + tier.getPointsPerTask() + " points each, and "
+					+ "tasks from any easier tier still count toward the total. "
+					+ "Log in for your current total. " + where,
+				tier.getTaskListUrl());
+		}
+
+		int missing = tier.getPointsToUnlock() - points;
+		if (missing <= 0)
+		{
+			return new PathStep(PathStep.Type.DO_ACTIVITY,
+				"Claim the " + tier.getLabel() + " tier rewards",
+				"You have " + format(points) + " points, past the " + format(tier.getPointsToUnlock())
+					+ " this tier needs. Speak to Ghommal at the Warriors' Guild for the rewards.",
+				"https://oldschool.runescape.wiki/w/Combat_Achievements#Rewards");
+		}
+
+		int tasks = (missing + tier.getPointsPerTask() - 1) / tier.getPointsPerTask();
+		return new PathStep(PathStep.Type.DO_ACTIVITY,
+			"Earn " + format(missing) + " more Combat Achievement points",
+			"You have " + format(points) + " of the " + format(tier.getPointsToUnlock()) + " needed. "
+				+ "That is " + tasks + " " + tier.getLabel() + " task" + (tasks == 1 ? "" : "s")
+				+ " at " + tier.getPointsPerTask() + " points each (the tier has " + tier.getTaskCount()
+				+ "), or more tasks from easier tiers you skipped, which are often the faster points. "
+				+ where,
+			tier.getTaskListUrl());
+	}
+
+	/** True when {@code b} already covers {@code a}: same kind, same skill, at least as high. */
+	private static boolean sameRequirement(Requirement a, Requirement b)
+	{
+		return b != null && a.getType() == b.getType()
+			&& java.util.Objects.equals(a.getValue(), b.getValue())
+			&& b.getThreshold() >= a.getThreshold();
+	}
+
+	private static String format(int n)
+	{
+		return String.format(java.util.Locale.ROOT, "%,d", n);
 	}
 
 	/** Shortfall human-readable label for a single requirement, used both standalone and inside ANY_OF choices. */

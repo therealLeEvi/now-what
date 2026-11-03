@@ -22,6 +22,8 @@ public class PlayerState
 	private final Set<String> completedDiaryTiers = new HashSet<>();
 	private final Map<String, Integer> bossKillCounts = new HashMap<>();
 	private final Set<String> completedCombatAchievementTiers = new HashSet<>();
+	/** Running Combat Achievement points total, or -1 while it has not been read. */
+	private int combatAchievementPoints = -1;
 	/** Collection log slots the player owns, by item name. Only reliable once the log has been opened once. */
 	private final Set<String> collectionLogUnlocks = new HashSet<>();
 	private int collectionLogSlotsTotal;
@@ -129,6 +131,17 @@ public class PlayerState
 	public boolean isCombatAchievementTierComplete(String tier)
 	{
 		return completedCombatAchievementTiers.contains(tier.toUpperCase());
+	}
+
+	public void setCombatAchievementPoints(int points)
+	{
+		combatAchievementPoints = points;
+	}
+
+	/** -1 when unknown, which is not the same as having none. */
+	public int getCombatAchievementPoints()
+	{
+		return combatAchievementPoints;
 	}
 
 	public void addCollectionLogUnlock(String itemName)
