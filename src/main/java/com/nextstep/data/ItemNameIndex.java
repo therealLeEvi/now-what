@@ -40,6 +40,15 @@ public final class ItemNameIndex
 	}
 
 	/**
+	 * Every item constant, name and id. Used to check that the ids written into
+	 * item-sources.json point at the items they say they do.
+	 */
+	public static List<ItemTextParser.Candidate> all()
+	{
+		return Collections.unmodifiableList(index());
+	}
+
+	/**
 	 * Every item whose name contains {@code term}, compared without the
 	 * punctuation these names cannot carry.
 	 */

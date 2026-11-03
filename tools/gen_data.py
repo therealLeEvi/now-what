@@ -4,6 +4,7 @@
 # consolidated "Quests/Skill requirements" table. Quest-to-quest prerequisite
 # links are NOT tabulated anywhere fetchable, so those are hand-entered below
 # and are the part most worth reviewing.
+import collections
 import io, json, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from diary_data import DIARY_RAW, REGION_LABELS, DIARY_WIKI_PAGE, EXTRA_ACTIVITIES
@@ -840,6 +841,72 @@ MISC = [
      "Marks of grace from rooftop courses; weight reduction that pays off everywhere."),
 ]
 
+# What to wear and bring to a minigame, and where its strategy page is.
+# Same shape and same purpose as PVM_PREP above; these were living only in the
+# generated file for a while, which meant regenerating deleted them.
+MISC_PREP = {'minigame_barbarian_assault': {'setups': [['Any role',
+                                            ['Weapon: any, the roles barely use one',
+                                             'Penance gloves, once you have earned them']]],
+                                'supplies': ['A few sharks',
+                                             'The horn is handed to you in the lobby'],
+                                'strategyUrl': 'https://oldschool.runescape.wiki/w/Barbarian_Assault/Strategies'},
+ 'minigame_pest_control': {'setups': [['Melee',
+                                       ['Weapon: the best scimitar or whip you can wield',
+                                        'Amulet of strength',
+                                        'Rune platebody and rune platelegs']]],
+                           'supplies': ['Nothing: your health is restored between games'],
+                           'strategyUrl': 'https://oldschool.runescape.wiki/w/Pest_Control/Strategies'},
+ 'minigame_wintertodt': {'setups': [['Warm clothing, four pieces',
+                                     ['Bruma torch',
+                                      'Warm gloves',
+                                      'Fire cape or clue hunter garb',
+                                      'Santa hat or woolly hat']]],
+                         'supplies': ['Knife',
+                                      'Tinderbox',
+                                      'Hammer, for repairing the braziers',
+                                      'Rejuvenation potions are made from the herbs that drop '
+                                      'in'],
+                         'strategyUrl': 'https://oldschool.runescape.wiki/w/Wintertodt'},
+ 'minigame_tempoross': {'setups': [['Nothing worth wearing',
+                                    ["Angler's outfit, for the Fishing bonus"]]],
+                        'supplies': ['Harpoon or dragon harpoon',
+                                     'Rope and a hammer are provided at the docks',
+                                     'A knife, if you want to cook as you go'],
+                        'strategyUrl': 'https://oldschool.runescape.wiki/w/Tempoross'},
+ 'minigame_guardians_of_the_rift': {'setups': [['Runecraft kit',
+                                                ['Full graceful',
+                                                 'Raiments of the eye, once you have the '
+                                                 'set']]],
+                                    'supplies': ['Pickaxe',
+                                                 'Chisel, for the guardian stones',
+                                                 'Stamina potion',
+                                                 'Catalytic talisman or elemental talisman'],
+                                    'strategyUrl': 'https://oldschool.runescape.wiki/w/Guardians_of_the_Rift/Strategies'},
+ 'minigame_fight_caves': {'setups': [['Ranged (the standard way)',
+                                      ['Void ranger helm, void knight top and void knight '
+                                       "robe, or black d'hide",
+                                       "Ava's assembler or Ava's accumulator",
+                                       'Necklace of anguish or amulet of fury',
+                                       'Toxic blowpipe, or rune crossbow with diamond bolts '
+                                       '(e)',
+                                       'Barrows gloves',
+                                       'Pegasian boots or snakeskin boots']]],
+                          'supplies': ['Saradomin brew (4)',
+                                       'Super restore (4)',
+                                       'Cooked karambwan for combo eating',
+                                       'Ranging potion',
+                                       'Prayer potions, if you are not using super restores'],
+                          'strategyUrl': 'https://oldschool.runescape.wiki/w/Fight_Caves/Strategies'},
+ 'unlock_warriors_guild': {'setups': [['Melee, for the animated armour',
+                                       ['Weapon: dragon scimitar or abyssal whip',
+                                        'Amulet of strength',
+                                        'Rune platebody and rune platelegs',
+                                        'Barrows gloves or combat bracelet']]],
+                           'supplies': ['Rune platebody and rune platelegs to animate',
+                                        'Sharks or monkfish',
+                                        'Games necklace'],
+                           'strategyUrl': 'https://oldschool.runescape.wiki/w/Warriors%27_Guild'}}
+
 for mid, name, cat, reqs, desc in MISC:
     out = []
     for t, v, thr in reqs:
@@ -854,11 +921,17 @@ for mid, name, cat, reqs, desc in MISC:
         if thr:
             r["threshold"] = thr
         out.append(r)
-    activities.append({
+    entry = {
         "id": mid, "name": name, "category": cat, "description": desc,
         "reasonTemplate": "Available to you now",
         "wikiUrl": wiki_url(name), "priority": 4, "requirements": out,
-    })
+    }
+    prep = MISC_PREP.get(mid)
+    if prep:
+        entry["setups"] = [{"name": n, "items": its} for n, its in prep["setups"]]
+        entry["supplies"] = prep["supplies"]
+        entry["strategyUrl"] = prep["strategyUrl"]
+    activities.append(entry)
 
 # ---- Achievement Diaries ----
 TIER_ORDER = ["EASY", "MEDIUM", "HARD", "ELITE"]
@@ -922,6 +995,14 @@ COLLECTION = [
     ("collectionlog_dragon_defender", "Dragon defender", "the Warriors' Guild",
      [("COMBINED_SKILL_LEVEL", "ATTACK,STRENGTH", 130)]),
 ]
+# A collection log slot that is really a boss takes that boss's kit, so there
+# is one copy of the answer. Resolved by Activity.preparationFrom at load.
+COLLECTION_PREP = {'collectionlog_vorkath_head': 'pvm_vorkath',
+ 'collectionlog_zulrah_pet': 'pvm_zulrah',
+ 'collectionlog_barrows_set': 'pvm_barrows',
+ 'collectionlog_fire_cape': 'minigame_fight_caves',
+ 'collectionlog_dragon_defender': 'unlock_warriors_guild'}
+
 for cid, name, source, reqs in COLLECTION:
     out = []
     for t, v, thr in reqs:
@@ -929,12 +1010,18 @@ for cid, name, source, reqs in COLLECTION:
         if thr:
             r["threshold"] = thr
         out.append(r)
-    activities.append({
-        "id": cid, "name": name, "category": "COLLECTION_LOG",
-        "description": "Collection log slot from " + source,
-        "reasonTemplate": "You can access this drop source now",
-        "wikiUrl": wiki_url(name), "priority": 3, "requirements": out,
-    })
+    entry = collections.OrderedDict()
+    entry["id"] = cid
+    entry["name"] = name
+    entry["category"] = "COLLECTION_LOG"
+    entry["description"] = "Collection log slot from " + source
+    entry["reasonTemplate"] = "You can access this drop source now"
+    entry["wikiUrl"] = wiki_url(name)
+    if cid in COLLECTION_PREP:
+        entry["preparationFrom"] = COLLECTION_PREP[cid]
+    entry["priority"] = 3
+    entry["requirements"] = out
+    activities.append(entry)
 
 io.open('src/main/resources/com/nextstep/activities.json', 'w', encoding='utf-8', newline='\n').write(
     json.dumps(activities, indent=2, ensure_ascii=False) + "\n")
@@ -991,11 +1078,159 @@ ITEMS = [
     ("RUNE_PLATEBODY", "Rune platebody", 1127, "GE_BUY", "Budget melee body", None, None),
     ("CADAVA_BERRIES", "Cadava berries", 753, "GE_BUY", None, None, None),
     ("JANGERBERRIES", "Jangerberries", 247, "GE_BUY", None, None, None),
+
+    # ---- Second wave. Every id below was read with `./gradlew itemid`, which
+    # prints RuneLite's own ItemID constants, rather than recalled - two ids
+    # typed from memory in the first pass were wrong, and a wrong id shows the
+    # player a picture of something else entirely.
+    ("DRAGON_HUNTER_CROSSBOW", "Dragon hunter crossbow", 21012, "MONSTER_DROP", "Chambers of Xeric", 150, None),
+    ("TWISTED_BUCKLER", "Twisted buckler", 21000, "MONSTER_DROP", "Chambers of Xeric", 250, None),
+    ("DINHS_BULWARK", "Dinh's bulwark", 21015, "MONSTER_DROP", "Chambers of Xeric", 150, None),
+    ("ANCESTRAL_ROBE_BOTTOM", "Ancestral robe bottom", 21024, "MONSTER_DROP", "Chambers of Xeric", 350, None),
+    ("ANCESTRAL_HAT", "Ancestral hat", 21018, "MONSTER_DROP", "Chambers of Xeric", 350, None),
+    ("DEXTEROUS_PRAYER_SCROLL", "Dexterous prayer scroll", 21034, "MONSTER_DROP", "Chambers of Xeric", 75, None),
+    ("ARCANE_PRAYER_SCROLL", "Arcane prayer scroll", 21079, "MONSTER_DROP", "Chambers of Xeric", 75, None),
+    ("GHRAZI_RAPIER", "Ghrazi rapier", 22324, "MONSTER_DROP", "Theatre of Blood", 120, None),
+    ("SANGUINESTI_STAFF", "Sanguinesti staff", 22323, "MONSTER_DROP", "Theatre of Blood", 120, None),
+    ("JUSTICIAR_FACEGUARD", "Justiciar faceguard", 22326, "MONSTER_DROP", "Theatre of Blood", 150, None),
+    ("JUSTICIAR_CHESTGUARD", "Justiciar chestguard", 22327, "MONSTER_DROP", "Theatre of Blood", 150, None),
+    ("JUSTICIAR_LEGGUARDS", "Justiciar legguards", 22328, "MONSTER_DROP", "Theatre of Blood", 150, None),
+    ("OSMUMTENS_FANG", "Osmumten's fang", 26219, "MONSTER_DROP", "Tombs of Amascut", 60, None),
+    ("LIGHTBEARER", "Lightbearer", 25975, "MONSTER_DROP", "Tombs of Amascut", 40, None),
+    ("ELIDINIS_WARD", "Elidinis' ward", 25985, "MONSTER_DROP", "Tombs of Amascut", 150, None),
+    ("MASORI_MASK", "Masori mask", 27226, "MONSTER_DROP", "Tombs of Amascut", 150, None),
+    ("MASORI_BODY", "Masori body", 27229, "MONSTER_DROP", "Tombs of Amascut", 150, None),
+    ("MASORI_CHAPS", "Masori chaps", 27232, "MONSTER_DROP", "Tombs of Amascut", 150, None),
+    ("TUMEKENS_SHADOW", "Tumeken's shadow", 27275, "MONSTER_DROP", "Tombs of Amascut", 350, None),
+    ("ARMADYL_HELMET", "Armadyl helmet", 11826, "MONSTER_DROP", "Kree'arra", 381, None),
+    ("ARMADYL_CHESTPLATE", "Armadyl chestplate", 11828, "MONSTER_DROP", "Kree'arra", 381, None),
+    ("ARMADYL_CHAINSKIRT", "Armadyl chainskirt", 11830, "MONSTER_DROP", "Kree'arra", 381, None),
+    ("BANDOS_BOOTS", "Bandos boots", 11836, "MONSTER_DROP", "General Graardor", 381, None),
+    ("BANDOS_GODSWORD", "Bandos godsword hilt", 11812, "MONSTER_DROP", "General Graardor", 508, None),
+    ("SARADOMIN_SWORD", "Saradomin sword", 11838, "MONSTER_DROP", "Commander Zilyana", 381, None),
+    ("ZAMORAKIAN_SPEAR", "Zamorakian spear", 11824, "MONSTER_DROP", "K'ril Tsutsaroth", 381, None),
+    ("STAFF_OF_THE_DEAD", "Staff of the dead", 11791, "MONSTER_DROP", "K'ril Tsutsaroth", 508, None),
+    ("ZAMORAK_GODSWORD", "Zamorak godsword hilt", 11816, "MONSTER_DROP", "K'ril Tsutsaroth", 508, None),
+    ("TANZANITE_FANG", "Tanzanite fang", 12922, "MONSTER_DROP", "Zulrah", 90, {'type': 'QUEST_COMPLETE', 'value': 'Regicide'}),
+    ("MAGIC_FANG", "Magic fang", 12932, "MONSTER_DROP", "Zulrah", 90, {'type': 'QUEST_COMPLETE', 'value': 'Regicide'}),
+    ("SERPENTINE_VISAGE", "Serpentine visage", 12927, "MONSTER_DROP", "Zulrah", 90, {'type': 'QUEST_COMPLETE', 'value': 'Regicide'}),
+    ("DRACONIC_VISAGE", "Draconic visage", 11286, "MONSTER_DROP", "Vorkath", 5000, {'type': 'QUEST_COMPLETE', 'value': 'Dragon Slayer II'}),
+    ("DRAGONBONE_NECKLACE", "Dragonbone necklace", 22111, "MONSTER_DROP", "Vorkath", 1000, {'type': 'QUEST_COMPLETE', 'value': 'Dragon Slayer II'}),
+    ("PRIMORDIAL_CRYSTAL", "Primordial crystal", 13231, "MONSTER_DROP", "Cerberus", 512, {'type': 'SKILL_LEVEL', 'value': 'SLAYER', 'threshold': 91}),
+    ("PEGASIAN_CRYSTAL", "Pegasian crystal", 13229, "MONSTER_DROP", "Cerberus", 512, {'type': 'SKILL_LEVEL', 'value': 'SLAYER', 'threshold': 91}),
+    ("ETERNAL_CRYSTAL", "Eternal crystal", 13227, "MONSTER_DROP", "Cerberus", 512, {'type': 'SKILL_LEVEL', 'value': 'SLAYER', 'threshold': 91}),
+    ("ABYSSAL_DAGGER", "Abyssal dagger", 13265, "MONSTER_DROP", "the Abyssal Sire", 128, {'type': 'SKILL_LEVEL', 'value': 'SLAYER', 'threshold': 85}),
+    ("HYDRAS_CLAW", "Hydra's claw", 22966, "MONSTER_DROP", "Alchemical Hydra", 1000, {'type': 'SKILL_LEVEL', 'value': 'SLAYER', 'threshold': 95}),
+    ("HYDRA_LEATHER", "Hydra leather", 22983, "MONSTER_DROP", "Alchemical Hydra", 515, {'type': 'SKILL_LEVEL', 'value': 'SLAYER', 'threshold': 95}),
+    ("KRAKEN_TENTACLE", "Kraken tentacle", 12004, "MONSTER_DROP", "the Kraken", 200, {'type': 'SKILL_LEVEL', 'value': 'SLAYER', 'threshold': 87}),
+    ("BLACK_TOURMALINE_CORE", "Black tourmaline core", 21730, "MONSTER_DROP", "the Grotesque Guardians", 1000, {'type': 'SKILL_LEVEL', 'value': 'SLAYER', 'threshold': 75}),
+    ("DHAROKS_GREATAXE", "Dharok's greataxe", 4718, "MONSTER_DROP", "Barrows chests", None, {'type': 'QUEST_COMPLETE', 'value': 'Priest in Peril'}),
+    ("AHRIMS_STAFF", "Ahrim's staff", 4710, "MONSTER_DROP", "Barrows chests", None, {'type': 'QUEST_COMPLETE', 'value': 'Priest in Peril'}),
+    ("KARILS_CROSSBOW", "Karil's crossbow", 4734, "MONSTER_DROP", "Barrows chests", None, {'type': 'QUEST_COMPLETE', 'value': 'Priest in Peril'}),
+    ("GUTHANS_WARSPEAR", "Guthan's warspear", 4726, "MONSTER_DROP", "Barrows chests", None, {'type': 'QUEST_COMPLETE', 'value': 'Priest in Peril'}),
+    ("VERACS_FLAIL", "Verac's flail", 4755, "MONSTER_DROP", "Barrows chests", None, {'type': 'QUEST_COMPLETE', 'value': 'Priest in Peril'}),
+    ("TORAGS_HAMMERS", "Torag's hammers", 4747, "MONSTER_DROP", "Barrows chests", None, {'type': 'QUEST_COMPLETE', 'value': 'Priest in Peril'}),
+    ("BLACK_MASK", "Black mask", 8921, "MONSTER_DROP", "Cave horrors on Mos Le'Harmless", 512, {'type': 'SKILL_LEVEL', 'value': 'SLAYER', 'threshold': 58}),
+    ("DARK_BOW", "Dark bow", 11235, "MONSTER_DROP", "Dark beasts", 512, {'type': 'SKILL_LEVEL', 'value': 'SLAYER', 'threshold': 90}),
+    ("GRANITE_MAUL", "Granite maul", 4153, "MONSTER_DROP", "Gargoyles", 750, {'type': 'SKILL_LEVEL', 'value': 'SLAYER', 'threshold': 75}),
+    ("IMBUED_HEART", "Imbued heart", 20724, "MONSTER_DROP", "Any superior slayer monster", None, {'type': 'SKILL_LEVEL', 'value': 'SLAYER', 'threshold': 1}),
+    ("DRAGON_AXE", "Dragon axe", 6739, "MONSTER_DROP", "Dagannoth Kings, or a Wintertodt supply crate", 128, {'type': 'SKILL_LEVEL', 'value': 'WOODCUTTING', 'threshold': 61}),
+    ("DRAGON_HARPOON", "Dragon harpoon", 21028, "MONSTER_DROP", "Wyrms", None, {'type': 'SKILL_LEVEL', 'value': 'FISHING', 'threshold': 61}),
+    ("HERB_SACK", "Herb sack", 13226, "SHOP", "Slayer reward shop, 750 points", None, None),
+    ("SEED_BOX", "Seed box", 13639, "SHOP", "Tithe Farm reward shop, 250 points", None, {'type': 'SKILL_LEVEL', 'value': 'FARMING', 'threshold': 34}),
+    ("BOTTOMLESS_COMPOST_BUCKET", "Bottomless compost bucket", 22994, "SHOP", "Tithe Farm reward shop, 250 points", None, {'type': 'SKILL_LEVEL', 'value': 'FARMING', 'threshold': 34}),
+    ("FISH_BARREL", "Fish barrel", 25582, "SHOP", "Tempoross reward pool", None, {'type': 'SKILL_LEVEL', 'value': 'FISHING', 'threshold': 35}),
+    ("TACKLE_BOX", "Tackle box", 25580, "SHOP", "Tempoross reward pool", None, {'type': 'SKILL_LEVEL', 'value': 'FISHING', 'threshold': 35}),
+    ("RUNE_POUCH", "Rune pouch", 12791, "SHOP", "Last Man Standing shop, or Wilderness slayer", None, None),
+    ("AVAS_ASSEMBLER", "Ava's assembler", 22109, "QUEST_REWARD", "Dragon Slayer II", None, {'type': 'QUEST_COMPLETE', 'value': 'Dragon Slayer II'}),
+    ("ARDOUGNE_CLOAK_4", "Ardougne cloak 4", 13124, "QUEST_REWARD", "Ardougne Elite Diary", None, None),
+    ("INFERNAL_CAPE", "Infernal cape", 21295, "MONSTER_DROP", "the Inferno", 1, {'type': 'SKILL_LEVEL', 'value': 'RANGED', 'threshold': 85}),
+    ("AMULET_OF_GLORY", "Amulet of glory", 1704, "GE_BUY", "Teleports and a solid all-round amulet", None, None),
+    ("BERSERKER_NECKLACE", "Berserker necklace", 11128, "GE_BUY", "Obsidian melee, from the TzHaar", None, None),
+    ("RUNE_CROSSBOW", "Rune crossbow", 9185, "GE_BUY", "The standard mid-game ranged weapon", None, None),
 ]
+
+# A drop takes the kit of the thing that drops it: asking for a twisted bow is
+# asking for the Chambers of Xeric, so that is the setup to show.
+ITEM_PREP = {
+    'DRAGON_HUNTER_CROSSBOW': 'pvm_chambers_of_xeric',
+    'TWISTED_BUCKLER': 'pvm_chambers_of_xeric',
+    'DINHS_BULWARK': 'pvm_chambers_of_xeric',
+    'ANCESTRAL_ROBE_BOTTOM': 'pvm_chambers_of_xeric',
+    'ANCESTRAL_HAT': 'pvm_chambers_of_xeric',
+    'DEXTEROUS_PRAYER_SCROLL': 'pvm_chambers_of_xeric',
+    'ARCANE_PRAYER_SCROLL': 'pvm_chambers_of_xeric',
+    'GHRAZI_RAPIER': 'pvm_theatre_of_blood',
+    'SANGUINESTI_STAFF': 'pvm_theatre_of_blood',
+    'JUSTICIAR_FACEGUARD': 'pvm_theatre_of_blood',
+    'JUSTICIAR_CHESTGUARD': 'pvm_theatre_of_blood',
+    'JUSTICIAR_LEGGUARDS': 'pvm_theatre_of_blood',
+    'OSMUMTENS_FANG': 'pvm_tombs_of_amascut',
+    'LIGHTBEARER': 'pvm_tombs_of_amascut',
+    'ELIDINIS_WARD': 'pvm_tombs_of_amascut',
+    'MASORI_MASK': 'pvm_tombs_of_amascut',
+    'MASORI_BODY': 'pvm_tombs_of_amascut',
+    'MASORI_CHAPS': 'pvm_tombs_of_amascut',
+    'TUMEKENS_SHADOW': 'pvm_tombs_of_amascut',
+    'ARMADYL_HELMET': 'pvm_kreearra',
+    'ARMADYL_CHESTPLATE': 'pvm_kreearra',
+    'ARMADYL_CHAINSKIRT': 'pvm_kreearra',
+    'BANDOS_BOOTS': 'pvm_general_graardor',
+    'BANDOS_GODSWORD': 'pvm_general_graardor',
+    'SARADOMIN_SWORD': 'pvm_commander_zilyana',
+    'ZAMORAKIAN_SPEAR': 'pvm_kril_tsutsaroth',
+    'STAFF_OF_THE_DEAD': 'pvm_kril_tsutsaroth',
+    'ZAMORAK_GODSWORD': 'pvm_kril_tsutsaroth',
+    'TANZANITE_FANG': 'pvm_zulrah',
+    'MAGIC_FANG': 'pvm_zulrah',
+    'SERPENTINE_VISAGE': 'pvm_zulrah',
+    'DRACONIC_VISAGE': 'pvm_vorkath',
+    'DRAGONBONE_NECKLACE': 'pvm_vorkath',
+    'PRIMORDIAL_CRYSTAL': 'pvm_cerberus',
+    'PEGASIAN_CRYSTAL': 'pvm_cerberus',
+    'ETERNAL_CRYSTAL': 'pvm_cerberus',
+    'ABYSSAL_DAGGER': 'pvm_abyssal_sire',
+    'HYDRAS_CLAW': 'pvm_alchemical_hydra',
+    'HYDRA_LEATHER': 'pvm_alchemical_hydra',
+    'KRAKEN_TENTACLE': 'pvm_kraken',
+    'BLACK_TOURMALINE_CORE': 'pvm_grotesque_guardians',
+    'DHAROKS_GREATAXE': 'pvm_barrows',
+    'AHRIMS_STAFF': 'pvm_barrows',
+    'KARILS_CROSSBOW': 'pvm_barrows',
+    'GUTHANS_WARSPEAR': 'pvm_barrows',
+    'VERACS_FLAIL': 'pvm_barrows',
+    'TORAGS_HAMMERS': 'pvm_barrows',
+    'FISH_BARREL': 'minigame_tempoross',
+    'TACKLE_BOX': 'minigame_tempoross',
+    'TWISTED_BOW': 'pvm_chambers_of_xeric',
+ 'SCYTHE_OF_VITUR': 'pvm_theatre_of_blood',
+ 'DRAGON_CLAWS': 'pvm_chambers_of_xeric',
+ 'KODAI_WAND': 'pvm_chambers_of_xeric',
+ 'ELDER_MAUL': 'pvm_chambers_of_xeric',
+ 'ANCESTRAL_ROBE_TOP': 'pvm_chambers_of_xeric',
+ 'AVERNIC_DEFENDER': 'pvm_theatre_of_blood',
+ 'TOXIC_BLOWPIPE': 'pvm_zulrah',
+ 'ARMADYL_CROSSBOW': 'pvm_commander_zilyana',
+ 'BANDOS_CHESTPLATE': 'pvm_general_graardor',
+ 'BANDOS_TASSETS': 'pvm_general_graardor',
+ 'ARMADYL_GODSWORD': 'pvm_kreearra',
+ 'SARADOMIN_GODSWORD': 'pvm_commander_zilyana',
+ 'PRIMORDIAL_BOOTS': 'pvm_cerberus',
+ 'DRAGON_HUNTER_LANCE': 'pvm_alchemical_hydra',
+ 'OCCULT_NECKLACE': 'pvm_thermonuclear_smoke_devil',
+ 'TRIDENT_OF_THE_SEAS': 'pvm_kraken',
+ 'FIRE_CAPE': 'minigame_fight_caves',
+ 'DRAGON_DEFENDER': 'unlock_warriors_guild'}
 
 items = []
 for iid, display, game_id, stype, detail, kc, req in ITEMS:
-    entry = {"id": iid, "displayName": display, "gameItemId": game_id, "type": stype}
+    entry = collections.OrderedDict()
+    entry["id"] = iid
+    if iid in ITEM_PREP:
+        entry["preparationFrom"] = ITEM_PREP[iid]
+    entry["displayName"] = display
+    entry["gameItemId"] = game_id
+    entry["type"] = stype
     if detail:
         entry["detail"] = detail
     if kc:
@@ -1013,6 +1248,38 @@ items.append({
                     {"itemId": "JANGERBERRIES", "quantity": 1}],
     "wikiUrl": WIKI + "Zamorak_brew",
 })
+
+
+# Items made out of other items in this file. The ingredient ids are checked
+# by ContentDatabaseTest, so a chain that no longer resolves fails the build
+# rather than quietly becoming a dead end in the panel.
+CRAFTED = [
+    ("PEGASIAN_BOOTS", "Pegasian boots", 13237, "A pegasian crystal on a pair of ranger boots", {'type': 'SKILL_LEVEL', 'value': 'RUNECRAFT', 'threshold': 60}, [('PEGASIAN_CRYSTAL', 1)]),
+    ("ETERNAL_BOOTS", "Eternal boots", 13235, "An eternal crystal on a pair of infinity boots", {'type': 'SKILL_LEVEL', 'value': 'RUNECRAFT', 'threshold': 60}, [('ETERNAL_CRYSTAL', 1)]),
+    ("TOXIC_STAFF_OF_THE_DEAD", "Toxic staff of the dead", 12904, "A magic fang on a staff of the dead", None, [('MAGIC_FANG', 1), ('STAFF_OF_THE_DEAD', 1)]),
+    ("SLAYER_HELMET", "Slayer helmet", 11864, "A black mask plus the four Slayer-shop pieces", {'type': 'SKILL_LEVEL', 'value': 'CRAFTING', 'threshold': 55}, [('BLACK_MASK', 1)]),
+    ("ABYSSAL_BLUDGEON", "Abyssal bludgeon", 13263, "The three bludgeon pieces from the Abyssal Sire, combined", {'type': 'SKILL_LEVEL', 'value': 'SLAYER', 'threshold': 85}, []),
+    ("NECKLACE_OF_ANGUISH", "Necklace of anguish", 19547, "String a zenyte and enchant it", {'type': 'SKILL_LEVEL', 'value': 'CRAFTING', 'threshold': 98}, []),
+    ("TORMENTED_BRACELET", "Tormented bracelet", 19544, "Make a zenyte bracelet and enchant it", {'type': 'SKILL_LEVEL', 'value': 'CRAFTING', 'threshold': 98}, []),
+    ("RING_OF_SUFFERING", "Ring of suffering", 19550, "Make a zenyte ring and enchant it", {'type': 'SKILL_LEVEL', 'value': 'CRAFTING', 'threshold': 98}, []),
+    ("BRIMSTONE_RING", "Brimstone ring", 22975, "Hydra's eye, fang and heart, combined", {'type': 'SKILL_LEVEL', 'value': 'SLAYER', 'threshold': 95}, []),
+    ("TRIDENT_OF_THE_SWAMP", "Trident of the swamp", 12899, "A magic fang on a trident of the seas", None, [('MAGIC_FANG', 1), ('TRIDENT_OF_THE_SEAS', 1)]),
+]
+
+for iid, display, game_id, detail, req, ingredients in CRAFTED:
+    entry = collections.OrderedDict()
+    entry["id"] = iid
+    entry["displayName"] = display
+    entry["gameItemId"] = game_id
+    entry["type"] = "CRAFT"
+    entry["detail"] = detail
+    if req:
+        entry["skillRequirement"] = req
+    if ingredients:
+        entry["ingredients"] = [{"itemId": i, "quantity": q}
+                                for i, q in ingredients]
+    entry["wikiUrl"] = wiki_url(display)
+    items.append(entry)
 
 io.open('src/main/resources/com/nextstep/item-sources.json', 'w', encoding='utf-8', newline='\n').write(
     json.dumps(items, indent=2, ensure_ascii=False) + "\n")

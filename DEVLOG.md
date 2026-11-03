@@ -786,6 +786,66 @@ them per material fixes the count and the rate together. Also corrected while
 checking: a yew longbow (u) needs 70 Fletching, not the 50 we had, and a redwood
 shield 92, not 90.
 
+## The generators had drifted, and following the instructions would have deleted work
+
+Before adding items it was worth checking that `gen_data.py` still produced
+what ships, because `tools/README.md` tells the next person to regenerate
+rather than hand-edit. It did not. Regenerating would have deleted:
+
+- `setups`, `supplies` and `strategyUrl` for **seven minigames**, Wintertodt's
+  warm clothing among them - the very kit that had just been wired through to
+  the Firemaking path;
+- `preparationFrom` on **five collection log slots** and **19 item sources**,
+  which is how a twisted bow knows to show you the Chambers of Xeric's setup.
+
+None of it was in the generator. All of it had been hand-edited into the
+generated JSON at some point, against this project's own instruction, and the
+instruction is the right one - so the generator was taught the data rather than
+the instruction being softened. The tables were extracted from the shipped
+files programmatically rather than retyped, and the test is simple: run
+`gen_data.py`, and `git diff` must be empty. It is.
+
+That property is worth more than the data it protects. It is the difference
+between "the generator is how you change this" being true and being a comment.
+
+## 35 item sources, and a dropdown that was going to get worse
+
+The item goal was a `JComboBox` over 35 items. Both halves of that were a
+problem: the list was thin, and the control gets worse with every entry added,
+which is precisely backwards for a content database meant to grow.
+
+The control first. `SearchPicker` is a text field with its matches underneath,
+collapsed at rest so it reads as "this is your choice" and expanding while you
+type. The ranking is in `NameSearch`, kept pure and unit-tested because the
+behaviour that matters is small and specific: every whitespace-separated term
+must appear, so "drag cl" finds Dragon claws; a prefix of the whole name beats
+a word start beats a match anywhere; punctuation is ignored on both sides,
+because nobody types the apostrophe in "Seers' ring". Two bugs only showed up
+in a rendered screenshot - a blank query was being ranked, so the picker opened
+on whichever name was shortest rather than first; and clicking the field left
+the chosen name in it, so typing "drag" after "Fire cape" produced "Fire
+capedrag" and no matches.
+
+Then the data: **35 item sources to 110**. Raids uniques (Chambers, Theatre,
+Tombs), the God Wars drop tables at their real 1/381 and 1/508, Zulrah's
+jewels, Vorkath, Cerberus's crystals and the boots made from them, Barrows
+weapons, slayer drops, skilling unlocks, and the zenyte jewellery. 68 of them
+borrow a fight's kit, so asking for Osmumten's fang answers "what do I take to
+the Tombs of Amascut?" without a word of new gear data being written.
+
+Two rules held while writing them:
+
+- **No id from memory.** `./gradlew itemid` reads RuneLite's own `ItemID`
+  constants and prints every match with its id. `ContentDatabaseTest` then
+  checks all 110 shipped ids against those constants and against the display
+  name they claim, so an id pointing at a different real item fails the build.
+  Two ids typed from memory in the first pass were wrong, and a wrong id is
+  invisible - nothing throws, the player just sees the wrong picture.
+- **No invented drop rate.** `estimatedKc` is omitted wherever the number is
+  not something to state with a straight face: Barrows, where the rate moves
+  with how many brothers you kill, and the dragon harpoon. A missing estimate
+  reads as "we are not saying". An invented one reads as fact.
+
 ## Still to do before the hub PR
 
 Everything mechanical is done and committed. What is left needs a person:

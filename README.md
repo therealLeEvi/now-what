@@ -17,7 +17,9 @@ would rather not choose, it will roll one for you, optionally within a category.
 
 - **an activity** - a boss, a raid, a quest, a diary tier, a minigame
 - **a skill level** - "99 Attack", broken into the methods that get you there
-- **an item** - the drop, the raid, or the Grand Exchange
+- **an item** - the drop, the raid, or the Grand Exchange. Type to search it:
+  "drag cl" finds Dragon claws, "seers ring" finds Seers' ring with or without
+  the apostrophe
 
 The plan walks the requirement graph backwards. Asking for Zulrah finds Regicide,
 and Regicide's own unmet quest requirements under that, and the skill levels
@@ -71,8 +73,8 @@ To build and run it from source you need JDK 11 or later:
 ## The data
 
 The plugin ships its own content database rather than calling anything at
-runtime: **256 activities**, **178 training methods across 23 skills** and
-**35 item sources**. It makes no network requests of its own.
+runtime: **256 activities**, **183 training methods across 23 skills** and
+**110 item sources**. It makes no network requests of its own.
 
 That data is taken from the [Old School RuneScape Wiki](https://oldschool.runescape.wiki/),
 which publishes under CC BY-NC-SA 3.0. Every record carries the `wikiUrl` of the

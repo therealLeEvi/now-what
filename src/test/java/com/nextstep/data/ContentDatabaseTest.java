@@ -2,11 +2,14 @@ package com.nextstep.data;
 
 import com.google.gson.Gson;
 import com.nextstep.model.Activity;
+import com.nextstep.data.ItemNameIndex;
 import com.nextstep.model.ItemSource;
 import com.nextstep.model.Requirement;
 import com.nextstep.model.TrainingMethod;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.List;
 import java.util.Set;
 import org.junit.Before;
@@ -109,6 +112,112 @@ public class ContentDatabaseTest
 
 		assertEquals("tick-manipulation methods should carry no attention judgement: " + both,
 			0, both.size());
+	}
+
+	/**
+	 * An item that borrows a fight's kit has to name a fight that exists.
+	 * <p>
+	 * Nothing throws if it does not - {@code NextStepPanel} looks the id up,
+	 * gets null, and shows the drop with no answer to "what do I take?", which
+	 * looks exactly like an item nobody wrote a kit for.
+	 */
+	@Test
+	public void everyItemBorrowingKitNamesAKnownActivity()
+	{
+		Set<String> ids = new HashSet<>();
+		for (Activity activity : activities)
+		{
+			ids.add(activity.getId());
+		}
+
+		List<String> dangling = new ArrayList<>();
+		int borrowing = 0;
+		for (ItemSource item : items)
+		{
+			if (item.getPreparationFrom() == null)
+			{
+				continue;
+			}
+			borrowing++;
+			if (!ids.contains(item.getPreparationFrom()))
+			{
+				dangling.add(item.getDisplayName() + " -> " + item.getPreparationFrom());
+			}
+		}
+
+		assertEquals("items borrowing kit from no such activity: " + dangling,
+			0, dangling.size());
+		assertTrue("no item borrows kit any more - did the link get dropped?", borrowing > 0);
+	}
+
+	/**
+	 * Every {@code gameItemId} has to be a real item, and has to be the item it
+	 * claims to be.
+	 * <p>
+	 * This is the check the first pass did not have, and two ids typed from
+	 * memory back then were wrong. A wrong id is silent: nothing throws, the
+	 * panel simply shows a picture of a different item, and the only way to
+	 * notice is to recognise the sprite. The name a constant reads back as is
+	 * approximate - {@code MASORI_BODY_F} comes back as "masori body (f)" - so
+	 * the match is deliberately loose: the first word of the display name has
+	 * to appear in the constant. That is enough to catch an id pointing at
+	 * something else entirely, which is the failure that matters.
+	 */
+	@Test
+	public void everyGameItemIdNamesTheItemItClaimsTo()
+	{
+		Map<Integer, List<String>> byId = new HashMap<>();
+		for (ItemTextParser.Candidate candidate : ItemNameIndex.all())
+		{
+			byId.computeIfAbsent(candidate.getId(), k -> new ArrayList<>())
+				.add(candidate.getName());
+		}
+		assertTrue("no ItemID constants on the classpath - this test proves nothing",
+			byId.size() > 1000);
+
+		List<String> wrong = new ArrayList<>();
+		for (ItemSource item : items)
+		{
+			List<String> names = byId.get(item.getGameItemId());
+			if (names == null)
+			{
+				wrong.add(item.getDisplayName() + " -> " + item.getGameItemId()
+					+ " is not an item id at all");
+				continue;
+			}
+			String first = flattenFirstWord(item.getDisplayName());
+			boolean ok = false;
+			for (String name : names)
+			{
+				if (flatten(name).contains(first))
+				{
+					ok = true;
+					break;
+				}
+			}
+			if (!ok)
+			{
+				wrong.add(item.getDisplayName() + " -> " + item.getGameItemId()
+					+ " which is " + names);
+			}
+		}
+
+		assertEquals("item ids naming the wrong item: " + wrong, 0, wrong.size());
+	}
+
+	private static String flattenFirstWord(String text)
+	{
+		String[] words = flatten(text).split(" ");
+		return words.length == 0 ? "" : words[0];
+	}
+
+	private static String flatten(String text)
+	{
+		return text.toLowerCase(java.util.Locale.ROOT)
+			.replace("'", "")
+			.replace("-", "")
+			.replace("(", "")
+			.replace(")", "");
 	}
 
 	/**

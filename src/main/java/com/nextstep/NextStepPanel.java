@@ -240,7 +240,7 @@ public class NextStepPanel extends PluginPanel
 	private final JComboBox<Activity> activityCombo;
 	private final JComboBox<String> skillCombo;
 	private final JSpinner skillLevelSpinner;
-	private final JComboBox<ItemSource> itemCombo;
+	private final SearchPicker<ItemSource> itemPicker;
 	private final JSpinner itemQuantitySpinner;
 	/**
 	 * Which of the two ways in the panel is open.
@@ -461,25 +461,17 @@ public class NextStepPanel extends PluginPanel
 				(Integer) skillLevelSpinner.getValue(), tickManipulationCheckbox.isSelected())))));
 
 		// --- Goal: an item ---
-		// A free-text field was worse than useless here: anything not in
-		// item-sources.json came back as "no source data", so the only way to get
-		// an answer was to already know the exact id. Offer what's actually known.
+		// Typed at, not scrolled through. A bare free-text field was worse than
+		// useless when this was tried before, because anything absent from
+		// item-sources.json came back as "no source data" and the only way to
+		// get an answer was to already know what was in there. A search over
+		// what is known keeps the typing and loses the guessing - and unlike a
+		// dropdown it gets better as the database grows rather than worse.
 		List<ItemSource> sortedItems = allItemSources.stream()
 			.sorted(Comparator.comparing(ItemSource::getDisplayName))
 			.collect(Collectors.toList());
-		itemCombo = new JComboBox<>(sortedItems.toArray(new ItemSource[0]));
-		itemCombo.setRenderer(new DefaultListCellRenderer()
-		{
-			@Override
-			public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-				boolean isSelected, boolean cellHasFocus)
-			{
-				super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-				setText(value == null ? "" : ((ItemSource) value).getDisplayName());
-				return this;
-			}
-		});
-		constrainInput(itemCombo);
+		itemPicker = new SearchPicker<>(sortedItems, ItemSource::getDisplayName,
+			"Type to search, or pick from the list");
 		itemQuantitySpinner = new JSpinner(new SpinnerNumberModel(1, 1, 10000, 1));
 		constrainSpinner(itemQuantitySpinner);
 		countOwnedCheckbox = new JCheckBox("Count what I already own");
@@ -491,10 +483,11 @@ public class NextStepPanel extends PluginPanel
 		countOwnedCheckbox.setToolTipText("On: plans only what is missing from your bank, "
 			+ "inventory and gear. Off: plans the full route as if you had none, which is what "
 			+ "you want when you already own one and are after another.");
-		stack(chooseContainer, goalBlock("Item", itemCombo, itemQuantitySpinner, countOwnedCheckbox,
+		itemPicker.setTrailing(itemQuantitySpinner);
+		stack(chooseContainer, goalBlock("Item", itemPicker, countOwnedCheckbox,
 			"Plan path", e ->
 			{
-				ItemSource selected = (ItemSource) itemCombo.getSelectedItem();
+				ItemSource selected = itemPicker.getSelected();
 				if (selected != null)
 				{
 					renderPath(pathResolver.apply(Goal.itemQuantity(selected.getId(),
@@ -609,6 +602,38 @@ public class NextStepPanel extends PluginPanel
 		java.awt.event.ActionListener action)
 	{
 		return goalBlock(caption, input, trailing, null, buttonText, action);
+	}
+
+	/**
+	 * A goal block built round a {@link SearchPicker} instead of a dropdown.
+	 * <p>
+	 * Separate from the dropdown version because the picker owns its own height:
+	 * it is a field with a results list that appears and disappears underneath,
+	 * so pinning the input row to one line - which is right for a combo box -
+	 * would clip the matches away.
+	 */
+	private JPanel goalBlock(String caption, SearchPicker<?> picker, Component extra,
+		String buttonText, java.awt.event.ActionListener action)
+	{
+		JPanel block = new JPanel();
+		block.setLayout(new BoxLayout(block, BoxLayout.Y_AXIS));
+		block.setBackground(ColorScheme.DARK_GRAY_COLOR);
+		block.setBorder(new EmptyBorder(6, 0, 2, 0));
+
+		stack(block, microLabel(caption, SUBTLE, 0));
+		stack(block, picker);
+		if (extra != null)
+		{
+			stack(block, extra);
+		}
+
+		JButton button = new JButton(buttonText);
+		button.setFocusPainted(false);
+		button.addActionListener(action);
+		stack(block, button);
+
+		block.setAlignmentX(Component.LEFT_ALIGNMENT);
+		return block;
 	}
 
 	/** As above, with one extra control between the inputs and the button. */

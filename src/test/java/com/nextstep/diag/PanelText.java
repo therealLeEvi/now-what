@@ -156,7 +156,10 @@ public class PanelText
 			else if ("item".equals(parts[0]))
 			{
 				row = 2;
-				select(combos.get(2), parts[1]);
+				// The item goal is a SearchPicker now, not a dropdown.
+				List<com.nextstep.SearchPicker> pickers = new ArrayList<>();
+				findAll(panel, com.nextstep.SearchPicker.class, pickers);
+				selectIn(pickers.get(0), parts[1]);
 				if (parts.length > 2)
 				{
 					spinners.get(1).setValue(Integer.parseInt(parts[2]));
@@ -303,6 +306,29 @@ public class PanelText
 			sb.append("  ");
 		}
 		return sb.toString();
+	}
+
+	/**
+	 * Picks an entry out of a {@link com.nextstep.SearchPicker} by id, which is
+	 * what the harness means by "item:TWISTED_BOW". The picker is a text field
+	 * and a filtered list, so there is no index to set - the entry is looked up
+	 * and handed back to it.
+	 */
+	@SuppressWarnings("unchecked")
+	private static void selectIn(com.nextstep.SearchPicker picker, String id)
+	{
+		for (Object o : picker.getEntries())
+		{
+			String key = o instanceof Activity ? ((Activity) o).getId()
+				: o instanceof ItemSource ? ((ItemSource) o).getId()
+				: String.valueOf(o);
+			if (key.equalsIgnoreCase(id))
+			{
+				picker.select(o);
+				return;
+			}
+		}
+		throw new IllegalArgumentException("no picker entry for " + id);
 	}
 
 	private static void select(JComboBox combo, String id)

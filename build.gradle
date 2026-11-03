@@ -111,3 +111,10 @@ tasks.register('iconcoverage', JavaExec) {
 	classpath = sourceSets.test.runtimeClasspath
 	mainClass = 'com.nextstep.diag.IconCoverage'
 }
+
+// Reads an item id out of RuneLite's ItemID constants, which is where every
+// gameItemId in item-sources.json is supposed to come from rather than memory.
+tasks.register('itemid', JavaExec) {
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.nextstep.diag.ItemIdLookup'
+}

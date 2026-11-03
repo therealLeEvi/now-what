@@ -33,9 +33,27 @@ Builds every activity and item source. Contains, in order:
   wrong and the first place to look when a chain comes out odd.
 - `PVM`, `MISC`, `COLLECTION`, `CA_TIERS` — bosses, minigames, collection log
   goals and Combat Achievement tiers.
-- `ITEMS` — every `gameItemId` was read out of RuneLite's own `ItemID` class
-  rather than recalled. Do the same when adding more; two ids written from
-  memory during the first pass were wrong.
+- `ITEMS` and `CRAFTED` - every `gameItemId` was read out of RuneLite's own
+  `ItemID` class rather than recalled. Do the same when adding more; two ids
+  written from memory during the first pass were wrong. There is a tool for it:
+
+  ```
+  ./gradlew itemid --args="osmumtens fang|elidinis ward|masori body"
+  ```
+
+  It prints every matching constant with its id, shortest name first, so an
+  ambiguous name is a choice you make looking at the list. `ContentDatabaseTest`
+  then checks every shipped id against those constants, so an id pointing at
+  some other real item fails the build rather than showing the wrong picture.
+- `MISC_PREP`, `COLLECTION_PREP`, `ITEM_PREP` - the kit a minigame needs, and
+  the fights that collection log slots and item drops borrow theirs from.
+  **These exist because the generated files had been hand-edited.** For a while
+  the kit for seven minigames and the `preparationFrom` on 19 items lived only
+  in the JSON, so following the instruction at the top of this file - regenerate
+  rather than hand-edit - would have silently deleted all of it. Running
+  `gen_data.py` now reproduces the shipped files byte for byte, which is the
+  property to preserve: **check `git diff` is empty after regenerating** before
+  you add anything.
 
 ### gen_methods.py
 

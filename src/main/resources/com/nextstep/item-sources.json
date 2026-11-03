@@ -380,6 +380,764 @@
     "wikiUrl": "https://oldschool.runescape.wiki/w/Jangerberries"
   },
   {
+    "id": "DRAGON_HUNTER_CROSSBOW",
+    "preparationFrom": "pvm_chambers_of_xeric",
+    "displayName": "Dragon hunter crossbow",
+    "gameItemId": 21012,
+    "type": "MONSTER_DROP",
+    "detail": "Chambers of Xeric",
+    "estimatedKc": 150,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_hunter_crossbow"
+  },
+  {
+    "id": "TWISTED_BUCKLER",
+    "preparationFrom": "pvm_chambers_of_xeric",
+    "displayName": "Twisted buckler",
+    "gameItemId": 21000,
+    "type": "MONSTER_DROP",
+    "detail": "Chambers of Xeric",
+    "estimatedKc": 250,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Twisted_buckler"
+  },
+  {
+    "id": "DINHS_BULWARK",
+    "preparationFrom": "pvm_chambers_of_xeric",
+    "displayName": "Dinh's bulwark",
+    "gameItemId": 21015,
+    "type": "MONSTER_DROP",
+    "detail": "Chambers of Xeric",
+    "estimatedKc": 150,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dinh's_bulwark"
+  },
+  {
+    "id": "ANCESTRAL_ROBE_BOTTOM",
+    "preparationFrom": "pvm_chambers_of_xeric",
+    "displayName": "Ancestral robe bottom",
+    "gameItemId": 21024,
+    "type": "MONSTER_DROP",
+    "detail": "Chambers of Xeric",
+    "estimatedKc": 350,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ancestral_robe_bottom"
+  },
+  {
+    "id": "ANCESTRAL_HAT",
+    "preparationFrom": "pvm_chambers_of_xeric",
+    "displayName": "Ancestral hat",
+    "gameItemId": 21018,
+    "type": "MONSTER_DROP",
+    "detail": "Chambers of Xeric",
+    "estimatedKc": 350,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ancestral_hat"
+  },
+  {
+    "id": "DEXTEROUS_PRAYER_SCROLL",
+    "preparationFrom": "pvm_chambers_of_xeric",
+    "displayName": "Dexterous prayer scroll",
+    "gameItemId": 21034,
+    "type": "MONSTER_DROP",
+    "detail": "Chambers of Xeric",
+    "estimatedKc": 75,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dexterous_prayer_scroll"
+  },
+  {
+    "id": "ARCANE_PRAYER_SCROLL",
+    "preparationFrom": "pvm_chambers_of_xeric",
+    "displayName": "Arcane prayer scroll",
+    "gameItemId": 21079,
+    "type": "MONSTER_DROP",
+    "detail": "Chambers of Xeric",
+    "estimatedKc": 75,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Arcane_prayer_scroll"
+  },
+  {
+    "id": "GHRAZI_RAPIER",
+    "preparationFrom": "pvm_theatre_of_blood",
+    "displayName": "Ghrazi rapier",
+    "gameItemId": 22324,
+    "type": "MONSTER_DROP",
+    "detail": "Theatre of Blood",
+    "estimatedKc": 120,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ghrazi_rapier"
+  },
+  {
+    "id": "SANGUINESTI_STAFF",
+    "preparationFrom": "pvm_theatre_of_blood",
+    "displayName": "Sanguinesti staff",
+    "gameItemId": 22323,
+    "type": "MONSTER_DROP",
+    "detail": "Theatre of Blood",
+    "estimatedKc": 120,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Sanguinesti_staff"
+  },
+  {
+    "id": "JUSTICIAR_FACEGUARD",
+    "preparationFrom": "pvm_theatre_of_blood",
+    "displayName": "Justiciar faceguard",
+    "gameItemId": 22326,
+    "type": "MONSTER_DROP",
+    "detail": "Theatre of Blood",
+    "estimatedKc": 150,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Justiciar_faceguard"
+  },
+  {
+    "id": "JUSTICIAR_CHESTGUARD",
+    "preparationFrom": "pvm_theatre_of_blood",
+    "displayName": "Justiciar chestguard",
+    "gameItemId": 22327,
+    "type": "MONSTER_DROP",
+    "detail": "Theatre of Blood",
+    "estimatedKc": 150,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Justiciar_chestguard"
+  },
+  {
+    "id": "JUSTICIAR_LEGGUARDS",
+    "preparationFrom": "pvm_theatre_of_blood",
+    "displayName": "Justiciar legguards",
+    "gameItemId": 22328,
+    "type": "MONSTER_DROP",
+    "detail": "Theatre of Blood",
+    "estimatedKc": 150,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Justiciar_legguards"
+  },
+  {
+    "id": "OSMUMTENS_FANG",
+    "preparationFrom": "pvm_tombs_of_amascut",
+    "displayName": "Osmumten's fang",
+    "gameItemId": 26219,
+    "type": "MONSTER_DROP",
+    "detail": "Tombs of Amascut",
+    "estimatedKc": 60,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Osmumten's_fang"
+  },
+  {
+    "id": "LIGHTBEARER",
+    "preparationFrom": "pvm_tombs_of_amascut",
+    "displayName": "Lightbearer",
+    "gameItemId": 25975,
+    "type": "MONSTER_DROP",
+    "detail": "Tombs of Amascut",
+    "estimatedKc": 40,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Lightbearer"
+  },
+  {
+    "id": "ELIDINIS_WARD",
+    "preparationFrom": "pvm_tombs_of_amascut",
+    "displayName": "Elidinis' ward",
+    "gameItemId": 25985,
+    "type": "MONSTER_DROP",
+    "detail": "Tombs of Amascut",
+    "estimatedKc": 150,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Elidinis'_ward"
+  },
+  {
+    "id": "MASORI_MASK",
+    "preparationFrom": "pvm_tombs_of_amascut",
+    "displayName": "Masori mask",
+    "gameItemId": 27226,
+    "type": "MONSTER_DROP",
+    "detail": "Tombs of Amascut",
+    "estimatedKc": 150,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Masori_mask"
+  },
+  {
+    "id": "MASORI_BODY",
+    "preparationFrom": "pvm_tombs_of_amascut",
+    "displayName": "Masori body",
+    "gameItemId": 27229,
+    "type": "MONSTER_DROP",
+    "detail": "Tombs of Amascut",
+    "estimatedKc": 150,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Masori_body"
+  },
+  {
+    "id": "MASORI_CHAPS",
+    "preparationFrom": "pvm_tombs_of_amascut",
+    "displayName": "Masori chaps",
+    "gameItemId": 27232,
+    "type": "MONSTER_DROP",
+    "detail": "Tombs of Amascut",
+    "estimatedKc": 150,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Masori_chaps"
+  },
+  {
+    "id": "TUMEKENS_SHADOW",
+    "preparationFrom": "pvm_tombs_of_amascut",
+    "displayName": "Tumeken's shadow",
+    "gameItemId": 27275,
+    "type": "MONSTER_DROP",
+    "detail": "Tombs of Amascut",
+    "estimatedKc": 350,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Tumeken's_shadow"
+  },
+  {
+    "id": "ARMADYL_HELMET",
+    "preparationFrom": "pvm_kreearra",
+    "displayName": "Armadyl helmet",
+    "gameItemId": 11826,
+    "type": "MONSTER_DROP",
+    "detail": "Kree'arra",
+    "estimatedKc": 381,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Armadyl_helmet"
+  },
+  {
+    "id": "ARMADYL_CHESTPLATE",
+    "preparationFrom": "pvm_kreearra",
+    "displayName": "Armadyl chestplate",
+    "gameItemId": 11828,
+    "type": "MONSTER_DROP",
+    "detail": "Kree'arra",
+    "estimatedKc": 381,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Armadyl_chestplate"
+  },
+  {
+    "id": "ARMADYL_CHAINSKIRT",
+    "preparationFrom": "pvm_kreearra",
+    "displayName": "Armadyl chainskirt",
+    "gameItemId": 11830,
+    "type": "MONSTER_DROP",
+    "detail": "Kree'arra",
+    "estimatedKc": 381,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Armadyl_chainskirt"
+  },
+  {
+    "id": "BANDOS_BOOTS",
+    "preparationFrom": "pvm_general_graardor",
+    "displayName": "Bandos boots",
+    "gameItemId": 11836,
+    "type": "MONSTER_DROP",
+    "detail": "General Graardor",
+    "estimatedKc": 381,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Bandos_boots"
+  },
+  {
+    "id": "BANDOS_GODSWORD",
+    "preparationFrom": "pvm_general_graardor",
+    "displayName": "Bandos godsword hilt",
+    "gameItemId": 11812,
+    "type": "MONSTER_DROP",
+    "detail": "General Graardor",
+    "estimatedKc": 508,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Bandos_godsword_hilt"
+  },
+  {
+    "id": "SARADOMIN_SWORD",
+    "preparationFrom": "pvm_commander_zilyana",
+    "displayName": "Saradomin sword",
+    "gameItemId": 11838,
+    "type": "MONSTER_DROP",
+    "detail": "Commander Zilyana",
+    "estimatedKc": 381,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Saradomin_sword"
+  },
+  {
+    "id": "ZAMORAKIAN_SPEAR",
+    "preparationFrom": "pvm_kril_tsutsaroth",
+    "displayName": "Zamorakian spear",
+    "gameItemId": 11824,
+    "type": "MONSTER_DROP",
+    "detail": "K'ril Tsutsaroth",
+    "estimatedKc": 381,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Zamorakian_spear"
+  },
+  {
+    "id": "STAFF_OF_THE_DEAD",
+    "preparationFrom": "pvm_kril_tsutsaroth",
+    "displayName": "Staff of the dead",
+    "gameItemId": 11791,
+    "type": "MONSTER_DROP",
+    "detail": "K'ril Tsutsaroth",
+    "estimatedKc": 508,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Staff_of_the_dead"
+  },
+  {
+    "id": "ZAMORAK_GODSWORD",
+    "preparationFrom": "pvm_kril_tsutsaroth",
+    "displayName": "Zamorak godsword hilt",
+    "gameItemId": 11816,
+    "type": "MONSTER_DROP",
+    "detail": "K'ril Tsutsaroth",
+    "estimatedKc": 508,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Zamorak_godsword_hilt"
+  },
+  {
+    "id": "TANZANITE_FANG",
+    "preparationFrom": "pvm_zulrah",
+    "displayName": "Tanzanite fang",
+    "gameItemId": 12922,
+    "type": "MONSTER_DROP",
+    "detail": "Zulrah",
+    "estimatedKc": 90,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Regicide"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Tanzanite_fang"
+  },
+  {
+    "id": "MAGIC_FANG",
+    "preparationFrom": "pvm_zulrah",
+    "displayName": "Magic fang",
+    "gameItemId": 12932,
+    "type": "MONSTER_DROP",
+    "detail": "Zulrah",
+    "estimatedKc": 90,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Regicide"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_fang"
+  },
+  {
+    "id": "SERPENTINE_VISAGE",
+    "preparationFrom": "pvm_zulrah",
+    "displayName": "Serpentine visage",
+    "gameItemId": 12927,
+    "type": "MONSTER_DROP",
+    "detail": "Zulrah",
+    "estimatedKc": 90,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Regicide"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Serpentine_visage"
+  },
+  {
+    "id": "DRACONIC_VISAGE",
+    "preparationFrom": "pvm_vorkath",
+    "displayName": "Draconic visage",
+    "gameItemId": 11286,
+    "type": "MONSTER_DROP",
+    "detail": "Vorkath",
+    "estimatedKc": 5000,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Dragon Slayer II"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Draconic_visage"
+  },
+  {
+    "id": "DRAGONBONE_NECKLACE",
+    "preparationFrom": "pvm_vorkath",
+    "displayName": "Dragonbone necklace",
+    "gameItemId": 22111,
+    "type": "MONSTER_DROP",
+    "detail": "Vorkath",
+    "estimatedKc": 1000,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Dragon Slayer II"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragonbone_necklace"
+  },
+  {
+    "id": "PRIMORDIAL_CRYSTAL",
+    "preparationFrom": "pvm_cerberus",
+    "displayName": "Primordial crystal",
+    "gameItemId": 13231,
+    "type": "MONSTER_DROP",
+    "detail": "Cerberus",
+    "estimatedKc": 512,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 91
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Primordial_crystal"
+  },
+  {
+    "id": "PEGASIAN_CRYSTAL",
+    "preparationFrom": "pvm_cerberus",
+    "displayName": "Pegasian crystal",
+    "gameItemId": 13229,
+    "type": "MONSTER_DROP",
+    "detail": "Cerberus",
+    "estimatedKc": 512,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 91
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pegasian_crystal"
+  },
+  {
+    "id": "ETERNAL_CRYSTAL",
+    "preparationFrom": "pvm_cerberus",
+    "displayName": "Eternal crystal",
+    "gameItemId": 13227,
+    "type": "MONSTER_DROP",
+    "detail": "Cerberus",
+    "estimatedKc": 512,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 91
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Eternal_crystal"
+  },
+  {
+    "id": "ABYSSAL_DAGGER",
+    "preparationFrom": "pvm_abyssal_sire",
+    "displayName": "Abyssal dagger",
+    "gameItemId": 13265,
+    "type": "MONSTER_DROP",
+    "detail": "the Abyssal Sire",
+    "estimatedKc": 128,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 85
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Abyssal_dagger"
+  },
+  {
+    "id": "HYDRAS_CLAW",
+    "preparationFrom": "pvm_alchemical_hydra",
+    "displayName": "Hydra's claw",
+    "gameItemId": 22966,
+    "type": "MONSTER_DROP",
+    "detail": "Alchemical Hydra",
+    "estimatedKc": 1000,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 95
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hydra's_claw"
+  },
+  {
+    "id": "HYDRA_LEATHER",
+    "preparationFrom": "pvm_alchemical_hydra",
+    "displayName": "Hydra leather",
+    "gameItemId": 22983,
+    "type": "MONSTER_DROP",
+    "detail": "Alchemical Hydra",
+    "estimatedKc": 515,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 95
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hydra_leather"
+  },
+  {
+    "id": "KRAKEN_TENTACLE",
+    "preparationFrom": "pvm_kraken",
+    "displayName": "Kraken tentacle",
+    "gameItemId": 12004,
+    "type": "MONSTER_DROP",
+    "detail": "the Kraken",
+    "estimatedKc": 200,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 87
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Kraken_tentacle"
+  },
+  {
+    "id": "BLACK_TOURMALINE_CORE",
+    "preparationFrom": "pvm_grotesque_guardians",
+    "displayName": "Black tourmaline core",
+    "gameItemId": 21730,
+    "type": "MONSTER_DROP",
+    "detail": "the Grotesque Guardians",
+    "estimatedKc": 1000,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 75
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Black_tourmaline_core"
+  },
+  {
+    "id": "DHAROKS_GREATAXE",
+    "preparationFrom": "pvm_barrows",
+    "displayName": "Dharok's greataxe",
+    "gameItemId": 4718,
+    "type": "MONSTER_DROP",
+    "detail": "Barrows chests",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Priest in Peril"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dharok's_greataxe"
+  },
+  {
+    "id": "AHRIMS_STAFF",
+    "preparationFrom": "pvm_barrows",
+    "displayName": "Ahrim's staff",
+    "gameItemId": 4710,
+    "type": "MONSTER_DROP",
+    "detail": "Barrows chests",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Priest in Peril"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ahrim's_staff"
+  },
+  {
+    "id": "KARILS_CROSSBOW",
+    "preparationFrom": "pvm_barrows",
+    "displayName": "Karil's crossbow",
+    "gameItemId": 4734,
+    "type": "MONSTER_DROP",
+    "detail": "Barrows chests",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Priest in Peril"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Karil's_crossbow"
+  },
+  {
+    "id": "GUTHANS_WARSPEAR",
+    "preparationFrom": "pvm_barrows",
+    "displayName": "Guthan's warspear",
+    "gameItemId": 4726,
+    "type": "MONSTER_DROP",
+    "detail": "Barrows chests",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Priest in Peril"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Guthan's_warspear"
+  },
+  {
+    "id": "VERACS_FLAIL",
+    "preparationFrom": "pvm_barrows",
+    "displayName": "Verac's flail",
+    "gameItemId": 4755,
+    "type": "MONSTER_DROP",
+    "detail": "Barrows chests",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Priest in Peril"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Verac's_flail"
+  },
+  {
+    "id": "TORAGS_HAMMERS",
+    "preparationFrom": "pvm_barrows",
+    "displayName": "Torag's hammers",
+    "gameItemId": 4747,
+    "type": "MONSTER_DROP",
+    "detail": "Barrows chests",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Priest in Peril"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Torag's_hammers"
+  },
+  {
+    "id": "BLACK_MASK",
+    "displayName": "Black mask",
+    "gameItemId": 8921,
+    "type": "MONSTER_DROP",
+    "detail": "Cave horrors on Mos Le'Harmless",
+    "estimatedKc": 512,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 58
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Black_mask"
+  },
+  {
+    "id": "DARK_BOW",
+    "displayName": "Dark bow",
+    "gameItemId": 11235,
+    "type": "MONSTER_DROP",
+    "detail": "Dark beasts",
+    "estimatedKc": 512,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 90
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dark_bow"
+  },
+  {
+    "id": "GRANITE_MAUL",
+    "displayName": "Granite maul",
+    "gameItemId": 4153,
+    "type": "MONSTER_DROP",
+    "detail": "Gargoyles",
+    "estimatedKc": 750,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 75
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Granite_maul"
+  },
+  {
+    "id": "IMBUED_HEART",
+    "displayName": "Imbued heart",
+    "gameItemId": 20724,
+    "type": "MONSTER_DROP",
+    "detail": "Any superior slayer monster",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 1
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Imbued_heart"
+  },
+  {
+    "id": "DRAGON_AXE",
+    "displayName": "Dragon axe",
+    "gameItemId": 6739,
+    "type": "MONSTER_DROP",
+    "detail": "Dagannoth Kings, or a Wintertodt supply crate",
+    "estimatedKc": 128,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "WOODCUTTING",
+      "threshold": 61
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_axe"
+  },
+  {
+    "id": "DRAGON_HARPOON",
+    "displayName": "Dragon harpoon",
+    "gameItemId": 21028,
+    "type": "MONSTER_DROP",
+    "detail": "Wyrms",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FISHING",
+      "threshold": 61
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_harpoon"
+  },
+  {
+    "id": "HERB_SACK",
+    "displayName": "Herb sack",
+    "gameItemId": 13226,
+    "type": "SHOP",
+    "detail": "Slayer reward shop, 750 points",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Herb_sack"
+  },
+  {
+    "id": "SEED_BOX",
+    "displayName": "Seed box",
+    "gameItemId": 13639,
+    "type": "SHOP",
+    "detail": "Tithe Farm reward shop, 250 points",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FARMING",
+      "threshold": 34
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Seed_box"
+  },
+  {
+    "id": "BOTTOMLESS_COMPOST_BUCKET",
+    "displayName": "Bottomless compost bucket",
+    "gameItemId": 22994,
+    "type": "SHOP",
+    "detail": "Tithe Farm reward shop, 250 points",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FARMING",
+      "threshold": 34
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Bottomless_compost_bucket"
+  },
+  {
+    "id": "FISH_BARREL",
+    "preparationFrom": "minigame_tempoross",
+    "displayName": "Fish barrel",
+    "gameItemId": 25582,
+    "type": "SHOP",
+    "detail": "Tempoross reward pool",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FISHING",
+      "threshold": 35
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fish_barrel"
+  },
+  {
+    "id": "TACKLE_BOX",
+    "preparationFrom": "minigame_tempoross",
+    "displayName": "Tackle box",
+    "gameItemId": 25580,
+    "type": "SHOP",
+    "detail": "Tempoross reward pool",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FISHING",
+      "threshold": 35
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Tackle_box"
+  },
+  {
+    "id": "RUNE_POUCH",
+    "displayName": "Rune pouch",
+    "gameItemId": 12791,
+    "type": "SHOP",
+    "detail": "Last Man Standing shop, or Wilderness slayer",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Rune_pouch"
+  },
+  {
+    "id": "AVAS_ASSEMBLER",
+    "displayName": "Ava's assembler",
+    "gameItemId": 22109,
+    "type": "QUEST_REWARD",
+    "detail": "Dragon Slayer II",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Dragon Slayer II"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ava's_assembler"
+  },
+  {
+    "id": "ARDOUGNE_CLOAK_4",
+    "displayName": "Ardougne cloak 4",
+    "gameItemId": 13124,
+    "type": "QUEST_REWARD",
+    "detail": "Ardougne Elite Diary",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ardougne_cloak_4"
+  },
+  {
+    "id": "INFERNAL_CAPE",
+    "displayName": "Infernal cape",
+    "gameItemId": 21295,
+    "type": "MONSTER_DROP",
+    "detail": "the Inferno",
+    "estimatedKc": 1,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "RANGED",
+      "threshold": 85
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Infernal_cape"
+  },
+  {
+    "id": "AMULET_OF_GLORY",
+    "displayName": "Amulet of glory",
+    "gameItemId": 1704,
+    "type": "GE_BUY",
+    "detail": "Teleports and a solid all-round amulet",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Amulet_of_glory"
+  },
+  {
+    "id": "BERSERKER_NECKLACE",
+    "displayName": "Berserker necklace",
+    "gameItemId": 11128,
+    "type": "GE_BUY",
+    "detail": "Obsidian melee, from the TzHaar",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Berserker_necklace"
+  },
+  {
+    "id": "RUNE_CROSSBOW",
+    "displayName": "Rune crossbow",
+    "gameItemId": 9185,
+    "type": "GE_BUY",
+    "detail": "The standard mid-game ranged weapon",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Rune_crossbow"
+  },
+  {
     "id": "ZAMORAK_BREW",
     "displayName": "Zamorak brew (4)",
     "gameItemId": 2450,
@@ -401,5 +1159,163 @@
       }
     ],
     "wikiUrl": "https://oldschool.runescape.wiki/w/Zamorak_brew"
+  },
+  {
+    "id": "PEGASIAN_BOOTS",
+    "displayName": "Pegasian boots",
+    "gameItemId": 13237,
+    "type": "CRAFT",
+    "detail": "A pegasian crystal on a pair of ranger boots",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "RUNECRAFT",
+      "threshold": 60
+    },
+    "ingredients": [
+      {
+        "itemId": "PEGASIAN_CRYSTAL",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pegasian_boots"
+  },
+  {
+    "id": "ETERNAL_BOOTS",
+    "displayName": "Eternal boots",
+    "gameItemId": 13235,
+    "type": "CRAFT",
+    "detail": "An eternal crystal on a pair of infinity boots",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "RUNECRAFT",
+      "threshold": 60
+    },
+    "ingredients": [
+      {
+        "itemId": "ETERNAL_CRYSTAL",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Eternal_boots"
+  },
+  {
+    "id": "TOXIC_STAFF_OF_THE_DEAD",
+    "displayName": "Toxic staff of the dead",
+    "gameItemId": 12904,
+    "type": "CRAFT",
+    "detail": "A magic fang on a staff of the dead",
+    "ingredients": [
+      {
+        "itemId": "MAGIC_FANG",
+        "quantity": 1
+      },
+      {
+        "itemId": "STAFF_OF_THE_DEAD",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Toxic_staff_of_the_dead"
+  },
+  {
+    "id": "SLAYER_HELMET",
+    "displayName": "Slayer helmet",
+    "gameItemId": 11864,
+    "type": "CRAFT",
+    "detail": "A black mask plus the four Slayer-shop pieces",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "CRAFTING",
+      "threshold": 55
+    },
+    "ingredients": [
+      {
+        "itemId": "BLACK_MASK",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Slayer_helmet"
+  },
+  {
+    "id": "ABYSSAL_BLUDGEON",
+    "displayName": "Abyssal bludgeon",
+    "gameItemId": 13263,
+    "type": "CRAFT",
+    "detail": "The three bludgeon pieces from the Abyssal Sire, combined",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 85
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Abyssal_bludgeon"
+  },
+  {
+    "id": "NECKLACE_OF_ANGUISH",
+    "displayName": "Necklace of anguish",
+    "gameItemId": 19547,
+    "type": "CRAFT",
+    "detail": "String a zenyte and enchant it",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "CRAFTING",
+      "threshold": 98
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Necklace_of_anguish"
+  },
+  {
+    "id": "TORMENTED_BRACELET",
+    "displayName": "Tormented bracelet",
+    "gameItemId": 19544,
+    "type": "CRAFT",
+    "detail": "Make a zenyte bracelet and enchant it",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "CRAFTING",
+      "threshold": 98
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Tormented_bracelet"
+  },
+  {
+    "id": "RING_OF_SUFFERING",
+    "displayName": "Ring of suffering",
+    "gameItemId": 19550,
+    "type": "CRAFT",
+    "detail": "Make a zenyte ring and enchant it",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "CRAFTING",
+      "threshold": 98
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ring_of_suffering"
+  },
+  {
+    "id": "BRIMSTONE_RING",
+    "displayName": "Brimstone ring",
+    "gameItemId": 22975,
+    "type": "CRAFT",
+    "detail": "Hydra's eye, fang and heart, combined",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 95
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Brimstone_ring"
+  },
+  {
+    "id": "TRIDENT_OF_THE_SWAMP",
+    "displayName": "Trident of the swamp",
+    "gameItemId": 12899,
+    "type": "CRAFT",
+    "detail": "A magic fang on a trident of the seas",
+    "ingredients": [
+      {
+        "itemId": "MAGIC_FANG",
+        "quantity": 1
+      },
+      {
+        "itemId": "TRIDENT_OF_THE_SEAS",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Trident_of_the_swamp"
   }
 ]

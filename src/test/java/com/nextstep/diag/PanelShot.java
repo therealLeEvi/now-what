@@ -9,6 +9,7 @@ import com.nextstep.data.TrainingMethodDatabase;
 import com.nextstep.engine.PathPlanner;
 import com.nextstep.engine.PrerequisiteResolver;
 import com.nextstep.model.Activity;
+import com.nextstep.model.ItemSource;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -125,7 +126,10 @@ public class PanelShot
 				else if ("item".equals(parts[0]))
 				{
 					row = 2;
-					select(combos.get(2), parts[1]);
+					// The item goal is a SearchPicker now, not a dropdown.
+					List<com.nextstep.SearchPicker> pickers = new ArrayList<>();
+					findAll(panel, com.nextstep.SearchPicker.class, pickers);
+					selectIn(pickers.get(0), parts[1]);
 				}
 				else
 				{
@@ -230,6 +234,29 @@ public class PanelShot
 				dumpResults((Container) c, acc);
 			}
 		}
+	}
+
+	/**
+	 * Picks an entry out of a {@link com.nextstep.SearchPicker} by id, which is
+	 * what the harness means by "item:TWISTED_BOW". The picker is a text field
+	 * and a filtered list, so there is no index to set - the entry is looked up
+	 * and handed back to it.
+	 */
+	@SuppressWarnings("unchecked")
+	private static void selectIn(com.nextstep.SearchPicker picker, String id)
+	{
+		for (Object o : picker.getEntries())
+		{
+			String key = o instanceof Activity ? ((Activity) o).getId()
+				: o instanceof ItemSource ? ((ItemSource) o).getId()
+				: String.valueOf(o);
+			if (key.equalsIgnoreCase(id))
+			{
+				picker.select(o);
+				return;
+			}
+		}
+		throw new IllegalArgumentException("no picker entry for " + id);
 	}
 
 	static void select(JComboBox combo, String id)
