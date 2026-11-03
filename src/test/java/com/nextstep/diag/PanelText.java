@@ -165,6 +165,16 @@ public class PanelText
 					spinners.get(1).setValue(Integer.parseInt(parts[2]));
 				}
 			}
+			else if ("base".equals(parts[0]))
+			{
+				row = 3;
+				spinners.get(2).setValue(Integer.parseInt(parts[1]));
+			}
+			else if ("total".equals(parts[0]))
+			{
+				row = 4;
+				spinners.get(3).setValue(Integer.parseInt(parts[1]));
+			}
 			else
 			{
 				row = 0;

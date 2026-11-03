@@ -14,7 +14,22 @@ public class Goal
 		/** Own N of an item (bank + inventory + equipment). itemId + targetQuantity. */
 		ITEM_QUANTITY,
 		/** Unlock/complete something already in the Activity database. activityId. */
-		ACTIVITY
+		ACTIVITY,
+		/**
+		 * Bring every skill up to targetLevel. targetLevel.
+		 * <p>
+		 * "I want 80+ in everything" is a different question from "I want 80
+		 * Thieving", and answering it one skill at a time means working out
+		 * which skills are short, in what order, by hand.
+		 */
+		BASE_STATS,
+		/**
+		 * Reach a total level. targetLevel holds the total, not a skill level.
+		 * <p>
+		 * Which levels to take is the whole question, and the answer is the
+		 * cheapest next level each time - see PathPlanner.
+		 */
+		TOTAL_LEVEL
 	}
 
 	private final Type type;
@@ -74,6 +89,20 @@ public class Goal
 	{
 		return new Goal(Type.ITEM_QUANTITY, null, 0, itemId.toUpperCase(), targetQuantity, null,
 			displayName + " x" + targetQuantity, allowTickManipulation, countOwned);
+	}
+
+	/** Every skill at {@code level} or better. */
+	public static Goal baseStats(int level, boolean allowTickManipulation)
+	{
+		return new Goal(Type.BASE_STATS, null, level, null, 0, null,
+			level + "+ in every skill", allowTickManipulation);
+	}
+
+	/** A total level target, not a single skill's level. */
+	public static Goal totalLevel(int total, boolean allowTickManipulation)
+	{
+		return new Goal(Type.TOTAL_LEVEL, null, total, null, 0, null,
+			total + " total level", allowTickManipulation);
 	}
 
 	public static Goal activity(String activityId, String displayName, boolean allowTickManipulation)

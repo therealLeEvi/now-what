@@ -14,6 +14,7 @@ import java.util.Set;
 public class PlayerState
 {
 	private final Map<String, Integer> skillLevels = new HashMap<>();
+	private final Map<String, Long> skillXp = new java.util.HashMap<>();
 	private final Set<String> completedQuests = new HashSet<>();
 	private int questPoints;
 	private int combatLevel;
@@ -36,6 +37,27 @@ public class PlayerState
 	public void setSkillLevel(String skill, int level)
 	{
 		skillLevels.put(skill.toUpperCase(), level);
+	}
+
+	/**
+	 * Current experience in a skill, or 0 when it is not known.
+	 * <p>
+	 * Levels alone were enough while every goal named one skill: you are 76
+	 * Thieving, you want 99, the xp between those is the plan. A total level
+	 * goal has to compare the <em>next</em> level in 23 skills against each
+	 * other, and "level 62" could be one xp short of 63 or the whole bracket
+	 * away. Without the xp the cheapest-first ordering is guesswork dressed as
+	 * arithmetic.
+	 */
+	public long getSkillXp(String skill)
+	{
+		Long xp = skillXp.get(skill.toUpperCase());
+		return xp == null ? 0 : xp;
+	}
+
+	public void setSkillXp(String skill, long xp)
+	{
+		skillXp.put(skill.toUpperCase(), xp);
 	}
 
 	public int getSkillLevel(String skill)

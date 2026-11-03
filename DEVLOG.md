@@ -846,6 +846,43 @@ Two rules held while writing them:
   with how many brothers you kill, and the dragon harpoon. A missing estimate
   reads as "we are not saying". An invented one reads as fact.
 
+## Goals that are not one skill
+
+Two goals the panel could not be asked: "I want 80+ in everything", and "I want
+2000 total". Both were answerable one skill at a time, which means doing the
+interesting part - working out *which* skills - by hand.
+
+**Base stats** is the simple one: find the skills below the floor, plan each,
+cheapest first. Cheapest, not lowest, because the point of the order is to get
+skills over the line and xp is what that costs - Runecraft 60 to 80 is less
+work than Agility 50 to 80 even though Agility is further behind.
+
+**Total level** is the one with a real decision in it. The rule is: take the
+cheapest next level, over and over, until you have enough. That is not a
+heuristic - because each skill's levels get dearer as it climbs, repeatedly
+taking the cheapest available level also gives the cheapest *set* of that many
+levels, and no arrangement beats it.
+
+Three things came out of building it:
+
+- **Levels alone were not enough.** PlayerState tracked level but not xp, and
+  "level 62" is anywhere from the start of the bracket to one xp short of the
+  end. Comparing the next level in 23 skills against each other on that basis
+  is guesswork with arithmetic on top, so `getSkillXp` went in and the plugin
+  now reads `client.getSkillExperience` alongside the level.
+- **Hitpoints counts but cannot be planned.** It is in the total, and its one
+  entry in methods.json has no rate and says why: it rises out of combat xp. A
+  plan reading "Hitpoints 70 to 73" would be telling someone to go and do
+  something that does not exist, so it is excluded from both goals.
+- **Sailing broke the greedy, and the fix was almost wrong twice.** Sailing's
+  early levels are the cheapest in the game, so the first version took all
+  twelve levels from it and returned a plan with no steps at all - there is no
+  Sailing data to turn into steps. The obvious fix, "only consider skills with
+  an xp/hr", then quietly dropped Slayer and Farming, which are rate-less *on
+  purpose* because Slayer comes a task at a time and Farming a run at a time.
+  The test is "has any method at all". Sailing is still counted in the total
+  and the plan says why no levels were taken there.
+
 ## Still to do before the hub PR
 
 Everything mechanical is done and committed. What is left needs a person:

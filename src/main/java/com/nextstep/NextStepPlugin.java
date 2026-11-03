@@ -257,6 +257,11 @@ public class NextStepPlugin extends Plugin
 				continue;
 			}
 			state.setSkillLevel(skill.name(), client.getRealSkillLevel(skill));
+			// The xp too, not just the level: a total level plan compares the
+			// cost of the next level in one skill against the next level in
+			// another, and "level 62" is anywhere from the start of the bracket
+			// to one xp short of the end of it.
+			state.setSkillXp(skill.name(), client.getSkillExperience(skill));
 		}
 
 		for (Quest quest : Quest.values())

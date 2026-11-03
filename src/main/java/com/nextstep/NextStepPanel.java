@@ -241,6 +241,8 @@ public class NextStepPanel extends PluginPanel
 	private final JComboBox<String> skillCombo;
 	private final JSpinner skillLevelSpinner;
 	private final SearchPicker<ItemSource> itemPicker;
+	private final JSpinner baseStatsSpinner;
+	private final JSpinner totalLevelSpinner;
 	private final JSpinner itemQuantitySpinner;
 	/**
 	 * Which of the two ways in the panel is open.
@@ -496,6 +498,33 @@ public class NextStepPanel extends PluginPanel
 				}
 			}));
 
+		// --- Goal: a floor under every skill ---
+		// "I want 80+ in everything" is a question the panel could not be asked.
+		// Answering it one skill at a time means working out which are short and
+		// in what order by hand, which is the part a plan is for.
+		baseStatsSpinner = new JSpinner(new SpinnerNumberModel(70, 2, 99, 1));
+		constrainSpinner(baseStatsSpinner);
+		stack(chooseContainer, goalBlock("Base stats", goalCaption("Every skill at least"),
+			baseStatsSpinner, "Plan path", e ->
+				renderPath(pathResolver.apply(Goal.baseStats(
+					(Integer) baseStatsSpinner.getValue(),
+					tickManipulationCheckbox.isSelected())))));
+
+		// --- Goal: a total level ---
+		// The lower bound is 33, which is every skill at 1 and Hitpoints at 10;
+		// the upper is every skill at 99. Outside that the number means nothing.
+		totalLevelSpinner = new JSpinner(new SpinnerNumberModel(1500, 33, 2376, 1));
+		// Plain digits. The default editor groups by locale, so 1500 renders as
+		// "1.500" for anyone in Europe - which reads as one and a half, not
+		// fifteen hundred.
+		totalLevelSpinner.setEditor(new JSpinner.NumberEditor(totalLevelSpinner, "0"));
+		constrainSpinner(totalLevelSpinner);
+		stack(chooseContainer, goalBlock("Total level", goalCaption("Reach a total of"),
+			totalLevelSpinner, "Plan path", e ->
+				renderPath(pathResolver.apply(Goal.totalLevel(
+					(Integer) totalLevelSpinner.getValue(),
+					tickManipulationCheckbox.isSelected())))));
+
 		pathResultContainer.setLayout(new BoxLayout(pathResultContainer, BoxLayout.Y_AXIS));
 		pathResultContainer.setBackground(ColorScheme.DARK_GRAY_COLOR);
 		pathResultContainer.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -602,6 +631,20 @@ public class NextStepPanel extends PluginPanel
 		java.awt.event.ActionListener action)
 	{
 		return goalBlock(caption, input, trailing, null, buttonText, action);
+	}
+
+	/**
+	 * The left half of a goal row that has no list to pick from - just a
+	 * sentence and the number that finishes it. "Every skill at least [80]"
+	 * reads as one thing, where a bare spinner under a heading reads as a
+	 * setting.
+	 */
+	private JLabel goalCaption(String text)
+	{
+		JLabel label = new JLabel(text);
+		label.setForeground(DETAIL);
+		label.setFont(SMALL_FONT);
+		return label;
 	}
 
 	/**

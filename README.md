@@ -20,6 +20,11 @@ would rather not choose, it will roll one for you, optionally within a category.
 - **an item** - the drop, the raid, or the Grand Exchange. Type to search it:
   "drag cl" finds Dragon claws, "seers ring" finds Seers' ring with or without
   the apostrophe
+- **base stats** - "every skill at 80". It finds the skills that fall short and
+  plans them cheapest first, so the list visibly shrinks
+- **a total level** - "2000 total". It takes the cheapest next level each time,
+  which is the cheapest set of that many levels there is, and tells you which
+  skills it chose
 
 The plan walks the requirement graph backwards. Asking for Zulrah finds Regicide,
 and Regicide's own unmet quest requirements under that, and the skill levels

@@ -10,7 +10,10 @@ import com.nextstep.model.PathStep;
 import com.nextstep.model.PlayerState;
 import com.nextstep.model.PrerequisiteChain;
 import com.nextstep.model.Requirement;
+import com.nextstep.model.TrainingMethod;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -144,12 +147,227 @@ public class PathPlanner
 				}
 				break;
 			}
+			case BASE_STATS:
+			{
+				List<Shortfall> shortfalls = new ArrayList<>();
+				for (String skill : PLANNABLE_SKILLS)
+				{
+					int current = state.getSkillLevel(skill);
+					if (current < goal.getTargetLevel())
+					{
+						shortfalls.add(new Shortfall(skill, current, goal.getTargetLevel(),
+							XpTable.xpBetween(current, goal.getTargetLevel())));
+					}
+				}
+				alreadyComplete = shortfalls.isEmpty();
+				if (!alreadyComplete)
+				{
+					// Cheapest first. The player asked for a floor, not an order,
+					// so the order is ours to choose - and the one that gets the
+					// most skills over the line soonest is the one that keeps the
+					// list visibly shrinking.
+					shortfalls.sort(Comparator.comparingLong(sf -> sf.xp));
+					long total = 0;
+					for (Shortfall sf : shortfalls)
+					{
+						total += sf.xp;
+					}
+					warnings.add(shortfalls.size() + " skill"
+						+ (shortfalls.size() == 1 ? " is" : "s are") + " below "
+						+ goal.getTargetLevel() + ", "
+						+ XpTable.formatXp(total) + " xp in all \u2014 cheapest first.");
+					for (Shortfall sf : shortfalls)
+					{
+						steps.addAll(skillPathPlanner.plan(sf.skill, sf.from, sf.to,
+							trainingMethodDatabase.getMethodsFor(sf.skill),
+							goal.isAllowTickManipulation(), warnings));
+					}
+				}
+				break;
+			}
+			case TOTAL_LEVEL:
+			{
+				// Every skill counts towards the total, but only a skill we can
+				// describe how to train is a candidate to take levels from.
+				// Sailing is the case that proved it: its early levels are the
+				// cheapest in the game, so the greedy took all twelve from it
+				// and produced a plan with no steps in it at all.
+				Map<String, Integer> levels = new LinkedHashMap<>();
+				List<String> untrainable = new ArrayList<>();
+				int current = 0;
+				for (String skill : PLANNABLE_SKILLS)
+				{
+					int level = state.getSkillLevel(skill);
+					current += level;
+					if (hasTrainingData(skill))
+					{
+						levels.put(skill, level);
+					}
+					else
+					{
+						untrainable.add(capitalize(skill));
+					}
+				}
+				// Hitpoints counts towards the total but cannot be chosen: it
+				// rises out of combat xp on its own. Counting it and then
+				// planning it would be telling the player to go and train
+				// something there is no way to go and train.
+				current += state.getSkillLevel("HITPOINTS");
+
+				int needed = goal.getTargetLevel() - current;
+				alreadyComplete = needed <= 0;
+				if (alreadyComplete)
+				{
+					warnings.add("Your total level is already " + current + ".");
+					break;
+				}
+
+				if (!untrainable.isEmpty())
+				{
+					warnings.add("No training data for " + String.join(", ", untrainable)
+						+ ", so no levels were planned there \u2014 they still count "
+						+ "towards your total.");
+				}
+
+				int ceiling = levels.size() * 99 + 99;
+				if (goal.getTargetLevel() > ceiling)
+				{
+					warnings.add("The highest total level these skills reach is " + ceiling
+						+ ", so " + goal.getTargetLevel() + " is not reachable.");
+				}
+
+				// Take the cheapest next level, over and over. Each skill's
+				// levels get dearer as it climbs, so repeatedly taking the
+				// cheapest available one is also the cheapest set of that many
+				// levels overall - there is no arrangement that beats it.
+				Map<String, Integer> targets = new LinkedHashMap<>(levels);
+				int taken = 0;
+				while (taken < needed)
+				{
+					String best = null;
+					long bestCost = Long.MAX_VALUE;
+					for (Map.Entry<String, Integer> entry : targets.entrySet())
+					{
+						int at = entry.getValue();
+						if (at >= 99)
+						{
+							continue;
+						}
+						long cost = XpTable.xpForLevel(at + 1) - Math.max(
+							XpTable.xpForLevel(at), state.getSkillXp(entry.getKey()));
+						if (cost < bestCost)
+						{
+							bestCost = cost;
+							best = entry.getKey();
+						}
+					}
+					if (best == null)
+					{
+						warnings.add("Every skill with training data is already 99 \u2014 "
+							+ (needed - taken) + " level"
+							+ (needed - taken == 1 ? "" : "s") + " short of "
+							+ goal.getTargetLevel() + ".");
+						break;
+					}
+					targets.put(best, targets.get(best) + 1);
+					taken++;
+				}
+
+				List<Shortfall> picked = new ArrayList<>();
+				for (Map.Entry<String, Integer> entry : targets.entrySet())
+				{
+					int from = levels.get(entry.getKey());
+					if (entry.getValue() > from)
+					{
+						picked.add(new Shortfall(entry.getKey(), from, entry.getValue(),
+							XpTable.xpBetween(from, entry.getValue())));
+					}
+				}
+				picked.sort(Comparator.comparingLong(sf -> sf.xp));
+
+				long total = 0;
+				for (Shortfall sf : picked)
+				{
+					total += sf.xp;
+				}
+				warnings.add(taken + " level" + (taken == 1 ? "" : "s")
+					+ " from " + current + " to " + (current + taken) + ", "
+					+ XpTable.formatXp(total) + " xp in all \u2014 the cheapest "
+					+ "next level each time.");
+
+				for (Shortfall sf : picked)
+				{
+					steps.addAll(skillPathPlanner.plan(sf.skill, sf.from, sf.to,
+						trainingMethodDatabase.getMethodsFor(sf.skill),
+						goal.isAllowTickManipulation(), warnings));
+				}
+				break;
+			}
 			default:
 				warnings.add("Unsupported goal type: " + goal.getType());
 				alreadyComplete = false;
 		}
 
 		return new Path(goal, alreadyComplete, steps, warnings, requirementsAlreadyMet);
+	}
+
+	/**
+	 * The skills a plan can actually send someone to train.
+	 * <p>
+	 * Hitpoints is absent on purpose. It counts towards a total level and it is
+	 * in the game's skill list, but there is no such thing as going and
+	 * training it - it rises out of combat xp, which is why its one entry in
+	 * methods.json has no rate and says so. A total level plan that said
+	 * "Hitpoints 70 to 73" would be telling the player to do something that
+	 * cannot be done.
+	 * <p>
+	 * Sailing is present. There is no Sailing data yet, so asking for it
+	 * produces SkillPathPlanner's "no training method data" warning - which is
+	 * the honest answer to "get every skill to 80", and better than quietly
+	 * leaving a skill out of a goal that said "every".
+	 */
+	private static final List<String> PLANNABLE_SKILLS = java.util.Collections.unmodifiableList(
+		java.util.Arrays.asList(
+			"ATTACK", "DEFENCE", "STRENGTH", "RANGED", "PRAYER", "MAGIC",
+			"COOKING", "WOODCUTTING", "FLETCHING", "FISHING", "FIREMAKING", "CRAFTING",
+			"SMITHING", "MINING", "HERBLORE", "AGILITY", "THIEVING", "SLAYER", "FARMING",
+			"RUNECRAFT", "HUNTER", "CONSTRUCTION", "SAILING"));
+
+	/**
+	 * Whether methods.json has anything at all to say about training this.
+	 * <p>
+	 * Deliberately "any method", not "any method with an xp/hr". Slayer and
+	 * Farming are recorded without rates on purpose - Slayer comes a task at a
+	 * time and Farming a run at a time, and an hourly figure would be a
+	 * fiction - but "do Slayer tasks" is still a real answer to "where do I get
+	 * a level". Requiring a rate excluded both of them from total level plans,
+	 * which is a worse answer than one without a time estimate on it.
+	 */
+	private boolean hasTrainingData(String skill)
+	{
+		return !trainingMethodDatabase.getMethodsFor(skill).isEmpty();
+	}
+
+	private static String capitalize(String skill)
+	{
+		return skill.charAt(0) + skill.substring(1).toLowerCase(java.util.Locale.ROOT);
+	}
+
+	/** One skill that is short of where a goal needs it, and what closing that costs. */
+	private static final class Shortfall
+	{
+		private final String skill;
+		private final int from;
+		private final int to;
+		private final long xp;
+
+		private Shortfall(String skill, int from, int to, long xp)
+		{
+			this.skill = skill;
+			this.from = from;
+			this.to = to;
+			this.xp = xp;
+		}
 	}
 
 	/**
@@ -251,7 +469,7 @@ public class PathPlanner
 		steps.add(new PathStep(PathStep.Type.INFO, describeRequirement(req), req.getHint(), null));
 	}
 
-	/** Short human-readable label for a single requirement, used both standalone and inside ANY_OF choices. */
+	/** Shortfall human-readable label for a single requirement, used both standalone and inside ANY_OF choices. */
 	private String describeRequirement(Requirement req)
 	{
 		switch (req.getType())

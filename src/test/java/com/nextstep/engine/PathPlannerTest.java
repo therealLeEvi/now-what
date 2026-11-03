@@ -177,4 +177,252 @@ public class PathPlannerTest
 
 		assertTrue(path.getWarnings().stream().anyMatch(w -> w.contains("Circular")));
 	}
+
+	/**
+	 * Every skill that has a method gets one, so a base-stats or total-level
+	 * plan has something to say about all of them rather than a wall of
+	 * "no training method data".
+	 */
+	private static PathPlanner everySkillTrainable()
+	{
+		java.util.List<TrainingMethod> methods = new java.util.ArrayList<>();
+		for (String skill : Arrays.asList("ATTACK", "DEFENCE", "STRENGTH", "RANGED", "PRAYER",
+			"MAGIC", "COOKING", "WOODCUTTING", "FLETCHING", "FISHING", "FIREMAKING", "CRAFTING",
+			"SMITHING", "MINING", "HERBLORE", "AGILITY", "THIEVING", "SLAYER", "FARMING",
+			"RUNECRAFT", "HUNTER", "CONSTRUCTION", "SAILING"))
+		{
+			methods.add(new TrainingMethod(skill, 1, 99, "Train " + skill, 50000, null, null,
+				Intensity.NORMAL));
+		}
+		return new PathPlanner(Collections.emptyList(),
+			new PrerequisiteResolver(Collections.emptyList()),
+			TrainingMethodDatabase.of(methods),
+			ItemSourceDatabase.of(Collections.emptyList()));
+	}
+
+	private static PlayerState allSkillsAt(int level)
+	{
+		PlayerState state = new PlayerState();
+		for (String skill : Arrays.asList("ATTACK", "DEFENCE", "STRENGTH", "HITPOINTS", "RANGED",
+			"PRAYER", "MAGIC", "COOKING", "WOODCUTTING", "FLETCHING", "FISHING", "FIREMAKING",
+			"CRAFTING", "SMITHING", "MINING", "HERBLORE", "AGILITY", "THIEVING", "SLAYER",
+			"FARMING", "RUNECRAFT", "HUNTER", "CONSTRUCTION", "SAILING"))
+		{
+			state.setSkillLevel(skill, level);
+		}
+		return state;
+	}
+
+	@Test
+	public void baseStatsGoalAlreadyMetIsReportedAsComplete()
+	{
+		Path path = everySkillTrainable().plan(Goal.baseStats(70, false), allSkillsAt(75));
+
+		assertTrue(path.isAlreadyComplete());
+		assertTrue(path.getSteps().isEmpty());
+	}
+
+	/** Only the skills that fall short, and nothing for the ones that do not. */
+	@Test
+	public void baseStatsGoalPlansOnlyTheSkillsBelowTheFloor()
+	{
+		PlayerState state = allSkillsAt(90);
+		state.setSkillLevel("AGILITY", 50);
+		state.setSkillLevel("RUNECRAFT", 60);
+
+		Path path = everySkillTrainable().plan(Goal.baseStats(80, false), state);
+
+		java.util.Set<String> skills = new java.util.LinkedHashSet<>();
+		for (PathStep step : path.getSteps())
+		{
+			skills.add(step.getSkill());
+		}
+		assertEquals(new java.util.LinkedHashSet<>(Arrays.asList("RUNECRAFT", "AGILITY")), skills);
+	}
+
+	/**
+	 * Cheapest first. Runecraft 60 to 80 is less xp than Agility 50 to 80, so
+	 * it comes first even though Agility is the lower level - the point of the
+	 * order is to get skills over the line, and xp is what that costs.
+	 */
+	@Test
+	public void baseStatsGoalPutsTheCheapestSkillFirst()
+	{
+		PlayerState state = allSkillsAt(90);
+		state.setSkillLevel("AGILITY", 50);
+		state.setSkillLevel("RUNECRAFT", 60);
+
+		Path path = everySkillTrainable().plan(Goal.baseStats(80, false), state);
+
+		assertEquals("RUNECRAFT", path.getSteps().get(0).getSkill());
+	}
+
+	/** Hitpoints is not something you can be sent to train. */
+	@Test
+	public void baseStatsGoalNeverPlansHitpoints()
+	{
+		PlayerState state = allSkillsAt(90);
+		state.setSkillLevel("HITPOINTS", 40);
+
+		Path path = everySkillTrainable().plan(Goal.baseStats(80, false), state);
+
+		assertTrue("hitpoints rises out of combat xp and cannot be planned",
+			path.isAlreadyComplete());
+	}
+
+	@Test
+	public void totalLevelGoalAlreadyMetIsReportedAsComplete()
+	{
+		// 24 skills at 50 is a total of 1200.
+		Path path = everySkillTrainable().plan(Goal.totalLevel(1000, false), allSkillsAt(50));
+
+		assertTrue(path.isAlreadyComplete());
+	}
+
+	/**
+	 * The levels asked for are the levels planned - no more, to avoid sending
+	 * someone further than they asked, and no fewer.
+	 */
+	@Test
+	public void totalLevelGoalTakesExactlyTheLevelsAskedFor()
+	{
+		PlayerState state = allSkillsAt(50);
+		Path path = everySkillTrainable().plan(Goal.totalLevel(1200 + 7, false), state);
+
+		int gained = 0;
+		for (PathStep step : path.getSteps())
+		{
+			gained += step.getLevelTo() - step.getLevelFrom();
+		}
+		assertEquals(7, gained);
+	}
+
+	/**
+	 * Cheapest next level each time, so the levels come out of the lowest
+	 * skills - which is what makes a total level goal worth asking rather than
+	 * planning 23 skills by hand.
+	 */
+	@Test
+	public void totalLevelGoalTakesItsLevelsFromTheCheapestSkills()
+	{
+		PlayerState state = allSkillsAt(90);
+		state.setSkillLevel("AGILITY", 30);
+		state.setSkillLevel("RUNECRAFT", 31);
+
+		Path path = everySkillTrainable().plan(Goal.totalLevel(totalOf(state) + 4, false), state);
+
+		java.util.Set<String> skills = new java.util.LinkedHashSet<>();
+		for (PathStep step : path.getSteps())
+		{
+			skills.add(step.getSkill());
+		}
+		assertEquals(new java.util.LinkedHashSet<>(Arrays.asList("AGILITY", "RUNECRAFT")), skills);
+	}
+
+	/** A target past every skill being 99 is said to be out of reach, not silently clipped. */
+	@Test
+	public void totalLevelGoalSaysWhenTheTargetCannotBeReached()
+	{
+		PlayerState state = allSkillsAt(99);
+		Path path = everySkillTrainable().plan(Goal.totalLevel(3000, false), state);
+
+		boolean said = false;
+		for (String warning : path.getWarnings())
+		{
+			if (warning.contains("not reachable") || warning.contains("short of"))
+			{
+				said = true;
+			}
+		}
+		assertTrue("expected a warning about the target being out of reach, got "
+			+ path.getWarnings(), said);
+	}
+
+	private static int totalOf(PlayerState state)
+	{
+		int total = 0;
+		for (String skill : Arrays.asList("ATTACK", "DEFENCE", "STRENGTH", "HITPOINTS", "RANGED",
+			"PRAYER", "MAGIC", "COOKING", "WOODCUTTING", "FLETCHING", "FISHING", "FIREMAKING",
+			"CRAFTING", "SMITHING", "MINING", "HERBLORE", "AGILITY", "THIEVING", "SLAYER",
+			"FARMING", "RUNECRAFT", "HUNTER", "CONSTRUCTION", "SAILING"))
+		{
+			total += state.getSkillLevel(skill);
+		}
+		return total;
+	}
+
+	/**
+	 * Sailing is the case this exists for. Its early levels are the cheapest in
+	 * the game, so a greedy that only looked at cost took every level from it
+	 * and returned a plan with no steps in it - there is no Sailing data to
+	 * turn into steps. The levels still count towards the total, so the plan
+	 * says so rather than quietly planning something else.
+	 */
+	@Test
+	public void totalLevelGoalSkipsASkillItCannotDescribeTraining()
+	{
+		PlayerState state = allSkillsAt(90);
+		state.setSkillLevel("SAILING", 1);
+
+		// everySkillTrainable() minus Sailing.
+		java.util.List<TrainingMethod> methods = new java.util.ArrayList<>();
+		for (String skill : Arrays.asList("ATTACK", "DEFENCE", "STRENGTH", "RANGED", "PRAYER",
+			"MAGIC", "COOKING", "WOODCUTTING", "FLETCHING", "FISHING", "FIREMAKING", "CRAFTING",
+			"SMITHING", "MINING", "HERBLORE", "AGILITY", "THIEVING", "SLAYER", "FARMING",
+			"RUNECRAFT", "HUNTER", "CONSTRUCTION"))
+		{
+			methods.add(new TrainingMethod(skill, 1, 99, "Train " + skill, 50000, null, null,
+				Intensity.NORMAL));
+		}
+		PathPlanner planner = new PathPlanner(Collections.emptyList(),
+			new PrerequisiteResolver(Collections.emptyList()),
+			TrainingMethodDatabase.of(methods),
+			ItemSourceDatabase.of(Collections.emptyList()));
+
+		Path path = planner.plan(Goal.totalLevel(totalOf(state) + 3, false), state);
+
+		assertTrue("the plan should not be empty", !path.getSteps().isEmpty());
+		for (PathStep step : path.getSteps())
+		{
+			assertTrue("no level should have been taken from Sailing",
+				!"SAILING".equals(step.getSkill()));
+		}
+		boolean saidSo = false;
+		for (String warning : path.getWarnings())
+		{
+			if (warning.contains("Sailing"))
+			{
+				saidSo = true;
+			}
+		}
+		assertTrue("expected the plan to say why Sailing was skipped, got "
+			+ path.getWarnings(), saidSo);
+	}
+
+	/**
+	 * A rate-less method is still a method. Slayer comes a task at a time and
+	 * Farming a run at a time, so neither carries an xp/hr - but "do Slayer
+	 * tasks" is a real answer, and requiring a rate used to drop both skills
+	 * out of total level plans entirely.
+	 */
+	@Test
+	public void totalLevelGoalWillTakeLevelsFromARatelessSkill()
+	{
+		PlayerState state = allSkillsAt(90);
+		state.setSkillLevel("SLAYER", 20);
+
+		java.util.List<TrainingMethod> methods = new java.util.ArrayList<>();
+		methods.add(new TrainingMethod("SLAYER", 1, 99, "Slayer tasks", null, null, null,
+			Intensity.NORMAL));
+		methods.add(new TrainingMethod("MINING", 1, 99, "Mine", 50000, null, null,
+			Intensity.NORMAL));
+		PathPlanner planner = new PathPlanner(Collections.emptyList(),
+			new PrerequisiteResolver(Collections.emptyList()),
+			TrainingMethodDatabase.of(methods),
+			ItemSourceDatabase.of(Collections.emptyList()));
+
+		Path path = planner.plan(Goal.totalLevel(totalOf(state) + 2, false), state);
+
+		assertEquals("SLAYER", path.getSteps().get(0).getSkill());
+	}
 }
