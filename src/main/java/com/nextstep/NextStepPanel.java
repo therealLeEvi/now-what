@@ -26,6 +26,7 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -244,6 +245,19 @@ public class NextStepPanel extends PluginPanel
 	private final JSpinner totalLevelSpinner;
 	private final JSpinner itemQuantitySpinner;
 	/**
+	 * The player's real levels, for telling which plan steps are behind them.
+	 * Empty when logged out, which means nothing is finished - the honest answer
+	 * when the panel has nothing to go on.
+	 */
+	private Map<String, Integer> levels = java.util.Collections.emptyMap();
+	/**
+	 * Whether finished steps are listed or folded away. Folded by default: a
+	 * base-stats plan over thirteen skills is long enough that scrolling past
+	 * the part you have already done to reach the part you are on is the main
+	 * thing wrong with it.
+	 */
+	private boolean showFinishedSteps;
+	/**
 	 * Which of the two ways in the panel is open.
 	 * <p>
 	 * The sidebar used to open straight onto three dropdowns, which answers
@@ -390,6 +404,21 @@ public class NextStepPanel extends PluginPanel
 
 		// --- Goal: an existing activity (quest/diary/pvm/etc) ---
 		stack(chooseContainer, sectionHeader("Plan a path to\u2026"));
+
+		// The way back, and the roll.
+		//
+		// This screen had neither: once you picked "Plan a path" the opening
+		// fork was gone for the rest of the session, and with it the only route
+		// to a random suggestion - which is the half of the panel meant for the
+		// player who has no goal in mind. Small, and in one row, because it is a
+		// way out of this screen rather than part of the form.
+		stack(chooseContainer, linkRow(java.util.Arrays.asList(
+			actionLink("\u2190 Back", () -> setMode(Mode.START)),
+			actionLink("Surprise me", () ->
+			{
+				setMode(Mode.RANDOM);
+				roll();
+			}))));
 
 		tickManipulationCheckbox = new JCheckBox("Use tick-manipulation methods");
 		tickManipulationCheckbox.setBackground(ColorScheme.DARK_GRAY_COLOR);
@@ -811,10 +840,17 @@ public class NextStepPanel extends PluginPanel
 		String caption = "Step " + number;
 		if (step.getXpCost() > 0)
 		{
-			return caption + " \u00b7 " + XpTable.formatXp(step.getXpCost()) + " xp";
+			caption = caption + " \u00b7 " + XpTable.formatXp(step.getXpCost()) + " xp";
 		}
-		String kind = prefixFor(step.getType()).replace("[", "").replace("]", "").trim();
-		return kind.isEmpty() ? caption : caption + " \u00b7 " + kind;
+		else
+		{
+			String kind = prefixFor(step.getType()).replace("[", "").replace("]", "").trim();
+			caption = kind.isEmpty() ? caption : caption + " \u00b7 " + kind;
+		}
+		// Reached only while finished steps are being shown, since otherwise
+		// they are not in the list to caption. Without it they read as work
+		// still to do, which is the opposite of why they were unfolded.
+		return isFinished(step) ? caption + " \u00b7 done" : caption;
 	}
 
 	/** Drops the rendered plan and puts the goal pickers back in view. */
@@ -1280,6 +1316,11 @@ public class NextStepPanel extends PluginPanel
 	 */
 	private void renderPath(Path path)
 	{
+		renderPath(path, true);
+	}
+
+	private void renderPath(Path path, boolean scrollToTop)
+	{
 		lastPath = path;
 		optionBodiesShown.clear();
 		pathResultContainer.removeAll();
@@ -1359,6 +1400,37 @@ public class NextStepPanel extends PluginPanel
 		{
 			int i = 1;
 			List<PathStep> steps = path.getSteps();
+
+			// Steps the player is already past come out of the list, so what is
+			// left is what there is left to do. They are a link away, not gone:
+			// a plan that quietly drops things is a plan you cannot check.
+			int done = finishedCount(path);
+			if (done > 0)
+			{
+				stack(pathResultContainer, doneLink(
+					showFinishedSteps
+						? "Hide the " + done + " finished"
+						: done + " step" + (done == 1 ? "" : "s") + " done already "
+							+ "\u2014 show " + (done == 1 ? "it" : "them")));
+				if (!showFinishedSteps)
+				{
+					List<PathStep> left = new ArrayList<>();
+					for (PathStep step : steps)
+					{
+						if (!isFinished(step))
+						{
+							left.add(step);
+						}
+					}
+					steps = left;
+				}
+			}
+			if (steps.isEmpty() && done > 0 && !showFinishedSteps)
+			{
+				stack(pathResultContainer, resultLine("Every step in this plan is behind you "
+					+ "\u2014 plan it again to see what is next.",
+					ColorScheme.PROGRESS_COMPLETE_COLOR, 0));
+			}
 			for (int at = 0; at < steps.size(); at++)
 			{
 				PathStep step = steps.get(at);
@@ -1443,6 +1515,10 @@ public class NextStepPanel extends PluginPanel
 		SwingUtilities.invokeLater(() ->
 		{
 			sinkFooter();
+			if (!scrollToTop)
+			{
+				return;
+			}
 			int visible = Math.min(pathResultContainer.getHeight(), scrollPane.getViewport().getHeight());
 			pathResultContainer.scrollRectToVisible(new Rectangle(0, 0, 1, visible));
 		});
@@ -2430,6 +2506,24 @@ public class NextStepPanel extends PluginPanel
 	}
 
 	/** Opens or closes a merged run of level brackets. */
+	/**
+	 * Folds the steps the player is already past away, or brings them back.
+	 * <p>
+	 * Its own state rather than an entry in {@code expandedSteps}: that set is
+	 * keyed by step, and this is one switch for the whole plan.
+	 */
+	private JLabel doneLink(String text)
+	{
+		JLabel link = resultLine(text, QUIET_LINK, 10);
+		link.setFont(SMALL_FONT);
+		makeClickable(link, () ->
+		{
+			showFinishedSteps = !showFinishedSteps;
+			renderPath(lastPath);
+		});
+		return link;
+	}
+
 	private JLabel runLink(String runKey, String text)
 	{
 		JLabel link = resultLine(text, QUIET_LINK, 10);
@@ -2864,6 +2958,70 @@ public class NextStepPanel extends PluginPanel
 	/**
 	 * Called from the Swing thread by NextStepPlugin after each refresh.
 	 */
+	/**
+	 * The player's current levels, pushed in whenever the client's change.
+	 * <p>
+	 * A plan is rendered once and then sat there while the player went and did
+	 * it, so a step stayed on screen after it was finished and the list only
+	 * ever got longer to scroll through. The rendered plan is rebuilt when, and
+	 * only when, this changes which steps count as finished - every xp drop
+	 * arrives here, and rebuilding the panel on each one would make it flicker
+	 * for no reason.
+	 */
+	public void setProgress(Map<String, Integer> currentLevels)
+	{
+		Map<String, Integer> was = levels;
+		levels = currentLevels == null
+			? java.util.Collections.emptyMap()
+			: new java.util.HashMap<>(currentLevels);
+		if (lastPath == null)
+		{
+			return;
+		}
+		Map<String, Integer> now = levels;
+		levels = was;
+		int before = finishedCount(lastPath);
+		levels = now;
+		if (finishedCount(lastPath) != before)
+		{
+			// Not scrolled to the top: this re-render was not asked for, and
+			// yanking the view while the player is mid-read is worse than the
+			// stale step it is fixing.
+			renderPath(lastPath, false);
+		}
+	}
+
+	/**
+	 * Whether the player is already past this step.
+	 * <p>
+	 * Only skill training can be judged. A quest, a purchase or a boss kill has
+	 * no level to compare, and guessing at one would hide a step that still
+	 * needs doing - so those are never folded away.
+	 */
+	private boolean isFinished(PathStep step)
+	{
+		if (step.getType() != PathStep.Type.TRAIN_SKILL || step.getSkill() == null
+			|| step.getLevelTo() <= 0 || levels.isEmpty())
+		{
+			return false;
+		}
+		Integer at = levels.get(step.getSkill().toUpperCase(Locale.ROOT));
+		return at != null && at >= step.getLevelTo();
+	}
+
+	private int finishedCount(Path path)
+	{
+		int done = 0;
+		for (PathStep step : path.getSteps())
+		{
+			if (isFinished(step))
+			{
+				done++;
+			}
+		}
+		return done;
+	}
+
 	public void update(List<Activity> almostAvailable)
 	{
 		update(java.util.Collections.emptyList(), almostAvailable);

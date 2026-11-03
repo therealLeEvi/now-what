@@ -60,6 +60,12 @@ public class PlayerState
 		skillXp.put(skill.toUpperCase(), xp);
 	}
 
+	/** Every level read from the client, for the panel to mark finished steps. */
+	public Map<String, Integer> getSkillLevels()
+	{
+		return java.util.Collections.unmodifiableMap(skillLevels);
+	}
+
 	public int getSkillLevel(String skill)
 	{
 		return skillLevels.getOrDefault(skill.toUpperCase(), 1);

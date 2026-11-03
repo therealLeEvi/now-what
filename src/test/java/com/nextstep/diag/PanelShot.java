@@ -22,6 +22,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import net.runelite.client.ui.PluginPanel;
 
 /**
  * Renders NextStepPanel offline at real sidebar width so the layout can be
@@ -152,12 +153,20 @@ public class PanelShot
 			List<java.awt.Container> results = new ArrayList<>();
 			dumpResults(panel, results);
 
+			// PluginPanel is PANEL_WIDTH + SCROLLBAR_WIDTH wide on the outside by
+			// design - 225 of viewport and 17 for the scrollbar - so comparing
+			// its preferred width against the frame width reported an overflow
+			// on every single run. It cried wolf for long enough to be believed
+			// once and chased as a bug. What actually matters is whether
+			// anything inside the viewport is too wide for it, and that is
+			// PanelWidthTest's job, component by component.
 			Dimension pref = panel.getPreferredSize();
+			int sidebar = PluginPanel.PANEL_WIDTH + PluginPanel.SCROLLBAR_WIDTH;
 			System.out.println("panel preferred size = " + pref.width + "x" + pref.height
-				+ "  (frame width " + width + ")");
-			System.out.println(pref.width > width
-				? "!! content wider than the sidebar -> horizontal scrolling"
-				: "ok: content fits the sidebar width");
+				+ "  (frame width " + width + ", a real sidebar is " + sidebar + " outside)");
+			System.out.println(pref.width > sidebar
+				? "!! wider than a sidebar -> run PanelWidthTest to find what overflows"
+				: "ok: fits a sidebar");
 
 			BufferedImage img = new BufferedImage(panel.getWidth(), panel.getHeight(),
 				BufferedImage.TYPE_INT_RGB);

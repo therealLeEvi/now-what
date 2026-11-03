@@ -206,6 +206,9 @@ public class NextStepPlugin extends Plugin
 			SwingUtilities.invokeLater(() ->
 			{
 				Set<Activity.Category> hidden = hiddenCategories();
+				// Before the suggestions, because this can rebuild a rendered
+				// plan and the update below repaints around it.
+				panel.setProgress(state.getSkillLevels());
 				panel.update(
 					suggestionEngine.getAvailableNow(activityDatabase.getAllActivities(), state, hidden),
 					suggestionEngine.getAlmostAvailable(activityDatabase.getAllActivities(), state, hidden)
