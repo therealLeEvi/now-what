@@ -1,4 +1,4 @@
-# Next Step
+# Now What
 
 A RuneLite sidebar plugin that answers the two questions a bank screen tends to
 produce: **"what should I do tonight?"** and **"how do I actually get that?"**
@@ -69,7 +69,7 @@ ranking them by xp and leaving you to find out.
 ## Installing
 
 Once it is on the RuneLite plugin hub: **Configuration** (the wrench) →
-**Plugin Hub** → search for *Next Step* → **Install**.
+**Plugin Hub** → search for *Now What* → **Install**.
 
 To build and run it from source you need JDK 11 or later:
 
@@ -96,7 +96,7 @@ not made by or affiliated with Jagex.
 
 ## Development
 
-The JSON under `src/main/resources/com/nextstep/` is generated, not hand-edited.
+The JSON under `src/main/resources/com/nowwhat/` is generated, not hand-edited.
 `tools/` holds the generators and explains how to regenerate it; `ContentDatabaseTest`
 is what catches a dangling quest reference or a bad skill name afterwards.
 

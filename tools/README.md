@@ -14,7 +14,7 @@ python tools/gen_data.py
 python tools/gen_methods.py
 ```
 
-That rewrites both `src/main/resources/com/nextstep/activities.json` and
+That rewrites both `src/main/resources/com/nowwhat/activities.json` and
 `item-sources.json`. Then run `./gradlew test` — `ContentDatabaseTest` is what
 catches a dangling quest reference or a bad skill name, and those failures are
 otherwise invisible at runtime.
@@ -135,7 +135,7 @@ Same applies to `CA_<TIER>` and `CombatAchievementTracker`.
 Regenerates both icons as pixel art:
 
 ```
-java tools/MakeIcon.java src/main/resources/com/nextstep/icon.png      # 16x16 sidebar nav button
+java tools/MakeIcon.java src/main/resources/com/nowwhat/icon.png      # 16x16 sidebar nav button
 java tools/MakeIcon.java icon.png 3                                    # 48x48 plugin hub listing
 ```
 

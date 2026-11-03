@@ -3,14 +3,14 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 /**
- * Pixel-art generator for the Next Step icons. Drawn by hand at 16x16 rather
+ * Pixel-art generator for the Now What icons. Drawn by hand at 16x16 rather
  * than rendered with Graphics2D, because antialiasing at this size turns
  * everything to mush on RuneLite's dark sidebar.
  * <p>
  * Usage: {@code java tools/MakeIcon.java <out.png> [scale]}
  * <ul>
  * <li>scale 1 (the default) is the sidebar nav button,
- *     {@code src/main/resources/com/nextstep/icon.png}.
+ *     {@code src/main/resources/com/nowwhat/icon.png}.
  * <li>scale 3 is the plugin hub's listing icon, {@code icon.png} in the
  *     repository root, which the hub allows up to 48x72.
  * </ul>

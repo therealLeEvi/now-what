@@ -1860,6 +1860,11 @@ be worth having.
 Everything below is in git and building. Last brought up to date on
 2026-11-03.
 
+**Renamed to Now What on 2026-11-03.** Another plugin called Next Step, with the
+same `com.nextstep.NextStepPlugin` class, was already on the Plugin Hub. The
+package is now `com.nowwhat`, the settings group `nowwhat`. Everything above
+this section is history and still uses the old names.
+
 ### Working
 
 - Reads from the client: skill levels, completed quests, **quest points**,

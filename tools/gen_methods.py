@@ -474,7 +474,7 @@ OUT.sort(key=lambda x: (ORDER.index(x["skill"]), x["minLevel"], x["maxLevel"]))
 
 body = ",\n".join("  " + json.dumps(e, indent=2, ensure_ascii=False).replace("\n", "\n  ")
                   for e in OUT)
-io.open('src/main/resources/com/nextstep/methods.json', 'w', encoding='utf-8').write(
+io.open('src/main/resources/com/nowwhat/methods.json', 'w', encoding='utf-8').write(
     "[\n" + body + "\n]\n")
 print("wrote %d methods | %d wilderness | %d tick-manip" % (
     len(OUT),

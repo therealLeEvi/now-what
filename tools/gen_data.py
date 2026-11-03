@@ -1058,7 +1058,7 @@ for cid, name, source, reqs in COLLECTION:
     entry["requirements"] = out
     activities.append(entry)
 
-io.open('src/main/resources/com/nextstep/activities.json', 'w', encoding='utf-8', newline='\n').write(
+io.open('src/main/resources/com/nowwhat/activities.json', 'w', encoding='utf-8', newline='\n').write(
     json.dumps(activities, indent=2, ensure_ascii=False) + "\n")
 
 # ---- items ----
@@ -1318,7 +1318,7 @@ for iid, display, game_id, detail, req, ingredients in CRAFTED:
     entry["wikiUrl"] = wiki_url(display)
     items.append(entry)
 
-io.open('src/main/resources/com/nextstep/item-sources.json', 'w', encoding='utf-8', newline='\n').write(
+io.open('src/main/resources/com/nowwhat/item-sources.json', 'w', encoding='utf-8', newline='\n').write(
     json.dumps(items, indent=2, ensure_ascii=False) + "\n")
 
 print("activities:", len(activities), " items:", len(items))

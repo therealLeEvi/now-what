@@ -9,7 +9,7 @@ the BSD 2-Clause licence in [LICENSE](LICENSE).
 
 ## The bundled content database
 
-`src/main/resources/com/nextstep/activities.json`, `methods.json` and
+`src/main/resources/com/nowwhat/activities.json`, `methods.json` and
 `item-sources.json` describe quest and activity requirements, xp rates, drop
 sources and recommended setups. That information is taken from the
 [Old School RuneScape Wiki](https://oldschool.runescape.wiki/), which

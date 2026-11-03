@@ -2,11 +2,11 @@ plugins {
 	id 'java'
 }
 
-group = 'com.nextstep'
+group = 'com.nowwhat'
 version = '1.0'
 
 def runeLiteVersion = 'latest.release'
-def pluginMainClass = 'com.nextstep.NextStepPluginTest'
+def pluginMainClass = 'com.nowwhat.NowWhatPluginTest'
 
 repositories {
 	mavenLocal()
@@ -88,7 +88,7 @@ tasks.named('check') {
 // two builds at once. A jar named for this launch is never written again, and a
 // jar still held open by a running client cannot be deleted on Windows, so the
 // clean-up below only removes the ones no client is using.
-def runJarName = "next-step-run-${System.currentTimeMillis()}.jar"
+def runJarName = "now-what-run-${System.currentTimeMillis()}.jar"
 tasks.register('runJar', Jar) {
 	from sourceSets.main.output
 	from sourceSets.test.output
@@ -103,7 +103,7 @@ tasks.register('runJar', Jar) {
 // RuneLite dev mode: launches a real client with this plugin side-loaded.
 tasks.register('run', JavaExec) {
 	group = 'application'
-	description = 'Runs a RuneLite client with the Next Step plugin side-loaded.'
+	description = 'Runs a RuneLite client with the Now What plugin side-loaded.'
 	dependsOn 'runJar'
 	def compiled = sourceSets.main.output.files + sourceSets.test.output.files
 	classpath = files(tasks.named('runJar').flatMap { it.archiveFile }) +
@@ -118,35 +118,35 @@ tasks.register('run', JavaExec) {
 
 tasks.register('plandiag', JavaExec) {
 	classpath = sourceSets.test.runtimeClasspath
-	mainClass = 'com.nextstep.diag.PlanDiag'
+	mainClass = 'com.nowwhat.diag.PlanDiag'
 }
 
 tasks.register('panelshot', JavaExec) {
 	classpath = sourceSets.test.runtimeClasspath
-	mainClass = 'com.nextstep.diag.PanelShot'
+	mainClass = 'com.nowwhat.diag.PanelShot'
 }
 
 tasks.register('paneltext', JavaExec) {
 	classpath = sourceSets.test.runtimeClasspath
-	mainClass = 'com.nextstep.diag.PanelText'
+	mainClass = 'com.nowwhat.diag.PanelText'
 }
 
 tasks.register('iconcoverage', JavaExec) {
 	classpath = sourceSets.test.runtimeClasspath
-	mainClass = 'com.nextstep.diag.IconCoverage'
+	mainClass = 'com.nowwhat.diag.IconCoverage'
 }
 
 // Reads an item id out of RuneLite's ItemID constants, which is where every
 // gameItemId in item-sources.json is supposed to come from rather than memory.
-// Regenerates src/main/resources/com/nextstep/item-names.txt, the item table the
+// Regenerates src/main/resources/com/nowwhat/item-names.txt, the item table the
 // plugin ships in place of reading ItemID by reflection. Run it after changing
 // gear or supply text; ItemNamesTableTest fails until you do.
 tasks.register('itemnames', JavaExec) {
 	classpath = sourceSets.test.runtimeClasspath
-	mainClass = 'com.nextstep.data.ItemNamesTable'
+	mainClass = 'com.nowwhat.data.ItemNamesTable'
 }
 
 tasks.register('itemid', JavaExec) {
 	classpath = sourceSets.test.runtimeClasspath
-	mainClass = 'com.nextstep.diag.ItemIdLookup'
+	mainClass = 'com.nowwhat.diag.ItemIdLookup'
 }
