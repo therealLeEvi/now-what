@@ -4,27 +4,27 @@ A RuneLite sidebar plugin that answers the two questions a bank screen tends to
 produce: **"what should I do tonight?"** and **"how do I actually get that?"**
 
 It reads your live skills, quests, achievement diaries, Combat Achievements,
-combat level and what you own, and plans backwards from a goal to the things you have
-to do first - including what to wear and what to bring when you get there.
+combat level and what you own, and plans backwards from a goal to the things you
+have to do first, including what to wear and what to bring when you get there.
 
 ## What it does
 
 **Something to do.** The panel opens on what you can start right now, ranked,
-plus an "Almost there" list of what you are a short step from - one requirement
-away, within a few levels - each saying what is missing ("Needs 91 Slayer, you
-have 87"). If you would rather not choose, it will roll one for you, optionally
+plus an "Almost there" list of things you are a short step from: one requirement
+away, and within a few levels. Each one says what is missing ("Needs 91 Slayer,
+you have 87"). If you would rather not choose, it will roll one for you, optionally
 within a category.
 
 **Plan a path to anything.** Pick a goal three ways:
 
-- **an activity** - a boss, a raid, a quest, a diary tier, a minigame
-- **a skill level** - "99 Attack", broken into the methods that get you there
-- **an item** - the drop, the raid, or the Grand Exchange. Type to search it:
+- **an activity**: a boss, a raid, a quest, a diary tier, a minigame
+- **a skill level**: "99 Attack", broken into the methods that get you there
+- **an item**: the drop, the raid, or the Grand Exchange. Type to search it:
   "drag cl" finds Dragon claws, "seers ring" finds Seers' ring with or without
   the apostrophe
-- **base stats** - "every skill at 80". It finds the skills that fall short and
+- **base stats**: "every skill at 80". It finds the skills that fall short and
   plans them cheapest first, so the list visibly shrinks
-- **a total level** - "2000 total". It takes the cheapest next level each time,
+- **a total level**: "2000 total". It takes the cheapest next level each time,
   which is the cheapest set of that many levels there is, and tells you which
   skills it chose
 
@@ -35,7 +35,7 @@ and dangling requirements are reported rather than silently dropped.
 
 **What to bring.** A plan does not stop at naming the place. Each step ends in
 the gear and supplies for it, rendered as item icons rather than a list of
-names - and a goal that is only a *reason* to go somewhere inherits that
+names, and a goal that is only a *reason* to go somewhere inherits that
 somewhere's kit. Planning "Pet snakeling" gives you Zulrah's setup; planning an
 Ancestral robe top gives you the Chambers of Xeric's; planning 99 Firemaking
 gives you Wintertodt's warm clothing.
@@ -46,7 +46,8 @@ the card does the division: 99 Prayer from 43 at a gilded altar is not just
 leave the client to do in a wiki tab.
 
 **It defers to plugins that do a job better.** Where Quest Helper is the right
-tool for a quest step, the panel says so, and opens its panel for you.
+tool for a quest step, the panel says so, and tells you whether you have it
+installed and switched on.
 
 ## Settings
 
@@ -59,7 +60,7 @@ tool for a quest step, the panel says so, and opens its panel for you.
 | Prefer tick-manipulation methods | off | Plan with tick-manipulation training methods where they exist, falling back to normal ones. Exclusive, not additive, and overridable per lookup in the panel. |
 
 Methods also carry what an xp/hr figure cannot say: `Wilderness - PvP risk`,
-`Tick manipulation`, and - where it has been assessed - `Constant input` or
+`Tick manipulation`, and, where it has been assessed, `Constant input` or
 `Nearly AFK`. Bloodwood trees are the fastest Woodcutting that is not tick
 manipulation *and* a two-tick cycle across three trees; ironwood is one tree
 every four minutes at half the rate. The panel says which is which instead of
@@ -80,14 +81,15 @@ To build and run it from source you need JDK 11 or later:
 ## The data
 
 The plugin ships its own content database rather than calling anything at
-runtime: **256 activities**, **183 training methods across 23 skills** and
-**110 item sources**. It makes no network requests of its own.
+runtime: **259 activities**, **183 training methods across 23 skills** and
+**116 item sources**. Everything ships inside the plugin, nothing is downloaded,
+and it makes no network requests of its own.
 
 That data is taken from the [Old School RuneScape Wiki](https://oldschool.runescape.wiki/),
 which publishes under CC BY-NC-SA 3.0. Every record carries the `wikiUrl` of the
 page it came from, so any claim the panel makes can be traced to its source.
-See [NOTICE.md](NOTICE.md) for the attribution and licensing in full - the code
-and the data do not carry the same licence.
+See [NOTICE.md](NOTICE.md) for the attribution and licensing in full, since the
+code and the data do not carry the same licence.
 
 Old School RuneScape is a trademark of Jagex Ltd. This is a third-party tool,
 not made by or affiliated with Jagex.
@@ -115,7 +117,7 @@ checked in as a raw byte could reach a player's sidebar as mojibake. The
 `asciiCheck` task, which `./gradlew build` runs, is what enforces that.
 
 `DEVLOG.md` is the long-form record of how this was built and which approaches
-failed - written for whoever maintains it next, including a future me.
+failed, written for whoever maintains it next, including a future me.
 
 ## Licence
 
