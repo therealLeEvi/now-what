@@ -1350,8 +1350,18 @@ public class NowWhatPanel extends PluginPanel
 		}
 		else if (path.isRequirementsAlreadyMet())
 		{
-			stack(pathResultContainer, resultLine("You already meet every requirement \u2014 nothing is "
-				+ "blocking this.", ColorScheme.PROGRESS_COMPLETE_COLOR, 0));
+			stack(pathResultContainer, resultLine("You already meet every requirement, so you can "
+				+ "start this now.", ColorScheme.PROGRESS_COMPLETE_COLOR, 0));
+			// Meeting the requirements answers "can I", not "what do I do". For
+			// a birdhouse or herb run the how is the whole answer, and it lives
+			// in the description; without this the plan stopped at the line
+			// above. A quest or diary's description is a one-word label, and
+			// Quest Helper below says the rest.
+			String howTo = howTo(targetActivity(path));
+			if (howTo != null)
+			{
+				renderHowTo(howTo);
+			}
 			Activity target = preparationFor(path);
 			if (target != null)
 			{
@@ -1527,6 +1537,94 @@ public class NowWhatPanel extends PluginPanel
 		String id = path.getGoal().getActivityId();
 		return id == null ? null : activitiesById.get(id);
 	}
+
+	/** The activity's own description, when it says more than what kind of thing it is. */
+	static String howTo(Activity activity)
+	{
+		if (activity == null || activity.getHowTo() == null)
+		{
+			return null;
+		}
+		Activity.Category category = activity.getCategory();
+		if (category == Activity.Category.QUEST || category == Activity.Category.DIARY)
+		{
+			return null;
+		}
+		String text = activity.getHowTo().trim();
+		return text.isEmpty() ? null : text;
+	}
+
+	/**
+	 * The how-to text, laid out: a gap before each paragraph, a short line
+	 * ending in a colon as a heading, and "* " lines as an indented list under
+	 * it, in the same dash-and-indent style as the inventory below.
+	 */
+	/** The list marker the inventory uses, as a number so the source stays ASCII. */
+	private static final String EN_DASH = String.valueOf((char) 0x2013);
+
+	private void renderHowTo(String text)
+	{
+		for (String raw : text.split("\n"))
+		{
+			String line = raw.trim();
+			if (line.isEmpty())
+			{
+				continue;
+			}
+			JLabel label;
+			if (line.startsWith("* "))
+			{
+				label = resultLine(EN_DASH + " " + line.substring(2).trim(), DETAIL, 12);
+				label.setFont(SMALL_FONT);
+			}
+			else if (line.endsWith(":") && line.length() <= 60)
+			{
+				label = resultLine(line.substring(0, line.length() - 1), PRIMARY, 0);
+				label.setBorder(new EmptyBorder(8, 0, 1, 0));
+			}
+			else
+			{
+				// A paragraph of five sentences is a wall in a column this
+				// narrow, so prose is broken into a couple of sentences at a time.
+				for (String chunk : paragraphs(line))
+				{
+					JLabel paragraph = resultLine(chunk, DETAIL, 0);
+					paragraph.setBorder(new EmptyBorder(6, 0, 1, 0));
+					stack(pathResultContainer, paragraph);
+				}
+				continue;
+			}
+			stack(pathResultContainer, label);
+		}
+	}
+
+	/** Sentences regrouped into paragraphs of about two, never splitting one. */
+	static List<String> paragraphs(String prose)
+	{
+		List<String> out = new ArrayList<>();
+		StringBuilder current = new StringBuilder();
+		for (String sentence : prose.split("(?<=[.!?])\\s+(?=[A-Z])"))
+		{
+			if (current.length() > 0 && current.length() + sentence.length() > PARAGRAPH_CHARS)
+			{
+				out.add(current.toString());
+				current.setLength(0);
+			}
+			if (current.length() > 0)
+			{
+				current.append(' ');
+			}
+			current.append(sentence);
+		}
+		if (current.length() > 0)
+		{
+			out.add(current.toString());
+		}
+		return out;
+	}
+
+	/** Roughly two sentences, or four or five lines at sidebar width. */
+	private static final int PARAGRAPH_CHARS = 170;
 
 	/**
 	 * The activity whose gear answers this plan, which is not always the thing
@@ -1730,19 +1828,24 @@ public class NowWhatPanel extends PluginPanel
 		for (ItemTextParser.Phrase phrase : ItemTextParser.phrases(entry))
 		{
 			String term = ItemTextParser.searchTerm(phrase);
-			List<ItemTextParser.Candidate> candidates = new ArrayList<>();
+			List<ItemTextParser.Candidate> tradeable = new ArrayList<>();
 			for (ItemPrice price : itemManager.search(term))
 			{
-				candidates.add(new ItemTextParser.Candidate(price.getName(), price.getId()));
+				tradeable.add(new ItemTextParser.Candidate(price.getName(), price.getId()));
 			}
+			// The bundled table decides which item a phrase means. RuneLite's
+			// search only covers tradeable items, so for anything untradeable it
+			// offers the nearest tradeable relative instead: "avernic defender"
+			// finds the hilt, "dragon defender" the ornament kit, "scythe of
+			// vitur" the uncharged scythe. The table was built from every item
+			// in the game, so it holds the real one. The tradeable search is
+			// only the fallback for a phrase the table cannot place, and the
+			// source of the properly capitalised name for the tooltip.
+			List<ItemTextParser.Candidate> candidates = ItemNameIndex.search(term);
 			Integer id = ItemTextParser.pick(phrase, candidates);
 			if (id == null)
 			{
-				// RuneLite's own search only covers tradeable items, so half the
-				// gear in a boss guide - void, barrows gloves, an infernal cape -
-				// is simply not in it. Fall back to the full item list, which has
-				// coarser names but all of them.
-				candidates = ItemNameIndex.search(term);
+				candidates = tradeable;
 				id = ItemTextParser.pick(phrase, candidates);
 			}
 			optionMatched.merge(phrase.getText(), id != null, (a, b) -> a || b);
@@ -1750,14 +1853,7 @@ public class NowWhatPanel extends PluginPanel
 			{
 				continue;
 			}
-			for (ItemTextParser.Candidate candidate : candidates)
-			{
-				if (candidate.getId() == id)
-				{
-					icons.names.putIfAbsent(id, candidate.getName());
-					break;
-				}
-			}
+			icons.names.putIfAbsent(id, displayName(id, candidates, tradeable));
 			if (phrase.getQuantity() != null)
 			{
 				icons.counts.putIfAbsent(id, phrase.getQuantity());
@@ -1769,6 +1865,39 @@ public class NowWhatPanel extends PluginPanel
 			&& !optionMatched.containsValue(Boolean.FALSE);
 		iconCache.put(entry, icons);
 		return icons;
+	}
+
+	/**
+	 * The tooltip name for an item. The table's names come from item constants
+	 * and have lost their capitals and apostrophes ("tumekens shadow"), so the
+	 * game's own spelling is used wherever the tradeable search has it: the same
+	 * item, or a tradeable twin with the same name under another id.
+	 */
+	static String displayName(int id, List<ItemTextParser.Candidate> chosenFrom,
+		List<ItemTextParser.Candidate> tradeable)
+	{
+		String name = null;
+		for (ItemTextParser.Candidate candidate : chosenFrom)
+		{
+			if (candidate.getId() == id)
+			{
+				name = candidate.getName();
+				break;
+			}
+		}
+		if (name == null)
+		{
+			return "";
+		}
+		String flat = ItemNameIndex.flatten(name);
+		for (ItemTextParser.Candidate candidate : tradeable)
+		{
+			if (candidate.getId() == id || ItemNameIndex.flatten(candidate.getName()).equals(flat))
+			{
+				return candidate.getName();
+			}
+		}
+		return Character.toUpperCase(name.charAt(0)) + name.substring(1);
 	}
 
 	/**

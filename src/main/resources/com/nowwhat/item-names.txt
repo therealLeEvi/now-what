@@ -4,7 +4,6 @@
 536	dragon bones
 562	chaos rune
 563	law rune
-581	black robe
 590	tinderbox
 837	crossbow
 946	knife
@@ -27,6 +26,7 @@
 2434	prayer potion(4)
 2444	ranging potion(4)
 2446	antipoison(4)
+2497	black dhide chaps
 2503	black dhide body
 2550	ring of recoil
 2552	ring of dueling(8)
@@ -38,6 +38,7 @@
 3853	games necklace(8)
 4089	mystic hat
 4091	mystic robe top
+4093	mystic robe bottom
 4151	abyssal whip
 4155	enchanted gem
 4162	rock hammer
@@ -62,11 +63,11 @@
 7462	barrows gloves
 7946	monkfish
 8839	void knight top
+8840	void knight robe
 8842	void knight gloves
 9185	rune crossbow
 9242	ruby bolts (e)
 9243	diamond bolts (e)
-9788	slayer hood
 10499	avas accumulator
 10551	fighter torso
 10553	penance gloves
@@ -80,11 +81,13 @@
 11773	berserker ring (i)
 11784	black mask (i)
 11804	bandos godsword
+11826	armadyl helmet
 11832	bandos chestplate
 11834	bandos tassets
 11838	saradomin sword
 11840	dragon boots
 11860	graceful boots
+11864	slayer helmet
 11865	slayer helmet (i)
 11866	slayer ring 8
 11907	trident of the seas
@@ -96,6 +99,7 @@
 12253	armadyl robe top
 12265	bandos robe top
 12502	bandos chaps
+12508	armadyl dhide body
 12510	armadyl chaps
 12512	armadyl coif
 12610	book of law
@@ -111,6 +115,7 @@
 12931	serpentine helm
 12954	dragon defender
 13072	elite void top
+13073	elite void robe
 13235	eternal boots
 13237	pegasian boots
 13239	primordial boots
@@ -139,9 +144,11 @@
 21012	dragon hunter crossbow
 21018	ancestral hat
 21021	ancestral robe top
+21024	ancestral robe bottom
 21028	dragon harpoon
 21183	bracelet of slaughter
 21295	infernal cape
+21326	amethyst arrow
 21742	granite hammer
 21944	ruby dragon bolts (e)
 21946	diamond dragon bolts (e)
@@ -168,6 +175,7 @@
 23979	crystal legs
 23987	crystal halberd
 23995	blade of saeldor
+24271	neitiznot faceguard
 24419	inquisitors great helm
 24420	inquisitors hauberk
 24421	inquisitors plateskirt
@@ -179,7 +187,6 @@
 25487	venator ring
 25488	bellator ring
 25644	imcando hammer
-25849	amethyst dart
 25865	bow of faerdhinen
 25975	lightbearer
 25979	keris partisan
@@ -187,6 +194,7 @@
 26235	zaryte vambraces
 26241	virtus mask
 26243	virtus robe top
+26245	virtus robe bottom
 26340	ancient brew(4)
 26374	zaryte crossbow
 26382	torva full helm

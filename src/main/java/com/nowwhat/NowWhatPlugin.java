@@ -211,15 +211,17 @@ public class NowWhatPlugin extends Plugin
 				// Before the suggestions, because this can rebuild a rendered
 				// plan and the update below repaints around it.
 				panel.setProgress(state.getSkillLevels());
-				List<Activity> almost =
-					suggestionEngine.getAlmostAvailable(activityDatabase.getAllActivities(), state, hidden);
+				boolean hideWilderness = !config.showWilderness();
+				List<Activity> almost = suggestionEngine.getAlmostAvailable(
+					activityDatabase.getAllActivities(), state, hidden, hideWilderness);
 				Map<String, String> missing = new HashMap<>();
 				for (Activity activity : almost)
 				{
 					missing.put(activity.getId(), suggestionEngine.whatIsMissing(activity, state));
 				}
 				panel.update(
-					suggestionEngine.getAvailableNow(activityDatabase.getAllActivities(), state, hidden),
+					suggestionEngine.getAvailableNow(activityDatabase.getAllActivities(), state, hidden,
+						hideWilderness),
 					almost, missing
 				);
 			});

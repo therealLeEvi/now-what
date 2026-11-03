@@ -61,4 +61,15 @@ public interface NowWhatConfig extends Config
 	{
 		return false;
 	}
+
+	@ConfigItem(
+		keyName = "showWilderness",
+		name = "Show Wilderness suggestions",
+		description = "Include bosses and monsters in the Wilderness, where other players can attack you and you can lose items on death",
+		position = 6
+	)
+	default boolean showWilderness()
+	{
+		return true;
+	}
 }

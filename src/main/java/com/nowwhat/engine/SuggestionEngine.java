@@ -44,10 +44,24 @@ public class SuggestionEngine
 	public List<Activity> getAvailableNow(List<Activity> allActivities, PlayerState state,
 		Set<Activity.Category> hiddenCategories)
 	{
+		return getAvailableNow(allActivities, state, hiddenCategories, false);
+	}
+
+	/**
+	 * As above, optionally leaving out everything in the Wilderness, for the
+	 * player who never wants to be sent where other players can attack them.
+	 * <p>
+	 * "Available" here means suggested: the game's requirements are met
+	 * <em>and</em> so are the stats the wiki recommends. A fight with no
+	 * requirement at all is not something to point a level 3 account at.
+	 */
+	public List<Activity> getAvailableNow(List<Activity> allActivities, PlayerState state,
+		Set<Activity.Category> hiddenCategories, boolean hideWilderness)
+	{
 		List<Activity> result = new ArrayList<>();
 		for (Activity activity : allActivities)
 		{
-			if (isHidden(activity, hiddenCategories))
+			if (isHidden(activity, hiddenCategories, hideWilderness))
 			{
 				continue;
 			}
@@ -55,7 +69,7 @@ public class SuggestionEngine
 			{
 				continue;
 			}
-			if (meetsAllRequirements(activity, state))
+			if (meetsAllRequirements(activity, state) && unmetRecommended(activity, state).isEmpty())
 			{
 				result.add(activity);
 			}
@@ -82,10 +96,17 @@ public class SuggestionEngine
 	public List<Activity> getAlmostAvailable(List<Activity> allActivities, PlayerState state,
 		Set<Activity.Category> hiddenCategories)
 	{
+		return getAlmostAvailable(allActivities, state, hiddenCategories, false);
+	}
+
+	/** As above, optionally leaving out everything in the Wilderness. */
+	public List<Activity> getAlmostAvailable(List<Activity> allActivities, PlayerState state,
+		Set<Activity.Category> hiddenCategories, boolean hideWilderness)
+	{
 		List<Activity> result = new ArrayList<>();
 		for (Activity activity : allActivities)
 		{
-			if (isHidden(activity, hiddenCategories))
+			if (isHidden(activity, hiddenCategories, hideWilderness))
 			{
 				continue;
 			}
@@ -93,13 +114,55 @@ public class SuggestionEngine
 			{
 				continue;
 			}
-			Requirement missing = theOneMissing(activity, state);
-			if (missing != null && isClose(missing, state))
+			if (isAlmost(activity, state))
 			{
 				result.add(activity);
 			}
 		}
 		return result;
+	}
+
+	/**
+	 * A short step away, one of two ways: one requirement short and that one
+	 * close, with the recommended stats already there; or every requirement met
+	 * and only a few levels of recommended stats to go. A fight that is a
+	 * requirement away and also far below its recommended stats is not close,
+	 * whatever the requirement says.
+	 */
+	private boolean isAlmost(Activity activity, PlayerState state)
+	{
+		List<Requirement> recommended = unmetRecommended(activity, state);
+		if (meetsAllRequirements(activity, state))
+		{
+			if (recommended.isEmpty())
+			{
+				return false;
+			}
+			for (Requirement req : recommended)
+			{
+				if (!isClose(req, state))
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+		Requirement missing = theOneMissing(activity, state);
+		return missing != null && isClose(missing, state) && recommended.isEmpty();
+	}
+
+	/** The recommended stats this player does not have yet, in the order the data lists them. */
+	private List<Requirement> unmetRecommended(Activity activity, PlayerState state)
+	{
+		List<Requirement> unmet = new ArrayList<>();
+		for (Requirement req : activity.getRecommended())
+		{
+			if (!isRequirementMet(req, state))
+			{
+				unmet.add(req);
+			}
+		}
+		return unmet;
 	}
 
 	/**
@@ -168,6 +231,22 @@ public class SuggestionEngine
 	 */
 	public String whatIsMissing(Activity activity, PlayerState state)
 	{
+		if (meetsAllRequirements(activity, state))
+		{
+			List<Requirement> recommended = unmetRecommended(activity, state);
+			if (recommended.isEmpty())
+			{
+				return null;
+			}
+			// Said as a recommendation, not a need: nothing stops the player
+			// going now, and the line should not claim otherwise.
+			List<String> parts = new ArrayList<>();
+			for (Requirement req : recommended)
+			{
+				parts.add(describe(req, state));
+			}
+			return "Recommended " + String.join(", and ", parts);
+		}
 		Requirement missing = theOneMissing(activity, state);
 		return missing == null ? null : "Needs " + describe(missing, state);
 	}
@@ -237,8 +316,13 @@ public class SuggestionEngine
 	}
 
 	/** An activity with no category at all is never hidden: it has no switch. */
-	private boolean isHidden(Activity activity, Set<Activity.Category> hiddenCategories)
+	private boolean isHidden(Activity activity, Set<Activity.Category> hiddenCategories,
+		boolean hideWilderness)
 	{
+		if (hideWilderness && activity.isWilderness())
+		{
+			return true;
+		}
 		return activity.getCategory() != null && hiddenCategories.contains(activity.getCategory());
 	}
 

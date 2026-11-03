@@ -62,7 +62,29 @@ public class PanelShot
 		// A long skill plan is taller than a sidebar ever is, and anything past
 		// the frame height is simply not painted - so the height has to be
 		// settable or the shot silently truncates the thing being checked.
-		final int height = args.length > 3 ? Integer.parseInt(args[3]) : 900;
+		// After the mode: a height, and/or the account to plan for, written the
+		// way paneltext takes it ("all=70", "quest=Bone+Voyage").
+		int tall = 900;
+		for (int i = 3; i < args.length; i++)
+		{
+			if (args[i].matches("[0-9]+"))
+			{
+				tall = Integer.parseInt(args[i]);
+			}
+			else if (args[i].startsWith("all="))
+			{
+				int level = Integer.parseInt(args[i].substring(4));
+				for (net.runelite.api.Skill skill : net.runelite.api.Skill.values())
+				{
+					STATE.setSkillLevel(skill.name(), level);
+				}
+			}
+			else if (args[i].startsWith("quest="))
+			{
+				STATE.addCompletedQuest(args[i].substring(6).replace('+', ' '));
+			}
+		}
+		final int height = tall;
 
 		// Built and clicked in one pass, captured in a second, with the event
 		// queue drained in between. Anything the panel schedules for itself -

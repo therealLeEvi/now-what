@@ -421,6 +421,13 @@ public final class ItemTextParser
 	 * "crystal" under "Boots:" off a crystal key. Where several items still
 	 * qualify the shortest name wins, since the longer ones are variants
 	 * ("Masori body" over "Masori body (f)").
+	 * <p>
+	 * Before length, though, a name that has the very words the line was
+	 * written with beats one that only matched through a slot's other nouns.
+	 * "Shield" stands for the whole off-hand slot, so "dragonfire shield" also
+	 * matches "Dragonfire ward", and the ward's shorter name used to win; the
+	 * same went for "robe bottom" landing on the robe top, since "robe" is in
+	 * both the body and the legs lists.
 	 */
 	public static Integer pick(Phrase phrase, List<Candidate> candidates)
 	{
@@ -435,6 +442,7 @@ public final class ItemTextParser
 		boolean nameInFull = phrase.getWords().size() < 2 && phrase.getSlotNouns().isEmpty();
 
 		Candidate best = null;
+		Candidate bestWritten = null;
 		Candidate unloaded = null;
 		for (Candidate candidate : candidates)
 		{
@@ -469,6 +477,15 @@ public final class ItemTextParser
 			{
 				best = candidate;
 			}
+			if (containsAllExactly(nameWords, phrase.getWords())
+				&& (bestWritten == null || beats(candidate, bestWritten)))
+			{
+				bestWritten = candidate;
+			}
+		}
+		if (bestWritten != null)
+		{
+			best = bestWritten;
 		}
 		if (best == null)
 		{
@@ -635,6 +652,19 @@ public final class ItemTextParser
 		b = b.replace("'", "").replace("\u2019", "");
 		return a.equals(b) || a.equals(b + "s") || b.equals(a + "s")
 			|| a.equals(b + "es") || b.equals(a + "es");
+	}
+
+	/** As {@link #containsAll}, but each word has to be there itself, not through its slot's other nouns. */
+	private static boolean containsAllExactly(List<String> nameWords, List<String> needed)
+	{
+		for (String word : needed)
+		{
+			if (!containsWord(nameWords, word, false))
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 
 	private static String trimPunctuation(String word)

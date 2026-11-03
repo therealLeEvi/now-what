@@ -150,3 +150,14 @@ tasks.register('itemid', JavaExec) {
 	classpath = sourceSets.test.runtimeClasspath
 	mainClass = 'com.nowwhat.diag.ItemIdLookup'
 }
+
+// Every quest name RuneLite tracks, for tools/audit_quests.py.
+tasks.register('questnames', JavaExec) {
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.nowwhat.diag.QuestNames'
+}
+
+tasks.register('suggestdiag', JavaExec) {
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.nowwhat.diag.SuggestDiag'
+}

@@ -31,6 +31,15 @@ public class Activity
 	private List<Requirement> requirements = Collections.emptyList();
 	/** Higher = shown first when multiple suggestions are otherwise tied. */
 	private int priority;
+	/**
+	 * The stats the wiki recommends before attempting this, as opposed to what
+	 * the game enforces. They decide whether it is <em>suggested</em>, never
+	 * whether it can be planned: plenty of fights have no requirement at all,
+	 * and without this a level 3 account was being pointed at the Inferno.
+	 */
+	private List<Requirement> recommended = Collections.emptyList();
+	/** Takes place in the Wilderness, where other players can attack you. */
+	private boolean wilderness;
 
 	/**
 	 * What to wear and what to bring, for content you can now actually attempt.
@@ -196,6 +205,14 @@ public class Activity
 		return this;
 	}
 
+	/** Adds recommended stats and the Wilderness flag to a programmatically built activity. */
+	public Activity withRecommended(List<Requirement> recommended, boolean wilderness)
+	{
+		this.recommended = recommended;
+		this.wilderness = wilderness;
+		return this;
+	}
+
 	/** Same as above, with an explicit priority - used where ranking order matters (e.g. tests). */
 	public Activity(String id, String name, Category category, List<Requirement> requirements, int priority)
 	{
@@ -218,9 +235,56 @@ public class Activity
 		return category;
 	}
 
+	/**
+	 * The description as one line of prose, for the places that show it inline:
+	 * a plan step, a rolled suggestion. See {@link #getHowTo()} for the laid-out
+	 * version.
+	 */
 	public String getDescription()
 	{
+		return description == null ? null : flatten(description);
+	}
+
+	/**
+	 * The description with its layout: paragraphs on their own lines, a short
+	 * line ending in a colon as a heading, and lines starting "* " as a list
+	 * under it. A birdhouse run is a route, a list of spots and a table of
+	 * tiers, and written as one paragraph it could not be read in a sidebar.
+	 */
+	public String getHowTo()
+	{
 		return description;
+	}
+
+	/** Joins the laid-out form into one line, a heading's list joined with commas. */
+	static String flatten(String text)
+	{
+		List<String> out = new java.util.ArrayList<>();
+		List<String> list = new java.util.ArrayList<>();
+		for (String raw : text.split("\n"))
+		{
+			String line = raw.trim();
+			if (line.isEmpty())
+			{
+				continue;
+			}
+			if (line.startsWith("* "))
+			{
+				list.add(line.substring(2).trim());
+				continue;
+			}
+			if (!list.isEmpty())
+			{
+				out.add(String.join(", ", list) + ".");
+				list.clear();
+			}
+			out.add(line);
+		}
+		if (!list.isEmpty())
+		{
+			out.add(String.join(", ", list) + ".");
+		}
+		return String.join(" ", out);
 	}
 
 	public String getReasonTemplate()
@@ -241,5 +305,16 @@ public class Activity
 	public int getPriority()
 	{
 		return priority;
+	}
+
+	/** Never null; Gson leaves the field null when the JSON has no such key. */
+	public List<Requirement> getRecommended()
+	{
+		return recommended == null ? Collections.emptyList() : recommended;
+	}
+
+	public boolean isWilderness()
+	{
+		return wilderness;
 	}
 }

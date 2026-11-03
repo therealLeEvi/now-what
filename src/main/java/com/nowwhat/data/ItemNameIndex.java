@@ -75,7 +75,7 @@ public final class ItemNameIndex
 	}
 
 	/** Apostrophes and hyphens are absent from constant names; ignore them on both sides. */
-	static String flatten(String text)
+	public static String flatten(String text)
 	{
 		return text.toLowerCase(Locale.ROOT)
 			.replace("'", "")
