@@ -164,16 +164,10 @@ public class ContentDatabaseTest
 	@Test
 	public void everyShopPricedInEarnedCurrencyNamesWhereItIsEarned()
 	{
-		Set<String> knownGaps = new HashSet<>(Arrays.asList(
-			// Marks of grace come from the rooftop courses, and the activity in
-			// the database is "Buy a Graceful outfit" - pointing the hood at
-			// that would be a step telling you to buy the thing you asked for.
-			"GRACEFUL_HOOD",
-			// Slayer points come a task at a time; there is no Slayer activity
-			// to plan, and "do slayer tasks" is not one either.
-			"HERB_SACK",
-			// Last Man Standing is not in the database at all.
-			"RUNE_POUCH"));
+		// Empty on purpose. Graceful, the herb sack and the rune pouch were the
+		// last three, and each now names where its currency is earned. A new
+		// points shop that cannot do the same is admitted here by name.
+		Set<String> knownGaps = new HashSet<>();
 
 		List<String> deadEnds = new ArrayList<>();
 		for (ItemSource item : items)

@@ -616,6 +616,19 @@ public class PathPlanner
 				Activity earner = earns == null ? null : activitiesById.get(earns);
 				if (earner != null)
 				{
+					// The earner's own entry requirements come first. The herb
+					// sack only asks for 58 Herblore, but its points come from
+					// Tithe Farm, which asks for 34 Farming - and without this the
+					// plan sent someone at 20 Farming to a minigame they could not
+					// enter. One the item already asked for is not repeated.
+					for (Requirement entry : earner.getRequirements())
+					{
+						if (!RequirementEvaluator.isMet(entry, state)
+							&& !sameRequirement(entry, source.getSkillRequirement()))
+						{
+							expandStandaloneRequirement(entry, state, steps, warnings, allowTickManipulation);
+						}
+					}
 					steps.add(new PathStep(stepTypeFor(earner.getCategory()), earner.getName(),
 						earner.getCategory() + (earner.getDescription() != null
 							? " \u2014 " + earner.getDescription()

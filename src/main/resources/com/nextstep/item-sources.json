@@ -346,15 +346,11 @@
   },
   {
     "id": "GRACEFUL_HOOD",
+    "currencyFrom": "skilling_rooftop_agility",
     "displayName": "Graceful hood",
     "gameItemId": 11850,
     "type": "SHOP",
-    "detail": "Marks of grace, Rogues' Den",
-    "skillRequirement": {
-      "type": "SKILL_LEVEL",
-      "value": "AGILITY",
-      "threshold": 30
-    },
+    "detail": "Grace's shop in the Rogues' Den, Burthorpe, 35 marks of grace",
     "wikiUrl": "https://oldschool.runescape.wiki/w/Graceful_hood"
   },
   {
@@ -1011,10 +1007,16 @@
   },
   {
     "id": "HERB_SACK",
+    "currencyFrom": "minigame_tithe_farm",
     "displayName": "Herb sack",
     "gameItemId": 13226,
     "type": "SHOP",
-    "detail": "Slayer reward shop, 750 points",
+    "detail": "Tithe Farm reward shop, 250 points (or 750 Slayer points from any Slayer master)",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "HERBLORE",
+      "threshold": 58
+    },
     "wikiUrl": "https://oldschool.runescape.wiki/w/Herb_sack"
   },
   {
@@ -1075,10 +1077,11 @@
   },
   {
     "id": "RUNE_POUCH",
+    "currencyFrom": "minigame_last_man_standing",
     "displayName": "Rune pouch",
     "gameItemId": 12791,
     "type": "SHOP",
-    "detail": "Last Man Standing shop, or Wilderness slayer",
+    "detail": "Last Man Standing reward shop, 75 points for a rune pouch note, swapped for the pouch at any bank. The note also trades on the Grand Exchange. Slayer masters sell one for 750 points, and Mage Training Arena for far more effort.",
     "wikiUrl": "https://oldschool.runescape.wiki/w/Rune_pouch"
   },
   {

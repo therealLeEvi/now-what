@@ -5223,6 +5223,20 @@
     "strategyUrl": "https://oldschool.runescape.wiki/w/Tempoross"
   },
   {
+    "id": "minigame_last_man_standing",
+    "name": "Last Man Standing",
+    "category": "MINIGAME",
+    "description": "Safe PvP in the Ferox Enclave: nothing is lost on death, and you bring nothing in, since the game hands out the gear. Points come from competitive games only, up to 9 a game by placement and kills, and placement points need at least one kill. Competitive needs 750 total level and 30 Quest points, or 1,500 total level. 75 points buys a rune pouch note.",
+    "reasonTemplate": "Available to you now",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Last_Man_Standing",
+    "priority": 4,
+    "requirements": [],
+    "supplies": [
+      "Nothing - items cannot be brought in",
+      "Ring of dueling or the Minigame teleport, to reach Ferox Enclave without the Wilderness"
+    ]
+  },
+  {
     "id": "minigame_tithe_farm",
     "name": "Tithe Farm",
     "category": "MINIGAME",
@@ -5412,7 +5426,7 @@
     "category": "SKILLING",
     "description": "Marks of grace from rooftop courses; weight reduction that pays off everywhere.",
     "reasonTemplate": "Available to you now",
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Buy_a_Graceful_outfit",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Graceful_outfit",
     "priority": 4,
     "requirements": [
       {
@@ -5420,6 +5434,29 @@
         "value": "AGILITY",
         "threshold": 30
       }
+    ]
+  },
+  {
+    "id": "skilling_rooftop_agility",
+    "name": "Rooftop courses, for marks of grace",
+    "category": "SKILLING",
+    "description": "Marks of grace appear on rooftop courses, at most one every 3 minutes. From level 40, Canifis gives the most, about 12 to 18 an hour, until Ardougne at 90. A course 20 or more levels below you drops 80% fewer marks, Canifis excepted. Marks vanish after 10 minutes on the ground. A full Graceful outfit is 260 marks.",
+    "reasonTemplate": "Available to you now",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Mark_of_grace",
+    "priority": 4,
+    "requirements": []
+  },
+  {
+    "id": "skilling_slayer",
+    "name": "Slayer tasks, for Slayer points",
+    "category": "SKILLING",
+    "description": "Points start on your fifth task, and never come from Turael, Aya or Spria. Per task: Vannaka 8, Chaeldar 10, Nieve 12, Duradel 15, Konar 18. Every 10th task pays 5x and every 50th 15x. Vannaka needs combat 40, Chaeldar 70, Konar 75, Nieve 85, Duradel 100 and Slayer 50.",
+    "reasonTemplate": "Available to you now",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Slayer_reward_point",
+    "priority": 4,
+    "requirements": [],
+    "supplies": [
+      "Enchanted gem, from any Slayer master, to check your task anywhere"
     ]
   },
   {

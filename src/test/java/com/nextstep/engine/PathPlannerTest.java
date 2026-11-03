@@ -459,6 +459,70 @@ public class PathPlannerTest
 		assertEquals(PathStep.Type.ACQUIRE_ITEM, path.getSteps().get(1).getType());
 	}
 
+	/**
+	 * The herb sack asks for 58 Herblore, but its points come from Tithe Farm,
+	 * which asks for 34 Farming. The plan has to get the player into the
+	 * minigame before it sends them there.
+	 */
+	@Test
+	public void aShopPlansTheEntryRequirementsOfWhereItsCurrencyIsEarned()
+	{
+		Activity tithe = new Activity("minigame_tithe_farm", "Tithe Farm",
+			Activity.Category.MINIGAME, Arrays.asList(
+				new Requirement(Requirement.Type.SKILL_LEVEL, "FARMING", 34)));
+		ItemSource herbSack = new ItemSource("HERB_SACK", "Herb sack", ItemSource.SourceType.SHOP,
+			"Tithe Farm reward shop, 250 points", null, null,
+			new Requirement(Requirement.Type.SKILL_LEVEL, "HERBLORE", 58), Collections.emptyList())
+			.withCurrencyFrom("minigame_tithe_farm");
+		TrainingMethod farming = new TrainingMethod("FARMING", 1, 99, "Tree runs", 50000, null, null,
+			Intensity.NORMAL);
+
+		PathPlanner planner = new PathPlanner(Collections.singletonList(tithe),
+			new PrerequisiteResolver(Collections.singletonList(tithe)),
+			TrainingMethodDatabase.of(Collections.singletonList(farming)),
+			ItemSourceDatabase.of(Collections.singletonList(herbSack)));
+
+		PlayerState state = new PlayerState();
+		state.setSkillLevel("HERBLORE", 58);
+		state.setSkillLevel("FARMING", 20);
+
+		Path path = planner.plan(Goal.itemQuantity("HERB_SACK", 1, "Herb sack", false, false), state);
+
+		assertEquals(PathStep.Type.TRAIN_SKILL, path.getSteps().get(0).getType());
+		assertEquals("FARMING", path.getSteps().get(0).getSkill());
+		assertEquals("Tithe Farm", path.getSteps().get(1).getTitle());
+	}
+
+	/** The seed box and Tithe Farm both ask for 34 Farming; the plan says it once. */
+	@Test
+	public void aRequirementTheItemAndItsEarnerShareIsPlannedOnce()
+	{
+		Requirement farming34 = new Requirement(Requirement.Type.SKILL_LEVEL, "FARMING", 34);
+		Activity tithe = new Activity("minigame_tithe_farm", "Tithe Farm",
+			Activity.Category.MINIGAME, Collections.singletonList(farming34));
+		ItemSource seedBox = new ItemSource("SEED_BOX", "Seed box", ItemSource.SourceType.SHOP,
+			"Tithe Farm reward shop, 250 points", null, null,
+			new Requirement(Requirement.Type.SKILL_LEVEL, "FARMING", 34), Collections.emptyList())
+			.withCurrencyFrom("minigame_tithe_farm");
+		TrainingMethod farming = new TrainingMethod("FARMING", 1, 99, "Tree runs", 50000, null, null,
+			Intensity.NORMAL);
+
+		PathPlanner planner = new PathPlanner(Collections.singletonList(tithe),
+			new PrerequisiteResolver(Collections.singletonList(tithe)),
+			TrainingMethodDatabase.of(Collections.singletonList(farming)),
+			ItemSourceDatabase.of(Collections.singletonList(seedBox)));
+
+		PlayerState state = new PlayerState();
+		state.setSkillLevel("FARMING", 20);
+
+		Path path = planner.plan(Goal.itemQuantity("SEED_BOX", 1, "Seed box", false, false), state);
+
+		long farmingSteps = path.getSteps().stream()
+			.filter(step -> step.getType() == PathStep.Type.TRAIN_SKILL)
+			.count();
+		assertEquals(1, farmingSteps);
+	}
+
 	/** A currency pointing at no such activity is said out loud, not dropped. */
 	@Test
 	public void aShopPointingAtAnUnknownActivityWarns()
