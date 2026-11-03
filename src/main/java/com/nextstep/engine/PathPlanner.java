@@ -537,10 +537,33 @@ public class PathPlanner
 					source.getWikiUrl()));
 				break;
 			case SHOP:
+			{
+				// A points shop that only quotes its price is a dead end. "250
+				// points" says nothing about where points come from, how long
+				// they take or what to bring, and the player is left to go and
+				// find out somewhere else - which is the whole thing this panel
+				// is for. Where the currency has an activity behind it, that
+				// activity becomes a step in its own right, ahead of the
+				// purchase, carrying its own description and kit.
+				String earns = source.getCurrencyFrom();
+				Activity earner = earns == null ? null : activitiesById.get(earns);
+				if (earner != null)
+				{
+					steps.add(new PathStep(stepTypeFor(earner.getCategory()), earner.getName(),
+						earner.getCategory() + (earner.getDescription() != null
+							? " \u2014 " + earner.getDescription()
+							: ""),
+						earner.getWikiUrl()));
+				}
+				else if (earns != null)
+				{
+					warnings.add("Unknown activity id: " + earns);
+				}
 				steps.add(new PathStep(PathStep.Type.ACQUIRE_ITEM,
 					"Buy " + quantity + "x " + source.getDisplayName(),
 					"Shop: " + source.getDetail(), source.getWikiUrl()));
 				break;
+			}
 			case MONSTER_DROP:
 			{
 				String kcNote = source.getEstimatedKc() != null

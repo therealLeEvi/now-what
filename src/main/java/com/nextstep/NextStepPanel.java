@@ -472,7 +472,7 @@ public class NextStepPanel extends PluginPanel
 			.sorted(Comparator.comparing(ItemSource::getDisplayName))
 			.collect(Collectors.toList());
 		itemPicker = new SearchPicker<>(sortedItems, ItemSource::getDisplayName,
-			"Type to search, or pick from the list");
+			"Search for an item", "Type to search, or pick from the list");
 		itemQuantitySpinner = new JSpinner(new SpinnerNumberModel(1, 1, 10000, 1));
 		constrainSpinner(itemQuantitySpinner);
 		countOwnedCheckbox = new JCheckBox("Count what I already own");
@@ -489,12 +489,14 @@ public class NextStepPanel extends PluginPanel
 			"Plan path", e ->
 			{
 				ItemSource selected = itemPicker.getSelected();
-				if (selected != null)
+				if (selected == null)
 				{
-					renderPath(pathResolver.apply(Goal.itemQuantity(selected.getId(),
-						(Integer) itemQuantitySpinner.getValue(), selected.getDisplayName(),
-						tickManipulationCheckbox.isSelected(), countOwnedCheckbox.isSelected())));
+					itemPicker.promptForChoice();
+					return;
 				}
+				renderPath(pathResolver.apply(Goal.itemQuantity(selected.getId(),
+					(Integer) itemQuantitySpinner.getValue(), selected.getDisplayName(),
+					tickManipulationCheckbox.isSelected(), countOwnedCheckbox.isSelected())));
 			}));
 
 		// --- Goal: a floor under every skill ---
@@ -614,12 +616,31 @@ public class NextStepPanel extends PluginPanel
 		input.setMaximumSize(new Dimension(Integer.MAX_VALUE, h));
 	}
 
+	/**
+	 * Pins a spinner to the width its own digits need.
+	 * <p>
+	 * This was a flat 56px, which fits two digits and an arrow box and clips the
+	 * last digit off a total level of 2000. The editor is told how many columns
+	 * the model's maximum actually takes, and the width then comes from the
+	 * spinner rather than from a guess about fonts and arrow widths.
+	 */
 	private static void constrainSpinner(JSpinner spinner)
 	{
-		int h = spinner.getPreferredSize().height;
-		spinner.setPreferredSize(new Dimension(56, h));
-		spinner.setMinimumSize(new Dimension(56, h));
-		spinner.setMaximumSize(new Dimension(56, h));
+		if (spinner.getEditor() instanceof JSpinner.DefaultEditor
+			&& spinner.getModel() instanceof SpinnerNumberModel)
+		{
+			Comparable<?> max = ((SpinnerNumberModel) spinner.getModel()).getMaximum();
+			int digits = max instanceof Number
+				? String.valueOf(((Number) max).longValue()).length()
+				: 2;
+			((JSpinner.DefaultEditor) spinner.getEditor()).getTextField()
+				.setColumns(Math.max(2, digits));
+		}
+		Dimension want = spinner.getPreferredSize();
+		Dimension size = new Dimension(Math.max(56, want.width), want.height);
+		spinner.setPreferredSize(size);
+		spinner.setMinimumSize(size);
+		spinner.setMaximumSize(size);
 	}
 
 	/**
@@ -696,7 +717,17 @@ public class NextStepPanel extends PluginPanel
 		{
 			inputRow.add(trailing, BorderLayout.EAST);
 		}
-		inputRow.setPreferredSize(new Dimension(CONTENT_WIDTH, input.getPreferredSize().height));
+		// Tall enough for everything on the row, not just the thing in the
+		// middle of it. Two of these rows have a plain caption in the centre and
+		// the spinner beside it; a caption is some 15px tall, so taking the
+		// height from the centre alone squeezed the spinner and cut the tops and
+		// bottoms off its digits.
+		int rowHeight = input.getPreferredSize().height;
+		if (trailing != null)
+		{
+			rowHeight = Math.max(rowHeight, trailing.getPreferredSize().height);
+		}
+		inputRow.setPreferredSize(new Dimension(CONTENT_WIDTH, rowHeight));
 		stack(block, inputRow);
 
 		if (extra != null)

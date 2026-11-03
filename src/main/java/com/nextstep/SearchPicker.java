@@ -4,6 +4,11 @@ import com.nextstep.data.NameSearch;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.RenderingHints;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -52,7 +57,44 @@ public class SearchPicker<T> extends JPanel
 	/** Beyond this the list is noise; refine the query instead of scrolling. */
 	private static final int MAX_RESULTS = 40;
 
-	private final JTextField field = new JTextField();
+	/**
+	 * The field, with the placeholder painted into it whenever it is empty.
+	 * <p>
+	 * Swing has no placeholder, and the obvious substitute - putting the hint in
+	 * as real text and clearing it on focus - makes the hint a value: it plans
+	 * for "Search for an item" if you never touch the box. Painting it is the
+	 * honest version, because the document stays empty.
+	 */
+	private final JTextField field = new JTextField()
+	{
+		@Override
+		protected void paintComponent(Graphics g)
+		{
+			super.paintComponent(g);
+			if (placeholder == null || !getText().isEmpty())
+			{
+				return;
+			}
+			Graphics2D g2 = (Graphics2D) g.create();
+			try
+			{
+				g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+					RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+				g2.setColor(ColorScheme.LIGHT_GRAY_COLOR);
+				g2.setFont(getFont());
+				Insets insets = getInsets();
+				FontMetrics metrics = g2.getFontMetrics();
+				int y = insets.top + metrics.getAscent()
+					+ Math.max(0, (getHeight() - insets.top - insets.bottom
+						- metrics.getHeight()) / 2);
+				g2.drawString(placeholder, insets.left + 1, y);
+			}
+			finally
+			{
+				g2.dispose();
+			}
+		}
+	};
 	private final DefaultListModel<T> model = new DefaultListModel<>();
 	private final JList<T> results = new JList<>(model);
 	private final JScrollPane scroller = new JScrollPane(results);
@@ -62,14 +104,24 @@ public class SearchPicker<T> extends JPanel
 	private final List<T> all;
 	private final Function<T, String> name;
 
+	/** Painted in the field while it is empty; see {@link #field}. */
+	private String placeholder;
+
 	private T selected;
 	/** Guards the document listener while the field is being set programmatically. */
 	private boolean updating;
 
-	SearchPicker(List<T> all, Function<T, String> name, String hint)
+	/**
+	 * @param placeholder short text painted in the empty field, which is the
+	 * only thing telling a player this is a box they can type in - it sits
+	 * beside two real dropdowns and would otherwise look like a third
+	 * @param hint the longer explanation, as a tooltip
+	 */
+	SearchPicker(List<T> all, Function<T, String> name, String placeholder, String hint)
 	{
 		this.all = all;
 		this.name = name;
+		this.placeholder = placeholder;
 
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setBackground(ColorScheme.DARK_GRAY_COLOR);
@@ -102,6 +154,11 @@ public class SearchPicker<T> extends JPanel
 		});
 		scroller.setAlignmentX(Component.LEFT_ALIGNMENT);
 		scroller.setBorder(new EmptyBorder(2, 0, 0, 0));
+		// A long name is clipped with an ellipsis, never scrolled to. The list is
+		// six rows at most and a row is about 18px, so a horizontal scrollbar
+		// appearing along the bottom takes most of a row's height with it - which
+		// shows up as a result row sliced in half rather than as a scrollbar.
+		scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scroller.getViewport().setBackground(ColorScheme.DARKER_GRAY_COLOR);
 
 		empty = new JLabel("Nothing matches that");
@@ -198,13 +255,12 @@ public class SearchPicker<T> extends JPanel
 			}
 		});
 
-		// Start on the first entry so "Plan path" works without typing anything,
-		// exactly as the dropdown did.
+		// Nothing is chosen to start with, so the field is empty and the
+		// placeholder shows. The dropdown this replaced had to open on
+		// something; a search box opening on an arbitrary item would be both a
+		// choice the player did not make and the reason the box looks like a
+		// dropdown. The empty field is what makes it read as a search.
 		filter("");
-		if (!model.isEmpty())
-		{
-			selected = model.get(0);
-		}
 		showChosen();
 	}
 
@@ -221,7 +277,22 @@ public class SearchPicker<T> extends JPanel
 		resize();
 	}
 
-	/** The current choice, or null if the list is empty or nothing matched. */
+	/**
+	 * Puts the cursor in the search box with the matches open.
+	 * <p>
+	 * What "Plan path" does when nothing has been chosen yet. Doing nothing at
+	 * all reads as a broken button, and a complaint under it would be telling
+	 * the player off for not knowing the box was a box - this just shows them
+	 * where to type.
+	 */
+	void promptForChoice()
+	{
+		field.requestFocusInWindow();
+		filter("");
+		setListVisible(true);
+	}
+
+	/** The current choice, or null if nothing has been picked yet. */
 	public T getSelected()
 	{
 		return selected;
@@ -324,6 +395,40 @@ public class SearchPicker<T> extends JPanel
 		setListVisible(false);
 	}
 
+	/**
+	 * How tall one row of results actually is, asked of the renderer that draws
+	 * it.
+	 * <p>
+	 * This used to be guessed at as the field's height minus 4, and the guess
+	 * was short: the list was then capped below the height of its own rows, so
+	 * the first match showed with its text sliced in half across the bottom
+	 * edge. A renderer knows its own height; nothing else does.
+	 */
+	private int rowHeight()
+	{
+		if (!model.isEmpty())
+		{
+			Component sample = results.getCellRenderer().getListCellRendererComponent(
+				results, model.get(0), 0, false, false);
+			int measured = sample.getPreferredSize().height;
+			if (measured > 0)
+			{
+				return measured;
+			}
+		}
+		FontMetrics metrics = results.getFontMetrics(results.getFont());
+		return Math.max(16, metrics.getHeight() + 2);
+	}
+
+	/** The scroll pane's own borders and insets, which eat into the rows. */
+	private int chrome()
+	{
+		Insets scrollerInsets = scroller.getInsets();
+		Insets viewportInsets = scroller.getViewport().getInsets();
+		return scrollerInsets.top + scrollerInsets.bottom
+			+ viewportInsets.top + viewportInsets.bottom + 2;
+	}
+
 	private String text(T value)
 	{
 		String label = name.apply(value);
@@ -341,11 +446,10 @@ public class SearchPicker<T> extends JPanel
 		// BoxLayout honours the maximum, and a scroll pane's is unbounded, so
 		// without this the list stretches to fill whatever height is going.
 		int rows = Math.min(VISIBLE_ROWS, Math.max(1, model.size()));
-		int rowHeight = Math.max(16, results.getFixedCellHeight() > 0
-			? results.getFixedCellHeight()
-			: field.getPreferredSize().height - 4);
-		scroller.setMaximumSize(new Dimension(Integer.MAX_VALUE, rows * rowHeight + 6));
-		scroller.setPreferredSize(new Dimension(10, rows * rowHeight + 6));
+		int rowHeight = rowHeight();
+		int height = rows * rowHeight + chrome();
+		scroller.setMaximumSize(new Dimension(Integer.MAX_VALUE, height));
+		scroller.setPreferredSize(new Dimension(10, height));
 		setMaximumSize(new Dimension(Integer.MAX_VALUE, getPreferredSize().height));
 		revalidate();
 		repaint();

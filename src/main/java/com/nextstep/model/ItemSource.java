@@ -64,6 +64,16 @@ public class ItemSource
 	 * matching on it would work for some items and silently fail for others.
 	 */
 	private String preparationFrom;
+	/**
+	 * SHOP only: the activity whose currency pays for this.
+	 * <p>
+	 * {@link #detail} names the shop and the price, and a price on its own is a
+	 * dead end: "Tithe Farm reward shop, 250 points" tells a player nothing
+	 * about where points come from, how long 250 of them take, or what to bring
+	 * to earn them. Naming the activity lets the plan put a step in front of the
+	 * purchase instead of quoting a number and stopping.
+	 */
+	private String currencyFrom;
 	/** CRAFT only: skill level needed to perform the craft. */
 	private Requirement skillRequirement;
 	/** CRAFT only. */
@@ -71,7 +81,23 @@ public class ItemSource
 
 	public String getPreparationFrom()
 	{
-		return preparationFrom;
+		// You are going to the activity that mints the currency either way, so
+		// its kit answers "what do I take?" for the shop item too. Derived
+		// rather than authored twice, so the two cannot drift apart.
+		return preparationFrom != null ? preparationFrom : currencyFrom;
+	}
+
+	/** For programmatic construction; the shipped data comes from JSON. */
+	public ItemSource withCurrencyFrom(String currencyFrom)
+	{
+		this.currencyFrom = currencyFrom;
+		return this;
+	}
+
+	/** @see #currencyFrom */
+	public String getCurrencyFrom()
+	{
+		return currencyFrom;
 	}
 
 	/** No-arg constructor used by Gson when loading item-sources.json. */

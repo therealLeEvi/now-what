@@ -425,4 +425,65 @@ public class PathPlannerTest
 
 		assertEquals("SLAYER", path.getSteps().get(0).getSkill());
 	}
+
+	/**
+	 * A shop item whose currency is earned somewhere gets that somewhere as a
+	 * step of its own, ahead of the purchase. Without it the plan ends on "250
+	 * points" and the player has to leave the panel to find out what that means.
+	 */
+	@Test
+	public void aShopPricedInPointsPlansTheActivityThatMintsThem()
+	{
+		Activity tithe = new Activity("minigame_tithe_farm", "Tithe Farm",
+			Activity.Category.MINIGAME, Collections.emptyList())
+			.withDescription("1 point per 3 fruits");
+
+		ItemSource seedBox = new ItemSource("SEED_BOX", "Seed box", ItemSource.SourceType.SHOP,
+			"Tithe Farm reward shop, 250 points", null, null, null, Collections.emptyList())
+			.withCurrencyFrom("minigame_tithe_farm");
+
+		PathPlanner planner = new PathPlanner(Collections.singletonList(tithe),
+			new PrerequisiteResolver(Collections.singletonList(tithe)),
+			TrainingMethodDatabase.of(Collections.emptyList()),
+			ItemSourceDatabase.of(Collections.singletonList(seedBox)));
+
+		Path path = planner.plan(Goal.itemQuantity("SEED_BOX", 1, "Seed box", false, false),
+			new PlayerState());
+
+		assertEquals(2, path.getSteps().size());
+		PathStep earn = path.getSteps().get(0);
+		assertEquals(PathStep.Type.DO_ACTIVITY, earn.getType());
+		assertEquals("Tithe Farm", earn.getTitle());
+		assertTrue("the step should carry the activity's own description, got "
+			+ earn.getDetail(), earn.getDetail().contains("1 point per 3 fruits"));
+		assertEquals(PathStep.Type.ACQUIRE_ITEM, path.getSteps().get(1).getType());
+	}
+
+	/** A currency pointing at no such activity is said out loud, not dropped. */
+	@Test
+	public void aShopPointingAtAnUnknownActivityWarns()
+	{
+		ItemSource seedBox = new ItemSource("SEED_BOX", "Seed box", ItemSource.SourceType.SHOP,
+			"Some shop, 250 points", null, null, null, Collections.emptyList())
+			.withCurrencyFrom("minigame_nonexistent");
+
+		PathPlanner planner = new PathPlanner(Collections.emptyList(),
+			new PrerequisiteResolver(Collections.emptyList()),
+			TrainingMethodDatabase.of(Collections.emptyList()),
+			ItemSourceDatabase.of(Collections.singletonList(seedBox)));
+
+		Path path = planner.plan(Goal.itemQuantity("SEED_BOX", 1, "Seed box", false, false),
+			new PlayerState());
+
+		boolean said = false;
+		for (String warning : path.getWarnings())
+		{
+			if (warning.contains("minigame_nonexistent"))
+			{
+				said = true;
+			}
+		}
+		assertTrue("expected a warning naming the missing activity, got " + path.getWarnings(),
+			said);
+	}
 }

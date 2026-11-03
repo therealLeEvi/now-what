@@ -827,6 +827,13 @@ MISC = [
      "Safe Firemaking training with useful supply drops."),
     ("minigame_tempoross", "Tempoross", "MINIGAME", [("SKILL_LEVEL", "FISHING", 35)],
      "Safe Fishing training, source of the fish barrel and tackle box."),
+    # The description carries the wiki's own units rather than a points-per-hour
+    # figure it does not publish: 1 point per 3 fruits, 35 for a full sack, and
+    # 19 minutes per 100 fruits. From those a player can work out what 250
+    # points costs them, which is the question a reward-shop price raises.
+    ("minigame_tithe_farm", "Tithe Farm", "MINIGAME", [("SKILL_LEVEL", "FARMING", 34)],
+     "Farming minigame paid in points: 1 point per 3 fruits deposited, and 35 for "
+     "a full 100-fruit sack. Roughly 19 minutes per 100 fruits. No favour needed."),
     ("minigame_guardians_of_the_rift", "Guardians of the Rift", "MINIGAME", [("SKILL_LEVEL", "RUNECRAFT", 27)],
      "Runecraft training and the main source of Runecraft pets and outfits."),
     ("minigame_fight_caves", "Fight Caves", "MINIGAME", [("SKILL_LEVEL", "RANGED", 70)],
@@ -840,6 +847,20 @@ MISC = [
     ("skilling_graceful_set", "Buy a Graceful outfit", "SKILLING", [("SKILL_LEVEL", "AGILITY", 30)],
      "Marks of grace from rooftop courses; weight reduction that pays off everywhere."),
 ]
+
+# Which activity mints the currency a shop item is bought with.
+#
+# A price with no route to it is the complaint this answers: "Tithe Farm reward
+# shop, 250 points" named the shop and stopped, leaving the player to find out
+# elsewhere what Tithe Farm is, how points accrue and how long 250 takes. The
+# named activity is planned as a step ahead of the purchase, and its kit also
+# serves as the item's "what to bring" - see ItemSource.getPreparationFrom.
+ITEM_CURRENCY = {
+    'SEED_BOX': 'minigame_tithe_farm',
+    'BOTTOMLESS_COMPOST_BUCKET': 'minigame_tithe_farm',
+    'FISH_BARREL': 'minigame_tempoross',
+    'TACKLE_BOX': 'minigame_tempoross',
+}
 
 # What to wear and bring to a minigame, and where its strategy page is.
 # Same shape and same purpose as PVM_PREP above; these were living only in the
@@ -873,6 +894,20 @@ MISC_PREP = {'minigame_barbarian_assault': {'setups': [['Any role',
                                      'Rope and a hammer are provided at the docks',
                                      'A knife, if you want to cook as you go'],
                         'strategyUrl': 'https://oldschool.runescape.wiki/w/Tempoross'},
+ 'minigame_tithe_farm': {'setups': [["Farmer's outfit, for the xp bonus",
+                                    ["Farmer's strawhat",
+                                     "Farmer's jacket",
+                                     "Farmer's boro trousers",
+                                     "Farmer's boots"]]],
+                         'supplies': ['Spade',
+                                      'Seed dibber',
+                                      'Watering can, six to eight of them, which is what '
+                                      'the wiki recommends',
+                                      'Seeds are taken from the table inside, one tier at a '
+                                      'time',
+                                      "Gricoller's can, once you can afford one, ends the "
+                                      'refilling'],
+                         'strategyUrl': 'https://oldschool.runescape.wiki/w/Tithe_Farm'},
  'minigame_guardians_of_the_rift': {'setups': [['Runecraft kit',
                                                 ['Full graceful',
                                                  'Raiments of the eye, once you have the '
@@ -1200,8 +1235,6 @@ ITEM_PREP = {
     'GUTHANS_WARSPEAR': 'pvm_barrows',
     'VERACS_FLAIL': 'pvm_barrows',
     'TORAGS_HAMMERS': 'pvm_barrows',
-    'FISH_BARREL': 'minigame_tempoross',
-    'TACKLE_BOX': 'minigame_tempoross',
     'TWISTED_BOW': 'pvm_chambers_of_xeric',
  'SCYTHE_OF_VITUR': 'pvm_theatre_of_blood',
  'DRAGON_CLAWS': 'pvm_chambers_of_xeric',
@@ -1228,6 +1261,10 @@ for iid, display, game_id, stype, detail, kc, req in ITEMS:
     entry["id"] = iid
     if iid in ITEM_PREP:
         entry["preparationFrom"] = ITEM_PREP[iid]
+    if iid in ITEM_CURRENCY:
+        assert stype == "SHOP", iid + " has a currency but is not a SHOP"
+        assert iid not in ITEM_PREP, iid + " need not say preparationFrom too"
+        entry["currencyFrom"] = ITEM_CURRENCY[iid]
     entry["displayName"] = display
     entry["gameItemId"] = game_id
     entry["type"] = stype

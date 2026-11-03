@@ -184,6 +184,18 @@ public class Activity
 		this.requirements = requirements;
 	}
 
+	/**
+	 * Adds the description to a programmatically built activity.
+	 * <p>
+	 * Not decoration: a plan step built from an activity shows its description,
+	 * so a test about what a step says has to be able to set one.
+	 */
+	public Activity withDescription(String description)
+	{
+		this.description = description;
+		return this;
+	}
+
 	/** Same as above, with an explicit priority - used where ranking order matters (e.g. tests). */
 	public Activity(String id, String name, Category category, List<Requirement> requirements, int priority)
 	{

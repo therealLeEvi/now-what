@@ -5223,6 +5223,41 @@
     "strategyUrl": "https://oldschool.runescape.wiki/w/Tempoross"
   },
   {
+    "id": "minigame_tithe_farm",
+    "name": "Tithe Farm",
+    "category": "MINIGAME",
+    "description": "Farming minigame paid in points: 1 point per 3 fruits deposited, and 35 for a full 100-fruit sack. Roughly 19 minutes per 100 fruits. No favour needed.",
+    "reasonTemplate": "Available to you now",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Tithe_Farm",
+    "priority": 4,
+    "requirements": [
+      {
+        "type": "SKILL_LEVEL",
+        "value": "FARMING",
+        "threshold": 34
+      }
+    ],
+    "setups": [
+      {
+        "name": "Farmer's outfit, for the xp bonus",
+        "items": [
+          "Farmer's strawhat",
+          "Farmer's jacket",
+          "Farmer's boro trousers",
+          "Farmer's boots"
+        ]
+      }
+    ],
+    "supplies": [
+      "Spade",
+      "Seed dibber",
+      "Watering can, six to eight of them, which is what the wiki recommends",
+      "Seeds are taken from the table inside, one tier at a time",
+      "Gricoller's can, once you can afford one, ends the refilling"
+    ],
+    "strategyUrl": "https://oldschool.runescape.wiki/w/Tithe_Farm"
+  },
+  {
     "id": "minigame_guardians_of_the_rift",
     "name": "Guardians of the Rift",
     "category": "MINIGAME",

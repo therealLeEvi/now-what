@@ -7,6 +7,7 @@ import com.nextstep.model.ItemSource;
 import com.nextstep.model.Requirement;
 import com.nextstep.model.TrainingMethod;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -148,6 +149,50 @@ public class ContentDatabaseTest
 		assertEquals("items borrowing kit from no such activity: " + dangling,
 			0, dangling.size());
 		assertTrue("no item borrows kit any more - did the link get dropped?", borrowing > 0);
+	}
+
+	/**
+	 * A shop price quoted in a currency you earn has to say where you earn it.
+	 * <p>
+	 * "Tithe Farm reward shop, 250 points" was the complaint that produced this:
+	 * the panel named a shop and a number and stopped, with nothing about what
+	 * Tithe Farm is, how points accrue or how long 250 of them take. The ones
+	 * still missing a link are listed here by name, so adding a new points shop
+	 * fails this test until it either gets its activity or is admitted to the
+	 * list - a dead end has to be a decision, not an oversight.
+	 */
+	@Test
+	public void everyShopPricedInEarnedCurrencyNamesWhereItIsEarned()
+	{
+		Set<String> knownGaps = new HashSet<>(Arrays.asList(
+			// Marks of grace come from the rooftop courses, and the activity in
+			// the database is "Buy a Graceful outfit" - pointing the hood at
+			// that would be a step telling you to buy the thing you asked for.
+			"GRACEFUL_HOOD",
+			// Slayer points come a task at a time; there is no Slayer activity
+			// to plan, and "do slayer tasks" is not one either.
+			"HERB_SACK",
+			// Last Man Standing is not in the database at all.
+			"RUNE_POUCH"));
+
+		List<String> deadEnds = new ArrayList<>();
+		for (ItemSource item : items)
+		{
+			if (item.getType() != ItemSource.SourceType.SHOP || item.getDetail() == null)
+			{
+				continue;
+			}
+			String detail = item.getDetail().toLowerCase(java.util.Locale.ROOT);
+			boolean earned = detail.contains("point") || detail.contains("mark")
+				|| detail.contains("token") || detail.contains("reward");
+			if (earned && item.getCurrencyFrom() == null && !knownGaps.contains(item.getId()))
+			{
+				deadEnds.add(item.getId() + " (" + item.getDetail() + ")");
+			}
+		}
+
+		assertEquals("shop items quoting an earned price with nowhere to earn it: " + deadEnds,
+			0, deadEnds.size());
 	}
 
 	/**

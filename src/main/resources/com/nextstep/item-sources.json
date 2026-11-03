@@ -1019,6 +1019,7 @@
   },
   {
     "id": "SEED_BOX",
+    "currencyFrom": "minigame_tithe_farm",
     "displayName": "Seed box",
     "gameItemId": 13639,
     "type": "SHOP",
@@ -1032,6 +1033,7 @@
   },
   {
     "id": "BOTTOMLESS_COMPOST_BUCKET",
+    "currencyFrom": "minigame_tithe_farm",
     "displayName": "Bottomless compost bucket",
     "gameItemId": 22994,
     "type": "SHOP",
@@ -1045,7 +1047,7 @@
   },
   {
     "id": "FISH_BARREL",
-    "preparationFrom": "minigame_tempoross",
+    "currencyFrom": "minigame_tempoross",
     "displayName": "Fish barrel",
     "gameItemId": 25582,
     "type": "SHOP",
@@ -1059,7 +1061,7 @@
   },
   {
     "id": "TACKLE_BOX",
-    "preparationFrom": "minigame_tempoross",
+    "currencyFrom": "minigame_tempoross",
     "displayName": "Tackle box",
     "gameItemId": 25580,
     "type": "SHOP",
