@@ -57,7 +57,6 @@ import net.runelite.client.ui.ClientToolbar;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.NavigationButton;
 import net.runelite.client.ui.PluginPanel;
-import net.runelite.client.ui.components.PluginErrorPanel;
 import net.runelite.client.util.LinkBrowser;
 
 @Slf4j
@@ -1226,11 +1225,22 @@ public class NextStepPanel extends PluginPanel
 		return label;
 	}
 
+	/**
+	 * The logged-out state, in this panel's own typography rather than
+	 * RuneLite's PluginErrorPanel.
+	 * <p>
+	 * PluginErrorPanel puts its description in an HTML label with no wrap width,
+	 * so it asked for 253px inside a 225px sidebar. Horizontal scrolling is off
+	 * here, so nothing scrolls to reach it - the tail of the sentence is simply
+	 * cut off at the viewport edge, on the one screen a new user sees first.
+	 * Text wrapped by this panel has a width by construction, and
+	 * PanelWidthTest is the guard that keeps it that way.
+	 */
 	private void showPlaceholder()
 	{
-		PluginErrorPanel errorPanel = new PluginErrorPanel();
-		errorPanel.setContent("Next Step", "Log in to see suggestions based on your progress.");
-		availableNowContainer.add(errorPanel);
+		stack(availableNowContainer, sectionHeader("Next Step"));
+		stack(availableNowContainer, resultLine(
+			"Log in to see suggestions based on your progress.", SUBTLE, 0));
 	}
 
 	/**
