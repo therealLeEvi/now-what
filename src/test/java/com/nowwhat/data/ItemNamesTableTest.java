@@ -41,12 +41,24 @@ public class ItemNamesTableTest
 	public void everyPhrasePicksWhatTheFullIndexPicks()
 	{
 		List<String> differ = new ArrayList<>();
+		Map<String, Integer> checked = ItemNamesTable.checkedIds();
 		for (String line : ItemNamesTable.kitLines())
 		{
 			for (ItemTextParser.Phrase phrase : ItemTextParser.phrases(line))
 			{
 				String term = ItemTextParser.searchTerm(phrase);
-				Integer full = ItemTextParser.pick(phrase, ItemIdConstants.search(term));
+				List<ItemTextParser.Candidate> all = ItemIdConstants.search(term);
+				Integer full = ItemTextParser.pick(phrase, all, checked.keySet());
+				// Through the same correction the table was built with: the full
+				// index still picks ULTOR_RING's unused id, the table the real one.
+				for (ItemTextParser.Candidate candidate : all)
+				{
+					if (full != null && candidate.getId() == full)
+					{
+						full = ItemNamesTable.realId(full, candidate.getName(), checked);
+						break;
+					}
+				}
 				Integer shipped = ItemTextParser.pick(phrase, ItemNameIndex.search(term));
 				if (!Objects.equals(full, shipped))
 				{
@@ -86,5 +98,18 @@ public class ItemNamesTableTest
 			}
 		}
 		return false;
+	}
+
+	@Test
+	public void anUnusedPlainIdGivesWayToTheIdTheGameUses()
+	{
+		java.util.Map<String, Integer> checked = new java.util.HashMap<>();
+		checked.put("ultor ring", 28307);
+		checked.put("eye of ayak", 31115);
+
+		// ULTOR_RING (25485) was never used; ULTOR_RING_28307 is the ring.
+		org.junit.Assert.assertEquals(28307, ItemNamesTable.realId(25485, "ultor ring", checked));
+		// EYE_OF_AYAK_UNCHARGED is a real item, just not the one worn.
+		org.junit.Assert.assertEquals(31113, ItemNamesTable.realId(31113, "eye of ayak", checked));
 	}
 }

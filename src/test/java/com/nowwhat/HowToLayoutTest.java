@@ -34,7 +34,7 @@ public class HowToLayoutTest
 		String b = "Its phases follow one of four fixed rotations, so learn them.";
 		String c = "The loot appears under you.";
 
-		assertEquals(Arrays.asList(a + " " + b, c), NowWhatPanel.paragraphs(a + " " + b + " " + c));
-		assertEquals(Collections.singletonList("Short. Text."), NowWhatPanel.paragraphs("Short. Text."));
+		assertEquals(Arrays.asList(a + " " + b, c), PlanView.paragraphs(a + " " + b + " " + c));
+		assertEquals(Collections.singletonList("Short. Text."), PlanView.paragraphs("Short. Text."));
 	}
 }

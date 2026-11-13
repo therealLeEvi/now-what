@@ -167,17 +167,36 @@ public class PrerequisiteResolver
 
 	private List<Requirement> dedupeRequirements(List<Requirement> requirements)
 	{
+		// One entry per skill/KC however many quests along the chain ask for it,
+		// and that entry is the highest ask. Keeping the first one met instead
+		// planned Agility to 10 for Desert Treasure II, because The Dig Site
+		// wants 10 and is walked before Secrets of the North, which wants 69.
+		// The entry stays where the first ask was, so the order still follows
+		// the chain.
 		List<Requirement> result = new ArrayList<>();
-		Set<String> seen = new LinkedHashSet<>();
+		Map<String, Integer> indexByKey = new HashMap<>();
 		for (Requirement req : requirements)
 		{
-			// Keep only the first occurrence if the same skill/KC shows up more
-			// than once across the chain (e.g. two different quests both
-			// wanting Agility) - chain output stays de-duplicated for display.
-			String key = req.getType() + ":" + req.getValue();
-			if (seen.add(key))
+			if (req.getType() == Requirement.Type.ANY_OF)
 			{
+				// A choice has no value to key on, and two different choices
+				// are two different gates - never folded into one.
+				if (!result.contains(req))
+				{
+					result.add(req);
+				}
+				continue;
+			}
+			String key = req.getType() + ":" + req.getValue();
+			Integer at = indexByKey.get(key);
+			if (at == null)
+			{
+				indexByKey.put(key, result.size());
 				result.add(req);
+			}
+			else if (req.getThreshold() > result.get(at).getThreshold())
+			{
+				result.set(at, req);
 			}
 		}
 		return result;

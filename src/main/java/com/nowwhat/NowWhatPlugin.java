@@ -30,9 +30,12 @@ import net.runelite.api.gameval.VarPlayerID;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.ItemContainerChanged;
+import net.runelite.api.events.StatChanged;
+import net.runelite.api.gameval.InventoryID;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
+import net.runelite.client.events.RuneScapeProfileChanged;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.ClientToolbar;
@@ -50,8 +53,9 @@ public class NowWhatPlugin extends Plugin
 {
 	// Refresh isn't event-driven off every relevant varbit change (there are
 	// too many to subscribe to individually and reliably); instead we
-	// recompute on a timer. Once every few seconds is plenty since none of
-	// this data changes faster than a player can read a panel.
+	// recompute on a timer. The two things a player watches for - a level-up
+	// and a change in what they are carrying - do not wait for it: each asks
+	// for a refresh on the next tick.
 	private static final int REFRESH_INTERVAL_TICKS = 50; // ~30 seconds
 
 	@Inject
@@ -105,6 +109,8 @@ public class NowWhatPlugin extends Plugin
 	private NowWhatPanel panel;
 	private NavigationButton navButton;
 	private int ticksSinceRefresh = 0;
+	/** The real level last seen per skill, to tell a level-up from an xp drop. */
+	private final Map<Skill, Integer> lastLevels = new HashMap<>();
 
 	// Snapshot from the most recent refresh, read by the panel's "check
 	// requirements" lookup so that lookups don't need to hop back onto the
@@ -133,6 +139,9 @@ public class NowWhatPlugin extends Plugin
 
 		panel = new NowWhatPanel(config, activityDatabase.getAllActivities(),
 			itemSourceDatabase.getAllSources(), this::resolvePath, pluginManager, itemManager);
+		// Gear is drawn in the shape of the worn-equipment tab, and which slot an
+		// item goes in can only be asked on the game thread.
+		panel.setClientThread(clientThread);
 		// Lets the panel open another plugin's sidebar panel when it points at
 		// one - the toolbar is the only thing that can.
 
@@ -182,6 +191,31 @@ public class NowWhatPlugin extends Plugin
 		}
 	}
 
+	/**
+	 * A level-up is what finishes a training step, and it used to sit on screen
+	 * as unfinished until the timer came round, up to half a minute later. Only
+	 * the level matters: an xp drop arrives every few ticks while training and
+	 * changes nothing the panel shows.
+	 */
+	@Subscribe
+	public void onStatChanged(StatChanged event)
+	{
+		Integer before = lastLevels.put(event.getSkill(), event.getLevel());
+		if (before != null && before != event.getLevel())
+		{
+			ticksSinceRefresh = REFRESH_INTERVAL_TICKS; // refresh on the next tick
+		}
+	}
+
+	/** Another account has logged in: what was known about the last one's items goes. */
+	@Subscribe
+	public void onRuneScapeProfileChanged(RuneScapeProfileChanged event)
+	{
+		lastLevels.clear();
+		itemTracker.load();
+		ticksSinceRefresh = REFRESH_INTERVAL_TICKS;
+	}
+
 	@Subscribe
 	public void onGameTick(GameTick event)
 	{
@@ -210,7 +244,15 @@ public class NowWhatPlugin extends Plugin
 				Set<Activity.Category> hidden = hiddenCategories();
 				// Before the suggestions, because this can rebuild a rendered
 				// plan and the update below repaints around it.
-				panel.setProgress(state.getSkillLevels());
+				Set<String> finished = new java.util.HashSet<>();
+				for (Activity activity : activityDatabase.getAllActivities())
+				{
+					if (com.nowwhat.engine.RequirementEvaluator.isAlreadyDone(activity, state))
+					{
+						finished.add(activity.getName());
+					}
+				}
+				panel.setProgress(state.getSkillLevels(), finished);
 				boolean hideWilderness = !config.showWilderness();
 				List<Activity> almost = suggestionEngine.getAlmostAvailable(
 					activityDatabase.getAllActivities(), state, hidden, hideWilderness);
@@ -299,6 +341,13 @@ public class NowWhatPlugin extends Plugin
 
 		diaryTracker.readInto(client, state);
 		combatAchievementTracker.readInto(client, state);
+		// Read here as well as on change. The change events for what is carried
+		// and worn can arrive before the account they belong to is known, and
+		// are then dropped with the last account's items; the client still has
+		// both, so asking it is always right.
+		itemTracker.load();
+		itemTracker.onContainerChanged(InventoryID.INV, client.getItemContainer(InventoryID.INV));
+		itemTracker.onContainerChanged(InventoryID.WORN, client.getItemContainer(InventoryID.WORN));
 		itemTracker.writeInto(state);
 
 		// PvM boss KC and collection log slot data intentionally left as

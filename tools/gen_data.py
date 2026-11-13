@@ -12,6 +12,7 @@ from boss_data import BOSSES, BOSS_PREP, BOSS_QUESTS, BOSS_WIKI_PAGE, BOSS_SOURC
 from recommended_data import RECOMMENDED, WILDERNESS
 from activity_text import DESCRIPTIONS
 from boss_uniques import UNIQUES, NOTES as UNIQUE_NOTES
+from reward_items import ENTRIES as REWARD_ENTRIES, MODIFY as REWARD_MODIFY, ITEM_KEY_ORDER
 try:
     from quest_wiki_data import QUEST_WIKI
 except ImportError:  # first run, before tools/audit_quests.py has written it
@@ -458,7 +459,7 @@ PVM_PREP = {
                                  "black d'hide body and chaps", "magic shortbow (i)",
                                  "amethyst arrows", "void knight gloves", "Aranea boots",
                                  "ring of recoil"]),
-            ("Magic (budget)", ["Mystic hat", "amulet of glory", "skill cape",
+            ("Magic (budget)", ["Mystic hat", "amulet of glory", "god cape",
                                 "mystic robe top and bottom", "trident of the seas",
                                 "book of darkness", "barrows gloves", "wizard boots",
                                 "ring of recoil"]),
@@ -469,7 +470,7 @@ PVM_PREP = {
             ("Magic (best in slot)", ["Ancestral hat, top and bottom",
                                       "Tumeken's shadow or sanguinesti staff",
                                       "occult necklace", "imbued god cape", "tome of fire",
-                                      "magus ring"]),
+                                      "confliction gauntlets", "magus ring"]),
         ],
         "supplies": ["Extended anti-venom+ (4) - not optional here",
                      "4+ cooked karambwan for combo eating",
@@ -485,15 +486,18 @@ PVM_PREP = {
         "setups": [
             ("Ranged (budget)", ["Slayer helmet or Void ranger helm", "salve amulet (ei)",
                                  "Ava's accumulator", "black d'hide body and chaps",
-                                 "rune crossbow with ruby and diamond bolts (e)",
-                                 "dragonfire ward or anti-dragon shield", "barrows gloves"]),
+                                 "rune crossbow", "ruby bolts (e) and diamond bolts (e)",
+                                 "dragonfire ward or anti-dragon shield", "barrows gloves",
+                                 "blessed boots", "archers ring (i)"]),
             ("Ranged (best in slot)", ["Masori mask, body and chaps (f)",
                                        "dragon hunter crossbow",
                                        "ruby and diamond dragon bolts (e)", "salve amulet (ei)",
-                                       "Dizana's quiver", "Zaryte vambraces", "dragonfire ward"]),
+                                       "Dizana's quiver", "Zaryte vambraces", "dragonfire ward",
+                                       "venator ring"]),
             ("Melee (best in slot)", ["Torva full helm, platebody and platelegs",
                                       "dragon hunter lance", "avernic defender",
-                                      "salve amulet (ei)", "infernal cape", "ferocious gloves"]),
+                                      "salve amulet (ei)", "infernal cape", "ferocious gloves",
+                                      "ultor ring"]),
         ],
         "supplies": ["Extended super antifire, or super antifire plus Protect from Magic",
                      "Extended anti-venom+ - skip it only with a serpentine helm",
@@ -506,7 +510,8 @@ PVM_PREP = {
         "setups": [
             ("Ranged (budget)", ["Slayer helmet (i)", "amulet of fury", "Ava's assembler",
                                  "black d'hide body and chaps", "toxic blowpipe",
-                                 "book of law", "barrows gloves"]),
+                                 "book of law", "barrows gloves", "blessed boots",
+                                 "archers ring (i)"]),
             ("Ranged (best in slot)", ["Slayer helmet (i)", "Masori body and chaps (f)",
                                        "twisted bow", "twisted buckler",
                                        "seeking dragon arrows", "Zaryte vambraces",
@@ -527,7 +532,8 @@ PVM_PREP = {
         "setups": [
             ("Melee (budget)", ["Helm of neitiznot", "amulet of fury", "fire cape",
                                 "Bandos chestplate and tassets", "abyssal whip or dragon scimitar",
-                                "dragon defender", "barrows gloves", "dragon boots"]),
+                                "dragon defender", "barrows gloves", "dragon boots",
+                                "berserker ring (i)"]),
             ("Melee (best in slot)", ["Torva full helm, platebody and platelegs",
                                       "scythe of vitur or ghrazi rapier", "avernic defender",
                                       "amulet of rancour", "infernal cape", "ferocious gloves",
@@ -546,8 +552,9 @@ PVM_PREP = {
         "setups": [
             ("Ranged (budget)", ["Void ranger helm or Armadyl helmet", "amulet of fury",
                                  "Ava's assembler", "black d'hide or Armadyl body and chaps",
-                                 "rune crossbow with ruby and diamond bolts (e)",
-                                 "odium ward", "barrows gloves"]),
+                                 "rune crossbow", "ruby bolts (e) and diamond bolts (e)",
+                                 "odium ward", "barrows gloves", "Armadyl d'hide boots",
+                                 "ring of the gods (i)"]),
             ("Ranged (best in slot)", ["Masori mask, body and chaps (f)",
                                        "twisted bow or Zaryte crossbow", "Zaryte vambraces",
                                        "Dizana's quiver", "necklace of anguish",
@@ -566,7 +573,8 @@ PVM_PREP = {
         "setups": [
             ("Melee (budget)", ["Helm of neitiznot", "amulet of fury", "fire cape",
                                 "Bandos chestplate and tassets", "abyssal whip",
-                                "dragon defender", "barrows gloves", "dragon boots"]),
+                                "dragon defender", "barrows gloves", "dragon boots",
+                                "berserker ring (i)"]),
             ("Melee (best in slot)", ["Torva full helm, platebody and platelegs",
                                       "scythe of vitur", "avernic defender",
                                       "amulet of rancour", "infernal cape",
@@ -585,7 +593,8 @@ PVM_PREP = {
         "setups": [
             ("Melee (budget)", ["Helm of neitiznot", "amulet of fury", "fire cape",
                                 "Bandos chestplate and tassets", "abyssal whip",
-                                "dragon defender", "barrows gloves", "dragon boots"]),
+                                "dragon defender", "barrows gloves", "dragon boots",
+                                "berserker ring (i)"]),
             ("Melee (best in slot)", ["Torva full helm, platebody and platelegs",
                                       "scythe of vitur", "avernic defender",
                                       "amulet of rancour", "infernal cape",
@@ -603,23 +612,33 @@ PVM_PREP = {
     "pvm_tombs_of_amascut": {
         "setups": [
             ("Melee (best to worst)", ["Head: Torva full helm, Neitiznot faceguard, serpentine helm",
-                                       "Body/legs: Torva, Bandos, fighter torso",
-                                       "Weapon: Osmumten's fang, keris partisan, ghrazi rapier",
+                                       "Body: Torva, Bandos, fighter torso",
+                                       "Legs: Torva, Bandos",
+                                       "Weapon: Osmumten's fang, keris partisan of breaching, ghrazi rapier",
                                        "Shield: avernic then dragon defender",
                                        "Neck: rancour, torture, blood fury",
+                                       "Cape: infernal then fire cape",
                                        "Hands: ferocious then barrows gloves",
-                                       "Boots: primordial then dragon boots"]),
+                                       "Boots: primordial then dragon boots",
+                                       "Ring: ultor then berserker (i)"]),
             ("Ranged (best to worst)", ["Head/body/legs: Masori (f), Masori, crystal",
                                         "Weapon: twisted bow, Zaryte crossbow, bow of faerdhinen",
                                         "Shield: twisted buckler, dragonfire ward, odium ward",
                                         "Ammo: seeking dragon arrows or ruby dragon bolts (e)",
                                         "Neck: rupture then anguish",
-                                        "Cape: Dizana's quiver, Ava's assembler, Ava's accumulator"]),
+                                        "Cape: Dizana's quiver, Ava's assembler, Ava's accumulator",
+                                        "Hands: Zaryte vambraces then barrows gloves",
+                                        "Ring: venator ring",
+                                        "Lightbearer"]),
             ("Magic (best to worst)", ["Head/body/legs: ancestral then virtus",
                                        "Weapon: Tumeken's shadow, eye of Ayak, sanguinesti staff, trident of the swamp",
                                        "Shield: Elidinis' ward (f), arcane spirit shield",
                                        "Neck: occult necklace",
-                                       "Hands: confliction gauntlets then tormented bracelet"]),
+                                       "Cape: imbued god cape",
+                                       "Hands: confliction gauntlets then tormented bracelet",
+                                       "Ring: magus ring",
+                                       "Lightbearer",
+                                       "Ring: seers ring (i)"]),
         ],
         "supplies": ["Saradomin brews and super restores",
                      "Combat potion matching your style",
@@ -631,18 +650,25 @@ PVM_PREP = {
     "pvm_theatre_of_blood": {
         "setups": [
             ("Melee (best to worst)", ["Head: Torva or oathplate helm, Neitiznot faceguard, Blood Moon helm",
-                                       "Body/legs: Torva or oathplate, Bandos, fighter torso",
+                                       "Body: Torva or oathplate, Bandos, fighter torso",
+                                       "Legs: Torva or oathplate, Bandos, obsidian platelegs",
+                                       "Cape: infernal then fire cape",
+                                       "Hands: ferocious then barrows gloves",
                                        "Weapon: scythe of vitur, soulreaper axe or blade of saeldor, abyssal tentacle",
                                        "Shield: avernic then dragon defender",
                                        "Neck: rancour, torture, blood fury",
                                        "Boots: primordial then dragon boots",
                                        "Ring: ultor, bellator, berserker (i)"]),
             ("Ranged (best to worst)", ["Void ranger helm with elite void top and robe",
+                                        "Hands: void knight gloves",
                                         "Weapon: twisted bow plus toxic blowpipe",
+                                        "Ammo: seeking dragon arrows then dragon arrows",
                                         "Shield: twisted buckler",
                                         "Neck: rupture then anguish",
                                         "Cape: Dizana's quiver then Ava's assembler"]),
-            ("Magic (best to worst)", ["Head/body/legs: ancestral or virtus, or void mage",
+            ("Magic (best to worst)", ["Head/body/legs: ancestral or virtus",
+                                       "Void mage helm with elite void top and robe",
+                                       "Cape: infernal cape then imbued god cape",
                                        "Weapon: eye of Ayak, kodai wand, nightmare staff",
                                        "Shield: Elidinis' ward (f)",
                                        "Neck: occult necklace",
@@ -659,19 +685,29 @@ PVM_PREP = {
         "setups": [
             ("Melee (best to worst)", ["Head: Torva or oathplate helm, Neitiznot faceguard, Inquisitor's great helm",
                                        "Weapon: scythe of vitur, dragon hunter lance or soulreaper axe, ghrazi rapier or blade of saeldor",
+                                       "Body: Torva or oathplate, Inquisitor's hauberk, Bandos",
+                                       "Legs: Torva or oathplate, Inquisitor's plateskirt, Bandos",
                                        "Shield: avernic then dragon defender",
                                        "Neck: rancour, torture, blood fury or fury",
+                                       "Cape: infernal then fire cape",
+                                       "Lightbearer",
+                                       "Ring: ultor then berserker (i)",
                                        "Hands: ferocious then barrows gloves",
                                        "Boots: primordial then Aranea boots"]),
             ("Ranged (best to worst)", ["Head/body/legs: Masori (f), Masori, Armadyl",
-                                        "Weapon: twisted bow plus blowpipe, then dragon hunter or Zaryte crossbow",
+                                        "Weapon: twisted bow plus toxic blowpipe, then dragon hunter crossbow or Zaryte crossbow",
+                                        "Ammo: seeking dragon arrows or ruby dragon bolts (e)",
                                         "Neck: rupture then anguish",
+                                        "Cape: Dizana's quiver, Ava's assembler, Ava's accumulator",
+                                        "Ring: venator ring",
                                         "Hands: Zaryte vambraces then barrows gloves",
                                         "Boots: pegasian boots"]),
             ("Magic (best to worst)", ["Head/body/legs: ancestral then virtus",
                                        "Weapon: Tumeken's shadow, eye of Ayak, dragon hunter wand",
                                        "Shield: Elidinis' ward (f), tome of earth or fire",
                                        "Neck: occult then fury",
+                                       "Cape: imbued god cape",
+                                       "Ring: magus ring",
                                        "Hands: confliction gauntlets then tormented bracelet"]),
         ],
         "supplies": ["Prepot a stamina before you go in",
@@ -683,7 +719,7 @@ PVM_PREP = {
     "pvm_abyssal_sire": {
         "setups": [
             ("Melee (budget)", ["Black mask (i)", "amulet of glory", "fire cape",
-                                "fighter torso", "Bandos tassets", "abyssal whip or rapier",
+                                "fighter torso", "Bandos tassets", "abyssal whip or ghrazi rapier",
                                 "dragon defender", "barrows gloves", "dragon boots",
                                 "berserker ring (i)"]),
             ("Melee (best in slot)", ["Slayer helmet (i)", "Torva platebody and platelegs",
@@ -806,16 +842,18 @@ PVM_PREP = {
     "pvm_cerberus": {
         "setups": [
             ("Melee (budget)", ["Slayer helmet (i)", "amulet of fury", "fire cape",
-                                "Bandos or Torag's body and legs",
+                                "Bandos chestplate and tassets or Torag's platebody and platelegs",
                                 "abyssal whip or Saradomin sword", "dragon defender",
-                                "barrows gloves", "spectral spirit shield if you own one"]),
+                                "barrows gloves", "dragon boots", "berserker ring (i)",
+                                "spectral spirit shield if you own one"]),
             ("Melee (best in slot)", ["Slayer helmet (i)", "Inquisitor's hauberk and plateskirt",
                                       "scythe of vitur",
                                       "avernic defender or spectral spirit shield",
                                       "amulet of rancour", "infernal cape", "ferocious gloves",
                                       "ultor ring"]),
             ("Ranged (best in slot)", ["Slayer helmet (i)", "Masori body and chaps (f)",
-                                       "twisted bow", "necklace of rupture", "Dizana's quiver",
+                                       "twisted bow", "seeking dragon arrows", "necklace of rupture",
+                                       "Dizana's quiver",
                                        "Zaryte vambraces", "lightbearer"]),
         ],
         "supplies": ["6-9 prayer potions or super restores - the souls drain prayer fast",
@@ -1282,6 +1320,37 @@ for a in activities:
     if a["id"] in WILDERNESS:
         a["wilderness"] = True
 
+# Avernic treads (max) are the best boots for all three combat styles almost
+# everywhere, and most top-end kits were written before they existed: 19 "best
+# in slot" kits named no boots at all, and the raids' "best to worst" lists
+# still opened with primordial or pegasian boots. Put them in once here rather
+# than in sixty hand-written lists. Left alone: a kit that already names them,
+# the Wilderness (where nobody risks them), and a kit whose boots are the
+# fight's own answer - insulated boots, aranea boots, a Shayzien set.
+TREADS = "Avernic treads (max)"
+TREADS_PARTS = ("primordial", "pegasian", "eternal")
+BOOTS_WORDS = ("boots", "treads", "sandals", "shoes", "greaves")
+for a in activities:
+    if a["id"] in WILDERNESS:
+        continue
+    for setup in a.get("setups", []):
+        name = setup["name"].lower()
+        # A switch is only what gets swapped in mid-fight, and nobody swaps boots.
+        if ("best in slot" not in name and "best to worst" not in name) or "switch" in name:
+            continue
+        items = setup["items"]
+        if any("avernic treads" in line.lower() for line in items):
+            continue
+        boots = [i for i, line in enumerate(items)
+                 if any(word in line.lower() for word in BOOTS_WORDS)]
+        if not boots:
+            items.append(TREADS)
+            continue
+        line = items[boots[0]]
+        prefix, _, rest = line.partition(":") if line.lower().startswith("boots:") else ("", "", line)
+        if rest.strip().lower().startswith(TREADS_PARTS):
+            items[boots[0]] = (prefix + ": " if prefix else "") + TREADS + ", " + rest.strip()
+
 io.open('src/main/resources/com/nowwhat/activities.json', 'w', encoding='utf-8', newline='\n').write(
     json.dumps(activities, indent=2, ensure_ascii=False) + "\n")
 
@@ -1581,6 +1650,68 @@ for iid, display, game_id, stype, detail, kc, req, prep, unit in UNIQUES:
         entry["skillRequirement"] = req
     entry["wikiUrl"] = wiki_url(display.replace(" (damaged)", ""))
     items.append(entry)
+
+# Earned rewards (skilling and minigame shops, diaries, quests) and the finished
+# items made out of boss and Slayer components, with the corrections to entries
+# above that came with them. reward_items.py holds the facts and their wiki
+# sources; this only merges and checks them.
+by_id = collections.OrderedDict((e["id"], e) for e in items)
+for iid, changes in REWARD_MODIFY.items():
+    assert iid in by_id, "MODIFY names no such item: " + iid
+    old = by_id[iid]
+    merged = collections.OrderedDict()
+    for key in ITEM_KEY_ORDER:
+        value = changes[key] if key in changes else old.get(key)
+        if value is not None:
+            merged[key] = value
+    assert set(old) | set(changes) <= set(ITEM_KEY_ORDER), iid
+    by_id[iid] = merged
+for entry in REWARD_ENTRIES:
+    assert entry["id"] not in by_id, "duplicate item id " + entry["id"]
+    assert set(entry) <= set(ITEM_KEY_ORDER), entry["id"]
+    by_id[entry["id"]] = collections.OrderedDict(
+        (k, entry[k]) for k in ITEM_KEY_ORDER if k in entry)
+items = list(by_id.values())
+
+quest_names = {a["name"] for a in activities if a["category"] == "QUEST"}
+diary_ids = {a["id"] for a in activities if a["category"] == "DIARY"}
+VALID_SKILLS = {"ATTACK", "STRENGTH", "DEFENCE", "RANGED", "PRAYER", "MAGIC", "RUNECRAFT",
+                "CONSTRUCTION", "HITPOINTS", "AGILITY", "HERBLORE", "THIEVING", "CRAFTING",
+                "FLETCHING", "SLAYER", "HUNTER", "MINING", "SMITHING", "FISHING", "COOKING",
+                "FIREMAKING", "WOODCUTTING", "FARMING", "SAILING"}
+
+
+def check_requirement(iid, req):
+    kind = req["type"]
+    if kind == "ANY_OF":
+        for child in req["anyOf"]:
+            assert child["type"] != "ANY_OF", iid
+            check_requirement(iid, child)
+    elif kind == "SKILL_LEVEL":
+        assert req["value"] in VALID_SKILLS and 1 <= req["threshold"] <= 99, iid
+    elif kind == "COMBINED_SKILL_LEVEL":
+        assert set(req["value"].split(",")) <= VALID_SKILLS, iid
+    elif kind == "QUEST_COMPLETE":
+        assert req["value"] in quest_names, iid + " names unknown quest " + req["value"]
+    elif kind == "DIARY_COMPLETE":
+        assert req["value"] in diary_ids, iid + " names unknown diary " + req["value"]
+    else:
+        assert kind in ("QUEST_POINTS", "COMBAT_LEVEL"), iid + " " + kind
+
+
+for entry in items:
+    iid = entry["id"]
+    for key in ("preparationFrom", "currencyFrom"):
+        if key in entry:
+            assert entry[key] in known_ids, iid + " " + key + " " + entry[key]
+    if "currencyFrom" in entry:
+        assert entry["type"] == "SHOP", iid
+    for ingredient in entry.get("ingredients", []):
+        assert ingredient["itemId"] in by_id, iid + " needs unknown " + ingredient["itemId"]
+    if entry["type"] == "CRAFT":
+        assert entry.get("ingredients"), iid + " is a craft with nothing to make it from"
+    if "skillRequirement" in entry:
+        check_requirement(iid, entry["skillRequirement"])
 
 io.open('src/main/resources/com/nowwhat/item-sources.json', 'w', encoding='utf-8', newline='\n').write(
     json.dumps(items, indent=2, ensure_ascii=False) + "\n")

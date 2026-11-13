@@ -113,6 +113,44 @@ public class FinishedStepsTest
 			after.stream().anyMatch(line -> line.contains("Prayer 70")));
 	}
 
+	/**
+	 * A quest on the way to the goal folds away once the game says it is done.
+	 * The plan is not planned again while it is open, so a quest finished since
+	 * used to stay listed as still to do.
+	 */
+	@Test
+	public void aQuestFinishedSinceThePlanWasMadeFoldsAway() throws Exception
+	{
+		Gson gson = new Gson();
+		ActivityDatabase ad = new ActivityDatabase(gson);
+		ad.load();
+		com.nowwhat.model.Activity goal = ad.getAllActivities().stream()
+			.filter(a -> "Desert Treasure I".equals(a.getName()))
+			.findFirst().orElseThrow(AssertionError::new);
+
+		final NowWhatPanel[] built = new NowWhatPanel[1];
+		SwingUtilities.invokeAndWait(() ->
+		{
+			built[0] = panel(new PlayerState());
+			built[0].planFor(goal);
+		});
+
+		List<String> before = text(built[0]);
+		assertTrue("expected The Dig Site among the quests needed first: " + before,
+			before.stream().anyMatch(line -> line.contains("The Dig Site")));
+
+		SwingUtilities.invokeAndWait(() -> built[0].setProgress(
+			new java.util.HashMap<>(), java.util.Collections.singleton("The Dig Site")));
+
+		List<String> after = text(built[0]);
+		assertTrue("expected an offer to unfold the finished quest: " + after,
+			after.stream().anyMatch(line -> line.contains("done already")));
+		assertFalse("the finished quest should be folded away: " + after,
+			after.stream().anyMatch(line -> line.contains("The Dig Site")));
+		assertTrue("the goal itself must stay: " + after,
+			after.stream().anyMatch(line -> line.contains("Desert Treasure I")));
+	}
+
 	private static void planBaseStats(NowWhatPanel panel, int level)
 	{
 		List<JSpinner> spinners = new ArrayList<>();

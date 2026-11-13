@@ -51,6 +51,13 @@ public class ItemSource
 	private Integer gameItemId;
 	/** Free-text detail: shop name, boss name, notes - meaning depends on type. */
 	private String detail;
+	/**
+	 * How the drop actually works, where that takes more than a place name:
+	 * "about 1 kill in 100 drops an unsired...". Kept apart from detail because
+	 * a drop's detail is read as a place in "Bludgeon claw from <detail>", and
+	 * a sentence there turns the step title into a paragraph.
+	 */
+	private String note;
 	private String wikiUrl;
 	/** MONSTER_DROP only: rough expected kills for one drop. Always an estimate. */
 	private Integer estimatedKc;
@@ -101,6 +108,13 @@ public class ItemSource
 		return this;
 	}
 
+	/** For programmatic construction; the shipped data comes from JSON. */
+	public ItemSource withGameItemId(int gameItemId)
+	{
+		this.gameItemId = gameItemId;
+		return this;
+	}
+
 	/** @see #currencyFrom */
 	public String getCurrencyFrom()
 	{
@@ -139,6 +153,12 @@ public class ItemSource
 	public SourceType getType()
 	{
 		return type;
+	}
+
+	/** @see #note */
+	public String getNote()
+	{
+		return note;
 	}
 
 	public String getDetail()

@@ -103,6 +103,44 @@ public class PrerequisiteResolverTest
 	}
 
 	@Test
+	public void theSameSkillAskedTwiceKeepsTheHigherLevel()
+	{
+		// The low ask is walked first, as The Dig Site's 10 Agility is on the
+		// way to Desert Treasure II's 69.
+		Activity early = new Activity("q1", "Early Quest", Activity.Category.QUEST, Arrays.asList(
+			new Requirement(Requirement.Type.SKILL_LEVEL, "AGILITY", 10)
+		));
+		Activity late = new Activity("q2", "Late Quest", Activity.Category.QUEST, Arrays.asList(
+			new Requirement(Requirement.Type.QUEST_COMPLETE, "Early Quest", 0),
+			new Requirement(Requirement.Type.SKILL_LEVEL, "AGILITY", 69)
+		));
+
+		PrerequisiteResolver resolver = new PrerequisiteResolver(Arrays.asList(early, late));
+		PrerequisiteChain chain = resolver.resolve(late, new PlayerState());
+
+		assertEquals(1, chain.getStandaloneRequirements().size());
+		assertEquals(69, chain.getStandaloneRequirements().get(0).getThreshold());
+	}
+
+	@Test
+	public void twoDifferentChoicesAreBothKept()
+	{
+		Activity target = new Activity("boss", "Some Boss", Activity.Category.PVM, Arrays.asList(
+			Requirement.anyOf(
+				new Requirement(Requirement.Type.SKILL_LEVEL, "ATTACK", 99),
+				new Requirement(Requirement.Type.SKILL_LEVEL, "STRENGTH", 99)),
+			Requirement.anyOf(
+				new Requirement(Requirement.Type.SKILL_LEVEL, "RANGED", 99),
+				new Requirement(Requirement.Type.SKILL_LEVEL, "MAGIC", 99))
+		));
+
+		PrerequisiteResolver resolver = new PrerequisiteResolver(Arrays.asList(target));
+		PrerequisiteChain chain = resolver.resolve(target, new PlayerState());
+
+		assertEquals(2, chain.getStandaloneRequirements().size());
+	}
+
+	@Test
 	public void diaryTierChainResolvesThroughLowerTierFirst()
 	{
 		Activity easyTier = new Activity("ARDOUGNE_EASY", "Ardougne Easy", Activity.Category.DIARY, Arrays.asList());

@@ -64,6 +64,11 @@ against the wiki without reading the generator:
   with kits, supplies and the wiki pages each came from (`BOSS_SOURCES`).
 - `boss_uniques.py`: their unique drops as item goals, item ids from
   `./gradlew itemid`, drop rates and caveats in `NOTES`.
+- `reward_items.py`: earned rewards (skilling and minigame shops, diaries,
+  quests) and the finished items made out of boss and Slayer components, with
+  `MODIFY` corrections to the entries above them and a wiki source per entry in
+  `NOTES`. gen_data.py checks that every ingredient, activity, quest, diary and
+  skill it names exists, and that every CRAFT lists what it is made from.
 - `recommended_data.py`: the stats the wiki recommends per fight, and which
   fights are in the Wilderness. These only decide what is suggested.
 - `activity_text.py`: how-to descriptions that replace the one-line text of

@@ -68,10 +68,10 @@ public final class ItemTextParser
 			"faceguard", "faceguard", "crown"));
 		SLOT_NOUNS.put("helm", SLOT_NOUNS.get("head"));
 		SLOT_NOUNS.put("body", Arrays.asList("body", "platebody", "chestplate", "top", "robetop",
-			"hauberk", "torso", "robe", "chainbody"));
+			"hauberk", "torso", "robe", "chainbody", "chest", "leathertop", "brassard", "chestguard"));
 		SLOT_NOUNS.put("chest", SLOT_NOUNS.get("body"));
 		SLOT_NOUNS.put("legs", Arrays.asList("legs", "platelegs", "chaps", "skirt", "plateskirt",
-			"robeskirt", "bottom", "tassets", "robe"));
+			"robeskirt", "bottom", "tassets", "robe", "chainskirt", "leatherskirt", "cuisse", "legguards"));
 		SLOT_NOUNS.put("neck", Arrays.asList("necklace", "amulet"));
 		SLOT_NOUNS.put("amulet", SLOT_NOUNS.get("neck"));
 		SLOT_NOUNS.put("cape", Arrays.asList("cape", "cloak", "quiver", "assembler", "accumulator"));
@@ -82,7 +82,9 @@ public final class ItemTextParser
 		SLOT_NOUNS.put("hands", Arrays.asList("gloves", "vambraces", "gauntlets", "bracelet",
 			"bracers", "gloves"));
 		SLOT_NOUNS.put("gloves", SLOT_NOUNS.get("hands"));
-		SLOT_NOUNS.put("boots", Arrays.asList("boots", "shoes"));
+		// "treads" too: "Boots: Avernic treads (max), primordial boots" names the
+		// best boots in the game without the word "boots" anywhere in them.
+		SLOT_NOUNS.put("boots", Arrays.asList("boots", "shoes", "treads"));
 		SLOT_NOUNS.put("feet", SLOT_NOUNS.get("boots"));
 		SLOT_NOUNS.put("ring", Collections.singletonList("ring"));
 		SLOT_NOUNS.put("ammo", Arrays.asList("arrow", "arrows", "bolts", "darts", "javelins",
@@ -96,6 +98,60 @@ public final class ItemTextParser
 		SLOT_NOUNS.put("weapon", Collections.emptyList());
 		SLOT_NOUNS.put("mainhand", Collections.emptyList());
 		SLOT_NOUNS.put("2h", Collections.emptyList());
+	}
+
+	/** Kinds of thing a list can share: "nature, fire, dust and law runes". */
+	private static final Set<String> SHARED_NOUNS = new LinkedHashSet<>(Arrays.asList(
+		"runes", "rune", "arrows", "bolts", "darts", "javelins", "potions", "seeds", "logs",
+		"bars", "ores", "planks", "hides", "bones", "saplings"));
+
+	/** Every slot noun, for telling which belong to one slot only. */
+	private static final Set<String> ALL_SLOT_NOUNS = new LinkedHashSet<>();
+
+	static
+	{
+		SLOT_NOUNS.values().forEach(ALL_SLOT_NOUNS::addAll);
+	}
+
+	/**
+	 * Names for "any one of these", pictured by one of them. Guides write "god
+	 * cape" and "blessed coif" because every god's version does the same job,
+	 * and no item is called that, so the box stayed empty. The Saradomin one
+	 * stands in for the picture; the line keeps its words (see
+	 * {@link #namesAStandIn}), so "any god" is still said.
+	 */
+	private static final Map<String, String> STAND_INS = new LinkedHashMap<>();
+
+	static
+	{
+		STAND_INS.put("imbued god cape", "imbued saradomin cape");
+		STAND_INS.put("god cape", "saradomin cape");
+		STAND_INS.put("blessed coif", "saradomin coif");
+		STAND_INS.put("blessed d'hide coif", "saradomin coif");
+		STAND_INS.put("blessed body", "saradomin d'hide body");
+		STAND_INS.put("blessed d'hide body", "saradomin d'hide body");
+		STAND_INS.put("blessed chaps", "saradomin chaps");
+		STAND_INS.put("blessed d'hide chaps", "saradomin chaps");
+		STAND_INS.put("blessed boots", "saradomin d'hide boots");
+		STAND_INS.put("blessed d'hide boots", "saradomin d'hide boots");
+	}
+
+	/** Whether a line names one of the "any of these" items, so its words have to stay. */
+	public static boolean namesAStandIn(String entry)
+	{
+		if (entry == null)
+		{
+			return false;
+		}
+		String lower = entry.toLowerCase(Locale.ROOT);
+		for (String name : STAND_INS.keySet())
+		{
+			if (lower.contains(name))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/** Names that are a different thing wearing the same name, and never what a guide means. */
@@ -235,11 +291,32 @@ public final class ItemTextParser
 		// the first are named by their own word alone, and only the first option
 		// says which set they belong to. Without carrying that word across, every
 		// line of this shape loses all but its first piece.
-		String setWord = null;
-
-		for (String option : split(text))
+		// A set's name carries across the pieces written after it, but not past
+		// an "or": "Bandos chestplate and tassets" is one kit, "Super attack,
+		// strength and defence" three super potions, while "Oathplate helm,
+		// chest and legs or Torva" is two kits and Torva is not an oathplate
+		// piece. Every wrong carry the loadout audit found crossed an "or".
+		for (String group : text.split("(?i) or "))
 		{
-			Cleaned cleaned = words(option);
+			addPhrases(group, slots, phrases);
+		}
+		return phrases;
+	}
+
+	private static void addPhrases(String text, List<String> slots, List<Phrase> phrases)
+	{
+		String setWord = null;
+		List<String> options = split(text);
+		List<Cleaned> cleanedOptions = new ArrayList<>();
+		for (String option : options)
+		{
+			cleanedOptions.add(words(option));
+		}
+
+		for (int i = 0; i < options.size(); i++)
+		{
+			String option = options.get(i);
+			Cleaned cleaned = cleanedOptions.get(i);
 			List<String> words = cleaned.getWords();
 			if (words.isEmpty())
 			{
@@ -254,6 +331,22 @@ public final class ItemTextParser
 				words = Arrays.asList(setWord, words.get(0));
 				option = setWord + " " + option;
 			}
+			// The other way round, a list that shares its last word: "nature,
+			// fire, dust and law runes" is four kinds of rune.
+			else if (words.size() == 1 && slots.isEmpty())
+			{
+				String shared = sharedLastWord(cleanedOptions, i);
+				if (shared != null)
+				{
+					words = Arrays.asList(words.get(0), shared);
+					option = option + " " + shared;
+				}
+			}
+			String standIn = STAND_INS.get(String.join(" ", words));
+			if (standIn != null)
+			{
+				words = Arrays.asList(standIn.split(" "));
+			}
 			if (slots.isEmpty())
 			{
 				phrases.add(new Phrase(option, words, Collections.emptyList(),
@@ -266,7 +359,30 @@ public final class ItemTextParser
 					cleaned.getQuantity()));
 			}
 		}
-		return phrases;
+	}
+
+	/**
+	 * The last word of the next longer option, when only single words stand
+	 * between: in "death, chaos, soul and air runes", "runes" for "chaos". Null
+	 * when a longer option comes in between or there is none.
+	 */
+	private static String sharedLastWord(List<Cleaned> options, int from)
+	{
+		for (int j = from + 1; j < options.size(); j++)
+		{
+			List<String> later = options.get(j).getWords();
+			if (later.size() > 2)
+			{
+				return null;
+			}
+			if (later.size() == 2)
+			{
+				// Only a word that names a kind of thing: "manta rays" must not
+				// turn "anglerfish, sharks or manta rays" into "anglerfish rays".
+				return SHARED_NOUNS.contains(later.get(1)) ? later.get(1) : null;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -431,6 +547,15 @@ public final class ItemTextParser
 	 */
 	public static Integer pick(Phrase phrase, List<Candidate> candidates)
 	{
+		return pick(phrase, candidates, ItemNameIndex.known());
+	}
+
+	/**
+	 * As above, with the names that win a tie said outright - for building the
+	 * table those names are read from, before it exists.
+	 */
+	public static Integer pick(Phrase phrase, List<Candidate> candidates, Set<String> known)
+	{
 		if (candidates == null || candidates.isEmpty())
 		{
 			return null;
@@ -440,6 +565,13 @@ public final class ItemTextParser
 		// "Antipoison", "Sharks" - where there is nothing left to disambiguate.
 		// "crystal" still resolves to nothing, because no item is called that.
 		boolean nameInFull = phrase.getWords().size() < 2 && phrase.getSlotNouns().isEmpty();
+		// Known items only settle a shorthand the slot narrows ("Bandos" for
+		// legs). A line that names its item outright already said which one, and
+		// "fire staff" must not become the known "fire element staff crown".
+		if (phrase.getSlotNouns().isEmpty())
+		{
+			known = Collections.emptySet();
+		}
 
 		Candidate best = null;
 		Candidate bestWritten = null;
@@ -465,20 +597,27 @@ public final class ItemTextParser
 			{
 				continue;
 			}
+			// A word only another slot uses rules the item out: "ancestral" for
+			// legs found "ancestral robe top", because "robe" is a legs word too.
+			// "top" is not, so the top is the body's and the legs get the bottom.
+			if (!phrase.getSlotNouns().isEmpty() && belongsElsewhere(nameWords, phrase.getSlotNouns()))
+			{
+				continue;
+			}
 			if (contains(lower, UNLOADED))
 			{
-				if (unloaded == null || beats(candidate, unloaded))
+				if (unloaded == null || beats(candidate, unloaded, known))
 				{
 					unloaded = candidate;
 				}
 				continue;
 			}
-			if (best == null || beats(candidate, best))
+			if (best == null || beats(candidate, best, known))
 			{
 				best = candidate;
 			}
 			if (containsAllExactly(nameWords, phrase.getWords())
-				&& (bestWritten == null || beats(candidate, bestWritten)))
+				&& (bestWritten == null || beats(candidate, bestWritten, known)))
 			{
 				bestWritten = candidate;
 			}
@@ -512,8 +651,30 @@ public final class ItemTextParser
 	 * because a guide that says "prayer potions" without a number means full
 	 * ones, and a 1-dose icon would be quietly wrong.
 	 */
-	private static boolean beats(Candidate candidate, Candidate best)
+	/** Whether a name carries a slot word that this slot does not share. */
+	private static boolean belongsElsewhere(List<String> nameWords, List<String> slotNouns)
 	{
+		for (String word : nameWords)
+		{
+			if (ALL_SLOT_NOUNS.contains(word) && !slotNouns.contains(word))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private static boolean beats(Candidate candidate, Candidate best, Set<String> known)
+	{
+		// An item the plugin knows as a goal beats one it does not. Shortest
+		// name used to settle "Bandos" for legs, and "bandos chaps" is shorter
+		// than "bandos tassets".
+		boolean candidateKnown = known.contains(ItemNameIndex.flatten(candidate.getName()));
+		boolean bestKnown = known.contains(ItemNameIndex.flatten(best.getName()));
+		if (candidateKnown != bestKnown)
+		{
+			return candidateKnown;
+		}
 		int length = candidate.getName().length() - best.getName().length();
 		if (length != 0)
 		{
@@ -648,8 +809,9 @@ public final class ItemTextParser
 	 */
 	private static boolean samish(String a, String b)
 	{
-		a = a.replace("'", "").replace("\u2019", "");
-		b = b.replace("'", "").replace("\u2019", "");
+		// Hyphens too: the guides write "anti-dragon shield", the game "antidragon".
+		a = a.replace("'", "").replace("\u2019", "").replace("-", "");
+		b = b.replace("'", "").replace("\u2019", "").replace("-", "");
 		return a.equals(b) || a.equals(b + "s") || b.equals(a + "s")
 			|| a.equals(b + "es") || b.equals(a + "es");
 	}

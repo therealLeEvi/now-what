@@ -334,6 +334,25 @@ public class PathStep
 		return target;
 	}
 
+	/**
+	 * True for a step nothing forces: it closes the gap to the stats the wiki
+	 * recommends for the goal, not to anything the game checks. The panel says
+	 * so, because "train Ranged to 85" beside steps the game does insist on
+	 * reads as one more thing standing in the way.
+	 */
+	private boolean recommended;
+
+	public boolean isRecommended()
+	{
+		return recommended;
+	}
+
+	public PathStep asRecommended()
+	{
+		this.recommended = true;
+		return this;
+	}
+
 	public long getXpCost()
 	{
 		return xpCost;

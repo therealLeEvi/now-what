@@ -257,9 +257,13 @@ public class PathPlannerTest
 		assertEquals("RUNECRAFT", path.getSteps().get(0).getSkill());
 	}
 
-	/** Hitpoints is not something you can be sent to train. */
+	/**
+	 * Hitpoints is not something you can be sent to train, so it gets no step.
+	 * It is still one of "every skill", so the goal is not done while it is
+	 * short, and the plan says why there is nothing to do about it.
+	 */
 	@Test
-	public void baseStatsGoalNeverPlansHitpoints()
+	public void baseStatsGoalNeverPlansHitpointsButSaysItIsShort()
 	{
 		PlayerState state = allSkillsAt(90);
 		state.setSkillLevel("HITPOINTS", 40);
@@ -267,7 +271,9 @@ public class PathPlannerTest
 		Path path = everySkillTrainable().plan(Goal.baseStats(80, false), state);
 
 		assertTrue("hitpoints rises out of combat xp and cannot be planned",
-			path.isAlreadyComplete());
+			path.getSteps().isEmpty());
+		assertEquals(false, path.isAlreadyComplete());
+		assertTrue(path.getWarnings().stream().anyMatch(w -> w.contains("Hitpoints is 40")));
 	}
 
 	@Test
@@ -603,5 +609,179 @@ public class PathPlannerTest
 
 		assertEquals("Combat Achievements: Elite tier", path.getSteps().get(0).getTitle());
 		assertTrue(path.getWarnings().toString(), path.getWarnings().isEmpty());
+	}
+
+	@Test
+	public void piecesFromTheSameFightAreOneKillStepWithOneRequirement()
+	{
+		Requirement slayer = new Requirement(Requirement.Type.SKILL_LEVEL, "SLAYER", 95);
+		ItemSource eye = new ItemSource("EYE", "Hydra's eye", ItemSource.SourceType.MONSTER_DROP,
+			"Hydras", null, 1801, slayer, Collections.emptyList());
+		ItemSource fang = new ItemSource("FANG", "Hydra's fang", ItemSource.SourceType.MONSTER_DROP,
+			"Hydras", null, 1801, slayer, Collections.emptyList());
+		ItemSource heart = new ItemSource("HEART", "Hydra's heart", ItemSource.SourceType.MONSTER_DROP,
+			"Hydras", null, 1801, slayer, Collections.emptyList());
+		ItemSource ring = new ItemSource("RING", "Brimstone ring", ItemSource.SourceType.CRAFT,
+			"Combine the three", null, null, null, Arrays.asList(
+				new ItemSource.Ingredient("EYE", 1),
+				new ItemSource.Ingredient("FANG", 1),
+				new ItemSource.Ingredient("HEART", 1)));
+		TrainingMethod slaying = new TrainingMethod("SLAYER", 1, 99, "Slay", 20000, null, null,
+			Intensity.NORMAL);
+
+		PathPlanner planner = new PathPlanner(Collections.emptyList(),
+			new PrerequisiteResolver(Collections.emptyList()),
+			TrainingMethodDatabase.of(Arrays.asList(slaying)),
+			ItemSourceDatabase.of(Arrays.asList(eye, fang, heart, ring)));
+
+		PlayerState state = new PlayerState();
+		state.setSkillLevel("SLAYER", 80);
+
+		Path path = planner.plan(Goal.itemQuantity("RING", 1, "Brimstone ring", false), state);
+
+		// Slayer once, one trip to the hydras for all three pieces, then the ring.
+		assertEquals(path.getSteps().toString(), 3, path.getSteps().size());
+		assertEquals(PathStep.Type.TRAIN_SKILL, path.getSteps().get(0).getType());
+		PathStep kill = path.getSteps().get(1);
+		assertEquals(PathStep.Type.KILL_BOSS, kill.getType());
+		assertEquals("Hydra's eye, Hydra's fang and Hydra's heart from Hydras", kill.getTitle());
+		assertTrue(kill.getDetail(), kill.getDetail().startsWith("~1,801 attempts on average for each piece"));
+		assertEquals(PathStep.Type.ACQUIRE_ITEM, path.getSteps().get(2).getType());
+	}
+
+	@Test
+	public void aPrerequisiteTwoIngredientsShareIsPlannedOnce()
+	{
+		Requirement quest = new Requirement(Requirement.Type.QUEST_COMPLETE, "Regicide", 0);
+		ItemSource a = new ItemSource("A", "Part A", ItemSource.SourceType.GE_BUY,
+			null, null, null, quest, Collections.emptyList());
+		ItemSource b = new ItemSource("B", "Part B", ItemSource.SourceType.GE_BUY,
+			null, null, null, quest, Collections.emptyList());
+		ItemSource whole = new ItemSource("WHOLE", "Whole", ItemSource.SourceType.CRAFT,
+			"Put together", null, null, null, Arrays.asList(
+				new ItemSource.Ingredient("A", 1),
+				new ItemSource.Ingredient("B", 1)));
+
+		PathPlanner planner = new PathPlanner(Collections.emptyList(),
+			new PrerequisiteResolver(Collections.emptyList()),
+			TrainingMethodDatabase.of(Collections.emptyList()),
+			ItemSourceDatabase.of(Arrays.asList(a, b, whole)));
+
+		Path path = planner.plan(Goal.itemQuantity("WHOLE", 1, "Whole", false), new PlayerState());
+
+		long questSteps = path.getSteps().stream()
+			.filter(s -> s.getType() != PathStep.Type.ACQUIRE_ITEM)
+			.count();
+		assertTrue(path.getSteps().toString(), questSteps <= 1);
+		assertEquals(path.getSteps().toString(), 3,
+			path.getSteps().stream().filter(s -> s.getType() == PathStep.Type.ACQUIRE_ITEM).count());
+	}
+
+	/**
+	 * Levels come before the quests that ask for them: a plan that opens with
+	 * quests the player cannot start yet has its steps in the wrong order.
+	 */
+	@Test
+	public void activityGoalListsTrainingBeforeTheQuestsThatNeedIt()
+	{
+		Activity quest = new Activity("q1", "Gate Quest", Activity.Category.QUEST, Arrays.asList(
+			new Requirement(Requirement.Type.SKILL_LEVEL, "AGILITY", 30)));
+		Activity boss = new Activity("boss", "Some Boss", Activity.Category.PVM, Arrays.asList(
+			new Requirement(Requirement.Type.QUEST_COMPLETE, "Gate Quest", 0)));
+		TrainingMethod method = new TrainingMethod("AGILITY", 1, 99, "Some course", 20000, null, null,
+			Intensity.NORMAL);
+		PathPlanner planner = new PathPlanner(Arrays.asList(quest, boss),
+			new PrerequisiteResolver(Arrays.asList(quest, boss)),
+			TrainingMethodDatabase.of(Arrays.asList(method)),
+			ItemSourceDatabase.of(Collections.emptyList()));
+
+		Path path = planner.plan(Goal.activity("boss", "Some Boss", false), new PlayerState());
+
+		assertEquals(path.getSteps().toString(), 3, path.getSteps().size());
+		assertEquals(PathStep.Type.TRAIN_SKILL, path.getSteps().get(0).getType());
+		assertEquals(PathStep.Type.DO_QUEST, path.getSteps().get(1).getType());
+		assertTrue(path.getSteps().get(2).isTarget());
+	}
+
+	/**
+	 * The suggestion list holds a fight back for its recommended stats, so the
+	 * plan has to know about them too - as steps marked recommended, picking up
+	 * where the required level leaves off.
+	 */
+	@Test
+	public void recommendedStatsBecomeRecommendedStepsAfterTheRequiredOnes()
+	{
+		Activity boss = new Activity("boss", "Some Boss", Activity.Category.PVM, Arrays.asList(
+			new Requirement(Requirement.Type.SKILL_LEVEL, "RANGED", 70)))
+			.withRecommended(Arrays.asList(
+				new Requirement(Requirement.Type.SKILL_LEVEL, "RANGED", 85)), false);
+		TrainingMethod method = new TrainingMethod("RANGED", 1, 99, "Some monster", 50000, null, null,
+			Intensity.NORMAL);
+		PathPlanner planner = new PathPlanner(Arrays.asList(boss),
+			new PrerequisiteResolver(Arrays.asList(boss)),
+			TrainingMethodDatabase.of(Arrays.asList(method)),
+			ItemSourceDatabase.of(Collections.emptyList()));
+
+		PlayerState state = new PlayerState();
+		state.setSkillLevel("RANGED", 60);
+		Path path = planner.plan(Goal.activity("boss", "Some Boss", false), state);
+
+		assertEquals(path.getSteps().toString(), 3, path.getSteps().size());
+		PathStep required = path.getSteps().get(0);
+		assertEquals(60, required.getLevelFrom());
+		assertEquals(70, required.getLevelTo());
+		assertEquals(false, required.isRecommended());
+		PathStep recommended = path.getSteps().get(1);
+		assertEquals(70, recommended.getLevelFrom());
+		assertEquals(85, recommended.getLevelTo());
+		assertTrue(recommended.isRecommended());
+		assertEquals(false, path.isRequirementsAlreadyMet());
+
+		// With the recommended stats met as well, nothing is left to say.
+		state.setSkillLevel("RANGED", 85);
+		assertTrue(planner.plan(Goal.activity("boss", "Some Boss", false), state)
+			.isRequirementsAlreadyMet());
+	}
+
+	/**
+	 * Only the finished item used to be checked against what the player owns,
+	 * so holding two of three parts still meant being sent for all three.
+	 */
+	@Test
+	public void ingredientsAlreadyOwnedAreLeftOutOfAnItemPlan()
+	{
+		ItemSource a = new ItemSource("A", "Part A", ItemSource.SourceType.GE_BUY,
+			null, null, null, null, Collections.emptyList()).withGameItemId(101);
+		ItemSource b = new ItemSource("B", "Part B", ItemSource.SourceType.GE_BUY,
+			null, null, null, null, Collections.emptyList()).withGameItemId(102);
+		ItemSource whole = new ItemSource("WHOLE", "Whole", ItemSource.SourceType.CRAFT,
+			"Put together", null, null, null, Arrays.asList(
+				new ItemSource.Ingredient("A", 1),
+				new ItemSource.Ingredient("B", 5))).withGameItemId(100);
+		PathPlanner planner = new PathPlanner(Collections.emptyList(),
+			new PrerequisiteResolver(Collections.emptyList()),
+			TrainingMethodDatabase.of(Collections.emptyList()),
+			ItemSourceDatabase.of(Arrays.asList(a, b, whole)));
+
+		PlayerState state = new PlayerState();
+		java.util.Map<Integer, Integer> owned = new java.util.HashMap<>();
+		owned.put(101, 1);
+		owned.put(102, 2);
+		state.setOwnedItems(owned);
+		state.setBankSnapshotAvailable(true);
+
+		Path path = planner.plan(Goal.itemQuantity("WHOLE", 1, "Whole", false), state);
+
+		// Part A is covered outright; Part B is three short; then the craft.
+		assertEquals(path.getSteps().toString(), 2, path.getSteps().size());
+		assertEquals("Buy 3x Part B", path.getSteps().get(0).getTitle());
+		assertEquals("Craft 1x Whole", path.getSteps().get(1).getTitle());
+		assertTrue(path.getWarnings().toString(),
+			path.getWarnings().stream().anyMatch(w -> w.contains("Part A")));
+
+		// Asked for as if nothing were owned, everything is planned.
+		Path fromNothing = planner.plan(
+			Goal.itemQuantity("WHOLE", 1, "Whole", false).ignoringWhatIsOwned(), state);
+		assertEquals(fromNothing.getSteps().toString(), 3, fromNothing.getSteps().size());
 	}
 }

@@ -75,7 +75,7 @@
     "id": "AVERNIC_DEFENDER",
     "preparationFrom": "pvm_theatre_of_blood",
     "displayName": "Avernic defender hilt",
-    "gameItemId": 22322,
+    "gameItemId": 22477,
     "type": "MONSTER_DROP",
     "detail": "Theatre of Blood",
     "estimatedKc": 60,
@@ -83,16 +83,21 @@
   },
   {
     "id": "TOXIC_BLOWPIPE",
-    "preparationFrom": "pvm_zulrah",
     "displayName": "Toxic blowpipe",
     "gameItemId": 12926,
-    "type": "MONSTER_DROP",
-    "detail": "Zulrah",
-    "estimatedKc": 90,
+    "type": "CRAFT",
+    "detail": "Chisel a tanzanite fang",
     "skillRequirement": {
-      "type": "QUEST_COMPLETE",
-      "value": "Regicide"
+      "type": "SKILL_LEVEL",
+      "value": "FLETCHING",
+      "threshold": 78
     },
+    "ingredients": [
+      {
+        "itemId": "TANZANITE_FANG",
+        "quantity": 1
+      }
+    ],
     "wikiUrl": "https://oldschool.runescape.wiki/w/Toxic_blowpipe"
   },
   {
@@ -137,51 +142,63 @@
   {
     "id": "ARMADYL_GODSWORD",
     "preparationFrom": "pvm_kreearra",
-    "displayName": "Armadyl godsword hilt",
-    "gameItemId": 11802,
+    "displayName": "Armadyl hilt",
+    "gameItemId": 11810,
     "type": "MONSTER_DROP",
     "detail": "Kree'arra",
     "estimatedKc": 500,
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Armadyl_godsword_hilt"
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Armadyl_hilt"
   },
   {
     "id": "SARADOMIN_GODSWORD",
     "preparationFrom": "pvm_commander_zilyana",
-    "displayName": "Saradomin godsword hilt",
-    "gameItemId": 11806,
+    "displayName": "Saradomin hilt",
+    "gameItemId": 11814,
     "type": "MONSTER_DROP",
     "detail": "Commander Zilyana",
     "estimatedKc": 500,
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Saradomin_godsword_hilt"
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Saradomin_hilt"
   },
   {
     "id": "PRIMORDIAL_BOOTS",
-    "preparationFrom": "pvm_cerberus",
     "displayName": "Primordial boots",
     "gameItemId": 13239,
-    "type": "MONSTER_DROP",
-    "detail": "Cerberus",
-    "estimatedKc": 256,
+    "type": "CRAFT",
+    "detail": "A primordial crystal on a pair of dragon boots",
     "skillRequirement": {
       "type": "SKILL_LEVEL",
-      "value": "SLAYER",
-      "threshold": 91
+      "value": "RUNECRAFT",
+      "threshold": 60,
+      "hint": "Also 60 Magic; neither can be boosted."
     },
+    "ingredients": [
+      {
+        "itemId": "PRIMORDIAL_CRYSTAL",
+        "quantity": 1
+      },
+      {
+        "itemId": "DRAGON_BOOTS",
+        "quantity": 1
+      }
+    ],
     "wikiUrl": "https://oldschool.runescape.wiki/w/Primordial_boots"
   },
   {
     "id": "DRAGON_HUNTER_LANCE",
-    "preparationFrom": "pvm_alchemical_hydra",
     "displayName": "Dragon hunter lance",
     "gameItemId": 22978,
-    "type": "MONSTER_DROP",
-    "detail": "Alchemical Hydra",
-    "estimatedKc": 1000,
-    "skillRequirement": {
-      "type": "SKILL_LEVEL",
-      "value": "SLAYER",
-      "threshold": 95
-    },
+    "type": "CRAFT",
+    "detail": "A hydra's claw used on a Zamorakian hasta",
+    "ingredients": [
+      {
+        "itemId": "HYDRAS_CLAW",
+        "quantity": 1
+      },
+      {
+        "itemId": "ZAMORAKIAN_HASTA",
+        "quantity": 1
+      }
+    ],
     "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_hunter_lance"
   },
   {
@@ -219,12 +236,31 @@
     "displayName": "Amulet of torture",
     "gameItemId": 19553,
     "type": "CRAFT",
-    "detail": "String a zenyte and enchant it",
+    "detail": "Cast Lvl-7 Enchant on a strung zenyte amulet",
     "skillRequirement": {
       "type": "SKILL_LEVEL",
-      "value": "CRAFTING",
-      "threshold": 98
+      "value": "MAGIC",
+      "threshold": 93,
+      "hint": "Lvl-7 Enchant on the standard spellbook (20 blood, 20 soul, 1 cosmic rune); no enchant tablet exists for it. The amulet itself needs 98 Crafting."
     },
+    "ingredients": [
+      {
+        "itemId": "ZENYTE_AMULET",
+        "quantity": 1
+      },
+      {
+        "itemId": "BLOOD_RUNE",
+        "quantity": 20
+      },
+      {
+        "itemId": "SOUL_RUNE",
+        "quantity": 20
+      },
+      {
+        "itemId": "COSMIC_RUNE",
+        "quantity": 1
+      }
+    ],
     "wikiUrl": "https://oldschool.runescape.wiki/w/Amulet_of_torture"
   },
   {
@@ -277,7 +313,27 @@
     "gameItemId": 12954,
     "type": "MONSTER_DROP",
     "detail": "Cyclopes in the Warriors' Guild",
-    "estimatedKc": 1,
+    "estimatedKc": 100,
+    "skillRequirement": {
+      "type": "ANY_OF",
+      "anyOf": [
+        {
+          "type": "SKILL_LEVEL",
+          "value": "ATTACK",
+          "threshold": 99
+        },
+        {
+          "type": "SKILL_LEVEL",
+          "value": "STRENGTH",
+          "threshold": 99
+        },
+        {
+          "type": "COMBINED_SKILL_LEVEL",
+          "value": "ATTACK,STRENGTH",
+          "threshold": 130
+        }
+      ]
+    },
     "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_defender"
   },
   {
@@ -608,12 +664,12 @@
   {
     "id": "BANDOS_GODSWORD",
     "preparationFrom": "pvm_general_graardor",
-    "displayName": "Bandos godsword hilt",
+    "displayName": "Bandos hilt",
     "gameItemId": 11812,
     "type": "MONSTER_DROP",
     "detail": "General Graardor",
     "estimatedKc": 508,
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Bandos_godsword_hilt"
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Bandos_hilt"
   },
   {
     "id": "SARADOMIN_SWORD",
@@ -648,12 +704,12 @@
   {
     "id": "ZAMORAK_GODSWORD",
     "preparationFrom": "pvm_kril_tsutsaroth",
-    "displayName": "Zamorak godsword hilt",
+    "displayName": "Zamorak hilt",
     "gameItemId": 11816,
     "type": "MONSTER_DROP",
     "detail": "K'ril Tsutsaroth",
     "estimatedKc": 508,
-    "wikiUrl": "https://oldschool.runescape.wiki/w/Zamorak_godsword_hilt"
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Zamorak_hilt"
   },
   {
     "id": "TANZANITE_FANG",
@@ -777,7 +833,7 @@
     "gameItemId": 13265,
     "type": "MONSTER_DROP",
     "detail": "the Abyssal Sire",
-    "estimatedKc": 128,
+    "estimatedKc": 492,
     "skillRequirement": {
       "type": "SKILL_LEVEL",
       "value": "SLAYER",
@@ -1101,7 +1157,11 @@
     "displayName": "Ardougne cloak 4",
     "gameItemId": 13124,
     "type": "QUEST_REWARD",
-    "detail": "Ardougne Elite Diary",
+    "detail": "Ardougne Elite Diary, from Two-pints in the Flying Horse Inn in East Ardougne.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "ARDOUGNE_ELITE"
+    },
     "wikiUrl": "https://oldschool.runescape.wiki/w/Ardougne_cloak_4"
   },
   {
@@ -1147,7 +1207,7 @@
     "displayName": "Zamorak brew (4)",
     "gameItemId": 2450,
     "type": "CRAFT",
-    "detail": "Mix at a Herblore workbench",
+    "detail": "Jangerberries added to a torstol potion (unf), which makes a 3-dose brew",
     "skillRequirement": {
       "type": "SKILL_LEVEL",
       "value": "HERBLORE",
@@ -1155,7 +1215,7 @@
     },
     "ingredients": [
       {
-        "itemId": "CADAVA_BERRIES",
+        "itemId": "TORSTOL_POTION_UNF",
         "quantity": 1
       },
       {
@@ -1174,11 +1234,16 @@
     "skillRequirement": {
       "type": "SKILL_LEVEL",
       "value": "RUNECRAFT",
-      "threshold": 60
+      "threshold": 60,
+      "hint": "Also 60 Magic; neither can be boosted."
     },
     "ingredients": [
       {
         "itemId": "PEGASIAN_CRYSTAL",
+        "quantity": 1
+      },
+      {
+        "itemId": "RANGER_BOOTS",
         "quantity": 1
       }
     ],
@@ -1193,11 +1258,16 @@
     "skillRequirement": {
       "type": "SKILL_LEVEL",
       "value": "RUNECRAFT",
-      "threshold": 60
+      "threshold": 60,
+      "hint": "Also 60 Magic; neither can be boosted."
     },
     "ingredients": [
       {
         "itemId": "ETERNAL_CRYSTAL",
+        "quantity": 1
+      },
+      {
+        "itemId": "INFINITY_BOOTS",
         "quantity": 1
       }
     ],
@@ -1209,6 +1279,12 @@
     "gameItemId": 12904,
     "type": "CRAFT",
     "detail": "A magic fang on a staff of the dead",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "CRAFTING",
+      "threshold": 59,
+      "hint": "Boostable; use the magic fang on the staff with a chisel."
+    },
     "ingredients": [
       {
         "itemId": "MAGIC_FANG",
@@ -1226,15 +1302,36 @@
     "displayName": "Slayer helmet",
     "gameItemId": 11864,
     "type": "CRAFT",
-    "detail": "A black mask plus the four Slayer-shop pieces",
+    "detail": "A black mask, earmuffs, facemask, nose peg, spiny helmet and enchanted gem combined in the inventory once Malevolent masquerade is unlocked for 400 Slayer points (after A Porcine of Interest, reinforced goggles from a Slayer master for 100 coins are needed too)",
     "skillRequirement": {
       "type": "SKILL_LEVEL",
       "value": "CRAFTING",
-      "threshold": 55
+      "threshold": 55,
+      "hint": "Boostable; first unlock Malevolent masquerade for 400 Slayer reward points from any Slayer master."
     },
     "ingredients": [
       {
         "itemId": "BLACK_MASK",
+        "quantity": 1
+      },
+      {
+        "itemId": "EARMUFFS",
+        "quantity": 1
+      },
+      {
+        "itemId": "FACEMASK",
+        "quantity": 1
+      },
+      {
+        "itemId": "NOSE_PEG",
+        "quantity": 1
+      },
+      {
+        "itemId": "SPINY_HELMET",
+        "quantity": 1
+      },
+      {
+        "itemId": "ENCHANTED_GEM",
         "quantity": 1
       }
     ],
@@ -1245,12 +1342,26 @@
     "displayName": "Abyssal bludgeon",
     "gameItemId": 13263,
     "type": "CRAFT",
-    "detail": "The three bludgeon pieces from the Abyssal Sire, combined",
+    "detail": "The Overseer combines a bludgeon claw, spine and axon from the Abyssal Sire; for later bludgeons use the pieces on the Overseer's book",
     "skillRequirement": {
       "type": "SKILL_LEVEL",
       "value": "SLAYER",
       "threshold": 85
     },
+    "ingredients": [
+      {
+        "itemId": "BLUDGEON_CLAW",
+        "quantity": 1
+      },
+      {
+        "itemId": "BLUDGEON_SPINE",
+        "quantity": 1
+      },
+      {
+        "itemId": "BLUDGEON_AXON",
+        "quantity": 1
+      }
+    ],
     "wikiUrl": "https://oldschool.runescape.wiki/w/Abyssal_bludgeon"
   },
   {
@@ -1258,12 +1369,31 @@
     "displayName": "Necklace of anguish",
     "gameItemId": 19547,
     "type": "CRAFT",
-    "detail": "String a zenyte and enchant it",
+    "detail": "Cast Lvl-7 Enchant on a zenyte necklace",
     "skillRequirement": {
       "type": "SKILL_LEVEL",
-      "value": "CRAFTING",
-      "threshold": 98
+      "value": "MAGIC",
+      "threshold": 93,
+      "hint": "Lvl-7 Enchant on the standard spellbook (20 blood, 20 soul, 1 cosmic rune); no enchant tablet exists for it. The necklace itself needs 92 Crafting."
     },
+    "ingredients": [
+      {
+        "itemId": "ZENYTE_NECKLACE",
+        "quantity": 1
+      },
+      {
+        "itemId": "BLOOD_RUNE",
+        "quantity": 20
+      },
+      {
+        "itemId": "SOUL_RUNE",
+        "quantity": 20
+      },
+      {
+        "itemId": "COSMIC_RUNE",
+        "quantity": 1
+      }
+    ],
     "wikiUrl": "https://oldschool.runescape.wiki/w/Necklace_of_anguish"
   },
   {
@@ -1271,12 +1401,31 @@
     "displayName": "Tormented bracelet",
     "gameItemId": 19544,
     "type": "CRAFT",
-    "detail": "Make a zenyte bracelet and enchant it",
+    "detail": "Cast Lvl-7 Enchant on a zenyte bracelet",
     "skillRequirement": {
       "type": "SKILL_LEVEL",
-      "value": "CRAFTING",
-      "threshold": 98
+      "value": "MAGIC",
+      "threshold": 93,
+      "hint": "Lvl-7 Enchant on the standard spellbook (20 blood, 20 soul, 1 cosmic rune); no enchant tablet exists for it. The bracelet itself needs 95 Crafting."
     },
+    "ingredients": [
+      {
+        "itemId": "ZENYTE_BRACELET",
+        "quantity": 1
+      },
+      {
+        "itemId": "BLOOD_RUNE",
+        "quantity": 20
+      },
+      {
+        "itemId": "SOUL_RUNE",
+        "quantity": 20
+      },
+      {
+        "itemId": "COSMIC_RUNE",
+        "quantity": 1
+      }
+    ],
     "wikiUrl": "https://oldschool.runescape.wiki/w/Tormented_bracelet"
   },
   {
@@ -1284,12 +1433,31 @@
     "displayName": "Ring of suffering",
     "gameItemId": 19550,
     "type": "CRAFT",
-    "detail": "Make a zenyte ring and enchant it",
+    "detail": "Cast Lvl-7 Enchant on a zenyte ring",
     "skillRequirement": {
       "type": "SKILL_LEVEL",
-      "value": "CRAFTING",
-      "threshold": 98
+      "value": "MAGIC",
+      "threshold": 93,
+      "hint": "Lvl-7 Enchant on the standard spellbook (20 blood, 20 soul, 1 cosmic rune); no enchant tablet exists for it. The ring itself needs 89 Crafting."
     },
+    "ingredients": [
+      {
+        "itemId": "ZENYTE_RING",
+        "quantity": 1
+      },
+      {
+        "itemId": "BLOOD_RUNE",
+        "quantity": 20
+      },
+      {
+        "itemId": "SOUL_RUNE",
+        "quantity": 20
+      },
+      {
+        "itemId": "COSMIC_RUNE",
+        "quantity": 1
+      }
+    ],
     "wikiUrl": "https://oldschool.runescape.wiki/w/Ring_of_suffering"
   },
   {
@@ -1297,12 +1465,26 @@
     "displayName": "Brimstone ring",
     "gameItemId": 22975,
     "type": "CRAFT",
-    "detail": "Hydra's eye, fang and heart, combined",
+    "detail": "Hydra's eye, fang and heart used on each other",
     "skillRequirement": {
       "type": "SKILL_LEVEL",
       "value": "SLAYER",
       "threshold": 95
     },
+    "ingredients": [
+      {
+        "itemId": "HYDRAS_EYE",
+        "quantity": 1
+      },
+      {
+        "itemId": "HYDRAS_FANG",
+        "quantity": 1
+      },
+      {
+        "itemId": "HYDRAS_HEART",
+        "quantity": 1
+      }
+    ],
     "wikiUrl": "https://oldschool.runescape.wiki/w/Brimstone_ring"
   },
   {
@@ -1311,6 +1493,12 @@
     "gameItemId": 12899,
     "type": "CRAFT",
     "detail": "A magic fang on a trident of the seas",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "CRAFTING",
+      "threshold": 59,
+      "hint": "Boostable; use the magic fang on an uncharged trident with a chisel."
+    },
     "ingredients": [
       {
         "itemId": "MAGIC_FANG",
@@ -2339,7 +2527,7 @@
     "id": "DRAGON_CHAINBODY",
     "preparationFrom": "pvm_kalphite_queen",
     "displayName": "Dragon chainbody",
-    "gameItemId": 2513,
+    "gameItemId": 3140,
     "type": "MONSTER_DROP",
     "detail": "the Kalphite Queen",
     "estimatedKc": 128,
@@ -3011,12 +3199,13 @@
   },
   {
     "id": "HYDRAS_EYE",
-    "preparationFrom": "pvm_hydras",
+    "preparationFrom": "pvm_alchemical_hydra",
     "displayName": "Hydra's eye",
     "gameItemId": 22973,
     "type": "MONSTER_DROP",
-    "detail": "Hydras",
-    "estimatedKc": 1801,
+    "detail": "the Alchemical Hydra",
+    "note": "It gives the ring pieces in order: eye, fang, heart. Plain hydras drop them too, 1 in 361 on task.",
+    "estimatedKc": 181,
     "skillRequirement": {
       "type": "SKILL_LEVEL",
       "value": "SLAYER",
@@ -3026,12 +3215,13 @@
   },
   {
     "id": "HYDRAS_FANG",
-    "preparationFrom": "pvm_hydras",
+    "preparationFrom": "pvm_alchemical_hydra",
     "displayName": "Hydra's fang",
     "gameItemId": 22971,
     "type": "MONSTER_DROP",
-    "detail": "Hydras",
-    "estimatedKc": 1801,
+    "detail": "the Alchemical Hydra",
+    "note": "It gives the ring pieces in order: eye, fang, heart. Plain hydras drop them too, 1 in 361 on task.",
+    "estimatedKc": 181,
     "skillRequirement": {
       "type": "SKILL_LEVEL",
       "value": "SLAYER",
@@ -3041,12 +3231,13 @@
   },
   {
     "id": "HYDRAS_HEART",
-    "preparationFrom": "pvm_hydras",
+    "preparationFrom": "pvm_alchemical_hydra",
     "displayName": "Hydra's heart",
     "gameItemId": 22969,
     "type": "MONSTER_DROP",
-    "detail": "Hydras",
-    "estimatedKc": 1801,
+    "detail": "the Alchemical Hydra",
+    "note": "It gives the ring pieces in order: eye, fang, heart. Plain hydras drop them too, 1 in 361 on task.",
+    "estimatedKc": 181,
     "skillRequirement": {
       "type": "SKILL_LEVEL",
       "value": "SLAYER",
@@ -3128,5 +3319,4782 @@
       "threshold": 84
     },
     "wikiUrl": "https://oldschool.runescape.wiki/w/Drake's_claw"
+  },
+  {
+    "id": "GODSWORD_BLADE",
+    "displayName": "Godsword blade",
+    "gameItemId": 11798,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange; or join godsword shards 1, 2 and 3 (God Wars general drops) at an anvil with 80 Smithing",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Godsword_blade"
+  },
+  {
+    "id": "ARMADYL_GODSWORD_ASSEMBLED",
+    "displayName": "Armadyl godsword",
+    "gameItemId": 11802,
+    "type": "CRAFT",
+    "detail": "An Armadyl hilt on a godsword blade",
+    "ingredients": [
+      {
+        "itemId": "ARMADYL_GODSWORD",
+        "quantity": 1
+      },
+      {
+        "itemId": "GODSWORD_BLADE",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Armadyl_godsword"
+  },
+  {
+    "id": "BANDOS_GODSWORD_ASSEMBLED",
+    "displayName": "Bandos godsword",
+    "gameItemId": 11804,
+    "type": "CRAFT",
+    "detail": "A Bandos hilt on a godsword blade",
+    "ingredients": [
+      {
+        "itemId": "BANDOS_GODSWORD",
+        "quantity": 1
+      },
+      {
+        "itemId": "GODSWORD_BLADE",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Bandos_godsword"
+  },
+  {
+    "id": "SARADOMIN_GODSWORD_ASSEMBLED",
+    "displayName": "Saradomin godsword",
+    "gameItemId": 11806,
+    "type": "CRAFT",
+    "detail": "A Saradomin hilt on a godsword blade",
+    "ingredients": [
+      {
+        "itemId": "SARADOMIN_GODSWORD",
+        "quantity": 1
+      },
+      {
+        "itemId": "GODSWORD_BLADE",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Saradomin_godsword"
+  },
+  {
+    "id": "ZAMORAK_GODSWORD_ASSEMBLED",
+    "displayName": "Zamorak godsword",
+    "gameItemId": 11808,
+    "type": "CRAFT",
+    "detail": "A Zamorak hilt on a godsword blade",
+    "ingredients": [
+      {
+        "itemId": "ZAMORAK_GODSWORD",
+        "quantity": 1
+      },
+      {
+        "itemId": "GODSWORD_BLADE",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Zamorak_godsword"
+  },
+  {
+    "id": "ANCIENT_GODSWORD",
+    "displayName": "Ancient godsword",
+    "gameItemId": 26233,
+    "type": "CRAFT",
+    "detail": "An ancient hilt from Nex on a godsword blade",
+    "ingredients": [
+      {
+        "itemId": "ANCIENT_HILT",
+        "quantity": 1
+      },
+      {
+        "itemId": "GODSWORD_BLADE",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ancient_godsword"
+  },
+  {
+    "id": "NIHIL_SHARD",
+    "displayName": "Nihil shard",
+    "gameItemId": 26231,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange; also dropped by every monster in Nex's Ancient Prison",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Nihil_shard"
+  },
+  {
+    "id": "ZARYTE_CROSSBOW",
+    "displayName": "Zaryte crossbow",
+    "gameItemId": 26374,
+    "type": "CRAFT",
+    "detail": "A nihil horn and 250 nihil shards on an Armadyl crossbow",
+    "ingredients": [
+      {
+        "itemId": "ARMADYL_CROSSBOW",
+        "quantity": 1
+      },
+      {
+        "itemId": "NIHIL_HORN",
+        "quantity": 1
+      },
+      {
+        "itemId": "NIHIL_SHARD",
+        "quantity": 250
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Zaryte_crossbow"
+  },
+  {
+    "id": "BANDOSIAN_COMPONENTS",
+    "displayName": "Bandosian components",
+    "gameItemId": 26394,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange; or break a Bandos chestplate (3) or Bandos tassets (2) at the Ancient Forge in Nex's Ancient Prison",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Bandosian_components"
+  },
+  {
+    "id": "TORVA_FULL_HELM",
+    "displayName": "Torva full helm",
+    "gameItemId": 26382,
+    "type": "CRAFT",
+    "detail": "Repair the damaged helm with 1 Bandosian component, hammer at an anvil",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SMITHING",
+      "threshold": 90
+    },
+    "ingredients": [
+      {
+        "itemId": "TORVA_FULL_HELM_DAMAGED",
+        "quantity": 1
+      },
+      {
+        "itemId": "BANDOSIAN_COMPONENTS",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Torva_full_helm"
+  },
+  {
+    "id": "TORVA_PLATEBODY",
+    "displayName": "Torva platebody",
+    "gameItemId": 26384,
+    "type": "CRAFT",
+    "detail": "Repair the damaged platebody with 2 Bandosian components, hammer at an anvil",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SMITHING",
+      "threshold": 90
+    },
+    "ingredients": [
+      {
+        "itemId": "TORVA_PLATEBODY_DAMAGED",
+        "quantity": 1
+      },
+      {
+        "itemId": "BANDOSIAN_COMPONENTS",
+        "quantity": 2
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Torva_platebody"
+  },
+  {
+    "id": "TORVA_PLATELEGS",
+    "displayName": "Torva platelegs",
+    "gameItemId": 26386,
+    "type": "CRAFT",
+    "detail": "Repair the damaged platelegs with 2 Bandosian components, hammer at an anvil",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SMITHING",
+      "threshold": 90
+    },
+    "ingredients": [
+      {
+        "itemId": "TORVA_PLATELEGS_DAMAGED",
+        "quantity": 1
+      },
+      {
+        "itemId": "BANDOSIAN_COMPONENTS",
+        "quantity": 2
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Torva_platelegs"
+  },
+  {
+    "id": "CHROMIUM_INGOT",
+    "displayName": "Chromium ingot",
+    "gameItemId": 28276,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange; also dropped by the four Desert Treasure II bosses, or made by the Blast Furnace foreman from 40 noted adamantite and 40 noted runite ore plus 170,000 coins (85 Smithing)",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Chromium_ingot"
+  },
+  {
+    "id": "BLOOD_RUNE",
+    "displayName": "Blood rune",
+    "gameItemId": 565,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Blood_rune"
+  },
+  {
+    "id": "WARRIOR_RING",
+    "displayName": "Warrior ring",
+    "gameItemId": 6735,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Warrior_ring"
+  },
+  {
+    "id": "ULTOR_RING",
+    "displayName": "Ultor ring",
+    "gameItemId": 28307,
+    "type": "CRAFT",
+    "detail": "Chisel a berserker ring into its icon, fuse it with the ultor vestige and 500 blood runes, then smelt it with 3 chromium ingots at a furnace with a ring mould",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MAGIC",
+      "threshold": 90,
+      "hint": "Also 80 Crafting; Peer the Seer in Rellekka teaches the icon fusion when shown a ring icon"
+    },
+    "ingredients": [
+      {
+        "itemId": "ULTOR_VESTIGE",
+        "quantity": 1
+      },
+      {
+        "itemId": "BERSERKER_RING",
+        "quantity": 1
+      },
+      {
+        "itemId": "BLOOD_RUNE",
+        "quantity": 500
+      },
+      {
+        "itemId": "CHROMIUM_INGOT",
+        "quantity": 3
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ultor_ring"
+  },
+  {
+    "id": "BELLATOR_RING",
+    "displayName": "Bellator ring",
+    "gameItemId": 28316,
+    "type": "CRAFT",
+    "detail": "Chisel a warrior ring into its icon, fuse it with the bellator vestige and 500 blood runes, then smelt it with 3 chromium ingots at a furnace with a ring mould",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MAGIC",
+      "threshold": 90,
+      "hint": "Also 80 Crafting; Peer the Seer in Rellekka teaches the icon fusion when shown a ring icon"
+    },
+    "ingredients": [
+      {
+        "itemId": "BELLATOR_VESTIGE",
+        "quantity": 1
+      },
+      {
+        "itemId": "WARRIOR_RING",
+        "quantity": 1
+      },
+      {
+        "itemId": "BLOOD_RUNE",
+        "quantity": 500
+      },
+      {
+        "itemId": "CHROMIUM_INGOT",
+        "quantity": 3
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Bellator_ring"
+  },
+  {
+    "id": "MAGUS_RING",
+    "displayName": "Magus ring",
+    "gameItemId": 28313,
+    "type": "CRAFT",
+    "detail": "Chisel a seers ring into its icon, fuse it with the magus vestige and 500 blood runes, then smelt it with 3 chromium ingots at a furnace with a ring mould",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MAGIC",
+      "threshold": 90,
+      "hint": "Also 80 Crafting; Peer the Seer in Rellekka teaches the icon fusion when shown a ring icon"
+    },
+    "ingredients": [
+      {
+        "itemId": "MAGUS_VESTIGE",
+        "quantity": 1
+      },
+      {
+        "itemId": "SEERS_RING",
+        "quantity": 1
+      },
+      {
+        "itemId": "BLOOD_RUNE",
+        "quantity": 500
+      },
+      {
+        "itemId": "CHROMIUM_INGOT",
+        "quantity": 3
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Magus_ring"
+  },
+  {
+    "id": "VENATOR_RING",
+    "displayName": "Venator ring",
+    "gameItemId": 28310,
+    "type": "CRAFT",
+    "detail": "Chisel an archers ring into its icon, fuse it with the venator vestige and 500 blood runes, then smelt it with 3 chromium ingots at a furnace with a ring mould",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MAGIC",
+      "threshold": 90,
+      "hint": "Also 80 Crafting; Peer the Seer in Rellekka teaches the icon fusion when shown a ring icon"
+    },
+    "ingredients": [
+      {
+        "itemId": "VENATOR_VESTIGE",
+        "quantity": 1
+      },
+      {
+        "itemId": "ARCHERS_RING",
+        "quantity": 1
+      },
+      {
+        "itemId": "BLOOD_RUNE",
+        "quantity": 500
+      },
+      {
+        "itemId": "CHROMIUM_INGOT",
+        "quantity": 3
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Venator_ring"
+  },
+  {
+    "id": "SOULREAPER_AXE",
+    "displayName": "Soulreaper axe",
+    "gameItemId": 28338,
+    "type": "CRAFT",
+    "detail": "The four Desert Treasure II boss pieces combined with 2,000 blood runes",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MAGIC",
+      "threshold": 75,
+      "hint": "Cannot be boosted"
+    },
+    "ingredients": [
+      {
+        "itemId": "EYE_OF_THE_DUKE",
+        "quantity": 1
+      },
+      {
+        "itemId": "LEVIATHANS_LURE",
+        "quantity": 1
+      },
+      {
+        "itemId": "SIRENS_STAFF",
+        "quantity": 1
+      },
+      {
+        "itemId": "EXECUTIONERS_AXE_HEAD",
+        "quantity": 1
+      },
+      {
+        "itemId": "BLOOD_RUNE",
+        "quantity": 2000
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Soulreaper_axe"
+  },
+  {
+    "id": "VENATOR_BOW",
+    "displayName": "Venator bow",
+    "gameItemId": 27610,
+    "type": "CRAFT",
+    "detail": "Five venator shards combined",
+    "ingredients": [
+      {
+        "itemId": "VENATOR_SHARD",
+        "quantity": 5
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Venator_bow"
+  },
+  {
+    "id": "ANCIENT_STAFF",
+    "displayName": "Ancient staff",
+    "gameItemId": 4675,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange; Eblis also sells one",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ancient_staff"
+  },
+  {
+    "id": "ANCIENT_SCEPTRE",
+    "displayName": "Ancient sceptre",
+    "gameItemId": 27624,
+    "type": "CRAFT",
+    "detail": "Eblis, south of the Bedabin Camp, fuses an ancient icon onto an ancient staff",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Secrets of the North"
+    },
+    "ingredients": [
+      {
+        "itemId": "ANCIENT_ICON",
+        "quantity": 1
+      },
+      {
+        "itemId": "ANCIENT_STAFF",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ancient_sceptre"
+  },
+  {
+    "id": "SPIRIT_SHIELD",
+    "displayName": "Spirit shield",
+    "gameItemId": 12829,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange; also dropped by the Corporeal Beast",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Spirit_shield"
+  },
+  {
+    "id": "BLESSED_SPIRIT_SHIELD",
+    "displayName": "Blessed spirit shield",
+    "gameItemId": 12831,
+    "type": "CRAFT",
+    "detail": "A holy elixir on a spirit shield",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "PRAYER",
+      "threshold": 85
+    },
+    "ingredients": [
+      {
+        "itemId": "SPIRIT_SHIELD",
+        "quantity": 1
+      },
+      {
+        "itemId": "HOLY_ELIXIR",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Blessed_spirit_shield"
+  },
+  {
+    "id": "SPECTRAL_SPIRIT_SHIELD",
+    "displayName": "Spectral spirit shield",
+    "gameItemId": 12821,
+    "type": "CRAFT",
+    "detail": "A spectral sigil on a blessed spirit shield at an anvil with 90 Prayer and 85 Smithing, or Abbot Langley in Edgeville Monastery does it for 1,500,000 coins",
+    "ingredients": [
+      {
+        "itemId": "BLESSED_SPIRIT_SHIELD",
+        "quantity": 1
+      },
+      {
+        "itemId": "SPECTRAL_SIGIL",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Spectral_spirit_shield"
+  },
+  {
+    "id": "ARCANE_SPIRIT_SHIELD",
+    "displayName": "Arcane spirit shield",
+    "gameItemId": 12825,
+    "type": "CRAFT",
+    "detail": "An arcane sigil on a blessed spirit shield at an anvil with 90 Prayer and 85 Smithing, or Abbot Langley in Edgeville Monastery does it for 1,500,000 coins",
+    "ingredients": [
+      {
+        "itemId": "BLESSED_SPIRIT_SHIELD",
+        "quantity": 1
+      },
+      {
+        "itemId": "ARCANE_SIGIL",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Arcane_spirit_shield"
+  },
+  {
+    "id": "ELYSIAN_SPIRIT_SHIELD",
+    "displayName": "Elysian spirit shield",
+    "gameItemId": 12817,
+    "type": "CRAFT",
+    "detail": "An elysian sigil on a blessed spirit shield at an anvil with 90 Prayer and 85 Smithing, or Abbot Langley in Edgeville Monastery does it for 1,500,000 coins",
+    "ingredients": [
+      {
+        "itemId": "BLESSED_SPIRIT_SHIELD",
+        "quantity": 1
+      },
+      {
+        "itemId": "ELYSIAN_SIGIL",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Elysian_spirit_shield"
+  },
+  {
+    "id": "SERPENTINE_HELM",
+    "displayName": "Serpentine helm",
+    "gameItemId": 12931,
+    "type": "CRAFT",
+    "detail": "Chisel a serpentine visage",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "CRAFTING",
+      "threshold": 52
+    },
+    "ingredients": [
+      {
+        "itemId": "SERPENTINE_VISAGE",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Serpentine_helm"
+  },
+  {
+    "id": "SKELETAL_VISAGE",
+    "preparationFrom": "pvm_vorkath",
+    "displayName": "Skeletal visage",
+    "gameItemId": 22006,
+    "type": "MONSTER_DROP",
+    "detail": "Vorkath",
+    "estimatedKc": 5000,
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Dragon Slayer II"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Skeletal_visage"
+  },
+  {
+    "id": "ANTI_DRAGON_SHIELD",
+    "displayName": "Anti-dragon shield",
+    "gameItemId": 1540,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Anti-dragon_shield"
+  },
+  {
+    "id": "DRAGONFIRE_SHIELD",
+    "displayName": "Dragonfire shield",
+    "gameItemId": 11283,
+    "type": "CRAFT",
+    "detail": "A draconic visage on an anti-dragon shield at an anvil with 90 Smithing, or Oziach in Edgeville does it for 1,250,000 coins after Dragon Slayer I",
+    "skillRequirement": {
+      "type": "ANY_OF",
+      "anyOf": [
+        {
+          "type": "SKILL_LEVEL",
+          "value": "SMITHING",
+          "threshold": 90
+        },
+        {
+          "type": "QUEST_COMPLETE",
+          "value": "Dragon Slayer I"
+        }
+      ]
+    },
+    "ingredients": [
+      {
+        "itemId": "ANTI_DRAGON_SHIELD",
+        "quantity": 1
+      },
+      {
+        "itemId": "DRACONIC_VISAGE",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragonfire_shield"
+  },
+  {
+    "id": "DRAGONFIRE_WARD",
+    "displayName": "Dragonfire ward",
+    "gameItemId": 22002,
+    "type": "CRAFT",
+    "detail": "A skeletal visage on an anti-dragon shield at an anvil with 90 Smithing, or Oziach in Edgeville does it for 1,250,000 coins after Dragon Slayer I",
+    "skillRequirement": {
+      "type": "ANY_OF",
+      "anyOf": [
+        {
+          "type": "SKILL_LEVEL",
+          "value": "SMITHING",
+          "threshold": 90
+        },
+        {
+          "type": "QUEST_COMPLETE",
+          "value": "Dragon Slayer I"
+        }
+      ]
+    },
+    "ingredients": [
+      {
+        "itemId": "ANTI_DRAGON_SHIELD",
+        "quantity": 1
+      },
+      {
+        "itemId": "SKELETAL_VISAGE",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragonfire_ward"
+  },
+  {
+    "id": "AVERNIC_DEFENDER_ASSEMBLED",
+    "displayName": "Avernic defender",
+    "gameItemId": 22322,
+    "type": "CRAFT",
+    "detail": "An Avernic defender hilt on a dragon defender",
+    "ingredients": [
+      {
+        "itemId": "AVERNIC_DEFENDER",
+        "quantity": 1
+      },
+      {
+        "itemId": "DRAGON_DEFENDER",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Avernic_defender"
+  },
+  {
+    "id": "VOIDWAKER",
+    "displayName": "Voidwaker",
+    "gameItemId": 27690,
+    "type": "CRAFT",
+    "detail": "Madam Sikaro in the Ferox Enclave Dungeon assembles blade, hilt and gem for 500,000 coins",
+    "ingredients": [
+      {
+        "itemId": "VOIDWAKER_BLADE",
+        "quantity": 1
+      },
+      {
+        "itemId": "VOIDWAKER_HILT",
+        "quantity": 1
+      },
+      {
+        "itemId": "VOIDWAKER_GEM",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Voidwaker"
+  },
+  {
+    "id": "ODIUM_WARD",
+    "displayName": "Odium ward",
+    "gameItemId": 11926,
+    "type": "CRAFT",
+    "detail": "The three odium shards forged together at the Volcanic Forge on the Blighted Volcano in the Wilderness",
+    "ingredients": [
+      {
+        "itemId": "ODIUM_SHARD_1",
+        "quantity": 1
+      },
+      {
+        "itemId": "ODIUM_SHARD_2",
+        "quantity": 1
+      },
+      {
+        "itemId": "ODIUM_SHARD_3",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Odium_ward"
+  },
+  {
+    "id": "MALEDICTION_WARD",
+    "displayName": "Malediction ward",
+    "gameItemId": 11924,
+    "type": "CRAFT",
+    "detail": "The three malediction shards forged together at the Volcanic Forge on the Blighted Volcano in the Wilderness",
+    "ingredients": [
+      {
+        "itemId": "MALEDICTION_SHARD_1",
+        "quantity": 1
+      },
+      {
+        "itemId": "MALEDICTION_SHARD_2",
+        "quantity": 1
+      },
+      {
+        "itemId": "MALEDICTION_SHARD_3",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Malediction_ward"
+  },
+  {
+    "id": "WEBWEAVER_BOW",
+    "displayName": "Webweaver bow",
+    "gameItemId": 27655,
+    "type": "CRAFT",
+    "detail": "Fangs of Venenatis on an uncharged Craw's bow with 85 Fletching, or Derse Venator in the Ferox Enclave does it for 500,000 coins",
+    "ingredients": [
+      {
+        "itemId": "CRAWS_BOW",
+        "quantity": 1
+      },
+      {
+        "itemId": "FANGS_OF_VENENATIS",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Webweaver_bow"
+  },
+  {
+    "id": "URSINE_CHAINMACE",
+    "displayName": "Ursine chainmace",
+    "gameItemId": 27660,
+    "type": "CRAFT",
+    "detail": "Claws of Callisto on an uncharged Viggora's chainmace with 85 Smithing, or Andros Mai in the Ferox Enclave does it for 500,000 coins",
+    "ingredients": [
+      {
+        "itemId": "VIGGORAS_CHAINMACE",
+        "quantity": 1
+      },
+      {
+        "itemId": "CLAWS_OF_CALLISTO",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ursine_chainmace"
+  },
+  {
+    "id": "ACCURSED_SCEPTRE",
+    "displayName": "Accursed sceptre",
+    "gameItemId": 27665,
+    "type": "CRAFT",
+    "detail": "The skull of Vet'ion on an uncharged Thammaron's sceptre with 85 Crafting, or Phabelle Bile in the Ferox Enclave does it for 500,000 coins",
+    "ingredients": [
+      {
+        "itemId": "THAMMARONS_SCEPTRE",
+        "quantity": 1
+      },
+      {
+        "itemId": "SKULL_OF_VETION",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Accursed_sceptre"
+  },
+  {
+    "id": "ELDRITCH_NIGHTMARE_STAFF",
+    "displayName": "Eldritch Nightmare staff",
+    "gameItemId": 24425,
+    "type": "CRAFT",
+    "detail": "An eldritch orb on a Nightmare staff",
+    "ingredients": [
+      {
+        "itemId": "NIGHTMARE_STAFF",
+        "quantity": 1
+      },
+      {
+        "itemId": "ELDRITCH_ORB",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Eldritch_Nightmare_staff"
+  },
+  {
+    "id": "HARMONISED_NIGHTMARE_STAFF",
+    "displayName": "Harmonised Nightmare staff",
+    "gameItemId": 24423,
+    "type": "CRAFT",
+    "detail": "A harmonised orb on a Nightmare staff",
+    "ingredients": [
+      {
+        "itemId": "NIGHTMARE_STAFF",
+        "quantity": 1
+      },
+      {
+        "itemId": "HARMONISED_ORB",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Harmonised_Nightmare_staff"
+  },
+  {
+    "id": "VOLATILE_NIGHTMARE_STAFF",
+    "displayName": "Volatile Nightmare staff",
+    "gameItemId": 24424,
+    "type": "CRAFT",
+    "detail": "A volatile orb on a Nightmare staff",
+    "ingredients": [
+      {
+        "itemId": "NIGHTMARE_STAFF",
+        "quantity": 1
+      },
+      {
+        "itemId": "VOLATILE_ORB",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Volatile_Nightmare_staff"
+  },
+  {
+    "id": "NOXIOUS_HALBERD",
+    "displayName": "Noxious halberd",
+    "gameItemId": 29796,
+    "type": "CRAFT",
+    "detail": "Araxxor's noxious point, blade and pommel combined",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SMITHING",
+      "threshold": 72,
+      "hint": "Also 72 Crafting"
+    },
+    "ingredients": [
+      {
+        "itemId": "NOXIOUS_POINT",
+        "quantity": 1
+      },
+      {
+        "itemId": "NOXIOUS_BLADE",
+        "quantity": 1
+      },
+      {
+        "itemId": "NOXIOUS_POMMEL",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Noxious_halberd"
+  },
+  {
+    "id": "AMULET_OF_RANCOUR",
+    "displayName": "Amulet of rancour",
+    "gameItemId": 29801,
+    "type": "CRAFT",
+    "detail": "Chisel an araxyte fang into an etched fang, then attach it to an amulet of torture",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "CRAFTING",
+      "threshold": 86
+    },
+    "ingredients": [
+      {
+        "itemId": "AMULET_OF_TORTURE",
+        "quantity": 1
+      },
+      {
+        "itemId": "ARAXYTE_FANG",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Amulet_of_rancour"
+  },
+  {
+    "id": "BURNING_CLAWS",
+    "displayName": "Burning claws",
+    "gameItemId": 29577,
+    "type": "CRAFT",
+    "detail": "Two burning claws used on each other",
+    "ingredients": [
+      {
+        "itemId": "BURNING_CLAW",
+        "quantity": 2
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Burning_claws"
+  },
+  {
+    "id": "DARKLIGHT",
+    "displayName": "Darklight",
+    "gameItemId": 6746,
+    "type": "QUEST_REWARD",
+    "detail": "Shadow of the Storm; a lost one is replaced by Sir Prysin for 1,000 coins",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Shadow of the Storm"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Darklight"
+  },
+  {
+    "id": "ANCIENT_SHARD",
+    "displayName": "Ancient shard",
+    "gameItemId": 19677,
+    "type": "MONSTER_DROP",
+    "detail": "monsters in the Catacombs of Kourend",
+    "note": "Any monster there can drop it, and the rate rises with its hitpoints: about 1 in 197 from greater nechryaels (80 Slayer) and 1 in 310 from hill giants.",
+    "estimatedKc": 197,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ancient_shard"
+  },
+  {
+    "id": "ARCLIGHT",
+    "displayName": "Arclight",
+    "gameItemId": 19675,
+    "type": "CRAFT",
+    "detail": "Use Darklight on the altar in the centre of the Catacombs of Kourend with 3 ancient shards",
+    "ingredients": [
+      {
+        "itemId": "DARKLIGHT",
+        "quantity": 1
+      },
+      {
+        "itemId": "ANCIENT_SHARD",
+        "quantity": 3
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Arclight"
+  },
+  {
+    "id": "EMBERLIGHT",
+    "displayName": "Emberlight",
+    "gameItemId": 29589,
+    "type": "CRAFT",
+    "detail": "A tormented synapse on a fully charged Arclight (27 more ancient shards) with a hammer at an anvil",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SMITHING",
+      "threshold": 74,
+      "hint": "Must have read Duradel's notes, from Kuradal after While Guthix Sleeps"
+    },
+    "ingredients": [
+      {
+        "itemId": "TORMENTED_SYNAPSE",
+        "quantity": 1
+      },
+      {
+        "itemId": "ARCLIGHT",
+        "quantity": 1
+      },
+      {
+        "itemId": "ANCIENT_SHARD",
+        "quantity": 27
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Emberlight"
+  },
+  {
+    "id": "MAGIC_LONGBOW_U",
+    "displayName": "Magic longbow (u)",
+    "gameItemId": 70,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange; or cut magic logs with 85 Fletching",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_longbow_(u)"
+  },
+  {
+    "id": "SCORCHING_BOW",
+    "displayName": "Scorching bow",
+    "gameItemId": 29591,
+    "type": "CRAFT",
+    "detail": "A tormented synapse on an unstrung magic longbow",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FLETCHING",
+      "threshold": 74,
+      "hint": "Must have read Duradel's notes, from Kuradal after While Guthix Sleeps"
+    },
+    "ingredients": [
+      {
+        "itemId": "TORMENTED_SYNAPSE",
+        "quantity": 1
+      },
+      {
+        "itemId": "MAGIC_LONGBOW_U",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Scorching_bow"
+  },
+  {
+    "id": "IRON_BAR",
+    "displayName": "Iron bar",
+    "gameItemId": 2351,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Iron_bar"
+  },
+  {
+    "id": "BATTLESTAFF",
+    "displayName": "Battlestaff",
+    "gameItemId": 1391,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Battlestaff"
+  },
+  {
+    "id": "PURGING_STAFF",
+    "displayName": "Purging staff",
+    "gameItemId": 29594,
+    "type": "CRAFT",
+    "detail": "A tormented synapse and an iron bar on a battlestaff, hammer at an anvil",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "CRAFTING",
+      "threshold": 74,
+      "hint": "Also 55 Smithing (not boostable); must have read Duradel's notes, from Kuradal after While Guthix Sleeps"
+    },
+    "ingredients": [
+      {
+        "itemId": "TORMENTED_SYNAPSE",
+        "quantity": 1
+      },
+      {
+        "itemId": "IRON_BAR",
+        "quantity": 1
+      },
+      {
+        "itemId": "BATTLESTAFF",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Purging_staff"
+  },
+  {
+    "id": "ECHO_BOOTS",
+    "displayName": "Echo boots",
+    "gameItemId": 28945,
+    "type": "CRAFT",
+    "detail": "An echo crystal on a pair of guardian boots",
+    "ingredients": [
+      {
+        "itemId": "GUARDIAN_BOOTS",
+        "quantity": 1
+      },
+      {
+        "itemId": "ECHO_CRYSTAL",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Echo_boots"
+  },
+  {
+    "id": "SUNFIRE_SPLINTERS",
+    "displayName": "Sunfire splinters",
+    "gameItemId": 28924,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Sunfire_splinters"
+  },
+  {
+    "id": "BLESSED_DIZANAS_QUIVER",
+    "displayName": "Blessed Dizana's quiver",
+    "gameItemId": 28955,
+    "type": "CRAFT",
+    "detail": "Offer Dizana's quiver and 150,000 sunfire splinters at a Shrine of Ralos, e.g. the temple in Civitas illa Fortis",
+    "ingredients": [
+      {
+        "itemId": "DIZANAS_QUIVER",
+        "quantity": 1
+      },
+      {
+        "itemId": "SUNFIRE_SPLINTERS",
+        "quantity": 150000
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Blessed_Dizana's_quiver"
+  },
+  {
+    "id": "DEMON_TEAR",
+    "displayName": "Demon tear",
+    "gameItemId": 31111,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange; mainly dropped by the Doom of Mokhaiotl",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Demon_tear"
+  },
+  {
+    "id": "CONFLICTION_GAUNTLETS",
+    "displayName": "Confliction gauntlets",
+    "gameItemId": 31106,
+    "type": "CRAFT",
+    "detail": "Mokhaiotl cloth and 10,000 demon tears on a tormented bracelet",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "CRAFTING",
+      "threshold": 83,
+      "hint": "Also 70 Smithing"
+    },
+    "ingredients": [
+      {
+        "itemId": "TORMENTED_BRACELET",
+        "quantity": 1
+      },
+      {
+        "itemId": "MOKHAIOTL_CLOTH",
+        "quantity": 1
+      },
+      {
+        "itemId": "DEMON_TEAR",
+        "quantity": 10000
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Confliction_gauntlets"
+  },
+  {
+    "id": "AVERNIC_TREADS_MAX",
+    "displayName": "Avernic treads (max)",
+    "gameItemId": 31097,
+    "type": "CRAFT",
+    "detail": "Add primordial, pegasian and eternal boots to Avernic treads, one pair at a time, 4,000 demon tears each",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MAGIC",
+      "threshold": 80,
+      "hint": "Also 60 Runecraft"
+    },
+    "ingredients": [
+      {
+        "itemId": "AVERNIC_TREADS",
+        "quantity": 1
+      },
+      {
+        "itemId": "PRIMORDIAL_BOOTS",
+        "quantity": 1
+      },
+      {
+        "itemId": "PEGASIAN_BOOTS",
+        "quantity": 1
+      },
+      {
+        "itemId": "ETERNAL_BOOTS",
+        "quantity": 1
+      },
+      {
+        "itemId": "DEMON_TEAR",
+        "quantity": 12000
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Avernic_treads_(max)"
+  },
+  {
+    "id": "NECKLACE_OF_RUPTURE",
+    "displayName": "Necklace of rupture",
+    "gameItemId": 33639,
+    "type": "CRAFT",
+    "detail": "Chisel an elder venator fang into an etched fang, then attach it to a necklace of anguish",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "CRAFTING",
+      "threshold": 84
+    },
+    "ingredients": [
+      {
+        "itemId": "NECKLACE_OF_ANGUISH",
+        "quantity": 1
+      },
+      {
+        "itemId": "ELDER_VENATOR_FANG",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Necklace_of_rupture"
+  },
+  {
+    "id": "TWINFLAME_STAFF",
+    "displayName": "Twinflame staff",
+    "gameItemId": 30634,
+    "type": "CRAFT",
+    "detail": "The fire and ice element staff crowns on a battlestaff",
+    "ingredients": [
+      {
+        "itemId": "BATTLESTAFF",
+        "quantity": 1
+      },
+      {
+        "itemId": "FIRE_ELEMENT_STAFF_CROWN",
+        "quantity": 1
+      },
+      {
+        "itemId": "ICE_ELEMENT_STAFF_CROWN",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Twinflame_staff"
+  },
+  {
+    "id": "THREAD",
+    "displayName": "Thread",
+    "gameItemId": 1734,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Thread"
+  },
+  {
+    "id": "HUEYCOATL_HIDE_BODY",
+    "displayName": "Hueycoatl hide body",
+    "gameItemId": 30076,
+    "type": "CRAFT",
+    "detail": "Sew 3 Hueycoatl hides with a needle and thread",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "CRAFTING",
+      "threshold": 78
+    },
+    "ingredients": [
+      {
+        "itemId": "HUEYCOATL_HIDE",
+        "quantity": 3
+      },
+      {
+        "itemId": "THREAD",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hueycoatl_hide_body"
+  },
+  {
+    "id": "HUEYCOATL_HIDE_CHAPS",
+    "displayName": "Hueycoatl hide chaps",
+    "gameItemId": 30079,
+    "type": "CRAFT",
+    "detail": "Sew 2 Hueycoatl hides with a needle and thread",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "CRAFTING",
+      "threshold": 77
+    },
+    "ingredients": [
+      {
+        "itemId": "HUEYCOATL_HIDE",
+        "quantity": 2
+      },
+      {
+        "itemId": "THREAD",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hueycoatl_hide_chaps"
+  },
+  {
+    "id": "HUEYCOATL_HIDE_COIF",
+    "displayName": "Hueycoatl hide coif",
+    "gameItemId": 30073,
+    "type": "CRAFT",
+    "detail": "Sew 2 Hueycoatl hides with a needle and thread",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "CRAFTING",
+      "threshold": 76
+    },
+    "ingredients": [
+      {
+        "itemId": "HUEYCOATL_HIDE",
+        "quantity": 2
+      },
+      {
+        "itemId": "THREAD",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hueycoatl_hide_coif"
+  },
+  {
+    "id": "HUEYCOATL_HIDE_VAMBRACES",
+    "displayName": "Hueycoatl hide vambraces",
+    "gameItemId": 30082,
+    "type": "CRAFT",
+    "detail": "Sew 1 Hueycoatl hide with a needle and thread",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "CRAFTING",
+      "threshold": 76
+    },
+    "ingredients": [
+      {
+        "itemId": "HUEYCOATL_HIDE",
+        "quantity": 1
+      },
+      {
+        "itemId": "THREAD",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hueycoatl_hide_vambraces"
+  },
+  {
+    "id": "BLUDGEON_CLAW",
+    "preparationFrom": "pvm_abyssal_sire",
+    "displayName": "Bludgeon claw",
+    "gameItemId": 13275,
+    "type": "MONSTER_DROP",
+    "detail": "the Abyssal Sire",
+    "note": "About 1 kill in 100 drops an unsired, and offering it at the Font of Consumption gives a bludgeon piece 62 times in 128, never one you already hold, so a full set averages about 619 kills.",
+    "estimatedKc": 206,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 85
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Bludgeon_claw"
+  },
+  {
+    "id": "BLUDGEON_SPINE",
+    "preparationFrom": "pvm_abyssal_sire",
+    "displayName": "Bludgeon spine",
+    "gameItemId": 13274,
+    "type": "MONSTER_DROP",
+    "detail": "the Abyssal Sire",
+    "note": "About 1 kill in 100 drops an unsired, and offering it at the Font of Consumption gives a bludgeon piece 62 times in 128, never one you already hold, so a full set averages about 619 kills.",
+    "estimatedKc": 206,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 85
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Bludgeon_spine"
+  },
+  {
+    "id": "BLUDGEON_AXON",
+    "preparationFrom": "pvm_abyssal_sire",
+    "displayName": "Bludgeon axon",
+    "gameItemId": 13276,
+    "type": "MONSTER_DROP",
+    "detail": "the Abyssal Sire",
+    "note": "About 1 kill in 100 drops an unsired, and offering it at the Font of Consumption gives a bludgeon piece 62 times in 128, never one you already hold, so a full set averages about 619 kills.",
+    "estimatedKc": 206,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 85
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Bludgeon_axon"
+  },
+  {
+    "id": "ONYX",
+    "displayName": "Onyx",
+    "gameItemId": 6573,
+    "type": "GE_BUY",
+    "detail": "A cut onyx",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Onyx"
+  },
+  {
+    "id": "GOLD_BAR",
+    "displayName": "Gold bar",
+    "gameItemId": 2357,
+    "type": "GE_BUY",
+    "detail": "One gold bar per piece of jewellery",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Gold_bar"
+  },
+  {
+    "id": "BALL_OF_WOOL",
+    "displayName": "Ball of wool",
+    "gameItemId": 1759,
+    "type": "GE_BUY",
+    "detail": "Strings an amulet",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ball_of_wool"
+  },
+  {
+    "id": "SOUL_RUNE",
+    "displayName": "Soul rune",
+    "gameItemId": 566,
+    "type": "GE_BUY",
+    "detail": "Rune for Lvl-7 Enchant",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Soul_rune"
+  },
+  {
+    "id": "COSMIC_RUNE",
+    "displayName": "Cosmic rune",
+    "gameItemId": 564,
+    "type": "GE_BUY",
+    "detail": "Rune for the enchant spells",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Cosmic_rune"
+  },
+  {
+    "id": "UNCUT_ZENYTE",
+    "displayName": "Uncut zenyte",
+    "gameItemId": 19496,
+    "type": "CRAFT",
+    "detail": "A zenyte shard and a cut onyx used on the wall of flame under the Temple of Marimbo on Ape Atoll, while wearing a zombie monkey greegree",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "CRAFTING",
+      "threshold": 70,
+      "hint": "Needs Monkey Madness II and a small or big zombie monkey greegree worn; also trades on the Grand Exchange."
+    },
+    "ingredients": [
+      {
+        "itemId": "ZENYTE_SHARD",
+        "quantity": 1
+      },
+      {
+        "itemId": "ONYX",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Uncut_zenyte"
+  },
+  {
+    "id": "ZENYTE",
+    "displayName": "Zenyte",
+    "gameItemId": 19493,
+    "type": "CRAFT",
+    "detail": "Cut an uncut zenyte with a chisel",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "CRAFTING",
+      "threshold": 89,
+      "hint": "Boostable; the cut zenyte also trades on the Grand Exchange."
+    },
+    "ingredients": [
+      {
+        "itemId": "UNCUT_ZENYTE",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Zenyte"
+  },
+  {
+    "id": "ZENYTE_RING",
+    "displayName": "Zenyte ring",
+    "gameItemId": 19538,
+    "type": "CRAFT",
+    "detail": "A zenyte and a gold bar at a furnace with a ring mould",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "CRAFTING",
+      "threshold": 89,
+      "hint": "Boostable."
+    },
+    "ingredients": [
+      {
+        "itemId": "ZENYTE",
+        "quantity": 1
+      },
+      {
+        "itemId": "GOLD_BAR",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Zenyte_ring"
+  },
+  {
+    "id": "ZENYTE_NECKLACE",
+    "displayName": "Zenyte necklace",
+    "gameItemId": 19535,
+    "type": "CRAFT",
+    "detail": "A zenyte and a gold bar at a furnace with a necklace mould",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "CRAFTING",
+      "threshold": 92,
+      "hint": "Boostable."
+    },
+    "ingredients": [
+      {
+        "itemId": "ZENYTE",
+        "quantity": 1
+      },
+      {
+        "itemId": "GOLD_BAR",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Zenyte_necklace"
+  },
+  {
+    "id": "ZENYTE_BRACELET",
+    "displayName": "Zenyte bracelet",
+    "gameItemId": 19532,
+    "type": "CRAFT",
+    "detail": "A zenyte and a gold bar at a furnace with a bracelet mould",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "CRAFTING",
+      "threshold": 95,
+      "hint": "Boostable."
+    },
+    "ingredients": [
+      {
+        "itemId": "ZENYTE",
+        "quantity": 1
+      },
+      {
+        "itemId": "GOLD_BAR",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Zenyte_bracelet"
+  },
+  {
+    "id": "ZENYTE_AMULET",
+    "displayName": "Zenyte amulet",
+    "gameItemId": 19541,
+    "type": "CRAFT",
+    "detail": "A zenyte and a gold bar at a furnace with an amulet mould, then strung with a ball of wool",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "CRAFTING",
+      "threshold": 98,
+      "hint": "Boostable; stringing needs only level 1 (or String Jewellery at 80 Magic after Lunar Diplomacy)."
+    },
+    "ingredients": [
+      {
+        "itemId": "ZENYTE",
+        "quantity": 1
+      },
+      {
+        "itemId": "GOLD_BAR",
+        "quantity": 1
+      },
+      {
+        "itemId": "BALL_OF_WOOL",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Zenyte_amulet"
+  },
+  {
+    "id": "EARMUFFS",
+    "displayName": "Earmuffs",
+    "gameItemId": 4166,
+    "type": "SHOP",
+    "detail": "Any Slayer master, 200 coins (also on the Grand Exchange)",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Earmuffs"
+  },
+  {
+    "id": "FACEMASK",
+    "displayName": "Facemask",
+    "gameItemId": 4164,
+    "type": "SHOP",
+    "detail": "Any Slayer master, 200 coins (also on the Grand Exchange)",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Facemask"
+  },
+  {
+    "id": "NOSE_PEG",
+    "displayName": "Nose peg",
+    "gameItemId": 4168,
+    "type": "SHOP",
+    "detail": "Any Slayer master, 200 coins (also on the Grand Exchange)",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Nose_peg"
+  },
+  {
+    "id": "SPINY_HELMET",
+    "displayName": "Spiny helmet",
+    "gameItemId": 4551,
+    "type": "SHOP",
+    "detail": "Any Slayer master, 650 coins (also on the Grand Exchange)",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Spiny_helmet"
+  },
+  {
+    "id": "ENCHANTED_GEM",
+    "displayName": "Enchanted gem",
+    "gameItemId": 4155,
+    "type": "SHOP",
+    "detail": "Any Slayer master, 1 coin",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Enchanted_gem"
+  },
+  {
+    "id": "RANGER_BOOTS",
+    "displayName": "Ranger boots",
+    "gameItemId": 2577,
+    "type": "GE_BUY",
+    "detail": "A medium Treasure Trail reward",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ranger_boots"
+  },
+  {
+    "id": "TORSTOL_POTION_UNF",
+    "displayName": "Torstol potion (unf)",
+    "gameItemId": 111,
+    "type": "GE_BUY",
+    "detail": "Or a torstol in a vial of water at 78 Herblore",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Torstol_potion_(unf)"
+  },
+  {
+    "id": "ABYSSAL_TENTACLE",
+    "displayName": "Abyssal tentacle",
+    "gameItemId": 12006,
+    "type": "CRAFT",
+    "detail": "A kraken tentacle used on an abyssal whip; it cannot be undone and the whip is lost when the tentacle wears out",
+    "ingredients": [
+      {
+        "itemId": "KRAKEN_TENTACLE",
+        "quantity": 1
+      },
+      {
+        "itemId": "ABYSSAL_WHIP",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Abyssal_tentacle"
+  },
+  {
+    "id": "FEROCIOUS_GLOVES",
+    "displayName": "Ferocious gloves",
+    "gameItemId": 22981,
+    "type": "CRAFT",
+    "detail": "Hydra leather used on the machinery in the Lithkren Vault with a hammer",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Dragon Slayer II"
+    },
+    "ingredients": [
+      {
+        "itemId": "HYDRA_LEATHER",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ferocious_gloves"
+  },
+  {
+    "id": "BOOTS_OF_STONE",
+    "displayName": "Boots of stone",
+    "gameItemId": 23037,
+    "type": "SHOP",
+    "detail": "Any Slayer master, 200 coins (also on the Grand Exchange)",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Boots_of_stone"
+  },
+  {
+    "id": "BOOTS_OF_BRIMSTONE",
+    "displayName": "Boots of brimstone",
+    "gameItemId": 22951,
+    "type": "CRAFT",
+    "detail": "A drake's claw used on a pair of boots of stone",
+    "ingredients": [
+      {
+        "itemId": "DRAKES_CLAW",
+        "quantity": 1
+      },
+      {
+        "itemId": "BOOTS_OF_STONE",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Boots_of_brimstone"
+  },
+  {
+    "id": "HOLY_SANDALS",
+    "displayName": "Holy sandals",
+    "gameItemId": 12598,
+    "type": "GE_BUY",
+    "detail": "A medium Treasure Trail reward",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Holy_sandals"
+  },
+  {
+    "id": "DEVOUT_BOOTS",
+    "displayName": "Devout boots",
+    "gameItemId": 22954,
+    "type": "CRAFT",
+    "detail": "A drake's tooth used on a pair of holy sandals",
+    "ingredients": [
+      {
+        "itemId": "DRAKES_TOOTH",
+        "quantity": 1
+      },
+      {
+        "itemId": "HOLY_SANDALS",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Devout_boots"
+  },
+  {
+    "id": "NEITIZNOT_FACEGUARD",
+    "displayName": "Neitiznot faceguard",
+    "gameItemId": 24271,
+    "type": "CRAFT",
+    "detail": "Ask Olaf the Bard about basilisk jaws while carrying one, then use the jaw on a helm of Neitiznot",
+    "ingredients": [
+      {
+        "itemId": "BASILISK_JAW",
+        "quantity": 1
+      },
+      {
+        "itemId": "HELM_OF_NEITIZNOT",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Neitiznot_faceguard"
+  },
+  {
+    "id": "ELEMENTAL_SHIELD",
+    "displayName": "Elemental shield",
+    "gameItemId": 2890,
+    "type": "GE_BUY",
+    "detail": "Or smith one yourself after Elemental Workshop I",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Elemental_shield"
+  },
+  {
+    "id": "ANCIENT_WYVERN_SHIELD",
+    "displayName": "Ancient wyvern shield",
+    "gameItemId": 21633,
+    "type": "CRAFT",
+    "detail": "A wyvern visage used on the northern Strange Machine in the House on the Hill on Fossil Island, with an elemental shield and a hammer; charge it with fossils or numulites",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SMITHING",
+      "threshold": 66,
+      "hint": "Also 66 Magic (boostable), which the machine drains to 0."
+    },
+    "ingredients": [
+      {
+        "itemId": "WYVERN_VISAGE",
+        "quantity": 1
+      },
+      {
+        "itemId": "ELEMENTAL_SHIELD",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ancient_wyvern_shield"
+  },
+  {
+    "id": "GUARDIAN_BOOTS",
+    "displayName": "Guardian boots",
+    "gameItemId": 21733,
+    "type": "CRAFT",
+    "detail": "A black tourmaline core used on a pair of Bandos boots, which cannot be undone",
+    "ingredients": [
+      {
+        "itemId": "BLACK_TOURMALINE_CORE",
+        "quantity": 1
+      },
+      {
+        "itemId": "BANDOS_BOOTS",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Guardian_boots"
+  },
+  {
+    "id": "AMULET_OF_BLOOD_FURY",
+    "displayName": "Amulet of blood fury",
+    "gameItemId": 24780,
+    "type": "CRAFT",
+    "detail": "A blood shard used on an amulet of fury",
+    "ingredients": [
+      {
+        "itemId": "BLOOD_SHARD",
+        "quantity": 1
+      },
+      {
+        "itemId": "AMULET_OF_FURY",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Amulet_of_blood_fury"
+  },
+  {
+    "id": "DRAGON_METAL_SHARD",
+    "displayName": "Dragon metal shard",
+    "gameItemId": 22097,
+    "type": "GE_BUY",
+    "detail": "Or 1,800,000 coins at the Myths' Guild Armoury",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_metal_shard"
+  },
+  {
+    "id": "DRAGON_SQ_SHIELD",
+    "displayName": "Dragon sq shield",
+    "gameItemId": 1187,
+    "type": "GE_BUY",
+    "detail": "The base for a dragon kiteshield",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_sq_shield"
+  },
+  {
+    "id": "DRAGON_PLATEBODY",
+    "displayName": "Dragon platebody",
+    "gameItemId": 21892,
+    "type": "CRAFT",
+    "detail": "A dragon chainbody, dragon metal lump and dragon metal shard smithed at the Dragon Forge in the Ancient Cavern with a hammer",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SMITHING",
+      "threshold": 90,
+      "hint": "Boostable; the Dragon Forge needs Dragon Slayer II."
+    },
+    "ingredients": [
+      {
+        "itemId": "DRAGON_CHAINBODY",
+        "quantity": 1
+      },
+      {
+        "itemId": "DRAGON_METAL_LUMP",
+        "quantity": 1
+      },
+      {
+        "itemId": "DRAGON_METAL_SHARD",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_platebody"
+  },
+  {
+    "id": "DRAGON_KITESHIELD",
+    "displayName": "Dragon kiteshield",
+    "gameItemId": 21895,
+    "type": "CRAFT",
+    "detail": "A dragon sq shield, dragon metal slice and dragon metal shard smithed at the Dragon Forge in the Ancient Cavern with a hammer",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SMITHING",
+      "threshold": 75,
+      "hint": "Boostable; the Dragon Forge needs Dragon Slayer II."
+    },
+    "ingredients": [
+      {
+        "itemId": "DRAGON_SQ_SHIELD",
+        "quantity": 1
+      },
+      {
+        "itemId": "DRAGON_METAL_SLICE",
+        "quantity": 1
+      },
+      {
+        "itemId": "DRAGON_METAL_SHARD",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_kiteshield"
+  },
+  {
+    "id": "MAGIC_STOCK",
+    "displayName": "Magic stock",
+    "gameItemId": 21952,
+    "type": "GE_BUY",
+    "detail": "Or cut from magic logs with a knife at 78 Fletching",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_stock"
+  },
+  {
+    "id": "CROSSBOW_STRING",
+    "displayName": "Crossbow string",
+    "gameItemId": 9438,
+    "type": "GE_BUY",
+    "detail": "Strings any crossbow",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Crossbow_string"
+  },
+  {
+    "id": "DRAGON_CROSSBOW",
+    "displayName": "Dragon crossbow",
+    "gameItemId": 21902,
+    "type": "CRAFT",
+    "detail": "Dragon limbs fixed to a magic stock with a hammer, then strung with a crossbow string",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FLETCHING",
+      "threshold": 78,
+      "hint": "Boostable; both steps need 78."
+    },
+    "ingredients": [
+      {
+        "itemId": "MAGIC_STOCK",
+        "quantity": 1
+      },
+      {
+        "itemId": "DRAGON_LIMBS",
+        "quantity": 1
+      },
+      {
+        "itemId": "CROSSBOW_STRING",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dragon_crossbow"
+  },
+  {
+    "id": "MONKEY_TAIL",
+    "displayName": "Monkey tail",
+    "gameItemId": 19610,
+    "type": "GE_BUY",
+    "detail": "Dropped by demonic gorillas; strings a ballista",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Monkey_tail"
+  },
+  {
+    "id": "HEAVY_BALLISTA",
+    "displayName": "Heavy ballista",
+    "gameItemId": 19481,
+    "type": "CRAFT",
+    "detail": "Ballista limbs on a heavy frame, then a ballista spring, then a monkey tail",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FLETCHING",
+      "threshold": 72,
+      "hint": "Boostable; to wield it needs 75 Ranged, Monkey Madness II and Duke's advanced combat training."
+    },
+    "ingredients": [
+      {
+        "itemId": "HEAVY_FRAME",
+        "quantity": 1
+      },
+      {
+        "itemId": "BALLISTA_LIMBS",
+        "quantity": 1
+      },
+      {
+        "itemId": "BALLISTA_SPRING",
+        "quantity": 1
+      },
+      {
+        "itemId": "MONKEY_TAIL",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Heavy_ballista"
+  },
+  {
+    "id": "LIGHT_BALLISTA",
+    "displayName": "Light ballista",
+    "gameItemId": 19478,
+    "type": "CRAFT",
+    "detail": "Ballista limbs on a light frame, then a ballista spring, then a monkey tail",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FLETCHING",
+      "threshold": 47,
+      "hint": "Boostable; to wield it needs 65 Ranged."
+    },
+    "ingredients": [
+      {
+        "itemId": "LIGHT_FRAME",
+        "quantity": 1
+      },
+      {
+        "itemId": "BALLISTA_LIMBS",
+        "quantity": 1
+      },
+      {
+        "itemId": "BALLISTA_SPRING",
+        "quantity": 1
+      },
+      {
+        "itemId": "MONKEY_TAIL",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Light_ballista"
+  },
+  {
+    "id": "BRYOPHYTAS_STAFF",
+    "displayName": "Bryophyta's staff",
+    "gameItemId": 22368,
+    "type": "CRAFT",
+    "detail": "Bryophyta's essence used on a battlestaff with 62 Crafting, or hand the essence and 50,000 coins to Zaff in Varrock with no level needed; it comes uncharged and holds up to 1,000 nature runes",
+    "ingredients": [
+      {
+        "itemId": "BRYOPHYTAS_ESSENCE",
+        "quantity": 1
+      },
+      {
+        "itemId": "BATTLESTAFF",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Bryophyta's_staff"
+  },
+  {
+    "id": "BONECRUSHER",
+    "displayName": "Bonecrusher",
+    "gameItemId": 13116,
+    "type": "QUEST_REWARD",
+    "detail": "Morytania Hard Diary reward, from a ghost disciple in the Ectofuntus while wearing a ghostspeak amulet",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "MORYTANIA_HARD"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Bonecrusher"
+  },
+  {
+    "id": "HYDRA_TAIL",
+    "preparationFrom": "pvm_alchemical_hydra",
+    "displayName": "Hydra tail",
+    "gameItemId": 22988,
+    "type": "MONSTER_DROP",
+    "detail": "the Alchemical Hydra",
+    "note": "Plain hydras drop it too, 1 in 1,001 on task. It also trades on the Grand Exchange.",
+    "estimatedKc": 513,
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 95
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hydra_tail"
+  },
+  {
+    "id": "BONECRUSHER_NECKLACE",
+    "displayName": "Bonecrusher necklace",
+    "gameItemId": 22986,
+    "type": "CRAFT",
+    "detail": "A bonecrusher, a dragonbone necklace and a hydra tail combined; it can be split again",
+    "ingredients": [
+      {
+        "itemId": "BONECRUSHER",
+        "quantity": 1
+      },
+      {
+        "itemId": "DRAGONBONE_NECKLACE",
+        "quantity": 1
+      },
+      {
+        "itemId": "HYDRA_TAIL",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Bonecrusher_necklace"
+  },
+  {
+    "id": "VARROCK_ARMOUR_3",
+    "displayName": "Varrock armour 3",
+    "gameItemId": 13106,
+    "type": "QUEST_REWARD",
+    "detail": "Varrock Hard Diary, from Toby in Varrock.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "VARROCK_HARD"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Varrock_armour_3"
+  },
+  {
+    "id": "VARROCK_ARMOUR_4",
+    "displayName": "Varrock armour 4",
+    "gameItemId": 13107,
+    "type": "QUEST_REWARD",
+    "detail": "Varrock Elite Diary, from Toby in Varrock.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "VARROCK_ELITE"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Varrock_armour_4"
+  },
+  {
+    "id": "KARAMJA_GLOVES_3",
+    "displayName": "Karamja gloves 3",
+    "gameItemId": 11140,
+    "type": "QUEST_REWARD",
+    "detail": "Karamja Hard Diary, from Pirate Jackie the Fruit in Brimhaven (Perdu also sells a pair for 200 coins).",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "KARAMJA_HARD"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Karamja_gloves_3"
+  },
+  {
+    "id": "KARAMJA_GLOVES_4",
+    "displayName": "Karamja gloves 4",
+    "gameItemId": 13103,
+    "type": "QUEST_REWARD",
+    "detail": "Karamja Elite Diary, from Pirate Jackie the Fruit in Brimhaven (Perdu also sells a pair for 200 coins).",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "KARAMJA_ELITE"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Karamja_gloves_4"
+  },
+  {
+    "id": "EXPLORERS_RING_3",
+    "displayName": "Explorer's ring 3",
+    "gameItemId": 13127,
+    "type": "QUEST_REWARD",
+    "detail": "Lumbridge & Draynor Hard Diary, from Mikasi in Lumbridge.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "LUMBRIDGE_HARD"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Explorer's_ring_3"
+  },
+  {
+    "id": "EXPLORERS_RING_4",
+    "displayName": "Explorer's ring 4",
+    "gameItemId": 13128,
+    "type": "QUEST_REWARD",
+    "detail": "Lumbridge & Draynor Elite Diary, from Mikasi in Lumbridge.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "LUMBRIDGE_ELITE"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Explorer's_ring_4"
+  },
+  {
+    "id": "FALADOR_SHIELD_3",
+    "displayName": "Falador shield 3",
+    "gameItemId": 13119,
+    "type": "QUEST_REWARD",
+    "detail": "Falador Hard Diary, from Sir Rebral in the White Knights' Castle courtyard.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "FALADOR_HARD"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Falador_shield_3"
+  },
+  {
+    "id": "FALADOR_SHIELD_4",
+    "displayName": "Falador shield 4",
+    "gameItemId": 13120,
+    "type": "QUEST_REWARD",
+    "detail": "Falador Elite Diary, from Sir Rebral in the White Knights' Castle courtyard.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "FALADOR_ELITE"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Falador_shield_4"
+  },
+  {
+    "id": "MORYTANIA_LEGS_3",
+    "displayName": "Morytania legs 3",
+    "gameItemId": 13114,
+    "type": "QUEST_REWARD",
+    "detail": "Morytania Hard Diary, from Le-sabre in Canifis.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "MORYTANIA_HARD"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Morytania_legs_3"
+  },
+  {
+    "id": "MORYTANIA_LEGS_4",
+    "displayName": "Morytania legs 4",
+    "gameItemId": 13115,
+    "type": "QUEST_REWARD",
+    "detail": "Morytania Elite Diary, from Le-sabre in Canifis.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "MORYTANIA_ELITE"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Morytania_legs_4"
+  },
+  {
+    "id": "DESERT_AMULET_3",
+    "displayName": "Desert amulet 3",
+    "gameItemId": 13135,
+    "type": "QUEST_REWARD",
+    "detail": "Desert Hard Diary, from Jarr at the Shantay Pass.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "DESERT_HARD"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Desert_amulet_3"
+  },
+  {
+    "id": "DESERT_AMULET_4",
+    "displayName": "Desert amulet 4",
+    "gameItemId": 13136,
+    "type": "QUEST_REWARD",
+    "detail": "Desert Elite Diary, from Jarr at the Shantay Pass.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "DESERT_ELITE"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Desert_amulet_4"
+  },
+  {
+    "id": "FREMENNIK_SEA_BOOTS_3",
+    "displayName": "Fremennik sea boots 3",
+    "gameItemId": 13131,
+    "type": "QUEST_REWARD",
+    "detail": "Fremennik Hard Diary, from Thorodin south of Rellekka.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "FREMENNIK_HARD"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fremennik_sea_boots_3"
+  },
+  {
+    "id": "FREMENNIK_SEA_BOOTS_4",
+    "displayName": "Fremennik sea boots 4",
+    "gameItemId": 13132,
+    "type": "QUEST_REWARD",
+    "detail": "Fremennik Elite Diary, from Thorodin south of Rellekka.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "FREMENNIK_ELITE"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fremennik_sea_boots_4"
+  },
+  {
+    "id": "KANDARIN_HEADGEAR_3",
+    "displayName": "Kandarin headgear 3",
+    "gameItemId": 13139,
+    "type": "QUEST_REWARD",
+    "detail": "Kandarin Hard Diary, from The 'Wedge' outside Camelot castle.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "KANDARIN_HARD"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Kandarin_headgear_3"
+  },
+  {
+    "id": "KANDARIN_HEADGEAR_4",
+    "displayName": "Kandarin headgear 4",
+    "gameItemId": 13140,
+    "type": "QUEST_REWARD",
+    "detail": "Kandarin Elite Diary, from The 'Wedge' outside Camelot castle.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "KANDARIN_ELITE"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Kandarin_headgear_4"
+  },
+  {
+    "id": "WESTERN_BANNER_3",
+    "displayName": "Western banner 3",
+    "gameItemId": 13143,
+    "type": "QUEST_REWARD",
+    "detail": "Western Provinces Hard Diary, from the Elder gnome child in the Tree Gnome Stronghold.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "WESTERN_HARD"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Western_banner_3"
+  },
+  {
+    "id": "WESTERN_BANNER_4",
+    "displayName": "Western banner 4",
+    "gameItemId": 13144,
+    "type": "QUEST_REWARD",
+    "detail": "Western Provinces Elite Diary, from the Elder gnome child in the Tree Gnome Stronghold.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "WESTERN_ELITE"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Western_banner_4"
+  },
+  {
+    "id": "WILDERNESS_SWORD_3",
+    "displayName": "Wilderness sword 3",
+    "gameItemId": 13110,
+    "type": "QUEST_REWARD",
+    "detail": "Wilderness Hard Diary, from the Lesser Fanatic in Edgeville.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "WILDERNESS_HARD"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Wilderness_sword_3"
+  },
+  {
+    "id": "WILDERNESS_SWORD_4",
+    "displayName": "Wilderness sword 4",
+    "gameItemId": 13111,
+    "type": "QUEST_REWARD",
+    "detail": "Wilderness Elite Diary, from the Lesser Fanatic in Edgeville.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "WILDERNESS_ELITE"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Wilderness_sword_4"
+  },
+  {
+    "id": "RADAS_BLESSING_3",
+    "displayName": "Rada's blessing 3",
+    "gameItemId": 22945,
+    "type": "QUEST_REWARD",
+    "detail": "Kourend & Kebos Hard Diary, from Elise in the Kourend Castle courtyard.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "KOUREND_HARD"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Rada's_blessing_3"
+  },
+  {
+    "id": "RADAS_BLESSING_4",
+    "displayName": "Rada's blessing 4",
+    "gameItemId": 22947,
+    "type": "QUEST_REWARD",
+    "detail": "Kourend & Kebos Elite Diary, from Elise in the Kourend Castle courtyard (Perdu also sells them for 200 coins each).",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "KOUREND_ELITE"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Rada's_blessing_4"
+  },
+  {
+    "id": "ARDOUGNE_CLOAK_3",
+    "displayName": "Ardougne cloak 3",
+    "gameItemId": 13123,
+    "type": "QUEST_REWARD",
+    "detail": "Ardougne Hard Diary, from Two-pints in the Flying Horse Inn in East Ardougne.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "ARDOUGNE_HARD"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ardougne_cloak_3"
+  },
+  {
+    "id": "ARDOUGNE_CLOAK_1",
+    "displayName": "Ardougne cloak 1",
+    "gameItemId": 13121,
+    "type": "QUEST_REWARD",
+    "detail": "Ardougne Easy Diary, from Two-pints in the Flying Horse Inn in East Ardougne.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "ARDOUGNE_EASY"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ardougne_cloak_1"
+  },
+  {
+    "id": "ARDOUGNE_CLOAK_2",
+    "displayName": "Ardougne cloak 2",
+    "gameItemId": 13122,
+    "type": "QUEST_REWARD",
+    "detail": "Ardougne Medium Diary, from Two-pints in the Flying Horse Inn in East Ardougne.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "ARDOUGNE_MEDIUM"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ardougne_cloak_2"
+  },
+  {
+    "id": "ASH_SANCTIFIER",
+    "displayName": "Ash sanctifier",
+    "gameItemId": 25781,
+    "type": "QUEST_REWARD",
+    "detail": "Kourend & Kebos Hard Diary, from Tyss at the Dark Altar; charge it with death runes.",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "KOUREND_HARD"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ash_sanctifier"
+  },
+  {
+    "id": "AVAS_ATTRACTOR",
+    "displayName": "Ava's attractor",
+    "gameItemId": 10498,
+    "type": "QUEST_REWARD",
+    "detail": "Animal Magnetism reward from Ava in Draynor Manor if you are below 50 Ranged.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Animal Magnetism"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ava's_attractor"
+  },
+  {
+    "id": "AVAS_ACCUMULATOR",
+    "displayName": "Ava's accumulator",
+    "gameItemId": 10499,
+    "type": "QUEST_REWARD",
+    "detail": "Animal Magnetism reward from Ava in Draynor Manor at 50 Ranged; later, Ava upgrades an attractor for 75 steel arrows and 999 coins.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Animal Magnetism",
+      "hint": "Needs 50 Ranged; below that the quest gives Ava's attractor instead."
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ava's_accumulator"
+  },
+  {
+    "id": "HELM_OF_NEITIZNOT",
+    "displayName": "Helm of neitiznot",
+    "gameItemId": 10828,
+    "type": "QUEST_REWARD",
+    "detail": "The Fremennik Isles reward; more from Mawnis Burowgar on Neitiznot for 50,000 coins (also on the Grand Exchange, but only wearable after the quest).",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "The Fremennik Isles",
+      "hint": "55 Defence to wear."
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Helm_of_neitiznot"
+  },
+  {
+    "id": "MYTHICAL_CAPE",
+    "displayName": "Mythical cape",
+    "gameItemId": 22114,
+    "type": "SHOP",
+    "detail": "Jack at the Mythical Cape Store on the top floor of the Myths' Guild, 10,000 coins.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Dragon Slayer II"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Mythical_cape"
+  },
+  {
+    "id": "BOOK_OF_THE_DEAD",
+    "displayName": "Book of the dead",
+    "gameItemId": 25818,
+    "type": "QUEST_REWARD",
+    "detail": "A Kingdom Divided reward; Commander Fullore in Kourend Castle replaces it if lost.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "A Kingdom Divided"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Book_of_the_dead"
+  },
+  {
+    "id": "SALVE_AMULET",
+    "displayName": "Salve amulet",
+    "gameItemId": 4081,
+    "type": "QUEST_REWARD",
+    "detail": "After Haunted Mine, chisel a salve shard from the crystal outcrop in the Abandoned Mine and string it with a ball of wool.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Haunted Mine"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Salve_amulet"
+  },
+  {
+    "id": "SALVE_AMULET_E",
+    "displayName": "Salve amulet (e)",
+    "gameItemId": 10588,
+    "type": "CRAFT",
+    "detail": "Use Tarn's diary from the Lair of Tarn Razorlor miniquest on a salve amulet.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Lair of Tarn Razorlor"
+    },
+    "ingredients": [
+      {
+        "itemId": "SALVE_AMULET",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Salve_amulet_(e)"
+  },
+  {
+    "id": "IBANS_STAFF",
+    "displayName": "Iban's staff",
+    "gameItemId": 1409,
+    "type": "QUEST_REWARD",
+    "detail": "Underground Pass reward for defeating Iban.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Underground Pass",
+      "hint": "50 Magic and 50 Attack to wield."
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Iban's_staff"
+  },
+  {
+    "id": "IBANS_STAFF_U",
+    "displayName": "Iban's staff (u)",
+    "gameItemId": 12658,
+    "type": "CRAFT",
+    "detail": "The Dark Mage in West Ardougne upgrades an Iban's staff for 200,000 coins.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Underground Pass",
+      "hint": "50 Magic and 50 Attack to wield."
+    },
+    "ingredients": [
+      {
+        "itemId": "IBANS_STAFF",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Iban's_staff_(u)"
+  },
+  {
+    "id": "DRAMEN_STAFF",
+    "displayName": "Dramen staff",
+    "gameItemId": 772,
+    "type": "QUEST_REWARD",
+    "detail": "Cut a dramen branch from the dramen tree under Entrana and carve it with a knife.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Lost City",
+      "hint": "36 Woodcutting to cut the branch and 31 Crafting to carve it."
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Dramen_staff"
+  },
+  {
+    "id": "ECTOPHIAL",
+    "displayName": "Ectophial",
+    "gameItemId": 4251,
+    "type": "QUEST_REWARD",
+    "detail": "Ghosts Ahoy reward; Velorina in Port Phasmatys replaces it if lost.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Ghosts Ahoy"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ectophial"
+  },
+  {
+    "id": "ROYAL_SEED_POD",
+    "displayName": "Royal seed pod",
+    "gameItemId": 19564,
+    "type": "QUEST_REWARD",
+    "detail": "Monkey Madness II reward from King Narnode Shareen; spares cost 2 coins from him.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Monkey Madness II"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Royal_seed_pod"
+  },
+  {
+    "id": "LUNAR_STAFF",
+    "displayName": "Lunar staff",
+    "gameItemId": 9084,
+    "type": "QUEST_REWARD",
+    "detail": "Made during Lunar Diplomacy; the Oneiromancer on Lunar Isle replaces a lost one for 30,000 coins.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Lunar Diplomacy",
+      "hint": "65 Magic and 40 Defence to wield."
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Lunar_staff"
+  },
+  {
+    "id": "HOLY_WRENCH",
+    "displayName": "Holy wrench",
+    "gameItemId": 6714,
+    "type": "QUEST_REWARD",
+    "detail": "Reward partway through Rum Deal; Davey in the Braindeath Island brewery replaces it.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Rum Deal"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Holy_wrench"
+  },
+  {
+    "id": "IVANDIS_FLAIL",
+    "displayName": "Ivandis flail",
+    "gameItemId": 22398,
+    "type": "QUEST_REWARD",
+    "detail": "Made during A Taste of Hope; Ivan Strom's shop stocks more.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "A Taste of Hope",
+      "hint": "40 Attack to wield."
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ivandis_flail"
+  },
+  {
+    "id": "BLISTERWOOD_FLAIL",
+    "displayName": "Blisterwood flail",
+    "gameItemId": 24699,
+    "type": "QUEST_REWARD",
+    "detail": "Made during Sins of the Father; Ivan Strom in Meiyerditch sells more after the quest.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Sins of the Father",
+      "hint": "50 Attack to wield."
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Blisterwood_flail"
+  },
+  {
+    "id": "HALLOWED_FLAIL",
+    "displayName": "Hallowed flail",
+    "gameItemId": 33718,
+    "type": "QUEST_REWARD",
+    "detail": "Made during The Blood Moon Rises; Efaritay in Castle Drakan sells more after the quest.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "The Blood Moon Rises",
+      "hint": "50 Attack to wield."
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hallowed_flail"
+  },
+  {
+    "id": "SUNSPEAR",
+    "displayName": "Sunspear",
+    "gameItemId": 33722,
+    "type": "QUEST_REWARD",
+    "detail": "The Blood Moon Rises reward; Efaritay's Supplies in Castle Drakan replaces it for 100,000 coins.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "The Blood Moon Rises"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Sunspear"
+  },
+  {
+    "id": "DRAKANS_MEDALLION",
+    "displayName": "Drakan's medallion",
+    "gameItemId": 22400,
+    "type": "QUEST_REWARD",
+    "detail": "A Taste of Hope reward; spares are free from Kael Forshaw in the old Myreque Hideout.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "A Taste of Hope"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Drakan's_medallion"
+  },
+  {
+    "id": "RING_OF_SHADOWS",
+    "displayName": "Ring of shadows",
+    "gameItemId": 28327,
+    "type": "QUEST_REWARD",
+    "detail": "Desert Treasure II reward from Azzanadra; the Mysterious Bandit in the Ancient Vault sells another for 75,000 coins.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Desert Treasure II - The Fallen Empire"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ring_of_shadows"
+  },
+  {
+    "id": "KERIS_PARTISAN",
+    "displayName": "Keris partisan",
+    "gameItemId": 25979,
+    "type": "QUEST_REWARD",
+    "detail": "Beneath Cursed Sands reward from Maisa; Selim in Al Kharid sells more for 60,000 coins.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Beneath Cursed Sands",
+      "hint": "65 Attack to wield."
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Keris_partisan"
+  },
+  {
+    "id": "VS_SHIELD",
+    "displayName": "V's shield",
+    "gameItemId": 24266,
+    "type": "QUEST_REWARD",
+    "detail": "Made during The Fremennik Exiles; Brundt the Chieftain in Rellekka replaces it for 50,000 coins.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "The Fremennik Exiles",
+      "hint": "40 Defence and 60 Slayer to wield."
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/V's_shield"
+  },
+  {
+    "id": "TORTUGAN_SHIELD",
+    "displayName": "Tortugan shield",
+    "gameItemId": 31398,
+    "type": "QUEST_REWARD",
+    "detail": "Given during Troubled Tortugans; Elder Blunn's Spear and Shield Stall sells more for 2,500 coins.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Troubled Tortugans"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Tortugan_shield"
+  },
+  {
+    "id": "COWBELL_AMULET",
+    "displayName": "Cowbell amulet",
+    "gameItemId": 33103,
+    "type": "QUEST_REWARD",
+    "detail": "Gillie Groats after The Ides of Milk; charge it with air runes for cow field teleports.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "The Ides of Milk"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Cowbell_amulet"
+  },
+  {
+    "id": "MAGIC_SECATEURS",
+    "displayName": "Magic secateurs",
+    "gameItemId": 7409,
+    "type": "QUEST_REWARD",
+    "detail": "Fairytale I - Growing Pains reward; Malignius Mortifer south of Falador sells more for 40,000 coins.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Fairytale I - Growing Pains"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Magic_secateurs"
+  },
+  {
+    "id": "GAS_MASK",
+    "displayName": "Gas mask",
+    "gameItemId": 1506,
+    "type": "QUEST_REWARD",
+    "detail": "Alrena in East Ardougne makes it from dwellberries during Plague City; spares come from the cupboard in Edmond's house.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Plague City"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Gas_mask"
+  },
+  {
+    "id": "ENCHANTED_LYRE",
+    "displayName": "Enchanted lyre",
+    "gameItemId": 3690,
+    "type": "QUEST_REWARD",
+    "detail": "Offer a raw shark, manta ray or sea turtle at Fossegrimen's altar south-west of Rellekka to enchant the lyre from The Fremennik Trials.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "The Fremennik Trials"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Enchanted_lyre"
+  },
+  {
+    "id": "SOUL_BEARER",
+    "displayName": "Soul bearer",
+    "gameItemId": 19634,
+    "type": "QUEST_REWARD",
+    "detail": "Bear Your Soul miniquest: dig up the damaged soul bearer in the Arceuus church crypt and have the Key Master in Cerberus' lair repair it.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Soul_bearer"
+  },
+  {
+    "id": "SARADOMIN_CAPE",
+    "displayName": "Saradomin cape",
+    "gameItemId": 2412,
+    "type": "QUEST_REWARD",
+    "detail": "Mage Arena I: beat Kolodion, then pray at the Statue of Saradomin; Perdu sells another for 23,000 coins.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Mage Arena I"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Saradomin_cape"
+  },
+  {
+    "id": "IMBUED_SARADOMIN_CAPE",
+    "displayName": "Imbued Saradomin cape",
+    "gameItemId": 21791,
+    "type": "CRAFT",
+    "detail": "Mage Arena II: imbue your Saradomin cape with the drops of Justiciar Zachariah, Porazdir and Derwen in the deep Wilderness.",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MAGIC",
+      "threshold": 75,
+      "hint": "Mage Arena II miniquest, after Mage Arena I; cast each god spell 100 times in the Mage Arena first."
+    },
+    "ingredients": [
+      {
+        "itemId": "SARADOMIN_CAPE",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Imbued_Saradomin_cape"
+  },
+  {
+    "id": "GUTHIX_CAPE",
+    "displayName": "Guthix cape",
+    "gameItemId": 2413,
+    "type": "QUEST_REWARD",
+    "detail": "Mage Arena I: beat Kolodion, then pray at the Statue of Guthix; Perdu sells another for 23,000 coins.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Mage Arena I"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Guthix_cape"
+  },
+  {
+    "id": "IMBUED_GUTHIX_CAPE",
+    "displayName": "Imbued Guthix cape",
+    "gameItemId": 21793,
+    "type": "CRAFT",
+    "detail": "Mage Arena II: imbue your Guthix cape with the drops of Justiciar Zachariah, Porazdir and Derwen in the deep Wilderness.",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MAGIC",
+      "threshold": 75,
+      "hint": "Mage Arena II miniquest, after Mage Arena I; cast each god spell 100 times in the Mage Arena first."
+    },
+    "ingredients": [
+      {
+        "itemId": "GUTHIX_CAPE",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Imbued_Guthix_cape"
+  },
+  {
+    "id": "ZAMORAK_CAPE",
+    "displayName": "Zamorak cape",
+    "gameItemId": 2414,
+    "type": "QUEST_REWARD",
+    "detail": "Mage Arena I: beat Kolodion, then pray at the Statue of Zamorak; Perdu sells another for 23,000 coins.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Mage Arena I"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Zamorak_cape"
+  },
+  {
+    "id": "IMBUED_ZAMORAK_CAPE",
+    "displayName": "Imbued Zamorak cape",
+    "gameItemId": 21795,
+    "type": "CRAFT",
+    "detail": "Mage Arena II: imbue your Zamorak cape with the drops of Justiciar Zachariah, Porazdir and Derwen in the deep Wilderness.",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MAGIC",
+      "threshold": 75,
+      "hint": "Mage Arena II miniquest, after Mage Arena I; cast each god spell 100 times in the Mage Arena first."
+    },
+    "ingredients": [
+      {
+        "itemId": "ZAMORAK_CAPE",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Imbued_Zamorak_cape"
+  },
+  {
+    "id": "HOLY_BOOK_PAGE_SET",
+    "displayName": "Holy book page set",
+    "gameItemId": 13149,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange; a Grand Exchange clerk swaps it for the four Saradomin pages (or buy the pages one by one).",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Holy_book_page_set"
+  },
+  {
+    "id": "HOLY_BOOK",
+    "displayName": "Holy book",
+    "gameItemId": 3840,
+    "type": "CRAFT",
+    "detail": "Jossik at the Lighthouse gives the damaged Saradomin book after Horror from the Deep if you pick Saradomin (otherwise 5,000 coins); fill it with all four torn pages.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Horror from the Deep"
+    },
+    "ingredients": [
+      {
+        "itemId": "HOLY_BOOK_PAGE_SET",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Holy_book"
+  },
+  {
+    "id": "UNHOLY_BOOK_PAGE_SET",
+    "displayName": "Unholy book page set",
+    "gameItemId": 13151,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange; a Grand Exchange clerk swaps it for the four Zamorak pages (or buy the pages one by one).",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Unholy_book_page_set"
+  },
+  {
+    "id": "UNHOLY_BOOK",
+    "displayName": "Unholy book",
+    "gameItemId": 3842,
+    "type": "CRAFT",
+    "detail": "Jossik at the Lighthouse gives the damaged Zamorak book after Horror from the Deep if you pick Zamorak (otherwise 5,000 coins); fill it with all four torn pages.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Horror from the Deep"
+    },
+    "ingredients": [
+      {
+        "itemId": "UNHOLY_BOOK_PAGE_SET",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Unholy_book"
+  },
+  {
+    "id": "BOOK_OF_BALANCE_PAGE_SET",
+    "displayName": "Book of balance page set",
+    "gameItemId": 13153,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange; a Grand Exchange clerk swaps it for the four Guthix pages (or buy the pages one by one).",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Book_of_balance_page_set"
+  },
+  {
+    "id": "BOOK_OF_BALANCE",
+    "displayName": "Book of balance",
+    "gameItemId": 3844,
+    "type": "CRAFT",
+    "detail": "Jossik at the Lighthouse gives the damaged Guthix book after Horror from the Deep if you pick Guthix (otherwise 5,000 coins); fill it with all four torn pages.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Horror from the Deep"
+    },
+    "ingredients": [
+      {
+        "itemId": "BOOK_OF_BALANCE_PAGE_SET",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Book_of_balance"
+  },
+  {
+    "id": "BOOK_OF_LAW_PAGE_SET",
+    "displayName": "Book of law page set",
+    "gameItemId": 13157,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange; a Grand Exchange clerk swaps it for the four Armadyl pages (or buy the pages one by one).",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Book_of_law_page_set"
+  },
+  {
+    "id": "BOOK_OF_LAW",
+    "displayName": "Book of law",
+    "gameItemId": 12610,
+    "type": "CRAFT",
+    "detail": "Jossik at the Lighthouse sells the damaged Armadyl book for 5,000 coins after Horror from the Deep; fill it with all four torn pages.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Horror from the Deep"
+    },
+    "ingredients": [
+      {
+        "itemId": "BOOK_OF_LAW_PAGE_SET",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Book_of_law"
+  },
+  {
+    "id": "BOOK_OF_WAR_PAGE_SET",
+    "displayName": "Book of war page set",
+    "gameItemId": 13155,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange; a Grand Exchange clerk swaps it for the four Bandos pages (or buy the pages one by one).",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Book_of_war_page_set"
+  },
+  {
+    "id": "BOOK_OF_WAR",
+    "displayName": "Book of war",
+    "gameItemId": 12608,
+    "type": "CRAFT",
+    "detail": "Jossik at the Lighthouse sells the damaged Bandos book for 5,000 coins after Horror from the Deep; fill it with all four torn pages.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Horror from the Deep"
+    },
+    "ingredients": [
+      {
+        "itemId": "BOOK_OF_WAR_PAGE_SET",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Book_of_war"
+  },
+  {
+    "id": "BOOK_OF_DARKNESS_PAGE_SET",
+    "displayName": "Book of darkness page set",
+    "gameItemId": 13159,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange; a Grand Exchange clerk swaps it for the four Ancient pages (or buy the pages one by one).",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Book_of_darkness_page_set"
+  },
+  {
+    "id": "BOOK_OF_DARKNESS",
+    "displayName": "Book of darkness",
+    "gameItemId": 12612,
+    "type": "CRAFT",
+    "detail": "Jossik at the Lighthouse sells the damaged Zaros book for 5,000 coins after Horror from the Deep; fill it with all four torn pages.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Horror from the Deep"
+    },
+    "ingredients": [
+      {
+        "itemId": "BOOK_OF_DARKNESS_PAGE_SET",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Book_of_darkness"
+  },
+  {
+    "id": "RUBY_NECKLACE",
+    "displayName": "Ruby necklace",
+    "gameItemId": 1660,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ruby_necklace"
+  },
+  {
+    "id": "FIRE_RUNE",
+    "displayName": "Fire rune",
+    "gameItemId": 554,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange or a rune shop.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fire_rune"
+  },
+  {
+    "id": "DIGSITE_PENDANT",
+    "displayName": "Digsite pendant (5)",
+    "gameItemId": 11194,
+    "type": "CRAFT",
+    "detail": "Cast Lvl-3 Enchant on a ruby necklace once a Varrock Museum archaeologist has taught you the spell.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "The Dig Site",
+      "hint": "49 Magic for Lvl-3 Enchant; first find a clean necklace (1/51) cleaning finds at the Varrock Museum."
+    },
+    "ingredients": [
+      {
+        "itemId": "RUBY_NECKLACE",
+        "quantity": 1
+      },
+      {
+        "itemId": "COSMIC_RUNE",
+        "quantity": 1
+      },
+      {
+        "itemId": "FIRE_RUNE",
+        "quantity": 5
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Digsite_pendant"
+  },
+  {
+    "id": "WITCHWOOD_ICON",
+    "displayName": "Witchwood icon",
+    "gameItemId": 8923,
+    "type": "SHOP",
+    "detail": "Any Slayer master, 900 coins.",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SLAYER",
+      "threshold": 35,
+      "hint": "35 Slayer to wear; cave horrors also need Cabin Fever to reach Mos Le'Harmless."
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Witchwood_icon"
+  },
+  {
+    "id": "QUEST_POINT_CAPE",
+    "displayName": "Quest point cape",
+    "gameItemId": 9813,
+    "type": "SHOP",
+    "detail": "Wise Old Man in Draynor Village, 99,000 coins with the hood, once every quest is done.",
+    "skillRequirement": {
+      "type": "QUEST_POINTS",
+      "threshold": 346,
+      "hint": "Needs every quest; each new quest raises the total."
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Quest_point_cape"
+  },
+  {
+    "id": "XERICS_TALISMAN",
+    "preparationFrom": "pvm_lizardman_shamans",
+    "displayName": "Xeric's talisman",
+    "gameItemId": 13393,
+    "type": "MONSTER_DROP",
+    "detail": "lizardmen in Kourend",
+    "note": "Lizardmen, brutes and shamans drop it, 1 in 250, or 1 in 125 after the easy Kourend & Kebos Diary. Charge it with lizardman fangs.",
+    "estimatedKc": 250,
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Xeric's_talisman"
+  },
+  {
+    "id": "IMCANDO_HAMMER",
+    "displayName": "Imcando hammer",
+    "gameItemId": 25644,
+    "type": "MONSTER_DROP",
+    "detail": "barronite deposits in the Ruins of Camdozaal",
+    "note": "Smash the deposits on the Barronite Crusher (about 1 in 300 each), then Ramarno repairs the hammer for 1,250 barronite shards.",
+    "estimatedKc": 300,
+    "attemptUnit": "barronite deposits",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Below Ice Mountain",
+      "hint": "14 Mining to mine barronite rocks for the deposits."
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Imcando_hammer"
+  },
+  {
+    "id": "CRYSTAL_SHARD",
+    "preparationFrom": "pvm_the_gauntlet",
+    "displayName": "Crystal shard",
+    "gameItemId": 23962,
+    "type": "MONSTER_DROP",
+    "detail": "the Gauntlet reward chest",
+    "note": "7-12 per Corrupted Gauntlet completion (5-9 from the normal one). Zalcano, crystal trees and pickpocketing elves in Prifddinas give them too.",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Song of the Elves"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Crystal_shard"
+  },
+  {
+    "id": "BOW_OF_FAERDHINEN",
+    "displayName": "Bow of Faerdhinen",
+    "gameItemId": 25865,
+    "type": "CRAFT",
+    "detail": "Sing an enhanced crystal weapon seed and 100 crystal shards at the singing bowl in Prifddinas",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SMITHING",
+      "threshold": 82,
+      "hint": "Also 82 Crafting; both can be boosted."
+    },
+    "ingredients": [
+      {
+        "itemId": "ENHANCED_CRYSTAL_WEAPON_SEED",
+        "quantity": 1
+      },
+      {
+        "itemId": "CRYSTAL_SHARD",
+        "quantity": 100
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Bow_of_Faerdhinen"
+  },
+  {
+    "id": "BLADE_OF_SAELDOR",
+    "displayName": "Blade of Saeldor",
+    "gameItemId": 23995,
+    "type": "CRAFT",
+    "detail": "Sing an enhanced crystal weapon seed and 100 crystal shards at the singing bowl in Prifddinas",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SMITHING",
+      "threshold": 82,
+      "hint": "Also 82 Crafting; both can be boosted."
+    },
+    "ingredients": [
+      {
+        "itemId": "ENHANCED_CRYSTAL_WEAPON_SEED",
+        "quantity": 1
+      },
+      {
+        "itemId": "CRYSTAL_SHARD",
+        "quantity": 100
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Blade_of_Saeldor"
+  },
+  {
+    "id": "CRYSTAL_HELM",
+    "displayName": "Crystal helm",
+    "gameItemId": 23971,
+    "type": "CRAFT",
+    "detail": "Sing a crystal armour seed and 50 crystal shards at the singing bowl in Prifddinas",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SMITHING",
+      "threshold": 70,
+      "hint": "Also 70 Crafting; both can be boosted."
+    },
+    "ingredients": [
+      {
+        "itemId": "CRYSTAL_ARMOUR_SEED",
+        "quantity": 1
+      },
+      {
+        "itemId": "CRYSTAL_SHARD",
+        "quantity": 50
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Crystal_helm"
+  },
+  {
+    "id": "CRYSTAL_BODY",
+    "displayName": "Crystal body",
+    "gameItemId": 23975,
+    "type": "CRAFT",
+    "detail": "Sing three crystal armour seeds and 150 crystal shards at the singing bowl in Prifddinas",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SMITHING",
+      "threshold": 74,
+      "hint": "Also 74 Crafting; both can be boosted."
+    },
+    "ingredients": [
+      {
+        "itemId": "CRYSTAL_ARMOUR_SEED",
+        "quantity": 3
+      },
+      {
+        "itemId": "CRYSTAL_SHARD",
+        "quantity": 150
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Crystal_body"
+  },
+  {
+    "id": "CRYSTAL_LEGS",
+    "displayName": "Crystal legs",
+    "gameItemId": 23979,
+    "type": "CRAFT",
+    "detail": "Sing two crystal armour seeds and 100 crystal shards at the singing bowl in Prifddinas",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SMITHING",
+      "threshold": 72,
+      "hint": "Also 72 Crafting; both can be boosted."
+    },
+    "ingredients": [
+      {
+        "itemId": "CRYSTAL_ARMOUR_SEED",
+        "quantity": 2
+      },
+      {
+        "itemId": "CRYSTAL_SHARD",
+        "quantity": 100
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Crystal_legs"
+  },
+  {
+    "id": "CRYSTAL_BOW",
+    "displayName": "Crystal bow",
+    "gameItemId": 23983,
+    "type": "CRAFT",
+    "detail": "Sing a crystal weapon seed and 40 crystal shards at the singing bowl in Prifddinas",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SMITHING",
+      "threshold": 78,
+      "hint": "Also 78 Crafting; both can be boosted."
+    },
+    "ingredients": [
+      {
+        "itemId": "CRYSTAL_WEAPON_SEED",
+        "quantity": 1
+      },
+      {
+        "itemId": "CRYSTAL_SHARD",
+        "quantity": 40
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Crystal_bow"
+  },
+  {
+    "id": "CRYSTAL_HALBERD",
+    "displayName": "Crystal halberd",
+    "gameItemId": 23987,
+    "type": "CRAFT",
+    "detail": "Sing a crystal weapon seed and 40 crystal shards at the singing bowl in Prifddinas; needs the Western Provinces Hard Diary",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "SMITHING",
+      "threshold": 78,
+      "hint": "Also 78 Crafting (both can be boosted) and the Western Provinces Hard Diary."
+    },
+    "ingredients": [
+      {
+        "itemId": "CRYSTAL_WEAPON_SEED",
+        "quantity": 1
+      },
+      {
+        "itemId": "CRYSTAL_SHARD",
+        "quantity": 40
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Crystal_halberd"
+  },
+  {
+    "id": "ZAMORAKIAN_HASTA",
+    "displayName": "Zamorakian hasta",
+    "gameItemId": 11889,
+    "type": "CRAFT",
+    "detail": "Otto Godblessed north of Baxtorian Falls turns a Zamorakian spear into a hasta for 300,000 coins (150,000 after the Kandarin Elite Diary)",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Barbarian Training",
+      "hint": "Only the Barbarian Smithing part of Barbarian Training is needed."
+    },
+    "ingredients": [
+      {
+        "itemId": "ZAMORAKIAN_SPEAR",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Zamorakian_hasta"
+  },
+  {
+    "id": "MINING_GLOVES",
+    "displayName": "Mining gloves",
+    "gameItemId": 21343,
+    "type": "SHOP",
+    "detail": "Belona in the Mining Guild, 40 unidentified minerals, which drop at random while mining any rock in the guild's members area",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MINING",
+      "threshold": 60,
+      "hint": "The gloves need only 20 Mining to wear, but the guild and its minerals need 60 (boostable)"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Mining_gloves"
+  },
+  {
+    "id": "SUPERIOR_MINING_GLOVES",
+    "displayName": "Superior mining gloves",
+    "gameItemId": 21345,
+    "type": "SHOP",
+    "detail": "Belona in the Mining Guild, 100 unidentified minerals, which drop at random while mining any rock in the guild's members area",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MINING",
+      "threshold": 60,
+      "hint": "The gloves need 55 Mining to wear; the guild and its minerals need 60 (boostable)"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Superior_mining_gloves"
+  },
+  {
+    "id": "EXPERT_MINING_GLOVES",
+    "displayName": "Expert mining gloves",
+    "gameItemId": 21392,
+    "type": "CRAFT",
+    "detail": "Belona in the Mining Guild combines a pair of mining gloves and a pair of superior mining gloves for another 40 unidentified minerals (180 minerals in all)",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MINING",
+      "threshold": 70,
+      "hint": "70 Mining to wear; the Mining Guild itself needs 60"
+    },
+    "ingredients": [
+      {
+        "itemId": "MINING_GLOVES",
+        "quantity": 1
+      },
+      {
+        "itemId": "SUPERIOR_MINING_GLOVES",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Expert_mining_gloves"
+  },
+  {
+    "id": "PROSPECTOR_HELMET",
+    "displayName": "Prospector helmet",
+    "gameItemId": 12013,
+    "type": "SHOP",
+    "detail": "Prospector Percy in the Motherlode Mine, 40 golden nuggets; about 1 pay-dirt in 32 gives a nugget when cleaned",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MINING",
+      "threshold": 30,
+      "hint": "30 Mining (not boostable) to mine pay-dirt"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Prospector_helmet"
+  },
+  {
+    "id": "PROSPECTOR_JACKET",
+    "displayName": "Prospector jacket",
+    "gameItemId": 12014,
+    "type": "SHOP",
+    "detail": "Prospector Percy in the Motherlode Mine, 60 golden nuggets; about 1 pay-dirt in 32 gives a nugget when cleaned",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MINING",
+      "threshold": 30,
+      "hint": "30 Mining (not boostable) to mine pay-dirt"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Prospector_jacket"
+  },
+  {
+    "id": "PROSPECTOR_LEGS",
+    "displayName": "Prospector legs",
+    "gameItemId": 12015,
+    "type": "SHOP",
+    "detail": "Prospector Percy in the Motherlode Mine, 50 golden nuggets; about 1 pay-dirt in 32 gives a nugget when cleaned",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MINING",
+      "threshold": 30,
+      "hint": "30 Mining (not boostable) to mine pay-dirt"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Prospector_legs"
+  },
+  {
+    "id": "PROSPECTOR_BOOTS",
+    "displayName": "Prospector boots",
+    "gameItemId": 12016,
+    "type": "SHOP",
+    "detail": "Prospector Percy in the Motherlode Mine, 30 golden nuggets; about 1 pay-dirt in 32 gives a nugget when cleaned",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MINING",
+      "threshold": 30,
+      "hint": "30 Mining (not boostable) to mine pay-dirt"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Prospector_boots"
+  },
+  {
+    "id": "COAL_BAG",
+    "displayName": "Coal bag",
+    "gameItemId": 12019,
+    "type": "SHOP",
+    "detail": "Prospector Percy in the Motherlode Mine, 100 golden nuggets; about 1 pay-dirt in 32 gives a nugget when cleaned",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MINING",
+      "threshold": 30,
+      "hint": "30 Mining (not boostable) to mine pay-dirt"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Coal_bag"
+  },
+  {
+    "id": "GEM_BAG",
+    "displayName": "Gem bag",
+    "gameItemId": 12020,
+    "type": "SHOP",
+    "detail": "Prospector Percy in the Motherlode Mine, 100 golden nuggets; about 1 pay-dirt in 32 gives a nugget when cleaned",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MINING",
+      "threshold": 30,
+      "hint": "30 Mining (not boostable) to mine pay-dirt"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Gem_bag"
+  },
+  {
+    "id": "ANGLER_HAT",
+    "displayName": "Angler hat",
+    "gameItemId": 13258,
+    "type": "MONSTER_DROP",
+    "detail": "the Fishing Trawler",
+    "note": "The net gives a piece you do not own yet 1 game in 12 (about 48 games for the set), or trade 50 molch pearls with Alry the Angler.",
+    "estimatedKc": 12,
+    "attemptUnit": "Fishing Trawler games",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FISHING",
+      "threshold": 34,
+      "hint": "34 Fishing to wear; Trawler rewards need 15 Fishing and 50 contribution"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Angler_hat"
+  },
+  {
+    "id": "ANGLER_TOP",
+    "displayName": "Angler top",
+    "gameItemId": 13259,
+    "type": "MONSTER_DROP",
+    "detail": "the Fishing Trawler",
+    "note": "The net gives a piece you do not own yet 1 game in 12 (about 48 games for the set), or trade 50 molch pearls with Alry the Angler.",
+    "estimatedKc": 12,
+    "attemptUnit": "Fishing Trawler games",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FISHING",
+      "threshold": 34,
+      "hint": "34 Fishing to wear; Trawler rewards need 15 Fishing and 50 contribution"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Angler_top"
+  },
+  {
+    "id": "ANGLER_WADERS",
+    "displayName": "Angler waders",
+    "gameItemId": 13260,
+    "type": "MONSTER_DROP",
+    "detail": "the Fishing Trawler",
+    "note": "The net gives a piece you do not own yet 1 game in 12 (about 48 games for the set), or trade 50 molch pearls with Alry the Angler.",
+    "estimatedKc": 12,
+    "attemptUnit": "Fishing Trawler games",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FISHING",
+      "threshold": 34,
+      "hint": "34 Fishing to wear; Trawler rewards need 15 Fishing and 50 contribution"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Angler_waders"
+  },
+  {
+    "id": "ANGLER_BOOTS",
+    "displayName": "Angler boots",
+    "gameItemId": 13261,
+    "type": "MONSTER_DROP",
+    "detail": "the Fishing Trawler",
+    "note": "The net gives a piece you do not own yet 1 game in 12 (about 48 games for the set), or trade 50 molch pearls with Alry the Angler.",
+    "estimatedKc": 12,
+    "attemptUnit": "Fishing Trawler games",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FISHING",
+      "threshold": 34,
+      "hint": "34 Fishing to wear; Trawler rewards need 15 Fishing and 50 contribution"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Angler_boots"
+  },
+  {
+    "id": "SPIRIT_FLAKES",
+    "currencyFrom": "minigame_tempoross",
+    "displayName": "Spirit flakes",
+    "gameItemId": 25588,
+    "type": "SHOP",
+    "detail": "Tempoross reward pool, 1 in 4 rewards gives 32 to 64 flakes, about 12 per reward permit",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FISHING",
+      "threshold": 35
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Spirit_flakes"
+  },
+  {
+    "id": "SPIRIT_ANGLER_HEADBAND",
+    "displayName": "Spirit angler headband",
+    "gameItemId": 25592,
+    "type": "CRAFT",
+    "detail": "Gita Prymes in the Ruins of Unkah swaps an angler hat and 1,200 spirit flakes for it",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FISHING",
+      "threshold": 35
+    },
+    "ingredients": [
+      {
+        "itemId": "ANGLER_HAT",
+        "quantity": 1
+      },
+      {
+        "itemId": "SPIRIT_FLAKES",
+        "quantity": 1200
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Spirit_angler_headband"
+  },
+  {
+    "id": "SPIRIT_ANGLER_TOP",
+    "displayName": "Spirit angler top",
+    "gameItemId": 25594,
+    "type": "CRAFT",
+    "detail": "Gita Prymes in the Ruins of Unkah swaps an angler top and 1,200 spirit flakes for it",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FISHING",
+      "threshold": 35
+    },
+    "ingredients": [
+      {
+        "itemId": "ANGLER_TOP",
+        "quantity": 1
+      },
+      {
+        "itemId": "SPIRIT_FLAKES",
+        "quantity": 1200
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Spirit_angler_top"
+  },
+  {
+    "id": "SPIRIT_ANGLER_WADERS",
+    "displayName": "Spirit angler waders",
+    "gameItemId": 25596,
+    "type": "CRAFT",
+    "detail": "Gita Prymes in the Ruins of Unkah swaps angler waders and 1,200 spirit flakes for them",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FISHING",
+      "threshold": 35
+    },
+    "ingredients": [
+      {
+        "itemId": "ANGLER_WADERS",
+        "quantity": 1
+      },
+      {
+        "itemId": "SPIRIT_FLAKES",
+        "quantity": 1200
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Spirit_angler_waders"
+  },
+  {
+    "id": "SPIRIT_ANGLER_BOOTS",
+    "displayName": "Spirit angler boots",
+    "gameItemId": 25598,
+    "type": "CRAFT",
+    "detail": "Gita Prymes in the Ruins of Unkah swaps angler boots and 1,200 spirit flakes for them",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FISHING",
+      "threshold": 35
+    },
+    "ingredients": [
+      {
+        "itemId": "ANGLER_BOOTS",
+        "quantity": 1
+      },
+      {
+        "itemId": "SPIRIT_FLAKES",
+        "quantity": 1200
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Spirit_angler_boots"
+  },
+  {
+    "id": "TOME_OF_WATER",
+    "displayName": "Tome of water",
+    "gameItemId": 25574,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange (empty); otherwise 1 in 1,600 from the Tempoross reward pool",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Tome_of_water"
+  },
+  {
+    "id": "LUMBERJACK_HAT",
+    "displayName": "Lumberjack hat",
+    "gameItemId": 10941,
+    "type": "SHOP",
+    "detail": "the Forestry Shop, 1,200 anima-infused bark plus 200 noted yew and 100 noted magic logs; bark comes from Forestry events while chopping trees",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "WOODCUTTING",
+      "threshold": 44,
+      "hint": "44 Woodcutting (not boostable) to wear"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Lumberjack_hat"
+  },
+  {
+    "id": "LUMBERJACK_TOP",
+    "displayName": "Lumberjack top",
+    "gameItemId": 10939,
+    "type": "SHOP",
+    "detail": "the Forestry Shop, 1,500 anima-infused bark plus 60 noted yew, 120 noted magic and 120 noted redwood logs; bark comes from Forestry events while chopping trees",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "WOODCUTTING",
+      "threshold": 44,
+      "hint": "44 Woodcutting (not boostable) to wear"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Lumberjack_top"
+  },
+  {
+    "id": "LUMBERJACK_LEGS",
+    "displayName": "Lumberjack legs",
+    "gameItemId": 10940,
+    "type": "SHOP",
+    "detail": "the Forestry Shop, 1,300 anima-infused bark plus 160 noted yew and 140 noted magic logs; bark comes from Forestry events while chopping trees",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "WOODCUTTING",
+      "threshold": 44,
+      "hint": "44 Woodcutting (not boostable) to wear"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Lumberjack_legs"
+  },
+  {
+    "id": "LUMBERJACK_BOOTS",
+    "displayName": "Lumberjack boots",
+    "gameItemId": 10933,
+    "type": "SHOP",
+    "detail": "the Forestry Shop, 1,000 anima-infused bark plus 100 noted maple and 200 noted yew logs; bark comes from Forestry events while chopping trees",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "WOODCUTTING",
+      "threshold": 44,
+      "hint": "44 Woodcutting (not boostable) to wear"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Lumberjack_boots"
+  },
+  {
+    "id": "LOG_BASKET",
+    "displayName": "Log basket",
+    "gameItemId": 28140,
+    "type": "SHOP",
+    "detail": "the Forestry Shop, 5,000 anima-infused bark plus 300 noted oak and 300 noted willow logs; bark comes from Forestry events while chopping trees",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Log_basket"
+  },
+  {
+    "id": "FORESTRY_KIT",
+    "displayName": "Forestry kit",
+    "gameItemId": 28136,
+    "type": "SHOP",
+    "detail": "Free from the Friendly Forester's Forestry Shop in Draynor Village, Seers' Village, Prifddinas or Nemus Retreat",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Forestry_kit"
+  },
+  {
+    "id": "PYROMANCER_GARB",
+    "preparationFrom": "minigame_wintertodt",
+    "displayName": "Pyromancer garb",
+    "gameItemId": 20704,
+    "type": "MONSTER_DROP",
+    "detail": "the Wintertodt reward cart",
+    "note": "1 in 152 per roll for the outfit piece you have fewest of (garb first, then hood, robe, boots). 500 points earn 2 rolls, 1,000 earn 3.",
+    "estimatedKc": 152,
+    "attemptUnit": "reward cart rolls",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FIREMAKING",
+      "threshold": 50
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pyromancer_garb"
+  },
+  {
+    "id": "PYROMANCER_HOOD",
+    "preparationFrom": "minigame_wintertodt",
+    "displayName": "Pyromancer hood",
+    "gameItemId": 20708,
+    "type": "MONSTER_DROP",
+    "detail": "the Wintertodt reward cart",
+    "note": "1 in 152 per roll for the outfit piece you have fewest of (garb first, then hood, robe, boots). 500 points earn 2 rolls, 1,000 earn 3.",
+    "estimatedKc": 304,
+    "attemptUnit": "reward cart rolls",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FIREMAKING",
+      "threshold": 50
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pyromancer_hood"
+  },
+  {
+    "id": "PYROMANCER_ROBE",
+    "preparationFrom": "minigame_wintertodt",
+    "displayName": "Pyromancer robe",
+    "gameItemId": 20706,
+    "type": "MONSTER_DROP",
+    "detail": "the Wintertodt reward cart",
+    "note": "1 in 152 per roll for the outfit piece you have fewest of (garb first, then hood, robe, boots). 500 points earn 2 rolls, 1,000 earn 3.",
+    "estimatedKc": 456,
+    "attemptUnit": "reward cart rolls",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FIREMAKING",
+      "threshold": 50
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pyromancer_robe"
+  },
+  {
+    "id": "PYROMANCER_BOOTS",
+    "preparationFrom": "minigame_wintertodt",
+    "displayName": "Pyromancer boots",
+    "gameItemId": 20710,
+    "type": "MONSTER_DROP",
+    "detail": "the Wintertodt reward cart",
+    "note": "1 in 152 per roll for the outfit piece you have fewest of (garb first, then hood, robe, boots). 500 points earn 2 rolls, 1,000 earn 3.",
+    "estimatedKc": 608,
+    "attemptUnit": "reward cart rolls",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FIREMAKING",
+      "threshold": 50
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Pyromancer_boots"
+  },
+  {
+    "id": "WARM_GLOVES",
+    "preparationFrom": "minigame_wintertodt",
+    "displayName": "Warm gloves",
+    "gameItemId": 20712,
+    "type": "MONSTER_DROP",
+    "detail": "the Wintertodt reward cart",
+    "note": "About 1 in 150 per roll. 500 points earn 2 rolls, 1,000 earn 3.",
+    "estimatedKc": 150,
+    "attemptUnit": "reward cart rolls",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FIREMAKING",
+      "threshold": 50
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Warm_gloves"
+  },
+  {
+    "id": "BRUMA_TORCH",
+    "preparationFrom": "minigame_wintertodt",
+    "displayName": "Bruma torch",
+    "gameItemId": 20720,
+    "type": "MONSTER_DROP",
+    "detail": "the Wintertodt reward cart",
+    "note": "About 1 in 151 per roll. 500 points earn 2 rolls, 1,000 earn 3.",
+    "estimatedKc": 151,
+    "attemptUnit": "reward cart rolls",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FIREMAKING",
+      "threshold": 50
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Bruma_torch"
+  },
+  {
+    "id": "TOME_OF_FIRE",
+    "displayName": "Tome of fire",
+    "gameItemId": 20714,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange (empty); otherwise about 1 in 1,000 rolls of the Wintertodt reward cart",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MAGIC",
+      "threshold": 50,
+      "hint": "50 Magic to wield"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Tome_of_fire"
+  },
+  {
+    "id": "FARMERS_STRAWHAT",
+    "currencyFrom": "minigame_tithe_farm",
+    "displayName": "Farmer's strawhat",
+    "gameItemId": 13646,
+    "type": "SHOP",
+    "detail": "Tithe Farm reward shop, 75 points",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FARMING",
+      "threshold": 34
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Farmer's_strawhat"
+  },
+  {
+    "id": "FARMERS_JACKET",
+    "currencyFrom": "minigame_tithe_farm",
+    "displayName": "Farmer's jacket",
+    "gameItemId": 13642,
+    "type": "SHOP",
+    "detail": "Tithe Farm reward shop, 150 points (body type B gets the farmer's shirt instead)",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FARMING",
+      "threshold": 34
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Farmer's_jacket"
+  },
+  {
+    "id": "FARMERS_BORO_TROUSERS",
+    "currencyFrom": "minigame_tithe_farm",
+    "displayName": "Farmer's boro trousers",
+    "gameItemId": 13640,
+    "type": "SHOP",
+    "detail": "Tithe Farm reward shop, 125 points",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FARMING",
+      "threshold": 34
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Farmer's_boro_trousers"
+  },
+  {
+    "id": "FARMERS_BOOTS",
+    "currencyFrom": "minigame_tithe_farm",
+    "displayName": "Farmer's boots",
+    "gameItemId": 13644,
+    "type": "SHOP",
+    "detail": "Tithe Farm reward shop, 50 points",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FARMING",
+      "threshold": 34
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Farmer's_boots"
+  },
+  {
+    "id": "GRICOLLERS_CAN",
+    "currencyFrom": "minigame_tithe_farm",
+    "displayName": "Gricoller's can",
+    "gameItemId": 13353,
+    "type": "SHOP",
+    "detail": "Tithe Farm reward shop, 200 points",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "FARMING",
+      "threshold": 34
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Gricoller's_can"
+  },
+  {
+    "id": "CARPENTERS_HELMET",
+    "displayName": "Carpenter's helmet",
+    "gameItemId": 24872,
+    "type": "SHOP",
+    "detail": "Amy at Mahogany Homes in Falador, 400 carpenter points, earned by finishing Mahogany Homes repair contracts in Falador, Varrock, East Ardougne and Hosidius",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Carpenter's_helmet"
+  },
+  {
+    "id": "CARPENTERS_SHIRT",
+    "displayName": "Carpenter's shirt",
+    "gameItemId": 24874,
+    "type": "SHOP",
+    "detail": "Amy at Mahogany Homes in Falador, 800 carpenter points, earned by finishing Mahogany Homes repair contracts in Falador, Varrock, East Ardougne and Hosidius",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Carpenter's_shirt"
+  },
+  {
+    "id": "CARPENTERS_TROUSERS",
+    "displayName": "Carpenter's trousers",
+    "gameItemId": 24876,
+    "type": "SHOP",
+    "detail": "Amy at Mahogany Homes in Falador, 600 carpenter points, earned by finishing Mahogany Homes repair contracts in Falador, Varrock, East Ardougne and Hosidius",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Carpenter's_trousers"
+  },
+  {
+    "id": "CARPENTERS_BOOTS",
+    "displayName": "Carpenter's boots",
+    "gameItemId": 24878,
+    "type": "SHOP",
+    "detail": "Amy at Mahogany Homes in Falador, 200 carpenter points, earned by finishing Mahogany Homes repair contracts in Falador, Varrock, East Ardougne and Hosidius",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Carpenter's_boots"
+  },
+  {
+    "id": "PLANK_SACK",
+    "displayName": "Plank sack",
+    "gameItemId": 24882,
+    "type": "SHOP",
+    "detail": "Amy at Mahogany Homes in Falador, 350 carpenter points, earned by finishing Mahogany Homes repair contracts in Falador, Varrock, East Ardougne and Hosidius",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Plank_sack"
+  },
+  {
+    "id": "SMITHS_TUNIC",
+    "displayName": "Smiths tunic",
+    "gameItemId": 27023,
+    "type": "SHOP",
+    "detail": "Kovac's Giants' Foundry reward shop, 4,000 Foundry reputation, earned by smithing commissioned giant swords in the Giants' Foundry",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Sleeping Giants"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Smiths_tunic"
+  },
+  {
+    "id": "SMITHS_TROUSERS",
+    "displayName": "Smiths trousers",
+    "gameItemId": 27025,
+    "type": "SHOP",
+    "detail": "Kovac's Giants' Foundry reward shop, 4,000 Foundry reputation, earned by smithing commissioned giant swords in the Giants' Foundry",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Sleeping Giants"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Smiths_trousers"
+  },
+  {
+    "id": "SMITHS_BOOTS",
+    "displayName": "Smiths boots",
+    "gameItemId": 27027,
+    "type": "SHOP",
+    "detail": "Kovac's Giants' Foundry reward shop, 3,500 Foundry reputation, earned by smithing commissioned giant swords in the Giants' Foundry",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Sleeping Giants"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Smiths_boots"
+  },
+  {
+    "id": "SMITHS_GLOVES",
+    "displayName": "Smiths gloves",
+    "gameItemId": 27029,
+    "type": "SHOP",
+    "detail": "Kovac's Giants' Foundry reward shop, 3,500 Foundry reputation, earned by smithing commissioned giant swords in the Giants' Foundry",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Sleeping Giants"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Smiths_gloves"
+  },
+  {
+    "id": "COLOSSAL_BLADE",
+    "displayName": "Colossal blade",
+    "gameItemId": 27021,
+    "type": "SHOP",
+    "detail": "Kovac's Giants' Foundry reward shop, 5,000 Foundry reputation, earned by smithing commissioned giant swords in the Giants' Foundry",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "ATTACK",
+      "threshold": 60,
+      "hint": "60 Attack to wield; the Giants' Foundry needs Sleeping Giants"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Colossal_blade"
+  },
+  {
+    "id": "ROGUE_MASK",
+    "displayName": "Rogue mask",
+    "gameItemId": 5554,
+    "type": "MONSTER_DROP",
+    "detail": "the Rogues' Den maze in Burthorpe",
+    "note": "The safe at the end gives a rogue's equipment crate 5 times in 8, and you pick the piece from the crate.",
+    "estimatedKc": 2,
+    "attemptUnit": "maze runs",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "THIEVING",
+      "threshold": 50,
+      "hint": "and 50 Agility; neither can be boosted for the maze"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Rogue_mask"
+  },
+  {
+    "id": "ROGUE_TOP",
+    "displayName": "Rogue top",
+    "gameItemId": 5553,
+    "type": "MONSTER_DROP",
+    "detail": "the Rogues' Den maze in Burthorpe",
+    "note": "The safe at the end gives a rogue's equipment crate 5 times in 8, and you pick the piece from the crate.",
+    "estimatedKc": 2,
+    "attemptUnit": "maze runs",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "THIEVING",
+      "threshold": 50,
+      "hint": "and 50 Agility; neither can be boosted for the maze"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Rogue_top"
+  },
+  {
+    "id": "ROGUE_TROUSERS",
+    "displayName": "Rogue trousers",
+    "gameItemId": 5555,
+    "type": "MONSTER_DROP",
+    "detail": "the Rogues' Den maze in Burthorpe",
+    "note": "The safe at the end gives a rogue's equipment crate 5 times in 8, and you pick the piece from the crate.",
+    "estimatedKc": 2,
+    "attemptUnit": "maze runs",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "THIEVING",
+      "threshold": 50,
+      "hint": "and 50 Agility; neither can be boosted for the maze"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Rogue_trousers"
+  },
+  {
+    "id": "ROGUE_GLOVES",
+    "displayName": "Rogue gloves",
+    "gameItemId": 5556,
+    "type": "MONSTER_DROP",
+    "detail": "the Rogues' Den maze in Burthorpe",
+    "note": "The safe at the end gives a rogue's equipment crate 5 times in 8, and you pick the piece from the crate.",
+    "estimatedKc": 2,
+    "attemptUnit": "maze runs",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "THIEVING",
+      "threshold": 50,
+      "hint": "and 50 Agility; neither can be boosted for the maze"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Rogue_gloves"
+  },
+  {
+    "id": "ROGUE_BOOTS",
+    "displayName": "Rogue boots",
+    "gameItemId": 5557,
+    "type": "MONSTER_DROP",
+    "detail": "the Rogues' Den maze in Burthorpe",
+    "note": "The safe at the end gives a rogue's equipment crate 5 times in 8, and you pick the piece from the crate.",
+    "estimatedKc": 2,
+    "attemptUnit": "maze runs",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "THIEVING",
+      "threshold": 50,
+      "hint": "and 50 Agility; neither can be boosted for the maze"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Rogue_boots"
+  },
+  {
+    "id": "GRACEFUL_CAPE",
+    "currencyFrom": "skilling_rooftop_agility",
+    "displayName": "Graceful cape",
+    "gameItemId": 11852,
+    "type": "SHOP",
+    "detail": "Grace's shop in the Rogues' Den, Burthorpe, 40 marks of grace",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Graceful_cape"
+  },
+  {
+    "id": "GRACEFUL_TOP",
+    "currencyFrom": "skilling_rooftop_agility",
+    "displayName": "Graceful top",
+    "gameItemId": 11854,
+    "type": "SHOP",
+    "detail": "Grace's shop in the Rogues' Den, Burthorpe, 55 marks of grace",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Graceful_top"
+  },
+  {
+    "id": "GRACEFUL_LEGS",
+    "currencyFrom": "skilling_rooftop_agility",
+    "displayName": "Graceful legs",
+    "gameItemId": 11856,
+    "type": "SHOP",
+    "detail": "Grace's shop in the Rogues' Den, Burthorpe, 60 marks of grace",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Graceful_legs"
+  },
+  {
+    "id": "GRACEFUL_GLOVES",
+    "currencyFrom": "skilling_rooftop_agility",
+    "displayName": "Graceful gloves",
+    "gameItemId": 11858,
+    "type": "SHOP",
+    "detail": "Grace's shop in the Rogues' Den, Burthorpe, 30 marks of grace",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Graceful_gloves"
+  },
+  {
+    "id": "GRACEFUL_BOOTS",
+    "currencyFrom": "skilling_rooftop_agility",
+    "displayName": "Graceful boots",
+    "gameItemId": 11860,
+    "type": "SHOP",
+    "detail": "Grace's shop in the Rogues' Den, Burthorpe, 40 marks of grace",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Graceful_boots"
+  },
+  {
+    "id": "HAT_OF_THE_EYE",
+    "currencyFrom": "minigame_guardians_of_the_rift",
+    "displayName": "Hat of the Eye",
+    "gameItemId": 26850,
+    "type": "SHOP",
+    "detail": "Temple Supplies (Apprentice Felix) at the Temple of the Eye, 400 abyssal pearls from the Rewards Guardian",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "RUNECRAFT",
+      "threshold": 27
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hat_of_the_Eye"
+  },
+  {
+    "id": "ROBE_TOP_OF_THE_EYE",
+    "currencyFrom": "minigame_guardians_of_the_rift",
+    "displayName": "Robe top of the Eye",
+    "gameItemId": 26852,
+    "type": "SHOP",
+    "detail": "Temple Supplies (Apprentice Felix) at the Temple of the Eye, 350 abyssal pearls from the Rewards Guardian",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "RUNECRAFT",
+      "threshold": 27
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Robe_top_of_the_Eye"
+  },
+  {
+    "id": "ROBE_BOTTOMS_OF_THE_EYE",
+    "currencyFrom": "minigame_guardians_of_the_rift",
+    "displayName": "Robe bottoms of the Eye",
+    "gameItemId": 26854,
+    "type": "SHOP",
+    "detail": "Temple Supplies (Apprentice Felix) at the Temple of the Eye, 350 abyssal pearls from the Rewards Guardian",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "RUNECRAFT",
+      "threshold": 27
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Robe_bottoms_of_the_Eye"
+  },
+  {
+    "id": "BOOTS_OF_THE_EYE",
+    "currencyFrom": "minigame_guardians_of_the_rift",
+    "displayName": "Boots of the Eye",
+    "gameItemId": 26856,
+    "type": "SHOP",
+    "detail": "Temple Supplies (Apprentice Felix) at the Temple of the Eye, 250 abyssal pearls from the Rewards Guardian",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "RUNECRAFT",
+      "threshold": 27
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Boots_of_the_Eye"
+  },
+  {
+    "id": "ABYSSAL_NEEDLE",
+    "currencyFrom": "minigame_guardians_of_the_rift",
+    "displayName": "Abyssal needle",
+    "gameItemId": 26813,
+    "type": "SHOP",
+    "detail": "Temple Supplies (Apprentice Felix) at the Temple of the Eye, 750 abyssal pearls; also a 1 in 300 drop from the Rewards Guardian",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "RUNECRAFT",
+      "threshold": 27
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Abyssal_needle"
+  },
+  {
+    "id": "SMALL_POUCH",
+    "displayName": "Small pouch",
+    "gameItemId": 5509,
+    "type": "QUEST_REWARD",
+    "detail": "Free from the Mage of Zamorak after the Enter the Abyss miniquest (the Dark mage in the Abyss replaces it); the Rewards Guardian also gives one",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Enter the Abyss"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Small_pouch"
+  },
+  {
+    "id": "MEDIUM_POUCH",
+    "displayName": "Medium pouch",
+    "gameItemId": 5510,
+    "type": "QUEST_REWARD",
+    "detail": "Temple of the Eye quest reward if you have none yet; also from the Rewards Guardian in Guardians of the Rift, or abyssal monsters",
+    "skillRequirement": {
+      "type": "QUEST_COMPLETE",
+      "value": "Temple of the Eye"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Medium_pouch"
+  },
+  {
+    "id": "LARGE_POUCH",
+    "preparationFrom": "minigame_guardians_of_the_rift",
+    "displayName": "Large pouch",
+    "gameItemId": 5512,
+    "type": "MONSTER_DROP",
+    "detail": "Guardians of the Rift",
+    "note": "The Rewards Guardian gives it 15 times in 140 per search while you are missing it. Abyssal monsters drop it too.",
+    "estimatedKc": 9,
+    "attemptUnit": "reward searches",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "RUNECRAFT",
+      "threshold": 27,
+      "hint": "It drops at any level and stitches into a colossal pouch at 25; using it on its own needs 50 Runecraft"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Large_pouch"
+  },
+  {
+    "id": "GIANT_POUCH",
+    "preparationFrom": "minigame_guardians_of_the_rift",
+    "displayName": "Giant pouch",
+    "gameItemId": 5514,
+    "type": "MONSTER_DROP",
+    "detail": "Guardians of the Rift",
+    "note": "The Rewards Guardian gives it 15 times in 140 per search while you are missing it. Abyssal monsters drop it too.",
+    "estimatedKc": 9,
+    "attemptUnit": "reward searches",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "RUNECRAFT",
+      "threshold": 27,
+      "hint": "It drops at any level and stitches into a colossal pouch at 25; using it on its own needs 75 Runecraft"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Giant_pouch"
+  },
+  {
+    "id": "COLOSSAL_POUCH",
+    "displayName": "Colossal pouch",
+    "gameItemId": 26784,
+    "type": "CRAFT",
+    "detail": "Use an abyssal needle to stitch the small, medium, large and giant pouches together (none degraded); the needle is used up",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "CRAFTING",
+      "threshold": 56,
+      "hint": "and 25 Runecraft, neither boostable"
+    },
+    "ingredients": [
+      {
+        "itemId": "SMALL_POUCH",
+        "quantity": 1
+      },
+      {
+        "itemId": "MEDIUM_POUCH",
+        "quantity": 1
+      },
+      {
+        "itemId": "LARGE_POUCH",
+        "quantity": 1
+      },
+      {
+        "itemId": "GIANT_POUCH",
+        "quantity": 1
+      },
+      {
+        "itemId": "ABYSSAL_NEEDLE",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Colossal_pouch"
+  },
+  {
+    "id": "AMULET_OF_THE_EYE",
+    "preparationFrom": "minigame_guardians_of_the_rift",
+    "displayName": "Amulet of the Eye",
+    "gameItemId": 26914,
+    "type": "MONSTER_DROP",
+    "detail": "Guardians of the Rift",
+    "note": "It comes from a tarnished locket (1 in 40 intricate pouches, which come about 1 in 25 to 28 Rewards Guardian searches), shown to Phileas the Lumbridge Guide.",
+    "estimatedKc": 1000,
+    "attemptUnit": "reward searches",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "RUNECRAFT",
+      "threshold": 27
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Amulet_of_the_Eye"
+  },
+  {
+    "id": "GUILD_HUNTER_HEADWEAR",
+    "displayName": "Guild hunter headwear",
+    "gameItemId": 29263,
+    "type": "MONSTER_DROP",
+    "detail": "Hunters' Rumours at the Hunter Guild",
+    "note": "An adept, expert or master hunters' loot sack gives a piece 1 in 50, in order headwear, top, legs, boots.",
+    "estimatedKc": 50,
+    "attemptUnit": "adept-or-higher rumours",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "HUNTER",
+      "threshold": 57,
+      "hint": "Adept rumours need 57 Hunter; novice sacks never give the outfit"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Guild_hunter_headwear"
+  },
+  {
+    "id": "GUILD_HUNTER_TOP",
+    "displayName": "Guild hunter top",
+    "gameItemId": 29265,
+    "type": "MONSTER_DROP",
+    "detail": "Hunters' Rumours at the Hunter Guild",
+    "note": "An adept, expert or master hunters' loot sack gives a piece 1 in 50, in order headwear, top, legs, boots.",
+    "estimatedKc": 100,
+    "attemptUnit": "adept-or-higher rumours",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "HUNTER",
+      "threshold": 57,
+      "hint": "Adept rumours need 57 Hunter; novice sacks never give the outfit"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Guild_hunter_top"
+  },
+  {
+    "id": "GUILD_HUNTER_LEGS",
+    "displayName": "Guild hunter legs",
+    "gameItemId": 29267,
+    "type": "MONSTER_DROP",
+    "detail": "Hunters' Rumours at the Hunter Guild",
+    "note": "An adept, expert or master hunters' loot sack gives a piece 1 in 50, in order headwear, top, legs, boots.",
+    "estimatedKc": 150,
+    "attemptUnit": "adept-or-higher rumours",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "HUNTER",
+      "threshold": 57,
+      "hint": "Adept rumours need 57 Hunter; novice sacks never give the outfit"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Guild_hunter_legs"
+  },
+  {
+    "id": "GUILD_HUNTER_BOOTS",
+    "displayName": "Guild hunter boots",
+    "gameItemId": 29269,
+    "type": "MONSTER_DROP",
+    "detail": "Hunters' Rumours at the Hunter Guild",
+    "note": "An adept, expert or master hunters' loot sack gives a piece 1 in 50, in order headwear, top, legs, boots.",
+    "estimatedKc": 200,
+    "attemptUnit": "adept-or-higher rumours",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "HUNTER",
+      "threshold": 57,
+      "hint": "Adept rumours need 57 Hunter; novice sacks never give the outfit"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Guild_hunter_boots"
+  },
+  {
+    "id": "WILLOW_LOGS",
+    "displayName": "Willow logs",
+    "gameItemId": 1519,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Willow_logs"
+  },
+  {
+    "id": "YEW_LOGS",
+    "displayName": "Yew logs",
+    "gameItemId": 1515,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Yew_logs"
+  },
+  {
+    "id": "REDWOOD_LOGS",
+    "displayName": "Redwood logs",
+    "gameItemId": 19669,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Redwood_logs"
+  },
+  {
+    "id": "ENHANCED_QUETZAL_WHISTLE_BLUEPRINT",
+    "displayName": "Enhanced quetzal whistle blueprint",
+    "gameItemId": 29253,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange; also from hunters' loot sacks, and a torn copy is guaranteed after 100 rumours without one",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Enhanced_quetzal_whistle_blueprint"
+  },
+  {
+    "id": "PERFECTED_QUETZAL_WHISTLE_BLUEPRINT",
+    "displayName": "Perfected quetzal whistle blueprint",
+    "gameItemId": 29256,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange; also from hunters' loot sacks, and a torn copy is guaranteed after 250 rumours without one",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Perfected_quetzal_whistle_blueprint"
+  },
+  {
+    "id": "BASIC_QUETZAL_WHISTLE",
+    "displayName": "Basic quetzal whistle",
+    "gameItemId": 29271,
+    "type": "CRAFT",
+    "detail": "Soar Leader Pitri gives the blueprint free after 10 Hunters' Rumours (500 coins for later copies); Craft it with willow logs and a knife",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "HUNTER",
+      "threshold": 46,
+      "hint": "46 Hunter to take Hunters' Rumours"
+    },
+    "ingredients": [
+      {
+        "itemId": "WILLOW_LOGS",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Basic_quetzal_whistle"
+  },
+  {
+    "id": "ENHANCED_QUETZAL_WHISTLE",
+    "displayName": "Enhanced quetzal whistle",
+    "gameItemId": 29273,
+    "type": "CRAFT",
+    "detail": "Craft the enhanced blueprint with a basic quetzal whistle, yew logs and a knife",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "HUNTER",
+      "threshold": 46
+    },
+    "ingredients": [
+      {
+        "itemId": "BASIC_QUETZAL_WHISTLE",
+        "quantity": 1
+      },
+      {
+        "itemId": "ENHANCED_QUETZAL_WHISTLE_BLUEPRINT",
+        "quantity": 1
+      },
+      {
+        "itemId": "YEW_LOGS",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Enhanced_quetzal_whistle"
+  },
+  {
+    "id": "PERFECTED_QUETZAL_WHISTLE",
+    "displayName": "Perfected quetzal whistle",
+    "gameItemId": 29275,
+    "type": "CRAFT",
+    "detail": "Craft the perfected blueprint with an enhanced quetzal whistle, redwood logs and a knife",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "HUNTER",
+      "threshold": 46
+    },
+    "ingredients": [
+      {
+        "itemId": "ENHANCED_QUETZAL_WHISTLE",
+        "quantity": 1
+      },
+      {
+        "itemId": "PERFECTED_QUETZAL_WHISTLE_BLUEPRINT",
+        "quantity": 1
+      },
+      {
+        "itemId": "REDWOOD_LOGS",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Perfected_quetzal_whistle"
+  },
+  {
+    "id": "REAGENT_POUCH",
+    "displayName": "Reagent pouch",
+    "gameItemId": 29996,
+    "type": "SHOP",
+    "detail": "the Mixology Rewards shop in Aldarin, 13,800 mox, 11,200 aga and 15,100 lye resin, earned by mixing potions in Mastering Mixology",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "HERBLORE",
+      "threshold": 60,
+      "hint": "60 Herblore (not boostable) and Children of the Sun to play Mastering Mixology"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Reagent_pouch"
+  },
+  {
+    "id": "PRESCRIPTION_GOGGLES",
+    "displayName": "Prescription goggles",
+    "gameItemId": 29974,
+    "type": "SHOP",
+    "detail": "the Mixology Rewards shop in Aldarin, 8,600 mox, 7,000 aga and 9,350 lye resin, earned by mixing potions in Mastering Mixology",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "HERBLORE",
+      "threshold": 60,
+      "hint": "60 Herblore (not boostable) and Children of the Sun to play Mastering Mixology"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Prescription_goggles"
+  },
+  {
+    "id": "HALLOWED_RING",
+    "displayName": "Hallowed ring",
+    "gameItemId": 24731,
+    "type": "SHOP",
+    "detail": "the Mysterious Stranger's Hallowed Goods shop in Darkmeyer, 250 hallowed marks, looted from coffins and chests in the Hallowed Sepulchre",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "AGILITY",
+      "threshold": 52,
+      "hint": "The Sepulchre needs 52 Agility and Sins of the Father"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Hallowed_ring"
+  },
+  {
+    "id": "FIGHTER_TORSO",
+    "currencyFrom": "minigame_barbarian_assault",
+    "displayName": "Fighter torso",
+    "gameItemId": 10551,
+    "type": "SHOP",
+    "detail": "Commander Connad at the Barbarian Outpost, 375 honour points in each of the four roles, after one Penance Queen kill",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "DEFENCE",
+      "threshold": 40,
+      "hint": "40 Defence to wear"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fighter_torso"
+  },
+  {
+    "id": "FIGHTER_HAT",
+    "currencyFrom": "minigame_barbarian_assault",
+    "displayName": "Fighter hat",
+    "gameItemId": 10548,
+    "type": "SHOP",
+    "detail": "Commander Connad at the Barbarian Outpost, 275 honour points in each of the four roles, after one Penance Queen kill",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "DEFENCE",
+      "threshold": 45,
+      "hint": "45 Defence to wear"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Fighter_hat"
+  },
+  {
+    "id": "PENANCE_SKIRT",
+    "currencyFrom": "minigame_barbarian_assault",
+    "displayName": "Penance skirt",
+    "gameItemId": 10555,
+    "type": "SHOP",
+    "detail": "Commander Connad at the Barbarian Outpost, 375 honour points in each of the four roles, after one Penance Queen kill",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "RANGED",
+      "threshold": 60,
+      "hint": "and 40 Defence to wear"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Penance_skirt"
+  },
+  {
+    "id": "PENANCE_GLOVES",
+    "currencyFrom": "minigame_barbarian_assault",
+    "displayName": "Penance gloves",
+    "gameItemId": 10553,
+    "type": "SHOP",
+    "detail": "Commander Connad at the Barbarian Outpost, 150 honour points in each of the four roles (no Penance Queen kill needed)",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "DEFENCE",
+      "threshold": 40,
+      "hint": "40 Defence to wear"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Penance_gloves"
+  },
+  {
+    "id": "VOID_KNIGHT_TOP",
+    "currencyFrom": "minigame_pest_control",
+    "displayName": "Void knight top",
+    "gameItemId": 8839,
+    "type": "SHOP",
+    "detail": "the Void Knights at the Void Knights' Outpost, 250 Pest Control commendation points",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "DEFENCE",
+      "threshold": 42,
+      "hint": "Also 42 Attack, Strength, Hitpoints, Ranged and Magic, and 22 Prayer, to buy or wear any piece"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Void_knight_top"
+  },
+  {
+    "id": "VOID_KNIGHT_ROBE",
+    "currencyFrom": "minigame_pest_control",
+    "displayName": "Void knight robe",
+    "gameItemId": 8840,
+    "type": "SHOP",
+    "detail": "the Void Knights at the Void Knights' Outpost, 250 Pest Control commendation points",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "DEFENCE",
+      "threshold": 42,
+      "hint": "Also 42 Attack, Strength, Hitpoints, Ranged and Magic, and 22 Prayer, to buy or wear any piece"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Void_knight_robe"
+  },
+  {
+    "id": "VOID_KNIGHT_GLOVES",
+    "currencyFrom": "minigame_pest_control",
+    "displayName": "Void knight gloves",
+    "gameItemId": 8842,
+    "type": "SHOP",
+    "detail": "the Void Knights at the Void Knights' Outpost, 150 Pest Control commendation points",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "DEFENCE",
+      "threshold": 42,
+      "hint": "Also 42 Attack, Strength, Hitpoints, Ranged and Magic, and 22 Prayer, to buy or wear any piece"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Void_knight_gloves"
+  },
+  {
+    "id": "VOID_MAGE_HELM",
+    "currencyFrom": "minigame_pest_control",
+    "displayName": "Void mage helm",
+    "gameItemId": 11663,
+    "type": "SHOP",
+    "detail": "the Void Knights at the Void Knights' Outpost, 200 Pest Control commendation points",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "DEFENCE",
+      "threshold": 42,
+      "hint": "Also 42 Attack, Strength, Hitpoints, Ranged and Magic, and 22 Prayer, to buy or wear any piece"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Void_mage_helm"
+  },
+  {
+    "id": "VOID_RANGER_HELM",
+    "currencyFrom": "minigame_pest_control",
+    "displayName": "Void ranger helm",
+    "gameItemId": 11664,
+    "type": "SHOP",
+    "detail": "the Void Knights at the Void Knights' Outpost, 200 Pest Control commendation points",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "DEFENCE",
+      "threshold": 42,
+      "hint": "Also 42 Attack, Strength, Hitpoints, Ranged and Magic, and 22 Prayer, to buy or wear any piece"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Void_ranger_helm"
+  },
+  {
+    "id": "VOID_MELEE_HELM",
+    "currencyFrom": "minigame_pest_control",
+    "displayName": "Void melee helm",
+    "gameItemId": 11665,
+    "type": "SHOP",
+    "detail": "the Void Knights at the Void Knights' Outpost, 200 Pest Control commendation points",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "DEFENCE",
+      "threshold": 42,
+      "hint": "Also 42 Attack, Strength, Hitpoints, Ranged and Magic, and 22 Prayer, to buy or wear any piece"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Void_melee_helm"
+  },
+  {
+    "id": "ELITE_VOID_TOP",
+    "displayName": "Elite void top",
+    "gameItemId": 13072,
+    "type": "CRAFT",
+    "detail": "The Elite Void Knight upgrades a void knight top for another 200 Pest Control commendation points",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "WESTERN_HARD"
+    },
+    "ingredients": [
+      {
+        "itemId": "VOID_KNIGHT_TOP",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Elite_void_top"
+  },
+  {
+    "id": "ELITE_VOID_ROBE",
+    "displayName": "Elite void robe",
+    "gameItemId": 13073,
+    "type": "CRAFT",
+    "detail": "The Elite Void Knight upgrades a void knight robe for another 200 Pest Control commendation points",
+    "skillRequirement": {
+      "type": "DIARY_COMPLETE",
+      "value": "WESTERN_HARD"
+    },
+    "ingredients": [
+      {
+        "itemId": "VOID_KNIGHT_ROBE",
+        "quantity": 1
+      }
+    ],
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Elite_void_robe"
+  },
+  {
+    "id": "INFINITY_HAT",
+    "displayName": "Infinity hat",
+    "gameItemId": 6918,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange, or pizazz points from the Mage Training Arena (about 3.6 hours)",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MAGIC",
+      "threshold": 50,
+      "hint": "and 25 Defence to wear"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Infinity_hat"
+  },
+  {
+    "id": "INFINITY_TOP",
+    "displayName": "Infinity top",
+    "gameItemId": 6916,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange, or pizazz points from the Mage Training Arena (about 4.2 hours)",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MAGIC",
+      "threshold": 50,
+      "hint": "and 25 Defence to wear"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Infinity_top"
+  },
+  {
+    "id": "INFINITY_BOTTOMS",
+    "displayName": "Infinity bottoms",
+    "gameItemId": 6924,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange, or pizazz points from the Mage Training Arena (about 4.7 hours)",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MAGIC",
+      "threshold": 50,
+      "hint": "and 25 Defence to wear"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Infinity_bottoms"
+  },
+  {
+    "id": "INFINITY_GLOVES",
+    "displayName": "Infinity gloves",
+    "gameItemId": 6922,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange, or pizazz points from the Mage Training Arena (about 2 hours)",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MAGIC",
+      "threshold": 50,
+      "hint": "and 25 Defence to wear"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Infinity_gloves"
+  },
+  {
+    "id": "INFINITY_BOOTS",
+    "displayName": "Infinity boots",
+    "gameItemId": 6920,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange, or pizazz points from the Mage Training Arena (about 1.2 hours)",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MAGIC",
+      "threshold": 50,
+      "hint": "and 25 Defence to wear"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Infinity_boots"
+  },
+  {
+    "id": "MASTER_WAND",
+    "displayName": "Master wand",
+    "gameItemId": 6914,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange, or the Mage Training Arena: pizazz points plus a teacher wand, after the beginner and apprentice wands (about 5 hours)",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MAGIC",
+      "threshold": 60,
+      "hint": "60 Magic to wield"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Master_wand"
+  },
+  {
+    "id": "MAGES_BOOK",
+    "displayName": "Mage's book",
+    "gameItemId": 6889,
+    "type": "GE_BUY",
+    "detail": "Grand Exchange, or the Mage Training Arena for 500 telekinetic, 550 alchemist, 6,000 enchantment and 500 graveyard pizazz points (about 5.3 hours)",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "MAGIC",
+      "threshold": 60,
+      "hint": "60 Magic to wield"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Mage's_book"
+  },
+  {
+    "id": "RUNE_DEFENDER",
+    "preparationFrom": "unlock_warriors_guild",
+    "displayName": "Rune defender",
+    "gameItemId": 8850,
+    "type": "MONSTER_DROP",
+    "detail": "Cyclopes in the Warriors' Guild",
+    "note": "They drop the defenders one at a time, bronze to rune, each 1 in 50 (about 350 kills from nothing). The room costs warrior guild tokens.",
+    "estimatedKc": 350,
+    "skillRequirement": {
+      "type": "ANY_OF",
+      "anyOf": [
+        {
+          "type": "SKILL_LEVEL",
+          "value": "ATTACK",
+          "threshold": 99
+        },
+        {
+          "type": "SKILL_LEVEL",
+          "value": "STRENGTH",
+          "threshold": 99
+        },
+        {
+          "type": "COMBINED_SKILL_LEVEL",
+          "value": "ATTACK,STRENGTH",
+          "threshold": 130
+        }
+      ]
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Rune_defender"
+  },
+  {
+    "id": "LOOTING_BAG",
+    "currencyFrom": "minigame_last_man_standing",
+    "displayName": "Looting bag",
+    "gameItemId": 11941,
+    "type": "SHOP",
+    "detail": "Last Man Standing reward shop, 1 point; also 10 Slayer points from any Slayer master, or a drop from almost any Wilderness monster",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Looting_bag"
+  },
+  {
+    "id": "ECTOPLASMATOR",
+    "displayName": "Ectoplasmator",
+    "gameItemId": 25340,
+    "type": "SHOP",
+    "detail": "Nomad's Soul Wars reward shop on the Isle of Souls, 250 Zeal Tokens, earned by playing Soul Wars games",
+    "skillRequirement": {
+      "type": "SKILL_LEVEL",
+      "value": "PRAYER",
+      "threshold": 40,
+      "hint": "40 Prayer to buy; Soul Wars needs combat level 40 and total level 500"
+    },
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Ectoplasmator"
   }
 ]

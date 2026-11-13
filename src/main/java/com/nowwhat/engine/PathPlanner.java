@@ -98,8 +98,12 @@ public class PathPlanner
 				if (!alreadyComplete)
 				{
 					Set<String> visiting = new LinkedHashSet<>();
+					// Null when the player asked for the route as if they owned
+					// nothing: then no ingredient is counted as owned either.
+					Map<Integer, Integer> spent = goal.isCountOwned() ? new java.util.HashMap<>() : null;
 					planItem(goal.getItemId(), remaining, state, steps, warnings, visiting,
-						goal.isAllowTickManipulation());
+						goal.isAllowTickManipulation(), spent);
+					dropRepeatedPrerequisites(steps);
 
 					if (!state.isBankSnapshotAvailable())
 					{
@@ -128,17 +132,22 @@ public class PathPlanner
 				alreadyComplete = chain.isAlreadyUnlocked();
 				if (!alreadyComplete)
 				{
+					// Levels before the quests that ask for them. Listed the other
+					// way round, the plan opened with a block of quests the player
+					// could not start and only then said what to train for them.
+					for (Requirement req : chain.getStandaloneRequirements())
+					{
+						expandStandaloneRequirement(req, state, steps, warnings, goal.isAllowTickManipulation());
+					}
 					for (Activity prereq : chain.getRequiredActivitiesInOrder())
 					{
 						steps.add(new PathStep(stepTypeFor(prereq.getCategory()), prereq.getName(),
 							prereq.getCategory() + (prereq.getDescription() != null ? " \u2014 " + prereq.getDescription() : ""),
 							prereq.getWikiUrl()));
 					}
-					for (Requirement req : chain.getStandaloneRequirements())
-					{
-						expandStandaloneRequirement(req, state, steps, warnings, goal.isAllowTickManipulation());
-					}
 					warnings.addAll(chain.getUnresolvedReferences());
+					planRecommended(target, chain.getStandaloneRequirements(), state, steps, warnings,
+						goal.isAllowTickManipulation());
 					// A Combat Achievement tier is a points total, not a set of
 					// requirements, so "you meet every requirement" was true and
 					// useless: the combat level was the only thing it checked.
@@ -170,8 +179,20 @@ public class PathPlanner
 							XpTable.xpBetween(current, goal.getTargetLevel())));
 					}
 				}
-				alreadyComplete = shortfalls.isEmpty();
-				if (!alreadyComplete)
+				// Hitpoints is never planned - there is no going and training it -
+				// but "every skill" names it, so it cannot be passed over in
+				// silence either. With it left out altogether, an account with 60
+				// Hitpoints asking for 70 in everything was told "already done".
+				int hitpoints = state.getSkillLevel("HITPOINTS");
+				boolean hitpointsShort = hitpoints < goal.getTargetLevel();
+				alreadyComplete = shortfalls.isEmpty() && !hitpointsShort;
+				if (hitpointsShort)
+				{
+					warnings.add("Hitpoints is " + hitpoints + ", below " + goal.getTargetLevel()
+						+ ". There is no step for it: it rises on its own as you train "
+						+ "the combat skills.");
+				}
+				if (!shortfalls.isEmpty())
 				{
 					// Cheapest first. The player asked for a floor, not an order,
 					// so the order is ours to choose - and the one that gets the
@@ -206,6 +227,8 @@ public class PathPlanner
 				Map<String, Integer> levels = new LinkedHashMap<>();
 				List<String> untrainable = new ArrayList<>();
 				int current = 0;
+				// Levels the plan cannot add to: they count as they stand.
+				int fixed = state.getSkillLevel("HITPOINTS");
 				for (String skill : PLANNABLE_SKILLS)
 				{
 					int level = state.getSkillLevel(skill);
@@ -217,6 +240,7 @@ public class PathPlanner
 					else
 					{
 						untrainable.add(capitalize(skill));
+						fixed += level;
 					}
 				}
 				// Hitpoints counts towards the total but cannot be chosen: it
@@ -240,11 +264,15 @@ public class PathPlanner
 						+ "towards your total.");
 				}
 
-				int ceiling = levels.size() * 99 + 99;
+				// What the plan itself can reach: 99 in everything it can train,
+				// and the rest where it stands. Counting Hitpoints as 99 and the
+				// skills with no data as nothing made this fire late or not at all.
+				int ceiling = levels.size() * 99 + fixed;
 				if (goal.getTargetLevel() > ceiling)
 				{
-					warnings.add("The highest total level these skills reach is " + ceiling
-						+ ", so " + goal.getTargetLevel() + " is not reachable.");
+					warnings.add("The skills this can plan top out at a total of " + ceiling
+						+ " with the rest where they are now, so " + goal.getTargetLevel()
+						+ " is out of this plan's reach.");
 				}
 
 				// Take the cheapest next level, over and over. Each skill's
@@ -407,6 +435,61 @@ public class PathPlanner
 		}
 	}
 
+	/**
+	 * The stats the wiki recommends for the goal, as steps marked recommended.
+	 * <p>
+	 * The suggestion list already holds a fight back until these are met, and
+	 * says "Recommended 85 Ranged, you have 80" beside it. The plan knew nothing
+	 * about them, so clicking that same suggestion answered "you already meet
+	 * every requirement" - two parts of one panel disagreeing about one boss.
+	 * <p>
+	 * A recommended level picks up where a required one leaves off: 70 Ranged
+	 * needed and 85 recommended is one stretch to 70 and a recommended one from
+	 * 70 to 85, not the first stretch planned twice.
+	 */
+	private void planRecommended(Activity target, List<Requirement> required, PlayerState state,
+		List<PathStep> steps, List<String> warnings, boolean allowTickManipulation)
+	{
+		for (Requirement rec : target.getRecommended())
+		{
+			if (RequirementEvaluator.isMet(rec, state))
+			{
+				continue;
+			}
+			List<PathStep> extra = new ArrayList<>();
+			if (rec.getType() == Requirement.Type.SKILL_LEVEL)
+			{
+				int from = state.getSkillLevel(rec.getValue());
+				for (Requirement hard : required)
+				{
+					if (hard.getType() == Requirement.Type.SKILL_LEVEL
+						&& hard.getValue().equalsIgnoreCase(rec.getValue()))
+					{
+						from = Math.max(from, hard.getThreshold());
+					}
+				}
+				if (from >= rec.getThreshold())
+				{
+					continue;
+				}
+				extra.addAll(skillPathPlanner.plan(rec.getValue(), from, rec.getThreshold(),
+					trainingMethodDatabase.getMethodsFor(rec.getValue()), allowTickManipulation, warnings));
+			}
+			else
+			{
+				if (required.stream().anyMatch(hard -> sameRequirement(rec, hard)))
+				{
+					continue;
+				}
+				expandStandaloneRequirement(rec, state, extra, warnings, allowTickManipulation);
+			}
+			for (PathStep step : extra)
+			{
+				steps.add(step.asRecommended());
+			}
+		}
+	}
+
 	private void expandStandaloneRequirement(Requirement req, PlayerState state, List<PathStep> steps,
 		List<String> warnings, boolean allowTickManipulation)
 	{
@@ -524,6 +607,164 @@ public class PathPlanner
 	}
 
 	/** True when {@code b} already covers {@code a}: same kind, same skill, at least as high. */
+	/**
+	 * Which fight an item drops from, as a key two pieces of the same kit share,
+	 * or null for anything that is not a plain drop. Keyed on the drop's own
+	 * "from" text as well as its boss page, so Hydras and the Alchemical Hydra
+	 * - which share a gear page - stay separate trips.
+	 */
+	private String fightOf(String itemId)
+	{
+		ItemSource part = itemSourceDatabase.getSource(itemId);
+		if (part == null || part.getType() != ItemSource.SourceType.MONSTER_DROP
+			|| part.getDetail() == null)
+		{
+			return null;
+		}
+		return part.getDetail() + "|" + part.getPreparationFrom();
+	}
+
+	/**
+	 * Several drops from the same fight, as one kill step: "Hydra's eye, Hydra's
+	 * fang and Hydra's heart from Hydras". Each piece's requirement is planned
+	 * once, however many pieces share it.
+	 */
+	private void planDropsTogether(List<ItemSource.Ingredient> parts, int quantity, PlayerState state,
+		List<PathStep> steps, List<String> warnings, boolean allowTickManipulation)
+	{
+		List<ItemSource> sources = new ArrayList<>();
+		List<Requirement> planned = new ArrayList<>();
+		for (ItemSource.Ingredient ingredient : parts)
+		{
+			ItemSource part = itemSourceDatabase.getSource(ingredient.getItemId());
+			sources.add(part);
+			Requirement req = part.getSkillRequirement();
+			if (req != null && planned.stream().noneMatch(done -> sameRequirement(req, done)))
+			{
+				expandStandaloneRequirement(req, state, steps, warnings, allowTickManipulation);
+				planned.add(req);
+			}
+		}
+
+		List<String> names = new ArrayList<>();
+		for (ItemSource part : sources)
+		{
+			names.add(part.getDisplayName());
+		}
+		ItemSource first = sources.get(0);
+		String title = joinNames(names) + " from " + first.getDetail();
+
+		// Each piece's own average, rather than one total. The pieces roll
+		// independently, so adding their averages together would overstate the
+		// trip, and the honest figure for "all of them" depends on the drop
+		// table in ways a single number would hide.
+		String unit = first.getAttemptUnit();
+		boolean sameRate = sources.stream().allMatch(s -> s.getEstimatedKc() != null
+			&& s.getEstimatedKc().equals(first.getEstimatedKc()))
+			&& parts.stream().allMatch(p -> p.getQuantity() == parts.get(0).getQuantity());
+		String kcNote;
+		if (sameRate)
+		{
+			kcNote = "~" + format(first.getEstimatedKc() * parts.get(0).getQuantity() * quantity)
+				+ " " + unit + " on average for each piece \u2014 rough average, not a guaranteed rate";
+		}
+		else
+		{
+			List<String> each = new ArrayList<>();
+			for (int i = 0; i < sources.size(); i++)
+			{
+				ItemSource part = sources.get(i);
+				each.add(part.getEstimatedKc() == null
+					? part.getDisplayName() + " rate unknown"
+					: "~" + format(part.getEstimatedKc() * parts.get(i).getQuantity() * quantity)
+						+ " " + unit + " for " + part.getDisplayName());
+			}
+			kcNote = String.join(", ", each) + " \u2014 rough averages, not guaranteed rates";
+		}
+
+		Activity fight = first.getPreparationFrom() == null
+			? null
+			: activitiesById.get(first.getPreparationFrom());
+		steps.add(new PathStep(PathStep.Type.KILL_BOSS, title, withNote(kcNote, first),
+			fight != null && fight.getWikiUrl() != null ? fight.getWikiUrl() : first.getWikiUrl()));
+	}
+
+	/**
+	 * Removes a prerequisite the plan already asked for. A recipe is planned one
+	 * ingredient at a time, and two ingredients behind the same quest or the
+	 * same Slayer level each asked for it, so the plan said "train Slayer to
+	 * 85" twice. Only prerequisites are folded: two "buy" or "kill" steps for
+	 * different ingredients are different errands even when they read alike.
+	 */
+	static void dropRepeatedPrerequisites(List<PathStep> steps)
+	{
+		Set<String> seen = new java.util.HashSet<>();
+		steps.removeIf(step ->
+		{
+			if (step.getType() == PathStep.Type.ACQUIRE_ITEM || step.getType() == PathStep.Type.KILL_BOSS)
+			{
+				return false;
+			}
+			String key = step.getType() + "|" + step.getTitle() + "|" + step.getDetail()
+				+ "|" + step.getSkill() + "|" + step.getLevelFrom() + "|" + step.getLevelTo();
+			return !seen.add(key);
+		});
+	}
+
+	/**
+	 * How many of an ingredient still have to be got, once what the player owns
+	 * is taken off, with a line saying so whenever something was.
+	 *
+	 * @param spent what earlier ingredients have already claimed, per game item
+	 *              id, so a part two recipes share is not counted as owned
+	 *              twice; null to count nothing as owned
+	 */
+	private int stillNeeded(ItemSource.Ingredient ingredient, int wanted, PlayerState state,
+		Map<Integer, Integer> spent, List<String> warnings)
+	{
+		ItemSource source = itemSourceDatabase.getSource(ingredient.getItemId());
+		if (spent == null || source == null || source.getGameItemId() == null)
+		{
+			return wanted;
+		}
+		int id = source.getGameItemId();
+		int use = Math.min(wanted, state.getOwnedCount(id) - spent.getOrDefault(id, 0));
+		if (use <= 0)
+		{
+			return wanted;
+		}
+		spent.merge(id, use, Integer::sum);
+		if (use == wanted)
+		{
+			warnings.add("You already have " + (wanted == 1 ? "the " : "the " + format(wanted) + " ")
+				+ source.getDisplayName() + " this needs, so that is left out.");
+		}
+		else
+		{
+			warnings.add("You already have " + format(use) + " of the " + format(wanted) + " "
+				+ source.getDisplayName() + " this needs \u2014 planning for the other "
+				+ format(wanted - use) + ".");
+		}
+		return wanted - use;
+	}
+
+	/** The kill-count estimate, then how the drop works, where the data says. */
+	private static String withNote(String kcNote, ItemSource source)
+	{
+		return source.getNote() == null ? kcNote : kcNote + ". " + source.getNote();
+	}
+
+	/** "a", "a and b", "a, b and c". */
+	static String joinNames(List<String> names)
+	{
+		if (names.size() <= 1)
+		{
+			return names.isEmpty() ? "" : names.get(0);
+		}
+		return String.join(", ", names.subList(0, names.size() - 1))
+			+ " and " + names.get(names.size() - 1);
+	}
+
 	private static boolean sameRequirement(Requirement a, Requirement b)
 	{
 		return b != null && a.getType() == b.getType()
@@ -569,7 +810,8 @@ public class PathPlanner
 	 * MONSTER_DROP leaf, or we give up with a warning.
 	 */
 	private void planItem(String itemId, int quantity, PlayerState state, List<PathStep> steps,
-		List<String> warnings, Set<String> visiting, boolean allowTickManipulation)
+		List<String> warnings, Set<String> visiting, boolean allowTickManipulation,
+		Map<Integer, Integer> spent)
 	{
 		String key = itemId.toUpperCase();
 		if (visiting.contains(key))
@@ -653,7 +895,7 @@ public class PathPlanner
 					: "Drop rate unknown \u2014 check the wiki's droptable page";
 				steps.add(new PathStep(PathStep.Type.KILL_BOSS,
 					source.getDisplayName() + " from " + source.getDetail(),
-					kcNote, source.getWikiUrl()));
+					withNote(kcNote, source), source.getWikiUrl()));
 				break;
 			}
 			case QUEST_REWARD:
@@ -662,15 +904,57 @@ public class PathPlanner
 					source.getDetail(), source.getWikiUrl()));
 				break;
 			case CRAFT:
+			{
+				// Pieces that drop from the same fight are one trip, not three. A
+				// brimstone ring is the eye, fang and heart of the same hydra, and
+				// planned one ingredient at a time it read as "kill hydras" three
+				// times over, each with its own copy of the Slayer requirement.
+				//
+				// What is already owned comes off first. Only the finished item
+				// used to be checked against the bank, so someone holding two of
+				// a ring's three parts was sent to get all three again.
+				List<ItemSource.Ingredient> toGet = new ArrayList<>();
 				for (ItemSource.Ingredient ingredient : source.getIngredients())
 				{
-					planItem(ingredient.getItemId(), ingredient.getQuantity() * quantity, state, steps,
-						warnings, visiting, allowTickManipulation);
+					int left = stillNeeded(ingredient, ingredient.getQuantity() * quantity, state, spent,
+						warnings);
+					if (left > 0)
+					{
+						toGet.add(new ItemSource.Ingredient(ingredient.getItemId(), left));
+					}
+				}
+				Map<String, List<ItemSource.Ingredient>> byFight = new LinkedHashMap<>();
+				for (ItemSource.Ingredient ingredient : toGet)
+				{
+					String fight = fightOf(ingredient.getItemId());
+					if (fight != null)
+					{
+						byFight.computeIfAbsent(fight, f -> new ArrayList<>()).add(ingredient);
+					}
+				}
+				Set<String> plannedFights = new LinkedHashSet<>();
+				for (ItemSource.Ingredient ingredient : toGet)
+				{
+					String fight = fightOf(ingredient.getItemId());
+					List<ItemSource.Ingredient> together = fight == null ? null : byFight.get(fight);
+					if (together != null && together.size() > 1)
+					{
+						if (plannedFights.add(fight))
+						{
+							// The quantities in toGet are already totals.
+							planDropsTogether(together, 1, state, steps, warnings,
+								allowTickManipulation);
+						}
+						continue;
+					}
+					planItem(ingredient.getItemId(), ingredient.getQuantity(), state, steps,
+						warnings, visiting, allowTickManipulation, spent);
 				}
 				steps.add(new PathStep(PathStep.Type.ACQUIRE_ITEM,
 					"Craft " + quantity + "x " + source.getDisplayName(),
 					source.getDetail(), source.getWikiUrl()));
 				break;
+			}
 			default:
 				warnings.add("Unknown source type for " + itemId);
 		}

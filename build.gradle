@@ -161,3 +161,11 @@ tasks.register('suggestdiag', JavaExec) {
 	classpath = sourceSets.test.runtimeClasspath
 	mainClass = 'com.nowwhat.diag.SuggestDiag'
 }
+
+// Which slots each gear setup leaves empty. Needs a saved copy of RuneLite's
+// item stats: ./gradlew loadoutaudit -Pstats=path/to/stats.ids.min.json [-Pactivity=part_of_id]
+tasks.register('loadoutaudit', JavaExec) {
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.nowwhat.diag.LoadoutAudit'
+	args = [project.findProperty('stats') ?: '', project.findProperty('activity') ?: ''].findAll { it }
+}

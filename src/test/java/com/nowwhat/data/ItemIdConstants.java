@@ -127,6 +127,17 @@ public final class ItemIdConstants
 	 */
 	static String displayName(String constant)
 	{
+		// Two constants glue their variant onto the word: the salve amulet (i)
+		// and (ei) are SALVE_AMULETI and SALVE_AMULETEI, which no rule below
+		// can tell apart from a word that ends in "ei".
+		if (constant.equals("SALVE_AMULETI"))
+		{
+			return "salve amulet (i)";
+		}
+		if (constant.equals("SALVE_AMULETEI"))
+		{
+			return "salve amulet (ei)";
+		}
 		String[] parts = constant.toLowerCase(Locale.ROOT).split("_");
 		StringBuilder name = new StringBuilder();
 		for (int i = 0; i < parts.length; i++)
@@ -135,7 +146,9 @@ public final class ItemIdConstants
 			{
 				name.append(' ');
 			}
-			if (i > 0 && i == parts.length - 1 && parts[i].length() <= 2
+			// "max" as well: AVERNIC_TREADS_MAX is "Avernic treads (max)", and
+			// without the bracket a setup naming them never matched at all.
+			if (i > 0 && i == parts.length - 1 && (parts[i].length() <= 2 || parts[i].equals("max"))
 				&& !parts[i].isEmpty() && !Character.isDigit(parts[i].charAt(0)))
 			{
 				name.append('(').append(parts[i]).append(')');

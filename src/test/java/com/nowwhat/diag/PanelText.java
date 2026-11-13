@@ -196,9 +196,10 @@ public class PanelText
 			{
 				try
 				{
-					Field chosen = NowWhatPanel.class.getDeclaredField("chosenOptions");
+					Object plan = planOf(panel);
+					Field chosen = plan.getClass().getDeclaredField("chosenOptions");
 					chosen.setAccessible(true);
-					((java.util.Set<String>) chosen.get(panel)).addAll(picks);
+					((java.util.Set<String>) chosen.get(plan)).addAll(picks);
 				}
 				catch (ReflectiveOperationException ex)
 				{
@@ -209,9 +210,10 @@ public class PanelText
 
 			try
 			{
-				Field field = NowWhatPanel.class.getDeclaredField("pathResultContainer");
+				Object plan = planOf(panel);
+				Field field = plan.getClass().getDeclaredField("pathResultContainer");
 				field.setAccessible(true);
-				Container results = (Container) field.get(panel);
+				Container results = (Container) field.get(plan);
 
 				// A click= argument drives the links in the rendered plan, so the
 				// expanded views can be dumped too - which is where the grouping
@@ -339,6 +341,14 @@ public class PanelText
 			}
 		}
 		throw new IllegalArgumentException("no picker entry for " + id);
+	}
+
+	/** The panel's plan view, which holds the rendered plan and the choices made in it. */
+	private static Object planOf(NowWhatPanel panel) throws ReflectiveOperationException
+	{
+		Field plan = NowWhatPanel.class.getDeclaredField("plan");
+		plan.setAccessible(true);
+		return plan.get(panel);
 	}
 
 	private static void select(JComboBox combo, String id)

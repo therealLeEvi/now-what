@@ -164,10 +164,19 @@ public class ContentDatabaseTest
 	@Test
 	public void everyShopPricedInEarnedCurrencyNamesWhereItIsEarned()
 	{
-		// Empty on purpose. Graceful, the herb sack and the rune pouch were the
-		// last three, and each now names where its currency is earned. A new
-		// points shop that cannot do the same is admitted here by name.
-		Set<String> knownGaps = new HashSet<>();
+		// A points shop that cannot name where its currency is earned is admitted
+		// here by name. Each of these is a shop whose currency comes from an
+		// activity activities.json does not have yet - Mahogany Homes, Giants'
+		// Foundry, Mastering Mixology, the Hallowed Sepulchre and Soul Wars. The
+		// detail says in words where the currency comes from; adding the activity
+		// and a currencyFrom is the fix, and takes the id off this list.
+		Set<String> knownGaps = new HashSet<>(java.util.Arrays.asList(
+			"CARPENTERS_HELMET", "CARPENTERS_SHIRT", "CARPENTERS_TROUSERS", "CARPENTERS_BOOTS",
+			"PLANK_SACK",
+			"SMITHS_TUNIC", "SMITHS_TROUSERS", "SMITHS_BOOTS", "SMITHS_GLOVES", "COLOSSAL_BLADE",
+			"REAGENT_POUCH", "PRESCRIPTION_GOGGLES",
+			"HALLOWED_RING",
+			"ECTOPLASMATOR"));
 
 		List<String> deadEnds = new ArrayList<>();
 		for (ItemSource item : items)

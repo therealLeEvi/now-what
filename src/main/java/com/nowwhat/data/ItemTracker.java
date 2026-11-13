@@ -30,7 +30,8 @@ import net.runelite.client.config.ConfigManager;
  *       Until then there is nothing to read - not a RuneLite limitation, the
  *       data simply isn't client-side. So the bank is a <em>snapshot</em>
  *       from the last time it was opened, persisted to config so it survives
- *       logout instead of resetting to "you own nothing" every login.</li>
+ *       logout instead of resetting to "you own nothing" every login - one
+ *       snapshot per account, so two accounts never see each other's bank.</li>
  * </ul>
  *
  * <p>Because of that, {@link #hasBankSnapshot()} exists: a plan built with no
@@ -50,7 +51,8 @@ public class ItemTracker
 	private final Map<Integer, Integer> inventory = new HashMap<>();
 	private final Map<Integer, Integer> equipment = new HashMap<>();
 
-	private boolean bankSnapshotLoaded;
+	/** The account the bank in memory belongs to, or null before anyone has logged in. */
+	private String loadedFor;
 
 	@Inject
 	public ItemTracker(ConfigManager configManager)
@@ -58,16 +60,45 @@ public class ItemTracker
 		this.configManager = configManager;
 	}
 
-	/** Restores the persisted bank snapshot. Safe to call more than once. */
+	/**
+	 * Restores the bank snapshot of whoever is logged in. Safe to call as often
+	 * as you like: it only does anything when the account has changed.
+	 * <p>
+	 * The snapshot is kept per account. It used to be one setting for the whole
+	 * client, so a second account was planned against the first one's bank and
+	 * told it already owned things it had never seen. Inventory and gear are
+	 * dropped on a change too; the plugin reads those from the client again on
+	 * its next refresh.
+	 */
 	public void load()
 	{
-		if (bankSnapshotLoaded)
+		String account = configManager.getRSProfileKey();
+		if (account == null || account.equals(loadedFor))
 		{
 			return;
 		}
-		bankSnapshotLoaded = true;
+		loadedFor = account;
+		bank.clear();
+		inventory.clear();
+		equipment.clear();
 
-		String raw = configManager.getConfiguration(CONFIG_GROUP, BANK_KEY);
+		String raw = configManager.getRSProfileConfiguration(CONFIG_GROUP, BANK_KEY);
+		if (raw == null || raw.isEmpty())
+		{
+			// A snapshot saved before they were kept per account. It belongs to
+			// whoever opened a bank last, which for nearly everyone is the one
+			// account they play; handed to the first account that logs in and
+			// then removed, so it can never reach a second one.
+			raw = configManager.getConfiguration(CONFIG_GROUP, BANK_KEY);
+			if (raw != null)
+			{
+				configManager.unsetConfiguration(CONFIG_GROUP, BANK_KEY);
+				if (!raw.isEmpty())
+				{
+					configManager.setRSProfileConfiguration(CONFIG_GROUP, BANK_KEY, raw);
+				}
+			}
+		}
 		if (raw == null || raw.isEmpty())
 		{
 			return;
@@ -88,8 +119,8 @@ public class ItemTracker
 		}
 		catch (NumberFormatException e)
 		{
-			// A corrupt snapshot is not worth failing startup over; drop it and
-			// let the next bank visit rebuild it.
+			// A corrupt snapshot is not worth failing over; drop it and let the
+			// next bank visit rebuild it.
 			log.warn("Discarding unreadable bank snapshot", e);
 			bank.clear();
 		}
@@ -145,7 +176,7 @@ public class ItemTracker
 			}
 			sb.append(e.getKey()).append(':').append(e.getValue());
 		}
-		configManager.setConfiguration(CONFIG_GROUP, BANK_KEY, sb.toString());
+		configManager.setRSProfileConfiguration(CONFIG_GROUP, BANK_KEY, sb.toString());
 	}
 
 	/** Copies everything owned into the state accumulator. */

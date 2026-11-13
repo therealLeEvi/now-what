@@ -4882,7 +4882,7 @@
         "items": [
           "Mystic hat",
           "amulet of glory",
-          "skill cape",
+          "god cape",
           "mystic robe top and bottom",
           "trident of the seas",
           "book of darkness",
@@ -4900,7 +4900,8 @@
           "Dizana's quiver",
           "necklace of rupture",
           "ring of suffering (ri)",
-          "seeking dragon arrows"
+          "seeking dragon arrows",
+          "Avernic treads (max)"
         ]
       },
       {
@@ -4911,7 +4912,9 @@
           "occult necklace",
           "imbued god cape",
           "tome of fire",
-          "magus ring"
+          "confliction gauntlets",
+          "magus ring",
+          "Avernic treads (max)"
         ]
       }
     ],
@@ -4982,9 +4985,12 @@
           "salve amulet (ei)",
           "Ava's accumulator",
           "black d'hide body and chaps",
-          "rune crossbow with ruby and diamond bolts (e)",
+          "rune crossbow",
+          "ruby bolts (e) and diamond bolts (e)",
           "dragonfire ward or anti-dragon shield",
-          "barrows gloves"
+          "barrows gloves",
+          "blessed boots",
+          "archers ring (i)"
         ]
       },
       {
@@ -4996,7 +5002,9 @@
           "salve amulet (ei)",
           "Dizana's quiver",
           "Zaryte vambraces",
-          "dragonfire ward"
+          "dragonfire ward",
+          "venator ring",
+          "Avernic treads (max)"
         ]
       },
       {
@@ -5007,7 +5015,9 @@
           "avernic defender",
           "salve amulet (ei)",
           "infernal cape",
-          "ferocious gloves"
+          "ferocious gloves",
+          "ultor ring",
+          "Avernic treads (max)"
         ]
       }
     ],
@@ -5076,7 +5086,7 @@
           "fire cape",
           "fighter torso",
           "Bandos tassets",
-          "abyssal whip or rapier",
+          "abyssal whip or ghrazi rapier",
           "dragon defender",
           "barrows gloves",
           "dragon boots",
@@ -5093,7 +5103,8 @@
           "amulet of rancour",
           "infernal cape",
           "ferocious gloves",
-          "lightbearer"
+          "lightbearer",
+          "Avernic treads (max)"
         ]
       }
     ],
@@ -5186,7 +5197,8 @@
           "occult necklace",
           "imbued god cape",
           "confliction gauntlets",
-          "magus ring"
+          "magus ring",
+          "Avernic treads (max)"
         ]
       }
     ],
@@ -5239,10 +5251,12 @@
           "Slayer helmet (i)",
           "amulet of fury",
           "fire cape",
-          "Bandos or Torag's body and legs",
+          "Bandos chestplate and tassets or Torag's platebody and platelegs",
           "abyssal whip or Saradomin sword",
           "dragon defender",
           "barrows gloves",
+          "dragon boots",
+          "berserker ring (i)",
           "spectral spirit shield if you own one"
         ]
       },
@@ -5256,7 +5270,8 @@
           "amulet of rancour",
           "infernal cape",
           "ferocious gloves",
-          "ultor ring"
+          "ultor ring",
+          "Avernic treads (max)"
         ]
       },
       {
@@ -5265,10 +5280,12 @@
           "Slayer helmet (i)",
           "Masori body and chaps (f)",
           "twisted bow",
+          "seeking dragon arrows",
           "necklace of rupture",
           "Dizana's quiver",
           "Zaryte vambraces",
-          "lightbearer"
+          "lightbearer",
+          "Avernic treads (max)"
         ]
       }
     ],
@@ -5353,7 +5370,8 @@
           "occult necklace",
           "imbued god cape",
           "confliction gauntlets",
-          "magus ring"
+          "magus ring",
+          "Avernic treads (max)"
         ]
       }
     ],
@@ -5419,7 +5437,9 @@
           "black d'hide body and chaps",
           "toxic blowpipe",
           "book of law",
-          "barrows gloves"
+          "barrows gloves",
+          "blessed boots",
+          "archers ring (i)"
         ]
       },
       {
@@ -5433,7 +5453,8 @@
           "Zaryte vambraces",
           "Dizana's quiver",
           "necklace of anguish",
-          "lightbearer"
+          "lightbearer",
+          "Avernic treads (max)"
         ]
       },
       {
@@ -5446,7 +5467,8 @@
           "amulet of rancour",
           "infernal cape",
           "ferocious gloves",
-          "ultor ring"
+          "ultor ring",
+          "Avernic treads (max)"
         ]
       }
     ],
@@ -5522,7 +5544,8 @@
           "amulet of rancour",
           "infernal cape",
           "ferocious gloves",
-          "ultor ring"
+          "ultor ring",
+          "Avernic treads (max)"
         ]
       }
     ],
@@ -5679,7 +5702,8 @@
           "abyssal whip or dragon scimitar",
           "dragon defender",
           "barrows gloves",
-          "dragon boots"
+          "dragon boots",
+          "berserker ring (i)"
         ]
       },
       {
@@ -5691,7 +5715,8 @@
           "amulet of rancour",
           "infernal cape",
           "ferocious gloves",
-          "ultor ring"
+          "ultor ring",
+          "Avernic treads (max)"
         ]
       }
     ],
@@ -5781,9 +5806,12 @@
           "amulet of fury",
           "Ava's assembler",
           "black d'hide or Armadyl body and chaps",
-          "rune crossbow with ruby and diamond bolts (e)",
+          "rune crossbow",
+          "ruby bolts (e) and diamond bolts (e)",
           "odium ward",
-          "barrows gloves"
+          "barrows gloves",
+          "Armadyl d'hide boots",
+          "ring of the gods (i)"
         ]
       },
       {
@@ -5795,7 +5823,8 @@
           "Dizana's quiver",
           "necklace of anguish",
           "venator ring",
-          "seeking dragon arrows"
+          "seeking dragon arrows",
+          "Avernic treads (max)"
         ]
       }
     ],
@@ -5873,7 +5902,8 @@
           "abyssal whip",
           "dragon defender",
           "barrows gloves",
-          "dragon boots"
+          "dragon boots",
+          "berserker ring (i)"
         ]
       },
       {
@@ -5885,7 +5915,8 @@
           "amulet of rancour",
           "infernal cape",
           "ferocious gloves",
-          "ultor ring"
+          "ultor ring",
+          "Avernic treads (max)"
         ]
       }
     ],
@@ -5968,7 +5999,8 @@
           "abyssal whip",
           "dragon defender",
           "barrows gloves",
-          "dragon boots"
+          "dragon boots",
+          "berserker ring (i)"
         ]
       },
       {
@@ -5980,7 +6012,8 @@
           "amulet of rancour",
           "infernal cape",
           "ferocious gloves",
-          "ultor ring"
+          "ultor ring",
+          "Avernic treads (max)"
         ]
       }
     ],
@@ -6146,20 +6179,28 @@
         "items": [
           "Head: Torva or oathplate helm, Neitiznot faceguard, Inquisitor's great helm",
           "Weapon: scythe of vitur, dragon hunter lance or soulreaper axe, ghrazi rapier or blade of saeldor",
+          "Body: Torva or oathplate, Inquisitor's hauberk, Bandos",
+          "Legs: Torva or oathplate, Inquisitor's plateskirt, Bandos",
           "Shield: avernic then dragon defender",
           "Neck: rancour, torture, blood fury or fury",
+          "Cape: infernal then fire cape",
+          "Lightbearer",
+          "Ring: ultor then berserker (i)",
           "Hands: ferocious then barrows gloves",
-          "Boots: primordial then Aranea boots"
+          "Boots: Avernic treads (max), primordial then Aranea boots"
         ]
       },
       {
         "name": "Ranged (best to worst)",
         "items": [
           "Head/body/legs: Masori (f), Masori, Armadyl",
-          "Weapon: twisted bow plus blowpipe, then dragon hunter or Zaryte crossbow",
+          "Weapon: twisted bow plus toxic blowpipe, then dragon hunter crossbow or Zaryte crossbow",
+          "Ammo: seeking dragon arrows or ruby dragon bolts (e)",
           "Neck: rupture then anguish",
+          "Cape: Dizana's quiver, Ava's assembler, Ava's accumulator",
+          "Ring: venator ring",
           "Hands: Zaryte vambraces then barrows gloves",
-          "Boots: pegasian boots"
+          "Boots: Avernic treads (max), pegasian boots"
         ]
       },
       {
@@ -6169,7 +6210,10 @@
           "Weapon: Tumeken's shadow, eye of Ayak, dragon hunter wand",
           "Shield: Elidinis' ward (f), tome of earth or fire",
           "Neck: occult then fury",
-          "Hands: confliction gauntlets then tormented bracelet"
+          "Cape: imbued god cape",
+          "Ring: magus ring",
+          "Hands: confliction gauntlets then tormented bracelet",
+          "Avernic treads (max)"
         ]
       }
     ],
@@ -6218,11 +6262,14 @@
         "name": "Melee (best to worst)",
         "items": [
           "Head: Torva or oathplate helm, Neitiznot faceguard, Blood Moon helm",
-          "Body/legs: Torva or oathplate, Bandos, fighter torso",
+          "Body: Torva or oathplate, Bandos, fighter torso",
+          "Legs: Torva or oathplate, Bandos, obsidian platelegs",
+          "Cape: infernal then fire cape",
+          "Hands: ferocious then barrows gloves",
           "Weapon: scythe of vitur, soulreaper axe or blade of saeldor, abyssal tentacle",
           "Shield: avernic then dragon defender",
           "Neck: rancour, torture, blood fury",
-          "Boots: primordial then dragon boots",
+          "Boots: Avernic treads (max), primordial then dragon boots",
           "Ring: ultor, bellator, berserker (i)"
         ]
       },
@@ -6230,20 +6277,26 @@
         "name": "Ranged (best to worst)",
         "items": [
           "Void ranger helm with elite void top and robe",
+          "Hands: void knight gloves",
           "Weapon: twisted bow plus toxic blowpipe",
+          "Ammo: seeking dragon arrows then dragon arrows",
           "Shield: twisted buckler",
           "Neck: rupture then anguish",
-          "Cape: Dizana's quiver then Ava's assembler"
+          "Cape: Dizana's quiver then Ava's assembler",
+          "Avernic treads (max)"
         ]
       },
       {
         "name": "Magic (best to worst)",
         "items": [
-          "Head/body/legs: ancestral or virtus, or void mage",
+          "Head/body/legs: ancestral or virtus",
+          "Void mage helm with elite void top and robe",
+          "Cape: infernal cape then imbued god cape",
           "Weapon: eye of Ayak, kodai wand, nightmare staff",
           "Shield: Elidinis' ward (f)",
           "Neck: occult necklace",
-          "Hands: confliction gauntlets then tormented bracelet"
+          "Hands: confliction gauntlets then tormented bracelet",
+          "Avernic treads (max)"
         ]
       }
     ],
@@ -6298,12 +6351,15 @@
         "name": "Melee (best to worst)",
         "items": [
           "Head: Torva full helm, Neitiznot faceguard, serpentine helm",
-          "Body/legs: Torva, Bandos, fighter torso",
-          "Weapon: Osmumten's fang, keris partisan, ghrazi rapier",
+          "Body: Torva, Bandos, fighter torso",
+          "Legs: Torva, Bandos",
+          "Weapon: Osmumten's fang, keris partisan of breaching, ghrazi rapier",
           "Shield: avernic then dragon defender",
           "Neck: rancour, torture, blood fury",
+          "Cape: infernal then fire cape",
           "Hands: ferocious then barrows gloves",
-          "Boots: primordial then dragon boots"
+          "Boots: Avernic treads (max), primordial then dragon boots",
+          "Ring: ultor then berserker (i)"
         ]
       },
       {
@@ -6314,7 +6370,11 @@
           "Shield: twisted buckler, dragonfire ward, odium ward",
           "Ammo: seeking dragon arrows or ruby dragon bolts (e)",
           "Neck: rupture then anguish",
-          "Cape: Dizana's quiver, Ava's assembler, Ava's accumulator"
+          "Cape: Dizana's quiver, Ava's assembler, Ava's accumulator",
+          "Hands: Zaryte vambraces then barrows gloves",
+          "Ring: venator ring",
+          "Lightbearer",
+          "Avernic treads (max)"
         ]
       },
       {
@@ -6324,7 +6384,12 @@
           "Weapon: Tumeken's shadow, eye of Ayak, sanguinesti staff, trident of the swamp",
           "Shield: Elidinis' ward (f), arcane spirit shield",
           "Neck: occult necklace",
-          "Hands: confliction gauntlets then tormented bracelet"
+          "Cape: imbued god cape",
+          "Hands: confliction gauntlets then tormented bracelet",
+          "Ring: magus ring",
+          "Lightbearer",
+          "Ring: seers ring (i)",
+          "Avernic treads (max)"
         ]
       }
     ],
@@ -6538,7 +6603,7 @@
         "name": "Magic (budget)",
         "items": [
           "Ahrim's hood, robetop and robeskirt or Blue Moon helm, Blue Moon chestplate and Blue Moon tassets",
-          "trident of the swamp, or earth spells with a tome of earth",
+          "trident of the swamp - or earth spells with a tome of earth",
           "occult necklace",
           "imbued god cape",
           "tormented bracelet or barrows gloves",
@@ -6612,7 +6677,7 @@
           "Neitiznot faceguard or Justiciar faceguard",
           "amulet of fury",
           "fire cape",
-          "Bandos chestplate and tassets, or Barrows armour",
+          "Bandos chestplate and tassets - or Barrows armour",
           "abyssal tentacle or blade of saeldor",
           "dragon defender",
           "barrows gloves",
@@ -6797,7 +6862,7 @@
       {
         "name": "Ranged (budget)",
         "items": [
-          "Armadyl helmet, chestplate and chainskirt or Karil's",
+          "Armadyl helmet, chestplate and chainskirt or Karil's coif, leathertop and leatherskirt",
           "Armadyl crossbow or dragon hunter crossbow",
           "ruby bolts (e)",
           "odium ward or dragonfire ward",
@@ -6833,6 +6898,8 @@
           "infernal cape",
           "ferocious gloves",
           "avernic treads (max)",
+          "lightbearer",
+          "seeking dragon arrows and diamond ascension bolts (e)",
           "twisted bow and ascension crossbows for ranged switches"
         ]
       }
@@ -6898,8 +6965,8 @@
       {
         "name": "Ranged (budget)",
         "items": [
-          "Blessed coif, body and chaps or Karil's",
-          "amulet of fury or glory",
+          "Blessed coif, body and chaps or Karil's coif, leathertop and leatherskirt",
+          "amulet of fury or amulet of glory",
           "Ava's accumulator",
           "rune crossbow with ruby bolts (e) and sapphire bolts (e)",
           "odium ward or book of law",
@@ -7068,7 +7135,7 @@
           "amulet of fury",
           "fire cape",
           "Bandos chestplate and tassets",
-          "abyssal bludgeon or zombie axe, on crush",
+          "abyssal bludgeon or zombie axe - on crush",
           "dragon defender",
           "barrows gloves",
           "dragon boots",
@@ -7079,7 +7146,7 @@
         "name": "Magic (best in slot)",
         "items": [
           "Ancestral hat, top and bottom",
-          "harmonised Nightmare staff, casting fire surge",
+          "harmonised Nightmare staff - casting fire surge",
           "tome of fire",
           "elemental amulet or occult necklace",
           "imbued god cape",
@@ -7107,7 +7174,7 @@
         "name": "Melee (best in slot)",
         "items": [
           "Inquisitor's great helm, hauberk and plateskirt",
-          "obligator or scythe of vitur, on crush",
+          "obligator or scythe of vitur - on crush",
           "avernic defender",
           "amulet of rancour",
           "infernal cape",
@@ -7276,7 +7343,7 @@
           "fire cape",
           "Bandos chestplate or fighter torso",
           "Bandos tassets",
-          "zombie axe, on crush, sarachnis cudgel or dragon mace",
+          "zombie axe, sarachnis cudgel or dragon mace - on crush",
           "dragon defender",
           "barrows gloves",
           "dragon boots",
@@ -7292,6 +7359,7 @@
           "infernal cape",
           "barrows gloves",
           "primordial boots",
+          "berserker ring (i)",
           "ursine chainmace for the tail spec"
         ]
       },
@@ -7299,7 +7367,7 @@
         "name": "Melee (best in slot)",
         "items": [
           "Inquisitor's great helm, hauberk and plateskirt",
-          "scythe of vitur or dragon hunter lance on crush",
+          "scythe of vitur or dragon hunter lance - on crush",
           "avernic defender",
           "amulet of rancour",
           "infernal cape",
@@ -7364,30 +7432,32 @@
       {
         "name": "Melee (budget)",
         "items": [
-          "Helm of Neitiznot or a Barrows helm",
+          "Helm of Neitiznot - or a Barrows helm",
           "amulet of strength or amulet of glory",
           "fire cape",
-          "fighter torso or a Barrows platebody",
-          "dragon platelegs or Barrows legs",
+          "fighter torso - or a Barrows platebody",
+          "dragon platelegs - or Barrows legs",
           "dragon defender or rune defender",
           "barrows gloves",
           "dragon boots",
           "berserker ring (i)",
-          "abyssal whip (Blood), Zamorakian hasta on stab (Eclipse), sarachnis cudgel (Blue)"
+          "abyssal whip - for Blood Moon",
+          "Zamorakian hasta - on stab, for Eclipse Moon",
+          "sarachnis cudgel - for Blue Moon"
         ]
       },
       {
         "name": "Melee (best in slot)",
         "items": [
-          "Oathplate helm, chest and legs or Torva",
+          "Oathplate helm, chest and legs or Torva full helm, platebody and platelegs",
           "amulet of rancour",
           "infernal cape",
           "rondache or avernic defender",
           "ferocious gloves",
           "avernic treads (pr)",
           "ultor ring",
-          "soulreaper axe, on slash for Eclipse",
-          "scythe of vitur, on crush for Blue and on slash for Blood"
+          "soulreaper axe - on slash, for Eclipse Moon",
+          "scythe of vitur - on crush for Blue Moon, on slash for Blood Moon"
         ]
       }
     ],
@@ -7447,7 +7517,7 @@
           "climbing boots",
           "berserker ring (i)",
           "magic shortbow (i), rune arrows, black d'hide body and black d'hide chaps, Ava's accumulator",
-          "air battlestaff, mystic robe top and bottom and book of darkness for spells"
+          "air battlestaff, mystic robe top and mystic robe bottom, book of darkness for spells"
         ]
       },
       {
@@ -7703,7 +7773,7 @@
           "amulet of fury",
           "fire cape or mythical cape",
           "Bandos chestplate and tassets",
-          "abyssal bludgeon, or Zamorakian hasta with a dragon defender, on crush",
+          "abyssal bludgeon, or Zamorakian hasta with a dragon defender - on crush",
           "barrows gloves",
           "dragon boots or Aranea boots",
           "berserker ring (i)"
@@ -7714,7 +7784,7 @@
         "items": [
           "Slayer helmet (i)",
           "Inquisitor's hauberk",
-          "Inquisitor's plateskirt, or Torva platelegs with the Obligator",
+          "Inquisitor's plateskirt, or Torva platelegs - with the Obligator",
           "Obligator or scythe of Vitur",
           "rondache or avernic defender",
           "amulet of rancour",
@@ -8006,13 +8076,14 @@
         "name": "Melee (budget)",
         "items": [
           "Black mask (i) or Slayer helmet (i)",
-          "tortugan shield, in the cape slot",
+          "tortugan shield - worn in the cape slot",
           "amulet of strength",
           "fighter torso",
           "granite legs",
           "dragon scimitar",
           "dragon defender",
           "barrows gloves",
+          "dragon boots",
           "berserker ring (i)"
         ]
       },
@@ -8020,7 +8091,7 @@
         "name": "Melee (mid)",
         "items": [
           "Black mask (i)",
-          "tortugan shield, in the cape slot",
+          "tortugan shield - worn in the cape slot",
           "amulet of torture",
           "Bandos chestplate and tassets",
           "ghrazi rapier",
@@ -8034,7 +8105,7 @@
         "name": "Melee (best in slot)",
         "items": [
           "Black mask (i)",
-          "tortugan shield, in the cape slot",
+          "tortugan shield - worn in the cape slot",
           "amulet of rancour",
           "Oathplate chest and Torva platelegs",
           "scythe of Vitur",
@@ -8099,7 +8170,7 @@
           "amulet of torture",
           "fire cape",
           "Blood Moon chestplate and tassets",
-          "Osmumten's fang or noxious halberd (on stab)",
+          "Osmumten's fang or noxious halberd - on stab",
           "dragon defender",
           "barrows gloves",
           "primordial boots",
@@ -8177,7 +8248,7 @@
           "amulet of fury",
           "mythical cape or fire cape",
           "keris partisan of breaching or Verac's flail",
-          "dragon defender, with a one handed weapon",
+          "dragon defender - with a one handed weapon",
           "barrows gloves",
           "dragon boots",
           "berserker ring (i)"
@@ -8189,7 +8260,7 @@
           "Crystal helm, body and legs",
           "necklace of anguish",
           "Ava's assembler",
-          "toxic blowpipe with amethyst darts or better",
+          "toxic blowpipe with amethyst darts - or better darts",
           "barrows gloves",
           "Pegasian boots",
           "ring of suffering (ri)"
@@ -8214,6 +8285,7 @@
         "items": [
           "Masori mask, body and chaps (f)",
           "toxic blowpipe or twisted bow",
+          "dragon arrows for the twisted bow",
           "Dizana's quiver",
           "necklace of rupture",
           "Zaryte vambraces",
@@ -8397,7 +8469,7 @@
           "fire cape",
           "Blood Moon chestplate and tassets or Karil's leathertop and Karil's leatherskirt",
           "dual macuahuitl, Zamorakian hasta or Sarachnis cudgel",
-          "dragon defender, with a one handed weapon",
+          "dragon defender - with a one handed weapon",
           "barrows gloves",
           "Aranea boots",
           "berserker ring (i)"
@@ -8581,7 +8653,8 @@
           "bone shortbow or magic shortbow (i)",
           "amethyst arrows",
           "book of law",
-          "blessed boots"
+          "blessed boots",
+          "archers ring (i)"
         ]
       },
       {
@@ -8664,7 +8737,7 @@
           "Ava's accumulator",
           "black d'hide body and black d'hide chaps",
           "magic shortbow (i) or crystal bow",
-          "rune arrows, or amethyst ones if you have them",
+          "rune arrows or amethyst arrows",
           "black d'hide vambraces",
           "snakeskin boots",
           "Explorer's ring 4"
@@ -8861,7 +8934,7 @@
           "Helm of Neitiznot",
           "amulet of glory or amulet of fury",
           "fire cape",
-          "mixed hide top and legs, or proselyte",
+          "mixed hide top and legs or proselyte hauberk and cuisse",
           "Zamorakian hasta or abyssal dagger (p++)",
           "anti-dragon shield or dragonfire shield",
           "barrows gloves",
@@ -8901,7 +8974,7 @@
         "items": [
           "Masori mask, body and chaps (f)",
           "twisted bow",
-          "dragon or seeking dragon arrows",
+          "dragon arrows or seeking dragon arrows",
           "Dizana's quiver",
           "necklace of rupture",
           "Zaryte vambraces",
@@ -9529,7 +9602,7 @@
           "Verac's helm",
           "amulet of fury plus occult necklace",
           "Ava's assembler",
-          "blessed dragonhide body and chaps plus Ahrim's robetop and Ahrim's robeskirt",
+          "blessed d'hide body and chaps plus Ahrim's robetop and Ahrim's robeskirt",
           "toxic blowpipe, dragon crossbow and master wand",
           "ruby dragon bolts (e) and amethyst darts",
           "crystal shield",
@@ -9825,7 +9898,7 @@
       {
         "name": "Demonic Brutus (best in slot)",
         "items": [
-          "Oathplate helm, chest and legs or Torva",
+          "Oathplate helm, chest and legs or Torva full helm, platebody and platelegs",
           "Scythe of Vitur",
           "amulet of rancour",
           "infernal cape",
@@ -9867,7 +9940,7 @@
         "name": "Melee (low level)",
         "items": [
           "Blood Moon helm, chestplate and tassets",
-          "granite hammer, zombie axe or Zamorakian hasta, on crush",
+          "granite hammer, zombie axe or Zamorakian hasta - on crush",
           "amulet of strength or amulet of fury",
           "fire cape or mythical cape",
           "dragon defender",
@@ -9942,7 +10015,7 @@
       {
         "name": "Melee (best in slot)",
         "items": [
-          "Oathplate helm, chest and legs or Torva",
+          "Oathplate helm, chest and legs or Torva full helm, platebody and platelegs",
           "Emberlight",
           "amulet of rancour",
           "infernal cape",
@@ -10016,7 +10089,7 @@
         "items": [
           "Helm of Neitiznot or farseer helm",
           "amulet of glory or holy symbol",
-          "Ardougne cloak",
+          "Ardougne cloak 1 - a higher tier is better",
           "Zealot's robe top and bottom or monk's robes",
           "Iban's staff or warped sceptre",
           "book of darkness or malediction ward",
@@ -10028,7 +10101,7 @@
       {
         "name": "Magic (mid)",
         "items": [
-          "Ancestral or Virtus hat, top and bottom",
+          "Ancestral hat, top and bottom or Virtus mask, top and bottom",
           "trident of the swamp or trident of the seas",
           "occult necklace",
           "imbued god cape",
@@ -10113,7 +10186,8 @@
           "Dizana's quiver or Ava's assembler",
           "twisted buckler",
           "barrows gloves",
-          "Aranea boots"
+          "Aranea boots",
+          "lightbearer"
         ]
       },
       {
@@ -10121,7 +10195,7 @@
         "items": [
           "Neitiznot faceguard or serpentine helm",
           "Bandos chestplate and tassets, or Blood Moon chestplate and Blood Moon tassets",
-          "abyssal bludgeon or Emberlight, on crush",
+          "abyssal bludgeon or Emberlight - on crush",
           "amulet of fury",
           "fire cape",
           "dragon defender",
@@ -10162,7 +10236,7 @@
         "name": "Magic switch",
         "items": [
           "Ancestral hat, top and bottom",
-          "Tumeken's shadow or Harmonised Nightmare staff with the matching elemental tome",
+          "Tumeken's shadow or Harmonised Nightmare staff - with the matching elemental tome",
           "occult necklace",
           "imbued god cape",
           "confliction gauntlets",
@@ -10414,7 +10488,7 @@
           "Ava's accumulator",
           "black d'hide body and black d'hide chaps",
           "magic shortbow (i) or Craw's bow",
-          "bracelet of ethereum, charged",
+          "bracelet of ethereum - charged",
           "snakeskin boots",
           "ring of wealth"
         ]
@@ -10428,7 +10502,7 @@
           "blessed body and chaps or Karil's leathertop and Karil's leatherskirt",
           "Webweaver bow or Craw's bow with Rada's blessing 4",
           "twisted buckler or book of law",
-          "bracelet of ethereum, charged",
+          "bracelet of ethereum - charged",
           "blessed boots",
           "ring of shadows"
         ]
@@ -10558,7 +10632,7 @@
           "amulet of fury",
           "fire cape",
           "Bandos chestplate and tassets",
-          "dragon hunter lance or Osmumten's fang, the lance set to crush",
+          "dragon hunter lance or Osmumten's fang - the lance set to crush",
           "dragon defender or dragonfire shield",
           "barrows gloves",
           "dragon boots",
@@ -10583,7 +10657,7 @@
         "items": [
           "Torva full helm, or Slayer helmet (i) if on task",
           "Inquisitor's hauberk and Torva platelegs",
-          "dragon hunter lance, used on crush",
+          "dragon hunter lance - used on crush",
           "avernic defender",
           "amulet of rancour",
           "infernal cape",
@@ -10757,7 +10831,7 @@
       {
         "name": "Melee (budget)",
         "items": [
-          "Justiciar faceguard, chestguard and legguards, or Barrows armour",
+          "Justiciar faceguard, chestguard and legguards - or Barrows armour",
           "Zamorakian hasta or abyssal dagger",
           "dragonfire shield",
           "amulet of fury",
@@ -11264,7 +11338,7 @@
           "Helm of neitiznot",
           "amulet of fury",
           "fire cape",
-          "Dharok's, Guthan's or Torag's platebody and platelegs",
+          "Dharok's platebody and platelegs, or Guthan's platebody and chainskirt, or Torag's platebody and platelegs",
           "abyssal whip",
           "elemental shield, mind shield or dragonfire shield",
           "barrows gloves",
@@ -11275,7 +11349,7 @@
       {
         "name": "Ranged safespot (mid)",
         "items": [
-          "Blessed coif, body and chaps or Void ranger set",
+          "Blessed coif, body and chaps or Void ranger helm, Void knight top, Void knight robe and gloves",
           "hunters' sunlight crossbow with moonlight antler bolts",
           "mind shield or elemental shield",
           "Ava's assembler",
@@ -11290,7 +11364,7 @@
         "items": [
           "Torva full helm, or Slayer helmet (i) if on task",
           "Oathplate chest and legs or Torva platebody and Torva platelegs",
-          "dragon hunter lance, on swipe or pound",
+          "dragon hunter lance - on swipe or pound",
           "ancient wyvern shield or dragonfire shield",
           "amulet of rancour",
           "infernal cape",
@@ -11420,7 +11494,7 @@
           "Helm of neitiznot",
           "amulet of fury",
           "fire cape",
-          "Justiciar chestguard and legguards or Barrows armour",
+          "Justiciar chestguard and legguards - or Barrows armour",
           "Zamorakian hasta",
           "elemental shield or mind shield",
           "barrows gloves",
@@ -11504,7 +11578,7 @@
         "items": [
           "Slayer helmet (i)",
           "Torva platebody and platelegs",
-          "leaf-bladed battleaxe on slash or crush",
+          "leaf-bladed battleaxe - on slash or crush",
           "avernic defender",
           "amulet of rancour",
           "infernal cape",
@@ -11623,8 +11697,8 @@
           "Slayer helmet (i) or black mask (i)",
           "amulet of fury or amulet of blood fury",
           "fire cape",
-          "Justiciar chestguard and legguards or Dharok's, Guthan's or Torag's platebody and platelegs",
-          "Zamorakian hasta or zombie axe, on crush",
+          "Justiciar chestguard and legguards, or Dharok's platebody and platelegs, or Guthan's platebody and chainskirt, or Torag's platebody and platelegs",
+          "Zamorakian hasta or zombie axe - on crush",
           "mirror shield or V's shield",
           "barrows gloves",
           "dragon boots",
@@ -11726,7 +11800,7 @@
         "items": [
           "Slayer helmet (i)",
           "Torva platebody and platelegs",
-          "scythe of vitur, on crush, or Soulreaper axe",
+          "scythe of vitur or Soulreaper axe - scythe on crush",
           "avernic defender",
           "amulet of rancour",
           "infernal cape",
@@ -11786,7 +11860,7 @@
           "amulet of fury",
           "fire cape",
           "Bandos chestplate and tassets or Blood Moon chestplate and Blood Moon tassets",
-          "hallowed flail, a vampyrebane weapon is required",
+          "hallowed flail - a vampyrebane weapon is required",
           "dragon defender",
           "barrows gloves",
           "dragon boots",
@@ -11981,7 +12055,7 @@
           "necklace of rupture",
           "Dizana's quiver",
           "Zaryte vambraces",
-          "Avernic treads (max) with the elite Kourend & Kebos Diary",
+          "Avernic treads (max) - with the elite Kourend & Kebos Diary",
           "ring of the gods (i)"
         ]
       }
@@ -12059,7 +12133,7 @@
           "necklace of rupture",
           "Dizana's quiver",
           "Zaryte vambraces",
-          "Avernic treads (max) with the elite Kourend & Kebos Diary",
+          "Avernic treads (max) - with the elite Kourend & Kebos Diary",
           "venator ring or ring of the gods (i)"
         ]
       }

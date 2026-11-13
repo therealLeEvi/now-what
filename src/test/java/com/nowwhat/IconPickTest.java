@@ -34,6 +34,40 @@ public class IconPickTest
 		assertEquals("Book of darkness, not the page set", 12612, pick("Book of darkness"));
 	}
 
+	/** Every item a line pictures, in order. */
+	private static List<Integer> pickAll(String text)
+	{
+		List<Integer> ids = new java.util.ArrayList<>();
+		for (ItemTextParser.Phrase phrase : ItemTextParser.phrases(text))
+		{
+			Integer id = ItemTextParser.pick(phrase,
+				ItemNameIndex.search(ItemTextParser.searchTerm(phrase)));
+			ids.add(id == null ? -1 : id);
+		}
+		return ids;
+	}
+
+	@Test
+	public void aSetNameForBodyAndLegsIsTheArmourAGuideMeans()
+	{
+		// Shortest name used to win: the Bandos robe top and Bandos chaps.
+		assertEquals(java.util.Arrays.asList(11832, 11834), pickAll("Body/legs: Bandos"));
+	}
+
+	@Test
+	public void theLegsOfARobeSetAreNotItsTop()
+	{
+		// "robe" is a legs word too, and "ancestral robe top" used to fill both boxes.
+		assertEquals(java.util.Arrays.asList(21018, 21021, 21024),
+			pickAll("Head/body/legs: ancestral"));
+	}
+
+	@Test
+	public void aNameWrittenOutIsNotSwappedForAKnownItem()
+	{
+		assertEquals(1387, pick("Staff of fire"));
+	}
+
 	@Test
 	public void tooltipsUseTheGamesSpellingWhereItIsKnown()
 	{
@@ -42,8 +76,40 @@ public class IconPickTest
 		List<ItemTextParser.Candidate> tradeable = Arrays.asList(
 			new ItemTextParser.Candidate("Tumeken's shadow (uncharged)", 27277),
 			new ItemTextParser.Candidate("Tumeken's shadow", 99999));
-		assertEquals("Tumeken's shadow", NowWhatPanel.displayName(27275, table, tradeable));
+		assertEquals("Tumeken's shadow", GearView.displayName(27275, table, tradeable));
 		assertEquals("Tumekens shadow",
-			NowWhatPanel.displayName(27275, table, Collections.emptyList()));
+			GearView.displayName(27275, table, Collections.emptyList()));
+	}
+
+	/** The words each option of a line is looked up by. */
+	private static List<String> lookups(String text)
+	{
+		List<String> out = new java.util.ArrayList<>();
+		for (ItemTextParser.Phrase phrase : ItemTextParser.phrases(text))
+		{
+			out.add(String.join(" ", phrase.getWords()));
+		}
+		return out;
+	}
+
+	@Test
+	public void aSetNameCarriesThroughAListButNotPastAnOr()
+	{
+		assertEquals(java.util.Arrays.asList("super attack", "super strength", "super defence"),
+			lookups("Super attack, strength and defence"));
+		assertEquals(java.util.Arrays.asList("oathplate helm", "oathplate chest", "oathplate legs",
+			"torva"), lookups("Oathplate helm, chest and legs or Torva"));
+		assertEquals(java.util.Arrays.asList("ultor ring", "lightbearer"),
+			lookups("Ultor ring or lightbearer"));
+	}
+
+	@Test
+	public void aListCanShareItsLastWord()
+	{
+		assertEquals(java.util.Arrays.asList("dust runes", "chaos runes", "law runes"),
+			lookups("dust, chaos and law runes"));
+		// Fish are not a kind of thing a list shares: these stay three fish.
+		assertEquals(java.util.Arrays.asList("anglerfish", "sharks", "manta rays"),
+			lookups("anglerfish, sharks or manta rays"));
 	}
 }

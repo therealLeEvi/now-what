@@ -7,8 +7,10 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -41,6 +43,13 @@ public final class ItemNameIndex
 	private static final String CURLY_APOSTROPHE = String.valueOf((char) 0x2019);
 
 	private static List<ItemTextParser.Candidate> index;
+	/**
+	 * Flattened names of the items the plugin itself knows as goals - the rows
+	 * marked "known" in the table. When a phrase fits several items equally
+	 * ("Bandos" for legs: tassets or chaps), the known one is what a guide
+	 * means.
+	 */
+	private static Set<String> known = Collections.emptySet();
 
 	private ItemNameIndex()
 	{
@@ -69,6 +78,16 @@ public final class ItemNameIndex
 	}
 
 	/** The whole table, for the test that keeps it in step with the bundled text. */
+	/** The table's third column for an item the plugin knows as a goal. */
+	static final String KNOWN = "known";
+
+	/** @see #known */
+	public static Set<String> known()
+	{
+		index();
+		return known;
+	}
+
 	static List<ItemTextParser.Candidate> all()
 	{
 		return Collections.unmodifiableList(index());
@@ -97,6 +116,7 @@ public final class ItemNameIndex
 	private static List<ItemTextParser.Candidate> load()
 	{
 		List<ItemTextParser.Candidate> loaded = new ArrayList<>();
+		Set<String> knownNames = new HashSet<>();
 		try (InputStream in = ItemNameIndex.class.getResourceAsStream(RESOURCE))
 		{
 			if (in == null)
@@ -108,20 +128,25 @@ public final class ItemNameIndex
 			String line;
 			while ((line = reader.readLine()) != null)
 			{
-				int tab = line.indexOf('\t');
-				if (tab <= 0)
+				String[] columns = line.split("\t");
+				if (columns.length < 2 || columns[0].isEmpty())
 				{
 					continue;
 				}
-				loaded.add(new ItemTextParser.Candidate(line.substring(tab + 1),
-					Integer.parseInt(line.substring(0, tab))));
+				loaded.add(new ItemTextParser.Candidate(columns[1], Integer.parseInt(columns[0])));
+				if (columns.length > 2 && KNOWN.equals(columns[2]))
+				{
+					knownNames.add(flatten(columns[1]));
+				}
 			}
 		}
 		catch (IOException | NumberFormatException broken)
 		{
 			log.warn("Could not read the item name table", broken);
 			loaded.clear();
+			knownNames.clear();
 		}
+		known = Collections.unmodifiableSet(knownNames);
 		return loaded;
 	}
 }
