@@ -127,6 +127,14 @@ class PlanView
 		});
 	}
 
+	/** What the plan's Back link does. The panel replaces this to bring its own screens back. */
+	private Runnable onClose = this::clearPath;
+
+	void setOnClose(Runnable onClose)
+	{
+		this.onClose = onClose;
+	}
+
 	/** The column the plan is drawn into, for the panel to place. */
 	JPanel container()
 	{
@@ -159,10 +167,10 @@ class PlanView
 		titleLabel.setBorder(new EmptyBorder(10, 0, 0, 0));
 		stack(pathResultContainer, titleLabel);
 
-		// Once a plan is open there was no way out of it but re-picking from a
-		// dropdown you had already scrolled past.
+		// The way out. A plan has the sidebar to itself, so this is the only
+		// route back to the pickers and the suggestions.
 		stack(pathResultContainer, kit.linkRow(java.util.Collections.singletonList(
-			kit.actionLink("\u2190 Clear plan", this::clearPath))));
+			kit.actionLink("\u2190 Back", () -> onClose.run()))));
 
 		if (path.isAlreadyComplete())
 		{
@@ -1497,13 +1505,24 @@ class PlanView
 	void setProgress(Map<String, Integer> currentLevels, Set<String> finishedActivities)
 	{
 		int before = lastPath == null ? 0 : finishedCount(lastPath);
+		Map<String, Integer> levelsBefore = levels;
 		levels = currentLevels == null
 			? java.util.Collections.emptyMap()
 			: new java.util.HashMap<>(currentLevels);
 		doneActivities = finishedActivities == null
 			? java.util.Collections.emptySet()
 			: new java.util.HashSet<>(finishedActivities);
-		if (lastPath != null && finishedCount(lastPath) != before)
+		if (lastPath != null && !levelsBefore.isEmpty() && !levels.isEmpty()
+			&& !levels.equals(levelsBefore))
+		{
+			// A level went up while the plan was open. Folding finished steps
+			// away is not enough here: a step from 75 to 77 is not finished at
+			// 76, but its xp, its hours and its shopping list are all wrong.
+			// So the plan is made again from where the player now stands, with
+			// the methods they picked kept, and without moving the view.
+			renderPath(keepingFinished(lastPath, pathResolver.apply(lastPath.getGoal())), false);
+		}
+		else if (lastPath != null && finishedCount(lastPath) != before)
 		{
 			// Not scrolled to the top: this re-render was not asked for, and
 			// yanking the view while the player is mid-read is worse than the
@@ -1535,6 +1554,36 @@ class PlanView
 		}
 		Integer at = levels.get(step.getSkill().toUpperCase(Locale.ROOT));
 		return at != null && at >= step.getLevelTo();
+	}
+
+	/**
+	 * The new plan with the old one's finished steps put back at the front.
+	 * <p>
+	 * A plan made again starts from where the player stands, so everything
+	 * already behind them is simply absent from it - and the steps they
+	 * finished while watching would vanish instead of folding away as done.
+	 */
+	private Path keepingFinished(Path old, Path fresh)
+	{
+		if (fresh == null || fresh.isAlreadyComplete())
+		{
+			return fresh;
+		}
+		List<PathStep> steps = new ArrayList<>();
+		for (PathStep step : old.getSteps())
+		{
+			if (isFinished(step))
+			{
+				steps.add(step);
+			}
+		}
+		if (steps.isEmpty())
+		{
+			return fresh;
+		}
+		steps.addAll(fresh.getSteps());
+		return new Path(fresh.getGoal(), false, steps, fresh.getWarnings(),
+			fresh.isRequirementsAlreadyMet());
 	}
 
 	private int finishedCount(Path path)

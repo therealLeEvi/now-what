@@ -667,12 +667,10 @@ class GearView
 		name.setBorder(new EmptyBorder(6, 0, 0, 0));
 		stack(into, name);
 
-		// Pictures instead of the words, wherever the pictures say the same
-		// thing. A loadout is something players recognise by sight, and nine
-		// item names in a row is work the panel can do for them. The words
-		// stay only for the lines a picture cannot carry - a condition, a
-		// caveat, or an item that could not be matched at all - so nothing
-		// is lost to the tidying.
+		// Pictures instead of the words. A loadout is something players
+		// recognise by sight, and nine item names in a row is work the panel
+		// can do for them. The words stay only for an item that could not be
+		// matched to a picture; a condition or caveat moves to the hover.
 		Pictured gear = stackGear(into, setup.getItems());
 
 		if (!gear.getInWords().isEmpty())
@@ -695,10 +693,7 @@ class GearView
 		private final Map<Integer, String> names = new LinkedHashMap<>();
 		/** Item id to the count the line asked for, where it named one. */
 		private final Map<Integer, String> counts = new LinkedHashMap<>();
-		/**
-		 * True when the pictures say everything the line said: every option in it
-		 * was matched, and it carried no explanation beyond naming items.
-		 */
+		/** True when every option the line named was matched to a picture. */
 		private boolean complete;
 	}
 
@@ -774,6 +769,7 @@ class GearView
 		}
 
 		EntryIcons icons = new EntryIcons();
+		String note = ItemTextParser.explanation(entry);
 		// One option can expand into several phrases (a set names several slots),
 		// and matching any one of them is enough for that option to be pictured.
 		Map<String, Boolean> optionMatched = new LinkedHashMap<>();
@@ -806,18 +802,31 @@ class GearView
 			{
 				continue;
 			}
-			icons.names.putIfAbsent(id, displayName(id, candidates, tradeable));
+			// What the line said beyond the item goes on the hover, not under
+			// the pictures. A stand-in ("god cape" drawn as the Saradomin one)
+			// says so there too, so "any god's" does not quietly become
+			// "Saradomin's".
+			String name = displayName(id, candidates, tradeable);
+			if (ItemTextParser.namesAStandIn(phrase.getText()))
+			{
+				name += " (any version works)";
+			}
+			if (note != null)
+			{
+				name += " - " + note;
+			}
+			icons.names.putIfAbsent(id, name);
 			if (phrase.getQuantity() != null)
 			{
 				icons.counts.putIfAbsent(id, phrase.getQuantity());
 			}
 		}
 
-		// A stand-in picture ("god cape" drawn as the Saradomin cape) keeps its
-		// words, or "any god's" would silently become "Saradomin's".
-		icons.complete = !ItemTextParser.hasExplanation(entry)
-			&& !ItemTextParser.namesAStandIn(entry)
-			&& !optionMatched.isEmpty()
+		// Words stay under the pictures only for an option that could not be
+		// drawn at all. They used to stay for any line with a reason or a
+		// stand-in on it as well, which printed "imbued god cape" directly
+		// under a picture of one.
+		icons.complete = !optionMatched.isEmpty()
 			&& !optionMatched.containsValue(Boolean.FALSE);
 		iconCache.put(entry, icons);
 		return icons;

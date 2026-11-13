@@ -124,9 +124,8 @@ public class IconCoverage
 				{
 					resolved++;
 					// Whether the panel will drop the words for this line, which
-					// is the same test NowWhatPanel applies.
-					boolean complete = !ItemTextParser.hasExplanation(entry)
-						&& !optionMatched.containsValue(Boolean.FALSE);
+					// is the same test GearView applies.
+					boolean complete = !optionMatched.containsValue(Boolean.FALSE);
 					if (complete)
 					{
 						picturesOnly++;

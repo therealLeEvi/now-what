@@ -151,6 +151,47 @@ public class FinishedStepsTest
 			after.stream().anyMatch(line -> line.contains("Desert Treasure I")));
 	}
 
+	/**
+	 * A level gained part-way through a step does not finish it, but it does
+	 * change the step: the plan is made again from the new level.
+	 */
+	@Test
+	public void aLevelGainedMidStepPlansAgainFromThere() throws Exception
+	{
+		PlayerState state = new PlayerState();
+		for (String skill : ALL_SKILLS)
+		{
+			state.setSkillLevel(skill, 70);
+		}
+
+		final NowWhatPanel[] built = new NowWhatPanel[1];
+		SwingUtilities.invokeAndWait(() ->
+		{
+			built[0] = panel(state);
+			planBaseStats(built[0], 80);
+			built[0].setProgress(new java.util.HashMap<>(state.getSkillLevels()));
+		});
+		assertTrue(text(built[0]).stream().anyMatch(line -> line.contains("Prayer 70")));
+
+		state.setSkillLevel("PRAYER", 75);
+		SwingUtilities.invokeAndWait(() ->
+			built[0].setProgress(new java.util.HashMap<>(state.getSkillLevels())));
+
+		List<String> after = text(built[0]);
+		assertTrue("expected the Prayer step to start from 75 now: " + after,
+			after.stream().anyMatch(line -> line.contains("Prayer 75")));
+		assertFalse("the old starting level should be gone: " + after,
+			after.stream().anyMatch(line -> line.contains("Prayer 70")));
+
+		// Finishing the step folds it away as done; it does not just vanish.
+		state.setSkillLevel("PRAYER", 80);
+		SwingUtilities.invokeAndWait(() ->
+			built[0].setProgress(new java.util.HashMap<>(state.getSkillLevels())));
+		List<String> finished = text(built[0]);
+		assertTrue("expected the finished step to be offered back: " + finished,
+			finished.stream().anyMatch(line -> line.contains("done already")));
+	}
+
 	private static void planBaseStats(NowWhatPanel panel, int level)
 	{
 		List<JSpinner> spinners = new ArrayList<>();

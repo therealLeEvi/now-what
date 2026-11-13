@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import javax.swing.JPanel;
+import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.PluginPanel;
 
 /**
@@ -71,12 +72,11 @@ final class PanelStyle
 
 	// RuneLite's bundled RuneScape font is a pixel face designed for the game
 	// viewport; at sidebar size, for paragraphs rather than labels, it smears.
-	// The plan uses two installed faces instead: a serif for the things you
-	// navigate by - the goal, each step, each method - and the platform UI sans
-	// for everything you read. One font doing both jobs at 11, 12 and 13px with
-	// nothing between plain and bold is what made the panel read flat.
-	static final String[] TITLE_FAMILIES = {"Georgia", "Noto Serif", "DejaVu Serif",
-		Font.SERIF};
+	// So it is used where it is at home - the things you navigate by: the
+	// goal, each step, each method - and the platform UI sans carries
+	// everything you read. Titles were a serif for a while, which next to the
+	// client's own buttons and dropdowns made three faces in one sidebar and
+	// looked like it belonged to a different program.
 	static final String[] UI_FAMILIES = {"Segoe UI", "Noto Sans", "DejaVu Sans",
 		Font.SANS_SERIF};
 	/** Windows ships this as its own family; elsewhere bold stands in for it. */
@@ -91,10 +91,10 @@ final class PanelStyle
 	 * the pixel saved by shrinking it buys nothing.
 	 */
 	static final Font SMALL_FONT = installed(UI_FAMILIES, Font.PLAIN, 12);
-	/** A step title, a method name, a section heading: the serif voice. */
-	static final Font STEP_TITLE_FONT = installed(TITLE_FAMILIES, Font.PLAIN, 16);
-	static final Font OPTION_FONT = installed(TITLE_FAMILIES, Font.PLAIN, 14);
-	static final Font HEADER_FONT = installed(TITLE_FAMILIES, Font.PLAIN, 15);
+	/** A step title, a method name, a section heading: the game's own face, at its native 16px. */
+	static final Font STEP_TITLE_FONT = FontManager.getRunescapeBoldFont();
+	static final Font OPTION_FONT = FontManager.getRunescapeFont();
+	static final Font HEADER_FONT = FontManager.getRunescapeBoldFont();
 	/**
 	 * The little uppercase label over each step. Letter-spacing is what stops
 	 * all-caps at 10px reading as a smudge - and the extra weight is what stops

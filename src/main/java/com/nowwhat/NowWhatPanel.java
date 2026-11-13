@@ -86,10 +86,21 @@ public class NowWhatPanel extends PluginPanel
 	{
 		START,
 		CHOOSE,
-		RANDOM
+		RANDOM,
+		/** The list of things the player is close to being able to do. */
+		ALMOST
 	}
 
 	private Mode mode = Mode.START;
+	/**
+	 * True while a plan is on screen. The plan then has the sidebar to itself:
+	 * the pickers above it and the suggestions below it made one very long
+	 * column out of three unrelated things, and the plan - the answer to what
+	 * the player just asked - was the part they had to scroll to find.
+	 */
+	private boolean planOpen;
+	private JLabel almostThereHeader;
+	private JPanel almostBackRow;
 	/** The fork. */
 	private final JPanel startContainer = new JPanel();
 	/** The three goal pickers and the quest pointer - everything the panel had. */
@@ -228,7 +239,7 @@ public class NowWhatPanel extends PluginPanel
 			Activity selected = (Activity) activityCombo.getSelectedItem();
 			if (selected != null)
 			{
-				plan.renderPath(pathResolver.apply(Goal.activity(selected.getId(), selected.getName(),
+				showPlan(pathResolver.apply(Goal.activity(selected.getId(), selected.getName(),
 					tickManipulationCheckbox.isSelected())));
 			}
 		}));
@@ -255,7 +266,7 @@ public class NowWhatPanel extends PluginPanel
 		skillLevelSpinner = new JSpinner(new SpinnerNumberModel(99, 2, 99, 1));
 		constrainSpinner(skillLevelSpinner);
 		stack(chooseContainer, goalBlock("Skill level", skillCombo, skillLevelSpinner, "Plan path", e ->
-			plan.renderPath(pathResolver.apply(Goal.skillLevel((String) skillCombo.getSelectedItem(),
+			showPlan(pathResolver.apply(Goal.skillLevel((String) skillCombo.getSelectedItem(),
 				(Integer) skillLevelSpinner.getValue(), tickManipulationCheckbox.isSelected())))));
 
 		// --- Goal: an item ---
@@ -291,7 +302,7 @@ public class NowWhatPanel extends PluginPanel
 					itemPicker.promptForChoice();
 					return;
 				}
-				plan.renderPath(pathResolver.apply(Goal.itemQuantity(selected.getId(),
+				showPlan(pathResolver.apply(Goal.itemQuantity(selected.getId(),
 					(Integer) itemQuantitySpinner.getValue(), selected.getDisplayName(),
 					tickManipulationCheckbox.isSelected(), countOwnedCheckbox.isSelected())));
 			}));
@@ -304,7 +315,7 @@ public class NowWhatPanel extends PluginPanel
 		constrainSpinner(baseStatsSpinner);
 		stack(chooseContainer, goalBlock("Base stats", goalCaption("Every skill at least"),
 			baseStatsSpinner, "Plan path", e ->
-				plan.renderPath(pathResolver.apply(Goal.baseStats(
+				showPlan(pathResolver.apply(Goal.baseStats(
 					(Integer) baseStatsSpinner.getValue(),
 					tickManipulationCheckbox.isSelected())))));
 
@@ -319,7 +330,7 @@ public class NowWhatPanel extends PluginPanel
 		constrainSpinner(totalLevelSpinner);
 		stack(chooseContainer, goalBlock("Total level", goalCaption("Reach a total of"),
 			totalLevelSpinner, "Plan path", e ->
-				plan.renderPath(pathResolver.apply(Goal.totalLevel(
+				showPlan(pathResolver.apply(Goal.totalLevel(
 					(Integer) totalLevelSpinner.getValue(),
 					tickManipulationCheckbox.isSelected())))));
 
@@ -327,8 +338,8 @@ public class NowWhatPanel extends PluginPanel
 		// things you choose between when deciding what to do next.
 		stack(chooseContainer, questsSection());
 
+		plan.setOnClose(this::closePlan);
 		content.add(plan.container());
-		setMode(Mode.START);
 
 		// --- Suggestions ---
 		// "Available now" was a list of cards whose only action was to open the
@@ -340,11 +351,16 @@ public class NowWhatPanel extends PluginPanel
 		availableNowContainer.setAlignmentX(Component.LEFT_ALIGNMENT);
 		content.add(availableNowContainer);
 
-		stack(content, sectionHeader("Almost there"));
+		almostThereHeader = sectionHeader("Almost there");
+		stack(content, almostThereHeader);
+		almostBackRow = kit.linkRow(java.util.Collections.singletonList(
+			kit.actionLink("\u2190 Back", () -> setMode(Mode.START))));
+		stack(content, almostBackRow);
 		almostThereContainer.setLayout(new BoxLayout(almostThereContainer, BoxLayout.Y_AXIS));
 		almostThereContainer.setBackground(ColorScheme.DARK_GRAY_COLOR);
 		almostThereContainer.setAlignmentX(Component.LEFT_ALIGNMENT);
 		content.add(almostThereContainer);
+		setMode(Mode.START);
 
 		// A measured gap, so the credit sits at the foot of the sidebar instead
 		// of following whatever is on screen. On a fresh login there is almost
@@ -558,23 +574,16 @@ public class NowWhatPanel extends PluginPanel
 		block.add(kit.hairline());
 		block.add(Box.createVerticalStrut(8));
 
-		JLabel credit = kit.resultLine("Data from the Old School RuneScape Wiki, used under "
-			+ "CC BY-NC-SA 3.0. This plugin owns none of it.", DETAIL, 0);
-		credit.setFont(SMALL_FONT);
-		credit.setToolTipText(WIKI_URL);
-		kit.makeClickable(credit, () -> PanelKit.openUrl(WIKI_URL));
-		block.add(credit);
-
-		JLabel licence = kit.resultLine("Read the licence \u2197", QUIET_LINK, 0);
-		licence.setFont(SMALL_FONT);
+		// One line. The credit the licence asks for is the wiki's name and
+		// the licence's, and both are here; the rest is on the hover, because
+		// three paragraphs of it under a two-choice screen read as content.
+		JLabel credit = kit.actionLink("Data: OSRS Wiki \u2197", () -> PanelKit.openUrl(WIKI_URL));
+		credit.setToolTipText("<html>Data from the Old School RuneScape Wiki, used under "
+			+ "CC BY-NC-SA 3.0.<br>This plugin owns none of it.<br>Not affiliated with or endorsed "
+			+ "by Jagex. RuneScape and Old School<br>RuneScape are trademarks of Jagex Ltd.</html>");
+		JLabel licence = kit.actionLink("CC BY-NC-SA 3.0 \u2197", () -> PanelKit.openUrl(LICENCE_URL));
 		licence.setToolTipText(LICENCE_URL);
-		kit.makeClickable(licence, () -> PanelKit.openUrl(LICENCE_URL));
-		block.add(licence);
-
-		JLabel jagex = kit.resultLine("Not affiliated with or endorsed by Jagex. RuneScape and Old "
-			+ "School RuneScape are trademarks of Jagex Ltd.", DETAIL, 0);
-		jagex.setFont(SMALL_FONT);
-		block.add(jagex);
+		block.add(kit.linkRow(java.util.Arrays.asList(credit, licence)));
 
 		return block;
 	}
@@ -587,7 +596,7 @@ public class NowWhatPanel extends PluginPanel
 	void planFor(Activity activity)
 	{
 		activityCombo.setSelectedItem(activity);
-		plan.renderPath(pathResolver.apply(Goal.activity(activity.getId(), activity.getName(),
+		showPlan(pathResolver.apply(Goal.activity(activity.getId(), activity.getName(),
 			tickManipulationCheckbox.isSelected())));
 	}
 
@@ -663,6 +672,9 @@ public class NowWhatPanel extends PluginPanel
 				setMode(Mode.RANDOM);
 				roll();
 			}));
+		stack(startContainer, startOption("Almost there",
+			"What you are a few levels or a quest away from being able to do.",
+			() -> setMode(Mode.ALMOST)));
 	}
 
 	private JPanel startOption(String title, String blurb, Runnable action)
@@ -729,18 +741,50 @@ public class NowWhatPanel extends PluginPanel
 	private void setMode(Mode next)
 	{
 		mode = next;
-		startContainer.setVisible(next == Mode.START);
-		chooseContainer.setVisible(next == Mode.CHOOSE);
-		randomContainer.setVisible(next == Mode.RANDOM);
-		if (next != Mode.CHOOSE)
-		{
-			// A plan belongs to the question that produced it.
-			plan.clearPath();
-		}
+		planOpen = false;
+		// A plan belongs to the question that produced it.
+		plan.clearPath();
 		if (next != Mode.RANDOM)
 		{
 			randomContainer.removeAll();
 		}
+		showScreen();
+	}
+
+	/**
+	 * Puts a plan on screen by itself; its own Back link closes it. Whatever screen
+	 * asked for it is hidden, not cleared, so going back finds the pickers as
+	 * they were left and a rolled suggestion still rolled.
+	 */
+	private void showPlan(Path path)
+	{
+		planOpen = true;
+		showScreen();
+		plan.renderPath(path);
+	}
+
+	private void closePlan()
+	{
+		planOpen = false;
+		plan.clearPath();
+		showScreen();
+	}
+
+	/** Makes what is visible agree with the mode and with whether a plan is open. */
+	private void showScreen()
+	{
+		startContainer.setVisible(!planOpen && mode == Mode.START);
+		chooseContainer.setVisible(!planOpen && mode == Mode.CHOOSE);
+		randomContainer.setVisible(!planOpen && mode == Mode.RANDOM);
+		plan.container().setVisible(planOpen);
+		availableNowContainer.setVisible(!planOpen);
+		// A screen of its own, reached from the opening one. Sitting under
+		// every other screen it made each of them a long page, and the opening
+		// screen - two choices - the longest of all.
+		boolean almost = !planOpen && mode == Mode.ALMOST;
+		almostThereHeader.setVisible(almost);
+		almostBackRow.setVisible(almost);
+		almostThereContainer.setVisible(almost);
 		revalidate();
 		repaint();
 		SwingUtilities.invokeLater(this::sinkFooter);

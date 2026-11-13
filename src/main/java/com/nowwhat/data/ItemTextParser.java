@@ -429,6 +429,26 @@ public final class ItemTextParser
 		return itemPart(entry).length() < entry.trim().length();
 	}
 
+	/**
+	 * What a line says after it has finished naming items, without the dash
+	 * that introduced it: "not optional here". Null when it only names items.
+	 */
+	public static String explanation(String entry)
+	{
+		if (!hasExplanation(entry))
+		{
+			return null;
+		}
+		String rest = entry.trim().substring(itemPart(entry).length()).trim();
+		int from = 0;
+		while (from < rest.length() && "-,:;\u2013\u2014 ".indexOf(rest.charAt(from)) >= 0)
+		{
+			from++;
+		}
+		rest = rest.substring(from).trim();
+		return rest.isEmpty() ? null : rest;
+	}
+
 	private static List<String> split(String text)
 	{
 		List<String> parts = new ArrayList<>();

@@ -255,4 +255,12 @@ public class ItemTextParserTest
 		Phrase phrase = ItemTextParser.phrases("twisted bow").get(0);
 		assertNull(ItemTextParser.pick(phrase, new ArrayList<>()));
 	}
+
+	@Test
+	public void explanationIsWhatFollowsTheItems()
+	{
+		assertEquals("not optional here",
+			ItemTextParser.explanation("Extended anti-venom+ (4) - not optional here"));
+		assertNull(ItemTextParser.explanation("twisted bow or toxic blowpipe"));
+	}
 }
