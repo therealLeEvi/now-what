@@ -916,4 +916,29 @@ class GearView
 			rows * (counted ? 44 : 34) + 8));
 		stack(target, grid);
 	}
+
+	/**
+	 * One item to a line, with its count written out beside the picture.
+	 * <p>
+	 * For a shopping list. Under a 36px icon there is room for four digits, and
+	 * a count of bones for 99 Prayer has seven: it was being cut to "2,07...",
+	 * which is no number at all.
+	 */
+	void stackCountedRows(JPanel target, Pictured pictured)
+	{
+		for (Map.Entry<Integer, String> item : pictured.names.entrySet())
+		{
+			String count = pictured.counts.get(item.getKey());
+			JLabel row = new JLabel("<html><font color='#F1EDE6'>"
+				+ escapeHtml(count == null ? "" : count) + "</font><br>"
+				+ escapeHtml(item.getValue()) + "</html>");
+			row.setFont(SMALL_FONT);
+			row.setForeground(SUBTLE);
+			row.setIconTextGap(8);
+			row.setAlignmentX(Component.LEFT_ALIGNMENT);
+			row.setBorder(new EmptyBorder(3, 12, 1, 0));
+			itemManager.getImage(item.getKey()).addTo(row);
+			stack(target, row);
+		}
+	}
 }

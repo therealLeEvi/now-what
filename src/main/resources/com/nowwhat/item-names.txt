@@ -17,6 +17,8 @@
 564	cosmic rune	known
 565	blood rune	known
 566	soul rune	known
+577	blue wizard robe
+579	blue wizard hat
 590	tinderbox
 617	coins
 770	ardougne cloak
@@ -36,6 +38,7 @@
 1035	zamorak monk top
 1050	santa hat
 1059	leather gloves
+1061	leather boots
 1065	green dhide vambraces
 1079	rune platelegs
 1093	rune plateskirt
@@ -63,6 +66,7 @@
 1704	amulet of glory	known
 1718	holy symbol
 1725	amulet of strength
+1727	amulet of magic
 1731	amulet of power
 1755	chisel
 2011	curry
@@ -102,6 +106,7 @@
 4089	mystic hat
 4091	mystic robe top
 4093	mystic robe bottom
+4095	mystic gloves
 4097	mystic boots
 4131	rune boots
 4151	abyssal whip	known
@@ -153,11 +158,14 @@
 6450	kandarin headgear
 6469	white tree fruit
 6523	toktzxilak
+6568	obsidian cape
 6570	fire cape	known
 6585	amulet of fury	known
 6660	fishing explosive
 6685	saradomin brew(4)
 6714	holy wrench	known
+6731	seers ring	known
+6737	berserker ring	known
 6746	darklight	known
 6809	granite legs	known
 6862	woolly hat
@@ -248,6 +256,7 @@
 11936	dark crab
 11941	looting bag	known
 11951	extended antifire(4)
+11998	smoke battlestaff
 12002	occult necklace	known
 12006	abyssal tentacle	known
 12013	prospector helmet	known
@@ -296,6 +305,11 @@
 13265	abyssal dagger	known
 13280	max cape
 13353	gricollers can	known
+13377	shayzien gloves 5
+13378	shayzien boots 5
+13379	shayzien helm 5
+13380	shayzien greaves 5
+13381	shayzien body 5
 13393	xerics talisman	known
 13441	anglerfish
 13576	dragon warhammer	known
@@ -451,6 +465,7 @@
 24699	blisterwood flail	known
 24780	amulet of blood fury	known
 24953	waterbirth teleport
+25163	decorative boots
 25340	ectoplasmator	known
 25404	bloodbark body
 25410	bloodbark boots

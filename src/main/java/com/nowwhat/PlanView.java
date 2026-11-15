@@ -1320,9 +1320,16 @@ class PlanView
 	}
 
 	/**
-	 * What this range will use up, as pictures with the counts under them.
+	 * Supplies no shop or Grand Exchange offer will get you. "Buy 167,500 blessed
+	 * bone shards" sends a player looking for something that cannot be traded.
+	 */
+	private static final Set<String> MADE_NOT_BOUGHT =
+		java.util.Collections.singleton("blessed bone shards");
+
+	/**
+	 * What this range will use up, one to a line, each picture with its full count beside it.
 	 * <p>
-	 * The same row the gear gets, because it is the same question one step
+	 * Pictured like the gear, because it is the same question one step
 	 * later: the plan says 16 hours at a gilded altar, and the player's next
 	 * move is to work out how many dragon bones that is and go and buy them.
 	 * Doing that division in the panel is the difference between a plan you can
@@ -1336,7 +1343,12 @@ class PlanView
 			return;
 		}
 
-		stack(card, kit.microLabel("Buy", SUBTLE, 6, 12));
+		boolean allMade = true;
+		for (PathStep.Option.Needed line : needed)
+		{
+			allMade &= MADE_NOT_BOUGHT.contains(line.getItem().toLowerCase(java.util.Locale.ROOT));
+		}
+		stack(card, kit.microLabel(allMade ? "Make" : "Buy", SUBTLE, 6, 12));
 		GearView.Pictured pictured = new GearView.Pictured();
 		for (PathStep.Option.Needed line : needed)
 		{
@@ -1352,7 +1364,7 @@ class PlanView
 			pictured.names.putIfAbsent(id, line.getItem());
 			pictured.counts.put(id, exact(line.getQuantity()));
 		}
-		gear.stackIcons(card, pictured);
+		gear.stackCountedRows(card, pictured);
 		for (String words : pictured.getInWords())
 		{
 			JLabel line = kit.resultLine(words, DETAIL, 0);
@@ -1512,7 +1524,14 @@ class PlanView
 		doneActivities = finishedActivities == null
 			? java.util.Collections.emptySet()
 			: new java.util.HashSet<>(finishedActivities);
-		if (lastPath != null && !levelsBefore.isEmpty() && !levels.isEmpty()
+		if (lastPath != null && levelsBefore.isEmpty() && !levels.isEmpty())
+		{
+			// The plan was opened before the player's levels were known, so it
+			// starts every skill at 1. None of its steps were ever theirs to
+			// finish: it is made again outright, with nothing kept as done.
+			renderPath(pathResolver.apply(lastPath.getGoal()), false);
+		}
+		else if (lastPath != null && !levelsBefore.isEmpty() && !levels.isEmpty()
 			&& !levels.equals(levelsBefore))
 		{
 			// A level went up while the plan was open. Folding finished steps

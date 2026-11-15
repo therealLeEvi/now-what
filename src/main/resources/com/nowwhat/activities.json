@@ -6127,15 +6127,32 @@
       {
         "name": "Melee",
         "items": [
-          "Dragon scimitar or better",
+          "Helm of Neitiznot",
+          "amulet of glory",
+          "fire cape or obsidian cape",
+          "fighter torso or rune platebody",
+          "dragon platelegs or rune platelegs",
+          "abyssal whip or dragon scimitar",
+          "dragon defender or rune kiteshield",
+          "barrows gloves or combat bracelet",
+          "dragon boots or rune boots",
+          "berserker ring",
           "a special attack weapon such as a dragon dagger",
-          "any Strength-bonus gear",
           "60+ melee stats is the practical floor"
         ]
       },
       {
         "name": "Magic",
         "items": [
+          "Mystic hat",
+          "amulet of glory",
+          "mystic robe top",
+          "mystic robe bottom",
+          "smoke battlestaff or staff of fire",
+          "tome of fire",
+          "mystic gloves",
+          "mystic boots",
+          "seers ring",
           "Fire spells - Hespori takes 100% extra damage from them",
           "59 Magic for Fire Blast",
           "40 Prayer for Protect from Magic"
@@ -7814,8 +7831,14 @@
           "Venator bow",
           "amethyst arrows",
           "Ava's assembler",
-          "your strongest Ranged helm, body and legs",
+          "Masori mask (f) or Armadyl helmet",
           "Slayer helmet (i) if on task",
+          "Masori body (f) or Armadyl chestplate",
+          "Masori chaps (f) or Armadyl chainskirt",
+          "necklace of anguish",
+          "Zaryte vambraces or barrows gloves",
+          "pegasian boots",
+          "venator ring or archers ring (i)",
           "dwarf multicannon set up southwest of the web pillar"
         ]
       }
@@ -8935,7 +8958,7 @@
           "amulet of glory or amulet of fury",
           "fire cape",
           "mixed hide top and legs or proselyte hauberk and cuisse",
-          "Zamorakian hasta or abyssal dagger (p++)",
+          "Zamorakian hasta or abyssal dagger",
           "anti-dragon shield or dragonfire shield",
           "barrows gloves",
           "dragon boots",
@@ -9687,23 +9710,40 @@
       {
         "name": "Magic (free to play)",
         "items": [
-          "Best magic gear you have",
-          "whichever staff suits your best combat spell",
+          "Blue wizard hat",
+          "amulet of magic",
+          "blue wizard robe",
+          "zamorak monk bottom",
+          "staff of fire",
+          "leather gloves",
+          "leather boots",
           "runes for Snare and your highest spell"
         ]
       },
       {
         "name": "Ranged (free to play)",
         "items": [
+          "Coif",
+          "amulet of power",
           "Rune chainbody for crush defence",
-          "best ranged gear and bow you have"
+          "green d'hide chaps",
+          "green d'hide vambraces",
+          "maple shortbow",
+          "adamant arrows",
+          "leather boots"
         ]
       },
       {
         "name": "Melee (free to play)",
         "items": [
-          "Good melee armour with ranged and melee defence",
-          "rune scimitar"
+          "Rune full helm",
+          "amulet of power",
+          "rune platebody",
+          "rune platelegs",
+          "rune scimitar",
+          "rune kiteshield",
+          "leather gloves",
+          "leather boots"
         ]
       },
       {
@@ -9765,8 +9805,13 @@
       {
         "name": "Magic (free to play)",
         "items": [
-          "Best in slot free to play magic gear",
-          "fire staff",
+          "Blue wizard hat",
+          "amulet of magic",
+          "blue wizard robe",
+          "zamorak monk bottom",
+          "staff of fire",
+          "leather gloves",
+          "leather boots",
           "runes for Fire Blast"
         ]
       },
@@ -9775,18 +9820,24 @@
         "items": [
           "Coif",
           "amulet of power",
-          "green d'hide body, green d'hide chaps and vambraces",
+          "green d'hide body",
+          "green d'hide chaps",
+          "green d'hide vambraces",
           "maple shortbow",
-          "adamant arrows"
+          "adamant arrows",
+          "leather boots"
         ]
       },
       {
         "name": "Melee (free to play)",
         "items": [
           "Rune full helm",
+          "amulet of power",
           "green d'hide body and green d'hide chaps for magic defence",
+          "green d'hide vambraces",
           "rune kiteshield",
-          "rune scimitar"
+          "rune scimitar",
+          "leather boots"
         ]
       },
       {
@@ -9866,7 +9917,7 @@
           "rune scimitar or barronite mace",
           "mooleta or rune kiteshield",
           "gilded d'hide vambraces or leather gloves",
-          "decorative boots (gold)"
+          "decorative boots"
         ]
       },
       {
@@ -11181,7 +11232,11 @@
       {
         "name": "Ranged (budget)",
         "items": [
-          "Shayzien helm (5), body (5), greaves (5), gloves (5) and boots (5)",
+          "Shayzien helm (5)",
+          "Shayzien body (5)",
+          "Shayzien greaves (5)",
+          "Shayzien gloves (5)",
+          "Shayzien boots (5)",
           "toxic blowpipe with adamant darts or better",
           "book of law",
           "necklace of anguish",
@@ -11193,7 +11248,10 @@
         "name": "Ranged (best in slot)",
         "items": [
           "Slayer helmet (i) if on task, with the hard Kourend & Kebos Diary and Captain Cleive",
-          "Shayzien body (5), greaves (5), gloves (5) and boots (5)",
+          "Shayzien body (5)",
+          "Shayzien greaves (5)",
+          "Shayzien gloves (5)",
+          "Shayzien boots (5)",
           "twisted bow or bow of Faerdhinen",
           "necklace of rupture",
           "Dizana's quiver",
@@ -11203,7 +11261,11 @@
       {
         "name": "Melee",
         "items": [
-          "Shayzien helm (5), body (5), greaves (5), gloves (5) and boots (5)",
+          "Shayzien helm (5)",
+          "Shayzien body (5)",
+          "Shayzien greaves (5)",
+          "Shayzien gloves (5)",
+          "Shayzien boots (5)",
           "Ghrazi rapier or Osmumten's fang, on stab",
           "avernic defender or dragon defender",
           "amulet of rancour or amulet of torture",
@@ -11433,7 +11495,10 @@
           "Blood Moon helm, chestplate and tassets",
           "dual macuahuitl",
           "salve amulet (e)",
-          "your best melee cape, gloves, boots and ring"
+          "infernal cape or fire cape",
+          "ferocious gloves or barrows gloves",
+          "primordial boots or dragon boots",
+          "ultor ring or berserker ring (i)"
         ]
       },
       {
@@ -11441,8 +11506,13 @@
         "items": [
           "Toxic blowpipe, the best weapon here because of their negative armour",
           "salve amulet (e)",
-          "your best Ranged helm, body and legs",
-          "your best Ranged cape, gloves, boots and ring"
+          "Masori mask (f) or Armadyl helmet",
+          "Masori body (f) or Armadyl chestplate",
+          "Masori chaps (f) or Armadyl chainskirt",
+          "Dizana's quiver or Ava's assembler",
+          "Zaryte vambraces or barrows gloves",
+          "pegasian boots",
+          "venator ring or archers ring (i)"
         ]
       }
     ],
@@ -11627,21 +11697,32 @@
     ],
     "setups": [
       {
-        "name": "Melee (guide setup)",
+        "name": "Melee",
         "items": [
           "Slayer helmet (i)",
           "dragon hunter lance",
+          "avernic defender or dragon defender",
+          "amulet of torture or amulet of fury",
+          "infernal cape or fire cape",
+          "Bandos chestplate and tassets",
+          "ferocious gloves or barrows gloves",
           "boots of brimstone",
-          "your best melee body, legs, cape, gloves and ring"
+          "ultor ring or berserker ring (i)"
         ]
       },
       {
-        "name": "Ranged (task page)",
+        "name": "Ranged",
         "items": [
           "Slayer helmet (i)",
           "twisted bow, or dragon hunter crossbow for a dragonbane option",
+          "dragon arrows",
+          "necklace of anguish",
+          "Dizana's quiver or Ava's assembler",
+          "Masori body (f) or Armadyl chestplate",
+          "Masori chaps (f) or Armadyl chainskirt",
+          "Zaryte vambraces or barrows gloves",
           "boots of brimstone",
-          "your best Ranged body, legs, cape, gloves and ring"
+          "venator ring or archers ring (i)"
         ]
       }
     ],

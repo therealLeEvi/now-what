@@ -50,11 +50,12 @@ public class NowWhatPanel extends PluginPanel
 		"ATTACK", "DEFENCE", "STRENGTH", "HITPOINTS", "RANGED", "PRAYER", "MAGIC",
 		"COOKING", "WOODCUTTING", "FLETCHING", "FISHING", "FIREMAKING", "CRAFTING",
 		"SMITHING", "MINING", "HERBLORE", "AGILITY", "THIEVING", "SLAYER", "FARMING",
-		"RUNECRAFT", "HUNTER", "CONSTRUCTION"
+		"RUNECRAFT", "HUNTER", "CONSTRUCTION", "SAILING"
 	};
 
 	private static final String WIKI_URL = "https://oldschool.runescape.wiki/";
 	private static final String LICENCE_URL = "https://creativecommons.org/licenses/by-nc-sa/3.0/";
+	private static final String ISSUES_URL = "https://github.com/therealLeEvi/now-what/issues";
 
 	private final Function<Goal, Path> pathResolver;
 	/** Activities by id, so a finished plan can look up what to wear and bring. */
@@ -584,6 +585,13 @@ public class NowWhatPanel extends PluginPanel
 		JLabel licence = kit.actionLink("CC BY-NC-SA 3.0 \u2197", () -> PanelKit.openUrl(LICENCE_URL));
 		licence.setToolTipText(LICENCE_URL);
 		block.add(kit.linkRow(java.util.Arrays.asList(credit, licence)));
+
+		// On its own line: it is the one link here a player may be looking for.
+		JLabel report = kit.actionLink("Report a problem \u2197", () -> PanelKit.openUrl(ISSUES_URL));
+		report.setToolTipText("<html>Wrong data, a missing item or an idea?<br>Opens the plugin's "
+			+ "issue page on GitHub.</html>");
+		block.add(Box.createVerticalStrut(4));
+		block.add(kit.linkRow(java.util.Collections.singletonList(report)));
 
 		return block;
 	}

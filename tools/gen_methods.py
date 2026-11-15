@@ -467,11 +467,78 @@ m("CONSTRUCTION", 74, 99, "Oak dungeon doors", 550000,
 m("CONSTRUCTION", 77, 99, "Gnome benches (superior garden)", 1100000,
   "Fastest xp/hr of any skill in the game; needs a demon butler", CN)
 
+# ---------------------------------------------------------------- SAILING
+# From the wiki's Sailing training guide, read 2026-11-15. The guide marks
+# itself as partly out of date and several of its rates as provisional, so
+# these lean low: a trial is entered at its Swordfish rank, a courier route at
+# the bottom of its estimate, and a shipwreck at the worst hook the table gives.
+SA = W + "Sailing_training"
+BT = W + "Barracuda_Trials"
+CT = W + "Courier_tasks"
+SS = W + "Shipwreck_salvaging"
+m("SAILING", 1, 4, "Pandemonium (quest)", None,
+  "Sailing cannot be trained before it: the quest teaches the skill and gives you a raft", SA,
+  quests=["Pandemonium"])
+m("SAILING", 4, 30, "Sea charting, with courier tasks on the way", 10000,
+  "Chart every sea you can reach and carry cargo between the ports as you go. Prying Times "
+  "at 12 and Current Affairs at 22 unlock more charting tasks. Always trim your sails.",
+  W + "Sea_charting")
+m("SAILING", 30, 45, "Sea charting and courier tasks", 10000,
+  "The calmer way to 45. Crab Quest at 40 gives 10,000 xp, and charting alone carries you "
+  "to about level 50.", W + "Sea_charting")
+# Each trial twice: at the Swordfish rate while its ranks are being learned,
+# then at the Marlin rate. One low figure for the whole bracket put a courier
+# route ahead of the trials for a few levels at a time, and the plan hopped
+# between the two - where the guide says plainly that trials are fastest.
+m("SAILING", 30, 45, "Barracuda Trials: The Tempor Tantrum", 19000,
+  "The fastest repeatable xp from 30. About 19k an hour at Swordfish rank; work up to "
+  "Shark and Marlin.", BT, attention="DEMANDING")
+m("SAILING", 45, 55, "Barracuda Trials: The Tempor Tantrum", 24000,
+  "At Marlin rank, about 24k an hour", BT, attention="DEMANDING")
+m("SAILING", 55, 62, "Barracuda Trials: The Jubbly Jive", 65000,
+  "About 65k an hour at Swordfish rank; work up to Shark and Marlin", BT,
+  attention="DEMANDING")
+m("SAILING", 62, 72, "Barracuda Trials: The Jubbly Jive", 89000,
+  "At Marlin rank, about 89k an hour", BT, attention="DEMANDING")
+m("SAILING", 72, 76, "Barracuda Trials: The Gwenith Glide", 114000,
+  "About 114k an hour at Swordfish rank; work up to Shark and Marlin", BT,
+  attention="DEMANDING")
+m("SAILING", 76, 99, "Barracuda Trials: The Gwenith Glide", 184000,
+  "At Marlin rank, about 184k an hour; a crystal extractor and a rosewood hull push it "
+  "past 200k", BT, attention="DEMANDING")
+m("SAILING", 45, 62, "Courier tasks: Summer Shore route", 20000,
+  "Needs Troubled Tortugans. About nine deliveries an hour of 2,000-2,500 xp each; bring "
+  "20,000 coins to recover your boat.", CT, attention="ORDINARY")
+m("SAILING", 62, 76, "Courier tasks: Rellekka route", 66000,
+  "Rises to about 99k an hour once Etceteria opens at 65, depending on the tasks on offer",
+  CT, attention="ORDINARY")
+m("SAILING", 70, 99, "Courier tasks: Prifddinas route", 71000,
+  "Needs Song of the Elves. Aldarin, Port Tyras and Deepfin Point to Prifddinas.",
+  CT, attention="ORDINARY")
+m("SAILING", 76, 99, "Courier tasks: Lunar Isle route", 130000,
+  "Round trips to Lunar Isle, up to 160k an hour; five tasks at once from level 84",
+  CT, attention="ORDINARY")
+m("SAILING", 15, 35, "Shipwreck salvaging (small and fisherman's wrecks)", 2000,
+  "Slow this early, but nearly hands-off. Fisherman's wrecks from 26 roughly double it.",
+  SS, attention="AFK")
+m("SAILING", 35, 53, "Shipwreck salvaging (barracuda wrecks)", 9500,
+  "Much faster from 42 with a salvaging station; a second hook adds about a third",
+  SS, attention="AFK")
+m("SAILING", 53, 64, "Shipwreck salvaging (large wrecks)", 18000,
+  "With one mithril hook; about 25k an hour with two", SS, attention="AFK")
+m("SAILING", 64, 73, "Shipwreck salvaging (pirate wrecks)", 35000,
+  "Two hooks and a crewmate on one of them", SS, attention="AFK")
+m("SAILING", 73, 80, "Shipwreck salvaging (mercenary wrecks)", 55000,
+  "Two adamant hooks; 65-70k an hour with rune", SS, attention="AFK")
+m("SAILING", 80, 99, "Shipwreck salvaging (Fremennik and merchant wrecks)", 65000,
+  "Two rune hooks; merchant wrecks from 87 reach 80-95k an hour with dragon hooks",
+  SS, attention="AFK")
+
 # ---------------------------------------------------------------- emit
 ORDER = ['AGILITY', 'THIEVING', 'FARMING', 'MAGIC', 'SMITHING', 'RANGED', 'MINING', 'CRAFTING',
          'WOODCUTTING', 'FISHING', 'ATTACK', 'STRENGTH', 'DEFENCE', 'HITPOINTS', 'PRAYER',
          'COOKING', 'FLETCHING', 'FIREMAKING', 'HERBLORE', 'SLAYER', 'RUNECRAFT', 'HUNTER',
-         'CONSTRUCTION']
+         'CONSTRUCTION', 'SAILING']
 assert sorted(set(x["skill"] for x in OUT)) == sorted(ORDER)
 OUT.sort(key=lambda x: (ORDER.index(x["skill"]), x["minLevel"], x["maxLevel"]))
 

@@ -201,7 +201,9 @@ public class NowWhatPlugin extends Plugin
 	public void onStatChanged(StatChanged event)
 	{
 		Integer before = lastLevels.put(event.getSkill(), event.getLevel());
-		if (before != null && before != event.getLevel())
+		// The first sighting counts as well: that is the levels arriving after
+		// login, and a snapshot taken before them has every skill at 1.
+		if (before == null || before != event.getLevel())
 		{
 			ticksSinceRefresh = REFRESH_INTERVAL_TICKS; // refresh on the next tick
 		}
@@ -236,6 +238,14 @@ public class NowWhatPlugin extends Plugin
 	{
 		clientThread.invoke(() ->
 		{
+			// No Hitpoints xp means the levels have not come in yet - a real
+			// account starts with 1,154. A snapshot now would say level 1 in
+			// everything, and a plan made from it starts at "1 to 30". Their
+			// arrival asks for a refresh of its own.
+			if (client.getSkillExperience(Skill.HITPOINTS) == 0)
+			{
+				return;
+			}
 			PlayerState state = buildPlayerState();
 			latestState = state;
 

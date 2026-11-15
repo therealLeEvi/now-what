@@ -35,6 +35,26 @@ public class SkillPathPlanner
 	public List<PathStep> plan(String skill, int fromLevel, int toLevel, List<TrainingMethod> methods,
 		boolean preferTickManipulation, List<String> warningsOut)
 	{
+		return plan(skill, fromLevel, toLevel, methods, preferTickManipulation, warningsOut, 0);
+	}
+
+	/**
+	 * @param currentXp the player's experience in the skill, or 0 when it is
+	 *                  not known. A plan from "level 82" used to count from the
+	 *                  first xp of 82, so a player most of the way to 83 was
+	 *                  told to buy a level's worth of bones they did not need.
+	 *                  It only counts when it falls inside {@code fromLevel},
+	 *                  so a plan that starts somewhere other than where the
+	 *                  player stands is unaffected.
+	 */
+	public List<PathStep> plan(String skill, int fromLevel, int toLevel, List<TrainingMethod> methods,
+		boolean preferTickManipulation, List<String> warningsOut, long currentXp)
+	{
+		long alreadyGained = 0;
+		if (currentXp > XpTable.xpForLevel(fromLevel) && currentXp < XpTable.xpForLevel(fromLevel + 1))
+		{
+			alreadyGained = currentXp - XpTable.xpForLevel(fromLevel);
+		}
 		List<PathStep> steps = new ArrayList<>();
 		if (fromLevel >= toLevel)
 		{
@@ -164,6 +184,11 @@ public class SkillPathPlanner
 			}
 
 			long segmentXp = XpTable.xpBetween(segment.start, segment.end);
+			if (segment.start == fromLevel)
+			{
+				// Less than a level's worth, so it can never empty the segment.
+				segmentXp -= alreadyGained;
+			}
 
 			List<PathStep.Option> options = new ArrayList<>();
 			for (TrainingMethod method : segment.methods)

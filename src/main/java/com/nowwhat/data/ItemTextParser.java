@@ -774,6 +774,12 @@ public final class ItemTextParser
 			{
 				return true;
 			}
+			// A tier the guides bracket and the game does not: "Shayzien helm
+			// (5)" is the item RuneLite calls "Shayzien helm 5".
+			if (needle.matches("\\(\\d+\\)") && candidate.equals(needle.substring(1, needle.length() - 1)))
+			{
+				return true;
+			}
 			// "potion(4)" is one word in an item name but two ideas; match either.
 			int bracket = candidate.indexOf('(');
 			if (bracket > 0 && (samish(candidate.substring(0, bracket), needle)

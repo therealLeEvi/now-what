@@ -249,6 +249,25 @@ public class SkillPathPlannerTest
 		assertEquals(TrainingMethod.Attention.AFK, byName.get("One tree every four minutes"));
 	}
 
+	/** Xp already gained inside the starting level comes off the first step, and only that. */
+	@Test
+	public void xpAlreadyGainedInTheCurrentLevelIsNotPlannedAgain()
+	{
+		List<TrainingMethod> methods =
+			java.util.Collections.singletonList(normal(1, 99, "Motherlode Mine", 40000));
+		long full = XpTable.xpBetween(82, 85);
+		long halfway = XpTable.xpForLevel(82) + 100000;
+
+		List<PathStep> steps = new SkillPathPlanner().plan("MINING", 82, 85, methods, false,
+			new ArrayList<>(), halfway);
+		assertEquals(full - 100000, steps.get(0).getXpCost());
+
+		// Xp that does not belong to the starting level says nothing about it.
+		steps = new SkillPathPlanner().plan("MINING", 82, 85, methods, false,
+			new ArrayList<>(), XpTable.xpForLevel(60) + 5);
+		assertEquals(full, steps.get(0).getXpCost());
+	}
+
 	/**
 	 * An unjudged method must come through as null, not ORDINARY. The panel
 	 * prints nothing either way, but conflating the two would turn "nobody has

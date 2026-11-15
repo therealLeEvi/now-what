@@ -69,7 +69,7 @@ public class PathPlanner
 				{
 					steps.addAll(skillPathPlanner.plan(goal.getSkillName(), current, goal.getTargetLevel(),
 						trainingMethodDatabase.getMethodsFor(goal.getSkillName()),
-						goal.isAllowTickManipulation(), warnings));
+						goal.isAllowTickManipulation(), warnings, state.getSkillXp(goal.getSkillName())));
 				}
 				break;
 			}
@@ -212,7 +212,7 @@ public class PathPlanner
 					{
 						steps.addAll(skillPathPlanner.plan(sf.skill, sf.from, sf.to,
 							trainingMethodDatabase.getMethodsFor(sf.skill),
-							goal.isAllowTickManipulation(), warnings));
+							goal.isAllowTickManipulation(), warnings, state.getSkillXp(sf.skill)));
 					}
 				}
 				break;
@@ -338,7 +338,7 @@ public class PathPlanner
 				{
 					steps.addAll(skillPathPlanner.plan(sf.skill, sf.from, sf.to,
 						trainingMethodDatabase.getMethodsFor(sf.skill),
-						goal.isAllowTickManipulation(), warnings));
+						goal.isAllowTickManipulation(), warnings, state.getSkillXp(sf.skill)));
 				}
 				break;
 			}
@@ -360,10 +360,11 @@ public class PathPlanner
 	 * "Hitpoints 70 to 73" would be telling the player to do something that
 	 * cannot be done.
 	 * <p>
-	 * Sailing is present. There is no Sailing data yet, so asking for it
-	 * produces SkillPathPlanner's "no training method data" warning - which is
-	 * the honest answer to "get every skill to 80", and better than quietly
-	 * leaving a skill out of a goal that said "every".
+	 * Sailing is present, and was before it had any methods: asking for it
+	 * then produced SkillPathPlanner's "no training method data" warning, the
+	 * honest answer to "get every skill to 80" and better than quietly leaving
+	 * a skill out of a goal that said "every". A skill added to the game after
+	 * this one belongs here on the same terms.
 	 */
 	private static final List<String> PLANNABLE_SKILLS = java.util.Collections.unmodifiableList(
 		java.util.Arrays.asList(
@@ -473,7 +474,7 @@ public class PathPlanner
 					continue;
 				}
 				extra.addAll(skillPathPlanner.plan(rec.getValue(), from, rec.getThreshold(),
-					trainingMethodDatabase.getMethodsFor(rec.getValue()), allowTickManipulation, warnings));
+					trainingMethodDatabase.getMethodsFor(rec.getValue()), allowTickManipulation, warnings, state.getSkillXp(rec.getValue())));
 			}
 			else
 			{
@@ -501,7 +502,7 @@ public class PathPlanner
 				return; // already met, nothing to plan
 			}
 			List<PathStep> skillSteps = skillPathPlanner.plan(req.getValue(), current, req.getThreshold(),
-				trainingMethodDatabase.getMethodsFor(req.getValue()), allowTickManipulation, warnings);
+				trainingMethodDatabase.getMethodsFor(req.getValue()), allowTickManipulation, warnings, state.getSkillXp(req.getValue()));
 			if (skillSteps.isEmpty() && req.getHint() != null)
 			{
 				// Fall back to the authored hint if we have no structured method data for this skill.

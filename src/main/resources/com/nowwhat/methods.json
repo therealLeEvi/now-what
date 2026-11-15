@@ -1682,5 +1682,195 @@
     "xpPerHour": 1100000,
     "notes": "Fastest xp/hr of any skill in the game; needs a demon butler",
     "wikiUrl": "https://oldschool.runescape.wiki/w/Construction_training"
+  },
+  {
+    "skill": "SAILING",
+    "minLevel": 1,
+    "maxLevel": 4,
+    "name": "Pandemonium (quest)",
+    "xpPerHour": null,
+    "notes": "Sailing cannot be trained before it: the quest teaches the skill and gives you a raft",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Sailing_training",
+    "quests": [
+      "Pandemonium"
+    ]
+  },
+  {
+    "skill": "SAILING",
+    "minLevel": 4,
+    "maxLevel": 30,
+    "name": "Sea charting, with courier tasks on the way",
+    "xpPerHour": 10000,
+    "notes": "Chart every sea you can reach and carry cargo between the ports as you go. Prying Times at 12 and Current Affairs at 22 unlock more charting tasks. Always trim your sails.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Sea_charting"
+  },
+  {
+    "skill": "SAILING",
+    "minLevel": 15,
+    "maxLevel": 35,
+    "name": "Shipwreck salvaging (small and fisherman's wrecks)",
+    "xpPerHour": 2000,
+    "notes": "Slow this early, but nearly hands-off. Fisherman's wrecks from 26 roughly double it.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Shipwreck_salvaging",
+    "attention": "AFK"
+  },
+  {
+    "skill": "SAILING",
+    "minLevel": 30,
+    "maxLevel": 45,
+    "name": "Sea charting and courier tasks",
+    "xpPerHour": 10000,
+    "notes": "The calmer way to 45. Crab Quest at 40 gives 10,000 xp, and charting alone carries you to about level 50.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Sea_charting"
+  },
+  {
+    "skill": "SAILING",
+    "minLevel": 30,
+    "maxLevel": 45,
+    "name": "Barracuda Trials: The Tempor Tantrum",
+    "xpPerHour": 19000,
+    "notes": "The fastest repeatable xp from 30. About 19k an hour at Swordfish rank; work up to Shark and Marlin.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Barracuda_Trials",
+    "attention": "DEMANDING"
+  },
+  {
+    "skill": "SAILING",
+    "minLevel": 35,
+    "maxLevel": 53,
+    "name": "Shipwreck salvaging (barracuda wrecks)",
+    "xpPerHour": 9500,
+    "notes": "Much faster from 42 with a salvaging station; a second hook adds about a third",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Shipwreck_salvaging",
+    "attention": "AFK"
+  },
+  {
+    "skill": "SAILING",
+    "minLevel": 45,
+    "maxLevel": 55,
+    "name": "Barracuda Trials: The Tempor Tantrum",
+    "xpPerHour": 24000,
+    "notes": "At Marlin rank, about 24k an hour",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Barracuda_Trials",
+    "attention": "DEMANDING"
+  },
+  {
+    "skill": "SAILING",
+    "minLevel": 45,
+    "maxLevel": 62,
+    "name": "Courier tasks: Summer Shore route",
+    "xpPerHour": 20000,
+    "notes": "Needs Troubled Tortugans. About nine deliveries an hour of 2,000-2,500 xp each; bring 20,000 coins to recover your boat.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Courier_tasks",
+    "attention": "ORDINARY"
+  },
+  {
+    "skill": "SAILING",
+    "minLevel": 53,
+    "maxLevel": 64,
+    "name": "Shipwreck salvaging (large wrecks)",
+    "xpPerHour": 18000,
+    "notes": "With one mithril hook; about 25k an hour with two",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Shipwreck_salvaging",
+    "attention": "AFK"
+  },
+  {
+    "skill": "SAILING",
+    "minLevel": 55,
+    "maxLevel": 62,
+    "name": "Barracuda Trials: The Jubbly Jive",
+    "xpPerHour": 65000,
+    "notes": "About 65k an hour at Swordfish rank; work up to Shark and Marlin",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Barracuda_Trials",
+    "attention": "DEMANDING"
+  },
+  {
+    "skill": "SAILING",
+    "minLevel": 62,
+    "maxLevel": 72,
+    "name": "Barracuda Trials: The Jubbly Jive",
+    "xpPerHour": 89000,
+    "notes": "At Marlin rank, about 89k an hour",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Barracuda_Trials",
+    "attention": "DEMANDING"
+  },
+  {
+    "skill": "SAILING",
+    "minLevel": 62,
+    "maxLevel": 76,
+    "name": "Courier tasks: Rellekka route",
+    "xpPerHour": 66000,
+    "notes": "Rises to about 99k an hour once Etceteria opens at 65, depending on the tasks on offer",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Courier_tasks",
+    "attention": "ORDINARY"
+  },
+  {
+    "skill": "SAILING",
+    "minLevel": 64,
+    "maxLevel": 73,
+    "name": "Shipwreck salvaging (pirate wrecks)",
+    "xpPerHour": 35000,
+    "notes": "Two hooks and a crewmate on one of them",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Shipwreck_salvaging",
+    "attention": "AFK"
+  },
+  {
+    "skill": "SAILING",
+    "minLevel": 70,
+    "maxLevel": 99,
+    "name": "Courier tasks: Prifddinas route",
+    "xpPerHour": 71000,
+    "notes": "Needs Song of the Elves. Aldarin, Port Tyras and Deepfin Point to Prifddinas.",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Courier_tasks",
+    "attention": "ORDINARY"
+  },
+  {
+    "skill": "SAILING",
+    "minLevel": 72,
+    "maxLevel": 76,
+    "name": "Barracuda Trials: The Gwenith Glide",
+    "xpPerHour": 114000,
+    "notes": "About 114k an hour at Swordfish rank; work up to Shark and Marlin",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Barracuda_Trials",
+    "attention": "DEMANDING"
+  },
+  {
+    "skill": "SAILING",
+    "minLevel": 73,
+    "maxLevel": 80,
+    "name": "Shipwreck salvaging (mercenary wrecks)",
+    "xpPerHour": 55000,
+    "notes": "Two adamant hooks; 65-70k an hour with rune",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Shipwreck_salvaging",
+    "attention": "AFK"
+  },
+  {
+    "skill": "SAILING",
+    "minLevel": 76,
+    "maxLevel": 99,
+    "name": "Barracuda Trials: The Gwenith Glide",
+    "xpPerHour": 184000,
+    "notes": "At Marlin rank, about 184k an hour; a crystal extractor and a rosewood hull push it past 200k",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Barracuda_Trials",
+    "attention": "DEMANDING"
+  },
+  {
+    "skill": "SAILING",
+    "minLevel": 76,
+    "maxLevel": 99,
+    "name": "Courier tasks: Lunar Isle route",
+    "xpPerHour": 130000,
+    "notes": "Round trips to Lunar Isle, up to 160k an hour; five tasks at once from level 84",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Courier_tasks",
+    "attention": "ORDINARY"
+  },
+  {
+    "skill": "SAILING",
+    "minLevel": 80,
+    "maxLevel": 99,
+    "name": "Shipwreck salvaging (Fremennik and merchant wrecks)",
+    "xpPerHour": 65000,
+    "notes": "Two rune hooks; merchant wrecks from 87 reach 80-95k an hour with dragon hooks",
+    "wikiUrl": "https://oldschool.runescape.wiki/w/Shipwreck_salvaging",
+    "attention": "AFK"
   }
 ]

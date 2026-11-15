@@ -86,11 +86,20 @@ To build and run it from source you need JDK 11 or later:
 ./gradlew build    # compiles and runs the tests
 ```
 
+## Feedback and bug reports
+
+Found wrong data, a gear setup that looks off, or have an idea? Open an issue at
+<https://github.com/therealLeEvi/now-what/issues>. The **Report a problem** link
+at the bottom of the plugin's sidebar goes to the same page.
+
+It helps to say which goal or activity you had open and what you expected to
+see instead. A screenshot of the sidebar is welcome.
+
 ## The data
 
 The plugin ships its own content database rather than calling anything at
 runtime: **344 activities**, including every boss on the wiki's boss list,
-**182 training methods across 23 skills** and **245 item sources**. Everything ships inside the plugin, nothing is downloaded,
+**201 training methods across 24 skills** and **245 item sources**. Everything ships inside the plugin, nothing is downloaded,
 and it makes no network requests of its own.
 
 That data is taken from the [Old School RuneScape Wiki](https://oldschool.runescape.wiki/),
